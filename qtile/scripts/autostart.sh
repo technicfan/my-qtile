@@ -60,7 +60,9 @@ nextcloud &
 caffeine &
 
 input-remapper-control --command autoload &
-polychromatic-cli -o spectrum && polychromatic-cli -o brightness -p 50 &
+polychromatic-cli -o spectrum &
+polychromatic-cli -o brightness -p 50 &
+polychromatic-cli --dpi 2600 &
 
 .config/qtile/scripts/mouse.sh &
 
