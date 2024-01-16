@@ -400,7 +400,7 @@ def init_widgets_list():
                  font = "Ubuntu",
                  padding = 2,
                  foreground = colors[2],
-                 mouse_callbacks = {"Button1": lazy.spawn(myTerm), "Button2": lazy.spawn("dm-logout"), "Button3": lazy.spawn("vscodium GitHub/my-qtile_picom-config")},
+                 mouse_callbacks = {"Button1": lazy.spawn(myTerm), "Button2": lazy.spawn("dm-logout"), "Button3": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
                  **decoration_group
                  ),
         widget.Spacer(length=2, **decoration_group),
