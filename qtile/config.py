@@ -567,7 +567,6 @@ floating_layout = layout.Floating(
         Match(title="tastytrade"),        # tastytrade pop-out side gutter
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
-#        Match(wm_class="delphi32.exe"), # delphi 7
     ]
 )
 auto_fullscreen = True
