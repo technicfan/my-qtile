@@ -134,7 +134,7 @@ keys = [
     # Screens
     KeyChord([mod], "p", [
         Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"), 
-             lazy.spawn("feh --bg-fill Nextcloud/technicfan/Bilder/backgrounds/own/Arcolinux-text-dark-rounded-1080p.png"), desc="normal - both screens"),
+             lazy.spawn("feh --bg-fill .config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png"), desc="normal - both screens"),
         Key([], "m", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
         Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --auto"), desc="only one monitor"),
         Key([], "l", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --off"), desc="both screens off"),   
