@@ -198,7 +198,7 @@ keys = [
     Key([mod], "period", lazy.next_screen(), desc='Move focus to next monitor'),
     Key([mod], "comma", lazy.prev_screen(), desc='Move focus to prev monitor'),
     
-    # Dmenu scripts launched using the key chord SUPER+y followed by 'key'
+    # Dmenu scripts launched using the key chord SUPER+o followed by 'key'
     KeyChord([mod], "o", [
         Key([], "h", lazy.spawn("dm-hub"), desc='List all dmscripts'),
         Key([], "a", lazy.spawn("dm-sounds"), desc='Choose ambient sound'),
@@ -269,24 +269,11 @@ def client_new(client):
         client.togroup("8"),
     if client.name == "GitHub Desktop":
         client.togroup("7"),
+    if client.name == "VSCodium":
+        client.togroup("6"),
 
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
-# There 10 colorschemes available to choose from:
-#
-# colors = colors.DoomOne
-# colors = colors.Dracula
-# colors = colors.GruvboxDark
-# colors = colors.MonokaiPro
-# colors = colors.Nord
-# colors = colors.OceanicNext
-# colors = colors.Palenight
-# colors = colors.SolarizedDark
-# colors = colors.SolarizedLight
-# colors = colors.TomorrowNight
-#
-# It is best not manually change the colorscheme; instead run 'dtos-colorscheme'
-# which is set to 'MOD + p c'
 
 colors = colors.Technicfan
 
@@ -300,47 +287,11 @@ layout_theme = {"border_width": 2,
                 }
 
 layouts = [
-    #layout.Bsp(**layout_theme),
-    #layout.Floating(**layout_theme),
-    #layout.RatioTile(**layout_theme),
-    #layout.VerticalTile(**layout_theme),
-    #layout.Matrix(**layout_theme),
     layout.MonadTall(**layout_theme),
-    #layout.MonadWide(**layout_theme),
-#    layout.Tile(
-#         shift_windows=True,
-#         border_width = 0,
-#         margin = 0,
-#         ratio = 0.34,
-#         ),
     layout.Max(
          border_width = 0,
          margin = 4,
          ),
-    #layout.Stack(**layout_theme, num_stacks=2),
-    #layout.Columns(**layout_theme),
-    #layout.TreeTab(
-    #     font = "Ubuntu Bold",
-    #     fontsize = 11,
-    #     border_width = 0,
-    #     bg_color = colors[0],
-    #     active_bg = colors[8],
-    #     active_fg = colors[2],
-    #     inactive_bg = colors[1],
-    #     inactive_fg = colors[0],
-    #     padding_left = 8,
-    #     padding_x = 8,
-    #     padding_y = 6,
-    #     sections = ["ONE", "TWO", "THREE"],
-    #     section_fontsize = 10,
-    #     section_fg = colors[7],
-    #     section_top = 15,
-    #     section_bottom = 15,
-    #     level_shift = 8,
-    #     vspace = 3,
-    #     panel_width = 240
-    #     ),
-    #layout.Zoomy(**layout_theme),
 ]
 
 # Some settings that I use on almost every widget, which saves us
@@ -348,7 +299,6 @@ layouts = [
 widget_defaults = dict(
     font="JetBrains Bold",
     fontsize = 12,
-    padding = 0,
     background=colors[0]
 )
 
@@ -580,7 +530,7 @@ reconfigure_screens = True
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
-auto_minimize = True
+auto_minimize = False
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
