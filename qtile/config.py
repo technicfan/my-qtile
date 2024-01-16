@@ -25,6 +25,8 @@
 # SOFTWARE.
 
 import os
+import getpass
+import socket
 import subprocess
 from libqtile import bar, extension, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
@@ -62,6 +64,18 @@ def maximize_by_switching_layout(qtile):
         qtile.current_group.layout = 'max'
     elif current_layout_name == 'max':
         qtile.current_group.layout = 'monadtall'
+
+# Dmenu theme
+dmenu_theme = {
+    "background": "#133912",
+    "foreground": "#87a757",
+    "selected_background": "#87a757",
+    "selected_foreground": "#133912",
+    "dmenu_font": "JetBrains:Bold:pixelsize=14",
+    "dmenu_ignorecase": True,
+    "dmenu_lines": "20",
+}
+
 # A list of available commands that can be bound to keys can be found
 # at https://docs.qtile.org/en/latest/manual/config/lazy.html
 keys = [
@@ -70,12 +84,24 @@ keys = [
     Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
 
     # Added
     Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod], "d", lazy.spawn("dmenu_run -i -p Run: -nb '#133912' -nf '#87a757' -sb '#87a757' -sf '#133912' -fn 'JetBrains:bold:pixelsize=14' -y 7 -x 7 -z 1907"), desc="Run launcher"),
+    Key([mod], "d", lazy.run_extension(extension.DmenuRun(
+        dmenu_command = "dmenu_run -p 'Run:' -z 473",
+        **dmenu_theme,
+    )), desc="Run launcher"),
+    Key([mod], "w", lazy.run_extension(extension.CommandSet(
+        dmenu_command = "dmenu -p 'Problematic Apps:' -z 473",
+        commands = {
+            "Delphi 7": "wine .wine/drive_c/Program\ Files\ \(x86\)/Borland/Delphi7/Bin/delphi32.exe",
+            "Discord": "com.discordapp.Discord",
+            "Tor Browser": "torbrowser-launcher",
+        },
+        **dmenu_theme,
+    )), desc="Run launcher with problematic apps"),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
     Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
     Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Private web browser"),
@@ -90,14 +116,8 @@ keys = [
     KeyChord([mod], "s", [
         Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
         Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
-        Key([], "d", lazy.spawn("com.spotify.Client"), desc="Spotify")
+        Key([], "d", lazy.spawn("com.spotify.Client"), desc="Spotify"),
     ]),
-
-    # Background Netflix
-    #KeyChord([mod], "a", [
-    #    Key([], "b", lazy.spawn("feh --bg-fill Nextcloud/technicfan/Bilder/backgrounds/own/Arcolinux-text-dark-rounded-1080p.png")),
-    #    Key([], "n", lazy.spawn("feh --bg-fill Nextcloud/technicfan/Bilder/backgrounds/own/Arcolinux-text-dark-rounded-1080p-Netflix.png"))
-    #]),
 
     #Media
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
@@ -113,9 +133,17 @@ keys = [
 
     # Screens
     KeyChord([mod], "p", [
-        Key([], "p", lazy.spawn("xrandr --output HDMI-0 --auto --right-of DP-4"), lazy.spawn("feh --bg-fill Nextcloud/technicfan/Bilder/backgrounds/own/Arcolinux-text-dark-rounded-1080p.png"), desc="normal - both screens"),
-        Key([], "m", lazy.spawn("xrandr --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
-        Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off"), desc="only one monitor")    
+        Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"), 
+             lazy.spawn("feh --bg-fill Nextcloud/technicfan/Bilder/backgrounds/own/Arcolinux-text-dark-rounded-1080p.png"), desc="normal - both screens"),
+        Key([], "m", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
+        Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --auto"), desc="only one monitor"),
+        Key([], "l", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --off"), desc="both screens off"),   
+    ]),
+
+    # Activate Linux
+    KeyChord([mod], "a", [
+        Key([], "a", lazy.spawn("activate-linux -x 500 -d")),
+        Key([], "q", lazy.spawn("kill activate-linux")),
     ]),
     
     # Switch between windows
@@ -168,7 +196,7 @@ keys = [
     Key([mod], "comma", lazy.prev_screen(), desc='Move focus to prev monitor'),
     
     # Dmenu scripts launched using the key chord SUPER+y followed by 'key'
-    KeyChord([mod], "y", [
+    KeyChord([mod], "o", [
         Key([], "h", lazy.spawn("dm-hub"), desc='List all dmscripts'),
         Key([], "a", lazy.spawn("dm-sounds"), desc='Choose ambient sound'),
         Key([], "b", lazy.spawn("dm-setbg"), desc='Set background'),
@@ -194,10 +222,11 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ",]
-#group_labels = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX",]
+#group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "\uf17a ", "\uf1bc ",]
 
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+
 
 for i in range(len(group_names)):
     groups.append(
@@ -233,7 +262,8 @@ for i in groups:
 def client_new(client):
     if client.name == "Spotify":
         client.togroup("9"),
-
+    if client.name == "Default - Wine desktop":
+        client.togroup("8"),
 
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
@@ -415,12 +445,10 @@ def init_widgets_list():
 
         widgetbox_mpris,
         widget.Spacer(),
-        widget.GenPollText(
+        widget.TextBox(
                  padding = 10,
-                 update_interval = 300,
-                 func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
+                 text = "\uf17c   " + subprocess.check_output("printf $(uname -r)", shell=True, text=True),
                  foreground = colors[2],
-                 fmt = '\uf17c   {}',
                  **decoration_group
                  ),
         widget.CPU(
@@ -432,9 +460,9 @@ def init_widgets_list():
         widget.Memory(
                  padding = 10,
                  foreground = colors[2],
-                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("alacritty -e btop")},
                  format = '{MemUsed: .0f}{mm}',
                  fmt = '\uf1c0  {}',
+                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("alacritty -e btop")},
                  **decoration_group
                  ),
         widget.GenPollText(
@@ -460,16 +488,12 @@ def init_widgets_list():
                  ),
         widgetbox_systray,
         widget.Spacer(length=10),
-        widget.GenPollText(
+        widget.TextBox(
                  padding = 10,
                  foreground = colors[2],
-                 update_interval = 600,
-                 func = lambda: subprocess.check_output("printf $(whoami) && printf $(echo @) && printf $(hostnamectl hostname)", shell=True, text=True),
-                 mouse_callbacks = {'Button1': widgetbox_systray.toggle, "Button2": lazy.spawn(".config/qtile/scripts/mouse.sh")},
-                 decorations = [
-                     RectDecoration(colour=colors[1], radius=6, filled=True),
-                     RectDecoration(colour=colors[0], radius=4, filled=True, group=True, padding=2)
-                 ]
+                 text = getpass.getuser() + "@" + socket.gethostname(),
+                 mouse_callbacks = {'Button1': widgetbox_systray.toggle, "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
+                 **decoration_group
                  ),
         widget.Spacer(length=4)
 
@@ -483,7 +507,8 @@ def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     return widgets_screen1
 
-# All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer).
+# All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer). (old)
+# Now the python logo, the mpris widget and the systray are removed alongside with some spacers
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     del widgets_screen2[1:4]
@@ -542,7 +567,7 @@ floating_layout = layout.Floating(
         Match(title="tastytrade"),        # tastytrade pop-out side gutter
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
-        Match(wm_class="delphi32.exe"), # delphi 7
+#        Match(wm_class="delphi32.exe"), # delphi 7
     ]
 )
 auto_fullscreen = True
