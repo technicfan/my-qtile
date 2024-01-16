@@ -82,12 +82,16 @@ keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
     Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
+    Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Private web browser"),
+    Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
+    Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "r", lazy.restart()),
 
-    # Added
+    # dmenu
     Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
         dmenu_command = "dmenu_run -p 'Run:' -z 473",
@@ -102,10 +106,9 @@ keys = [
         },
         **dmenu_theme,
     )), desc="Run launcher with problematic apps"),
-    Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
-    Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
-    Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Private web browser"),
-    Key([mod, "control"], "r", lazy.restart()),
+
+    # Github
+    Key([mod], "g", lazy.spawn("github-desktop"), desc="GitHub desktop"),
 
     # Screenshot
     Key([], "print", lazy.spawn("flameshot screen"), desc="Screenshot active screen"),
@@ -264,6 +267,8 @@ def client_new(client):
         client.togroup("9"),
     if client.name == "Default - Wine desktop":
         client.togroup("8"),
+    if client.name == "GitHub Desktop":
+        client.togroup("7"),
 
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
