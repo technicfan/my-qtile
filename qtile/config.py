@@ -35,7 +35,6 @@ from libqtile.lazy import lazy
 from qtile_extras import widget
 from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
 from qtile_extras.popup.templates.mpris2 import COMPACT_LAYOUT, DEFAULT_LAYOUT
-#from qtile_extras.widget import StatusNotifier
 import colors
 
 mod = "mod4"              # Sets mod key to SUPER/WINDOWS
