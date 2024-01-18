@@ -12,7 +12,7 @@ picom.conf in /etc/xdg/
 normal:
 <img src="screenshots/screen-one-normal.png">
 with unhidden systray:
-<img src="sreenshots/screen-one-systray.png">
+<img src="screenshots/screen-one-systray.png">
 with music player:
 <img src="screenshots/screen-one-mpris.png">
 
