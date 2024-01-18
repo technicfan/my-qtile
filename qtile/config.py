@@ -408,7 +408,7 @@ def init_widgets_list():
                  ),
         widget.CPU(
                  padding = 10,
-                 format = '\uf2db   {load_percent}%',
+                 format = '\uf2db   {load_percent}% ({freq_current}GHz)',
                  foreground = colors[1],
                  **decoration_group
                  ),
