@@ -97,7 +97,7 @@ keys = [
         **dmenu_theme,
     )), desc="Run launcher"),
     Key([mod], "w", lazy.run_extension(extension.CommandSet(
-        dmenu_command = "dmenu -p 'Problematic Apps:' -z 473",
+        dmenu_command = "dmenu -p 'Extra Apps:' -z 473",
         commands = {
             "Delphi 7": "wine .wine/drive_c/Program\ Files\ \(x86\)/Borland/Delphi7/Bin/delphi32.exe",
             "Discord": "com.discordapp.Discord",
@@ -108,7 +108,7 @@ keys = [
             "Calc": "libreoffice --calc",
         },
         **dmenu_theme,
-    )), desc="Run launcher with problematic apps"),
+    )), desc="Run launcher with extra apps"),
 
     # Github
     Key([mod], "g", lazy.spawn("github-desktop"), desc="GitHub desktop"),
