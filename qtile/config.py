@@ -393,7 +393,7 @@ def init_widgets_list():
         widget.Sep(
             foreground = colors[4],
             linewidth = 2,
-            size_percent = 75,
+            size_percent = 70,
             **decoration_group,
         ),
         widget.GroupBox(

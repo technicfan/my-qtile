@@ -121,38 +121,6 @@ TomorrowNight = [
     ["#70c0ba", "#70c0ba"]  # color15
     ]
 
-# Own colors based on DoomOne
-
-Technicfanold = [
-    ["#2c2c2c", "#2c2c2c"], # inactive border
-    ["#bbc2cf", "#bbc2cf"], # fg
-    ["#1c1f24", "#1c1f24"], # color01
-    ["#ff6c6b", "#ff6c6b"], # color02
-    ["#46d9ff", "#46d9ff"], # color03
-    ["#da8548", "#da8548"], # color04
-    ["#51afef", "#51afef"], # color05
-    ["#c678dd", "#c678dd"], # color06
-    ["#87a757", "#87a757"], # color15
-    ["#ff6c6b", "#46d9ff", "#87a757", "#da8548"], # fun gradient
-    ["#0d2a0e", "#0d2a0e"], # bg
-    ["#133912", "#133912"]  # bar accent
-    ]
-
-TechnicfanClean = [
-    ["#2c2c2c", "#2c2c2c"], # inactive border
-    ["#87a757", "#87a757"], # fg
-    ["#87a757", "#87a757"], # color01
-    ["#87a757", "#87a757"], # color02
-    ["#87a757", "#87a757"], # color03
-    ["#87a757", "#87a757"], # color04
-    ["#87a757", "#87a757"], # color05
-    ["#87a757", "#87a757"], # color06
-    ["#87a757", "#87a757"], # color15
-    ["#87a757", "#87a757", "#87a757", "#87a757"], # fun gradient
-    ["#0d2a0e", "#0d2a0e"], # bg
-    ["#133912", "#133912"]  # bar accent
-    ]
-
 # Own colors
 
 Technicfan = [
