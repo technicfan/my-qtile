@@ -27,6 +27,7 @@
 import os
 import getpass
 import socket
+import distro
 import subprocess
 from libqtile import bar, extension, hook, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
@@ -41,7 +42,6 @@ mod = "mod4"              # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"      # My terminal of choice
 myBrowser = "firefox"     # My browser of choice
 myFM = "dolphin"          # My filemanager of choice
-myDistro = subprocess.check_output(".config/qtile/scripts/distro.sh", shell=True, text=True) # Current distro
 
 # Allows you to input a name when adding treetab section.
 @lazy.layout.function
@@ -420,7 +420,7 @@ def init_widgets_list():
                  padding = 10,
                  max_chars = 65,
                  width = bar.CALCULATED,
-                 empty_group_string = myDistro + " - Qtile",
+                 empty_group_string = distro.name() + " - Qtile",
                  mouse_callbacks = {"Button2": lazy.window.kill()},
                  **decoration_group 
                  ),
