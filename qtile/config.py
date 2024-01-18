@@ -27,6 +27,7 @@
 import os
 import getpass
 import socket
+# make sure 'python-distro' is installed
 import distro
 import subprocess
 from libqtile import bar, extension, hook, layout, qtile, widget
