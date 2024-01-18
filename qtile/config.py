@@ -43,6 +43,7 @@ mod = "mod4"              # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"      # My terminal of choice
 myBrowser = "firefox"     # My browser of choice
 myFM = "dolphin"          # My filemanager of choice
+wallpaper = "Arcolinux"   # wallpaper version; currently available: Arcolinux, Archlinux
 
 # Allows you to input a name when adding treetab section.
 @lazy.layout.function
@@ -140,8 +141,8 @@ keys = [
 
     # Screens
     KeyChord([mod], "p", [
-        Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"), 
-             lazy.spawn("feh --bg-fill .config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png"), desc="normal - both screens"),
+        Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"),
+             lazy.spawn("feh --bg-fill .config/qtile/wallpapers/" + wallpaper + "-text-dark-rounded-1080p.png"), desc="normal - both screens"),
         Key([], "m", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
         Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --auto"), desc="only one monitor"),
         Key([], "l", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --off"), desc="both screens off"),   
