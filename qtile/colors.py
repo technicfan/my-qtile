@@ -159,5 +159,6 @@ Technicfan = [
     ["#133912", "#133912"], # bg
     ["#87a757", "#87a757"], # fg
     ["#c678dd", "#c678dd"], # fg2
-    ["#0d2a0e", "#0d2a0e"]  # inactive border
+    ["#0d2a0e", "#0d2a0e"], # inactive border
+    ["#133912", "#133912", "#87a757", "#87a757", "#133912", "#133912"] # seperator gradient
     ]

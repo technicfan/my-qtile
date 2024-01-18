@@ -385,6 +385,32 @@ def init_widgets_list():
                  this_screen_border = colors [2],
                  other_current_screen_border = colors[1],
                  other_screen_border = colors[2],
+                 visible_groups = ["1", "2", "3", "4", "5"],
+                 **decoration_group
+                 ),
+        widget.Sep(
+            foreground = colors[4],
+            linewidth = 2,
+            size_percent = 75,
+            **decoration_group,
+        ),
+        widget.GroupBox(
+                 fontsize = 11,
+                 margin_x = 4,
+                 padding_y = 2,
+                 padding_x = 2,
+                 borderwidth = 2,
+                 active = colors[2],
+                 inactive = colors[1],
+                 block_highlight_text_color=colors[0],
+                 rounded = True,
+                 disable_drag = True,
+                 highlight_method = "block",
+                 this_current_screen_border = colors[1],
+                 this_screen_border = colors [2],
+                 other_current_screen_border = colors[1],
+                 other_screen_border = colors[2],
+                 visible_groups = ["6", "7", "8", "9"],
                  **decoration_group
                  ),
         widget.Spacer(length=5, **decoration_group),
@@ -467,12 +493,13 @@ def init_widgets_screen1():
     return widgets_screen1
 
 # All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer). (old)
-# Now the python logo, the mpris widget and the systray are removed alongside with some spacers
+# Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
+    widgets_screen2[23].mouse_callbacks = {}
     del widgets_screen2[1:4]
-    del widgets_screen2[8:9]
-    del widgets_screen2[15:16]
+    del widgets_screen2[10:11]
+    del widgets_screen2[17:18]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
