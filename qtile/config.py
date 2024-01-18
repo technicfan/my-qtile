@@ -102,6 +102,7 @@ keys = [
             "Delphi 7": "wine .wine/drive_c/Program\ Files\ \(x86\)/Borland/Delphi7/Bin/delphi32.exe",
             "Discord": "com.discordapp.Discord",
             "Tor Browser": "torbrowser-launcher",
+            "ArchLinux Tweak Tool": "archlinux-tweak-tool",
         },
         **dmenu_theme,
     )), desc="Run launcher with problematic apps"),
