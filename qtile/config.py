@@ -149,15 +149,6 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Lower volume key"),
     Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
 
-    # Screens
-    #KeyChord([mod], "p", [
-    #    Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"),
-    #         lazy.spawn("feh --bg-fill .config/qtile/wallpapers/" + wallpaper + "-text-dark-rounded-1080p.png"), desc="normal - both screens"),
-    #    Key([], "m", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
-    #    Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --auto"), desc="only one monitor"),
-    #    Key([], "l", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --off"), desc="both screens off"),   
-    #]),
-
     # Activate Linux
     KeyChord([mod], "a", [
         Key([], "a", lazy.spawn("activate-linux -x 500 -d")),
@@ -504,7 +495,6 @@ def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
     return widgets_screen1
 
-# All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer). (old)
 # Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
