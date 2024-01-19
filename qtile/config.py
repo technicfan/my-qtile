@@ -316,6 +316,24 @@ decoration_group = {
     ]
 }
 
+groupboxes = {
+    "fontsize": 11,
+    "margin_x": 4,
+    "padding_y": 2,
+    "padding_x": 2,
+    "borderwidth": 2,
+    "active": colors[2],
+    "inactive": colors[1],
+    "block_highlight_text_color": colors[0],
+    "rounded": True,
+    "disable_drag": True,
+    "highlight_method": "block",
+    "this_current_screen_border": colors[1],
+    "this_screen_border": colors [2],
+    "other_current_screen_border": colors[1],
+    "other_screen_border": colors[2],
+}
+
 widgetbox_systray = widget.WidgetBox( 
                  widgets = [
                      widget.Spacer(length=10),
@@ -373,47 +391,15 @@ def init_widgets_list():
         ),
         widget.Spacer(length=5, **decoration_group),
         widget.GroupBox(
-                 fontsize = 11,
-                 margin_x = 4,
-                 padding_y = 2,
-                 padding_x = 2,
-                 borderwidth = 2,
-                 active = colors[2],
-                 inactive = colors[1],
-                 block_highlight_text_color=colors[0],
-                 rounded = True,
-                 disable_drag = True,
-                 highlight_method = "block",
-                 this_current_screen_border = colors[1],
-                 this_screen_border = colors [2],
-                 other_current_screen_border = colors[1],
-                 other_screen_border = colors[2],
                  visible_groups = ["1", "2", "3", "4", "5"],
+                 **groupboxes,
                  **decoration_group
                  ),
-        widget.Sep(
-            foreground = colors[4],
-            linewidth = 2,
-            size_percent = 70,
-            **decoration_group,
-        ),
+        widget.Spacer(length=-4, **decoration_group),
         widget.GroupBox(
-                 fontsize = 11,
-                 margin_x = 4,
-                 padding_y = 2,
-                 padding_x = 2,
-                 borderwidth = 2,
-                 active = colors[2],
-                 inactive = colors[1],
-                 block_highlight_text_color=colors[0],
-                 rounded = True,
-                 disable_drag = True,
-                 highlight_method = "block",
-                 this_current_screen_border = colors[1],
-                 this_screen_border = colors [2],
-                 other_current_screen_border = colors[1],
-                 other_screen_border = colors[2],
                  visible_groups = ["6", "7", "8", "9"],
+                 hide_unused = True,
+                 **groupboxes,
                  **decoration_group
                  ),
         widget.Spacer(length=5, **decoration_group),
