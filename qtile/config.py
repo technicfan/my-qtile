@@ -111,6 +111,16 @@ keys = [
         },
         **dmenu_theme,
     )), desc="Run launcher with extra apps"),
+    Key([mod], "p", lazy.run_extension(extension.CommandSet(
+        dmenu_command = "dmenu -p 'Monitors:' -z 473",
+        commands = {
+            "Monitor 1": "xrandr --output HDMI-0 --off --output DP-4 --auto",
+            "Both Monitors": "xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4",
+            "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
+#            "Monitor 2": "xrandr --output HDMI-0 --auto --output DP-4 --off ",
+        },
+        **dmenu_theme,
+    )), desc="Monitor configuration"),
 
     # Github
     Key([mod], "g", lazy.spawn("github-desktop"), desc="GitHub desktop"),
@@ -140,13 +150,13 @@ keys = [
     Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
 
     # Screens
-    KeyChord([mod], "p", [
-        Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"),
-             lazy.spawn("feh --bg-fill .config/qtile/wallpapers/" + wallpaper + "-text-dark-rounded-1080p.png"), desc="normal - both screens"),
-        Key([], "m", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
-        Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --auto"), desc="only one monitor"),
-        Key([], "l", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --off"), desc="both screens off"),   
-    ]),
+    #KeyChord([mod], "p", [
+    #    Key([], "p", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4"),
+    #         lazy.spawn("feh --bg-fill .config/qtile/wallpapers/" + wallpaper + "-text-dark-rounded-1080p.png"), desc="normal - both screens"),
+    #    Key([], "m", lazy.spawn("xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4"), desc="mirror - both screens"),
+    #    Key([], "o", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --auto"), desc="only one monitor"),
+    #    Key([], "l", lazy.spawn("xrandr --output HDMI-0 --off --output DP-4 --off"), desc="both screens off"),   
+    #]),
 
     # Activate Linux
     KeyChord([mod], "a", [
