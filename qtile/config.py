@@ -225,17 +225,17 @@ keys = [
 
 ]
 groups = []
-group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 #group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "GFX",]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ",]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "</>", " ", " ", " ",]
-group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "DEV", "GIT", "WIN", "MUS",]
+group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "GIT", "WIN", "MUS",]
 
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
 
 
 for i in range(len(group_names)):
@@ -271,13 +271,13 @@ for i in groups:
 @hook.subscribe.client_new
 def client_new(client):
     if client.name == "Spotify":
-        client.togroup("9"),
+        client.togroup("0"),
     if client.name == "Default - Wine desktop":
-        client.togroup("8"),
+        client.togroup("9"),
     if client.name == "GitHub Desktop":
-        client.togroup("7"),
+        client.togroup("8"),
     if client.name == "VSCodium":
-        client.togroup("6"),
+        client.togroup("7"),
 
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
@@ -391,13 +391,13 @@ def init_widgets_list():
         ),
         widget.Spacer(length=5, **decoration_group),
         widget.GroupBox(
-                 visible_groups = ["1", "2", "3", "4", "5"],
+                 visible_groups = ["1", "2", "3", "4", "5", "6"],
                  **groupboxes,
                  **decoration_group
                  ),
         widget.Spacer(length=-4, **decoration_group),
         widget.GroupBox(
-                 visible_groups = ["6", "7", "8", "9"],
+                 visible_groups = ["7", "8", "9", "0"],
                  hide_unused = True,
                  **groupboxes,
                  **decoration_group
