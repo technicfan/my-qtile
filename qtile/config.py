@@ -152,7 +152,7 @@ keys = [
 
     # Activate Linux
     KeyChord([mod], "a", [
-        Key([], "a", lazy.spawn("activate-linux -x 470 -d -t 'Linux aktivieren' -m 'Öffnen Sie die Einstellungen, um Linux zu aktivieren.'")),
+        Key([], "a", lazy.spawn("activate-linux -x 500 -d -t 'Linux aktivieren' -m 'Wechseln Sie zu den Einstellungen, um Linux zu aktivieren.'")),
         Key([], "q", lazy.spawn("kill activate-linux")),
     ]),
     
