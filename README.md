@@ -8,7 +8,7 @@ autostart.sh based on the one from ArcoLinux (https://github.com/arcolinux/arcol
 qtile folder in .config/
 picom.conf in /etc/xdg/
 
-# Screenshots:
+# Screenshots(outdated):
 normal:
 <img src="screenshots/screen-one-normal.png">
 with unhidden systray:
