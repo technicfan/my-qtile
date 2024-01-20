@@ -117,6 +117,7 @@ keys = [
             "Monitor 1": "xrandr --output HDMI-0 --off --output DP-4 --auto",
             "Both Monitors": "xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4",
             "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
+            "Off": "xrandr --output HDMI-0 --off --output DP-4 --off",
 #            "Monitor 2": "xrandr --output HDMI-0 --auto --output DP-4 --off ",
         },
         **dmenu_theme,
