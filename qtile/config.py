@@ -95,11 +95,13 @@ keys = [
     # dmenu
     Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
-        dmenu_command = "dmenu_run -p 'Run:' -z 473",
+        dmenu_command = "dmenu_run -z 473",
+        dmenu_prompt = "Run:",
         **dmenu_theme,
     )), desc="Run launcher"),
     Key([mod], "w", lazy.run_extension(extension.CommandSet(
-        dmenu_command = "dmenu -p 'Extra Apps:' -z 473",
+        dmenu_command = "dmenu -z 473",
+        dmenu_prompt = "Extra Apps:",
         commands = {
             "Delphi 7": "wine .wine/drive_c/Program\ Files\ \(x86\)/Borland/Delphi7/Bin/delphi32.exe",
             "Discord": "com.discordapp.Discord",
