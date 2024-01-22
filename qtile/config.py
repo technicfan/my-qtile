@@ -128,6 +128,9 @@ keys = [
         **dmenu_theme,
     )), desc="Monitor configuration"),
 
+    # Lock
+    Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
+
     # Github
     Key([mod], "g", lazy.spawn("github-desktop"), desc="GitHub desktop"),
 
