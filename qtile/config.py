@@ -491,7 +491,7 @@ def init_widgets_screen1():
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     widgets_screen2[23].mouse_callbacks = {}
-    del widgets_screen2[1:4]
+    del widgets_screen2[1:5]
     del widgets_screen2[10:11]
     del widgets_screen2[17:18]
     return widgets_screen2
