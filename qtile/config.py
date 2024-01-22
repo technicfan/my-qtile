@@ -123,13 +123,19 @@ keys = [
             "Both Monitors": "xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4",
             "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
             "Off": "xrandr --output HDMI-0 --off --output DP-4 --off",
-#            "Monitor 2": "xrandr --output HDMI-0 --auto --output DP-4 --off ",
         },
         **dmenu_theme,
     )), desc="Monitor configuration"),
 
     # Lock
     Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
+
+    # Keyboard
+    KeyChord([mod], "k", [
+        Key([], "k", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50")),
+        Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0")),
+        Key([], "l", lazy.spawn("openrgb --startminimized")),
+    ]),
 
     # Github
     Key([mod], "g", lazy.spawn("github-desktop"), desc="GitHub desktop"),
