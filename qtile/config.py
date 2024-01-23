@@ -404,7 +404,7 @@ def init_widgets_list():
                  mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
                  **decoration_group
                  ),
-        widget.Spacer(length=3, **decoration_group),
+        widget.Spacer(length=5, **decoration_group),
         widget.Prompt(
                  foreground = colors[1],
                  padding = 3,
