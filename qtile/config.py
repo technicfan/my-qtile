@@ -147,9 +147,12 @@ keys = [
 
     # Spotify
     KeyChord([mod], "s", [
-        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
-        Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
-        Key([], "d", lazy.spawn("com.spotify.Client"), desc="Spotify"),
+        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), #lazy.spawn("alacritty -T Spotify-TUI -e spt"), 
+            desc="Spotify - auto play"),
+        Key([], "q", lazy.spawn("kill spotify"), #lazy.spawn("kill spt"), 
+            desc="Kill Spotify"),
+        Key([], "d", lazy.spawn("com.spotify.Client"), #lazy.spawn("alacritty -T Spotify-TUI -e spt"), 
+            desc="Spotify"),
     ]),
 
     #Media
@@ -287,6 +290,9 @@ for i in groups:
 def client_new(client):
     if client.name == "Spotify":
         client.togroup("0"),
+#        client.toggle_minimize(),
+#    if client.name == "Spotify-TUI":
+#        client.togroup("0"),
     if client.name == "Default - Wine desktop":
         client.togroup("9"),
     if client.name == "GitHub Desktop":
