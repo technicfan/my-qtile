@@ -398,13 +398,13 @@ def init_widgets_list():
                  mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
                  **decoration_group
                  ),
-        widget.Spacer(length=2, **decoration_group),
+        widget.Spacer(length=3, **decoration_group),
         widget.Prompt(
                  foreground = colors[1],
                  padding = 3,
                  **decoration_group
         ),
-        widget.Spacer(length=5, **decoration_group),
+        widget.Spacer(length=-2, **decoration_group),
         widget.GroupBox(
                  visible_groups = ["1", "2", "3", "4", "5", "6"],
                  **groupboxes,
