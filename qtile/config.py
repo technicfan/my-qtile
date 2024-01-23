@@ -90,7 +90,7 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "r", lazy.restart()),
+    Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
 
     # dmenu
     Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
@@ -134,9 +134,9 @@ keys = [
 
     # Keyboard
     KeyChord([mod], "k", [
-        Key([], "k", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50")),
-        Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0")),
-        Key([], "l", lazy.spawn("openrgb --startminimized")),
+        Key([], "k", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
+        Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0"), desc="no rgb lighting"),
+        Key([], "l", lazy.spawn("openrgb --startminimized"), desc="rgb lighting as sound visualizer"),
     ]),
 
     # Github
@@ -149,12 +149,9 @@ keys = [
 
     # Spotify
     KeyChord([mod], "s", [
-        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), #lazy.spawn("alacritty -T Spotify-TUI -e spt"), 
-            desc="Spotify - auto play"),
-        Key([], "q", lazy.spawn("kill spotify"), #lazy.spawn("kill spt"), 
-            desc="Kill Spotify"),
-        Key([], "d", lazy.spawn("com.spotify.Client"), #lazy.spawn("alacritty -T Spotify-TUI -e spt"), 
-            desc="Spotify"),
+        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
+        Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
+        Key([], "d", lazy.spawn("com.spotify.Client"), desc="Spotify"),
     ]),
 
     #Media
@@ -171,8 +168,8 @@ keys = [
 
     # Activate Linux
     KeyChord([mod], "a", [
-        Key([], "a", lazy.spawn("activate-linux -x 500 -d -t 'Linux aktivieren' -m 'Wechseln Sie zu den Einstellungen, um Linux zu aktivieren.'")),
-        Key([], "q", lazy.spawn("kill activate-linux")),
+        Key([], "a", lazy.spawn("activate-linux -x 500 -d -t 'Linux aktivieren' -m 'Wechseln Sie zu den Einstellungen, um Linux zu aktivieren.'"), desc="start activate linux"),
+        Key([], "q", lazy.spawn("kill activate-linux"), desc="kill activate linux"),
     ]),
     
     # Switch between windows
