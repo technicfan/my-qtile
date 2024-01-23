@@ -18,7 +18,6 @@ feh --bg-fill "/home/technicfan/.config/qtile/wallpapers/Arcolinux-text-dark-rou
 
 #starting utility applications at boot time
 run nm-applet &
-#run pamac-tray &
 run xfce4-power-manager &
 #numlockx on &
 blueman-applet &
