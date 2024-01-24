@@ -508,8 +508,8 @@ def init_widgets_screen2():
     widgets_screen2[23].mouse_callbacks = {}
     del widgets_screen2[1:3]
     del widgets_screen2[2:4]
-    del widgets_screen2[10:11]
-    del widgets_screen2[17:18]
+    del widgets_screen2[9:10]
+    del widgets_screen2[16:17]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
