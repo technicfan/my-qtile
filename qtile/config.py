@@ -43,7 +43,6 @@ mod = "mod4"              # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"      # My terminal of choice
 myBrowser = "firefox"     # My browser of choice
 myFM = "dolphin"          # My filemanager of choice
-wallpaper = "Arcolinux"   # wallpaper version; currently available: Arcolinux, Archlinux
 
 # Allows you to input a name when adding treetab section.
 @lazy.layout.function
@@ -326,7 +325,7 @@ layouts = [
 widget_defaults = dict(
     font="JetBrains Bold",
     fontsize = 12,
-    background=colors[0]
+    #background=colors[0]
 )
 
 decoration_group = {
@@ -515,8 +514,8 @@ def init_widgets_screen2():
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[4, 0, 0, 0])),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[4, 0, 0, 0]))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[4, 0, 0, 0], background="#00000000")),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[4, 0, 0, 0], background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
