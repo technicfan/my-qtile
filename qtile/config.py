@@ -330,8 +330,8 @@ widget_defaults = dict(
 
 decoration_group = {
     "decorations": [
-        RectDecoration(colour=colors[1], radius=6, filled=True, group=True),
-        RectDecoration(colour=colors[0], radius=4, filled=True, group=True, padding=2)
+        RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
+        RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
     ]
 }
 
@@ -360,8 +360,8 @@ widgetbox_systray = widget.WidgetBox(
                      widget.Systray(
                              padding = 5,
                              decorations = [
-                                 RectDecoration(colour="#87a757", radius=6, filled=True, extrawidth=5),
-                                 RectDecoration(colour="#133912", radius=4, filled=True, group=True, padding=2)
+                                 RectDecoration(colour="#87a757", radius=10, filled=True, extrawidth=5),
+                                 RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2)
                              ]
                              ),
                  ],
@@ -393,17 +393,15 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.Spacer(length=4),
-        widget.Spacer(length=5, **decoration_group),
         widget.TextBox(
                  text = "\uf3e2",
                  fontsize = 21,
                  font = "Ubuntu",
-                 padding = 2,
+                 padding = 7,
                  foreground = colors[2],
                  mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
                  **decoration_group
                  ),
-        widget.Spacer(length=5, **decoration_group),
         widget.Prompt(
                  foreground = colors[1],
                  padding = 3,
@@ -422,7 +420,8 @@ def init_widgets_list():
                  **groupboxes,
                  **decoration_group
                  ),
-        widget.Spacer(length=5, **decoration_group),
+        widget.Spacer(length=-4, **decoration_group),
+        widget.Spacer(length=9, **decoration_group),
         widget.Spacer(length=10),
         widget.WindowName(
                  foreground = colors[2],
@@ -504,11 +503,13 @@ def init_widgets_screen1():
 # Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    widgets_screen2[23].mouse_callbacks = {}
-    del widgets_screen2[1:3]
-    del widgets_screen2[2:4]
-    del widgets_screen2[9:10]
-    del widgets_screen2[16:17]
+    widgets_screen2[22].mouse_callbacks = {}
+    # python logo
+    del widgets_screen2[1:2]
+    # mpris
+    del widgets_screen2[10:11]
+    # systray
+    del widgets_screen2[18:19]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
