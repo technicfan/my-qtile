@@ -10,11 +10,16 @@ function run {
 #change your keyboard if you need it
 setxkbmap -layout de
 
+# Arcolinux-text-dark-rounded-1080p.png
+# Archlinux-text-dark-rounded-1080p.png
+# linux.png
+# retro-arco.png
+
 # Arcolinux
-feh --bg-fill "/home/technicfan/.config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png" &
+feh --bg-fill "/home/technicfan/.config/qtile/wallpapers/linux.png" &
 
 # Archlinux
-#feh --bg-fill "/home/technicfan/.config/qtile/wallpapers/Archlinux-text-dark-rounded-1080p.png" &
+#feh --bg-fill "path/to/wallpaper" &
 
 #starting utility applications at boot time
 run nm-applet &
