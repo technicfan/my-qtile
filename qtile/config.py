@@ -121,8 +121,8 @@ keys = [
     Key([mod], "p", lazy.run_extension(extension.CommandSet(
         dmenu_command = "dmenu -p 'Monitors:' -z 473",
         commands = {
-            "Monitor 1": "xrandr --output HDMI-0 --off --output DP-4 --auto",
-            "Both Monitors": "xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4",
+            "Monitor 1": ".config/qtile/scripts/one-screen.sh",
+            "Both Monitors": ".config/qtile/scripts/two-screens.sh",
             "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
             "Off": "xrandr --output HDMI-0 --off --output DP-4 --off",
         },

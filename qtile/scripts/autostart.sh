@@ -7,6 +7,14 @@ function run {
   fi
 }
 
+# screen config
+if [ $(cd .config/qtile/screens && ls) -eq 1 ]
+then
+    xrandr --output HDMI-0 --off --output DP-4 --auto
+else
+    xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
+fi
+
 #change your keyboard if you need it
 setxkbmap -layout de
 
