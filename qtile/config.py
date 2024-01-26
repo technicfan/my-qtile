@@ -455,7 +455,6 @@ def init_widgets_list():
                  foreground = colors[2],
                  format = '{MemUsed: .0f}{mm}',
                  fmt = '\uf1c0  {}',
-                 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("alacritty -e btop")},
                  **decoration_group
                  ),
         widget.GenPollText(
