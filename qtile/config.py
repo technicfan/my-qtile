@@ -330,8 +330,8 @@ widget_defaults = dict(
 
 decoration_group = {
     "decorations": [
-        RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
-        RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
+        RectDecoration(colour="#87a757", radius=10, filled=True, group=True),
+        RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2)
     ]
 }
 
@@ -356,18 +356,19 @@ groupboxes = {
 
 widgetbox_systray = widget.WidgetBox( 
                  widgets = [
-                     widget.Spacer(length=10),
                      widget.Systray(
                              padding = 5,
                              decorations = [
-                                 RectDecoration(colour="#87a757", radius=10, filled=True, extrawidth=5),
-                                 RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2)
+                                 RectDecoration(colour="#87a757", radius=10, filled=True, group=True),
+                                 RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2),
                              ]
                              ),
+                     widget.Spacer(length=6, **decoration_group),
                  ],
                  text_closed = "",
                  text_open = "",
-                 close_button_location = "right"
+                 close_button_location = "right",
+                 **decoration_group
                  )
 
 widgetbox_mpris = widget.WidgetBox ( 
@@ -392,7 +393,6 @@ extension_defaults = widget_defaults.copy()
 
 def init_widgets_list():
     widgets_list = [
-        widget.Spacer(length=4),
         widget.TextBox(
                  text = "\uf3e2",
                  fontsize = 21,
@@ -404,6 +404,7 @@ def init_widgets_list():
                  ),
         widget.Prompt(
                  foreground = colors[1],
+                 cursor_color = "#87a757",
                  padding = 3,
                  **decoration_group
         ),
@@ -420,13 +421,11 @@ def init_widgets_list():
                  **groupboxes,
                  **decoration_group
                  ),
-        widget.Spacer(length=-4, **decoration_group),
-        widget.Spacer(length=9, **decoration_group),
-        widget.Spacer(length=10),
+        widget.Spacer(length=-2, **decoration_group),
         widget.WindowName(
                  foreground = colors[2],
                  padding = 10,
-                 max_chars = 65,
+                 max_chars = 70,
                  width = bar.CALCULATED,
                  empty_group_string = distro.name() + " - Qtile",
                  mouse_callbacks = {"Button2": lazy.window.kill()},
@@ -480,7 +479,6 @@ def init_widgets_list():
                  **decoration_group
                  ),
         widgetbox_systray,
-        widget.Spacer(length=10),
         widget.TextBox(
                  padding = 10,
                  foreground = colors[2],
@@ -488,8 +486,6 @@ def init_widgets_list():
                  mouse_callbacks = {'Button1': widgetbox_systray.toggle, "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
                  **decoration_group
                  ),
-        widget.Spacer(length=4)
-
         ]
     return widgets_list
 
@@ -503,20 +499,21 @@ def init_widgets_screen1():
 # Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    widgets_screen2[22].mouse_callbacks = {}
+    # not opening systray when clicking on user on screen2
+    widgets_screen2[18].mouse_callbacks = {}
     # python logo
-    del widgets_screen2[1:2]
+    del widgets_screen2[0:3]
     # mpris
-    del widgets_screen2[10:11]
+    del widgets_screen2[7:8]
     # systray
-    del widgets_screen2[18:19]
+    del widgets_screen2[13:14]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[4, 0, 0, 0], background="#00000000")),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[4, 0, 0, 0], background="#00000000"))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[4, 4, 0, 4], background="#00000000")),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[4, 4, 0, 4], background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
