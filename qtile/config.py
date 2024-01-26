@@ -114,6 +114,7 @@ keys = [
             "ProtonUp-Qt": "/home/technicfan/Applications/ProtonUp-Qt-2.8.2-x86_64_f1d2fd1a010885df42d59cf306bdd908.AppImage",
             "GPT4All": "/mnt/Games/gpt4all/bin/chat",
             "Stable Diffusion WebUI": "alacritty -e /home/technicfan/stable-diffusion-webui/webui.sh",
+            "Sunshine": "sunshine",
         },
         **dmenu_theme,
     )), desc="Run launcher with extra apps"),
