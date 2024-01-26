@@ -355,38 +355,38 @@ groupboxes = {
 }
 
 widgetbox_systray = widget.WidgetBox( 
-                 widgets = [
-                     widget.Systray(
-                             padding = 5,
-                             decorations = [
-                                 RectDecoration(colour="#87a757", radius=10, filled=True, group=True),
-                                 RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2),
-                             ]
-                             ),
-                     widget.Spacer(length=6, **decoration_group),
-                 ],
-                 text_closed = "",
-                 text_open = "",
-                 close_button_location = "right",
-                 **decoration_group
-                 )
+                         widgets = [
+                                 widget.Systray(
+                                         padding = 5,
+                                         decorations = [
+                                             RectDecoration(colour="#87a757", radius=10, filled=True, group=True),
+                                             RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2),
+                                         ]
+                                 ),
+                                 widget.Spacer(length=6, **decoration_group),
+                         ],
+                         text_closed = "",
+                         text_open = "",
+                         close_button_location = "right",
+                         **decoration_group
+                    )
 
 widgetbox_mpris = widget.WidgetBox ( 
-                 widgets = [
-                     widget.Mpris2(
-                     padding = 10,
-                     no_metadata_text = "Keine Metadaten",
-                     paused_text = "Pausiert: {track}",
-                     format = "{xesam:title} - {xesam:artist}",
-                     foreground = colors[1],
-                     width = 250,
-                     **decoration_group
-                     ),
-                 ],
-                 text_closed = "",
-                 text_open = "",
-                 close_button_location = "right"
-                 )
+                     widgets = [
+                             widget.Mpris2(
+                             padding = 10,
+                             no_metadata_text = "Keine Metadaten",
+                             paused_text = "Pausiert: {track}",
+                             format = "{xesam:title} - {xesam:artist}",
+                             foreground = colors[1],
+                             width = 250,
+                             **decoration_group
+                             ),
+                     ],
+                     text_closed = "",
+                     text_open = "",
+                     close_button_location = "right"
+                  )
 
 extension_defaults = widget_defaults.copy()
 
