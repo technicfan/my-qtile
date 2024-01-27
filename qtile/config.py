@@ -224,21 +224,10 @@ keys = [
     # Dmenu scripts launched using the key chord SUPER+o followed by 'key'
     KeyChord([mod], "o", [
         Key([], "h", lazy.spawn("dm-hub"), desc='List all dmscripts'),
-        Key([], "a", lazy.spawn("dm-sounds"), desc='Choose ambient sound'),
-        Key([], "b", lazy.spawn("dm-setbg"), desc='Set background'),
-        Key([], "c", lazy.spawn("dtos-colorscheme"), desc='Choose color scheme'),
-        Key([], "e", lazy.spawn("dm-confedit"), desc='Choose a config file to edit'),
-        Key([], "i", lazy.spawn("dm-maim"), desc='Take a screenshot'),
-        Key([], "k", lazy.spawn("dm-kill"), desc='Kill processes '),
-        Key([], "m", lazy.spawn("dm-man"), desc='View manpages'),
-        Key([], "n", lazy.spawn("dm-note"), desc='Store and copy notes'),
-        Key([], "o", lazy.spawn("dm-bookman"), desc='Browser bookmarks'),
-        Key([], "p", lazy.spawn("passmenu -p \"Pass: \""), desc='Logout menu'),
-        Key([], "q", lazy.spawn("dm-logout"), desc='Logout menu'),
-        Key([], "r", lazy.spawn("dm-radio"), desc='Listen to online radio'),
-        Key([], "s", lazy.spawn("dm-websearch"), desc='Search various engines'),
-        Key([], "t", lazy.spawn("dm-translate"), desc='Translate text')
-    ])
+        Key([], "c", lazy.spawn("dm-confedit"), desc='Choose a config file to edit'),
+        Key([], "k", lazy.spawn("dm-kill"), desc='Kill processes'),
+        Key([], "p", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output")
+    ]),
 
 ]
 groups = []
