@@ -334,7 +334,10 @@ widgetbox_mpris = widget.WidgetBox (
                              format = "{xesam:title} - {xesam:artist}",
                              foreground = colors[1],
                              width = 250,
-                             **decoration_group
+                             decorations = [
+                                 RectDecoration(colour=colors[2], radius=10, filled=True, group=True),
+                                 RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
+                             ]
                              ),
                      ],
                      text_closed = "",
@@ -390,6 +393,9 @@ def init_widgets_list():
         # Middle of the bar
 
         widgetbox_mpris,
+
+        # Middle of the bar
+
         widget.Spacer(),
         widget.TextBox(
                  padding = 10,
