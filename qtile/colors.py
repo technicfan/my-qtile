@@ -124,8 +124,15 @@ TomorrowNight = [
 # Own colors
 
 Technicfan = [
-    ["#133912", "#133912"], # bg
-    ["#87a757", "#87a757"], # fg
-    ["#c678dd", "#c678dd"], # fg2
-    ["#0d2a0e", "#0d2a0e"]  # inactive border
+    "#133912", # bg
+    "#87a757", # fg
+    "#c678dd", # fg2
+    "#0d2a0e"  # inactive border
+    ]
+
+TechnicfanInv = [
+    "#133912", # bg
+    "#c678dd", # fg
+    "#87a757", # fg2
+    "#0d2a0e"  # inactive border
     ]
