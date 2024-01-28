@@ -381,7 +381,7 @@ def init_widgets_list():
                  padding = 10,
                  max_chars = 70,
                  width = bar.CALCULATED,
-                 empty_group_string = distro.name() + " - Qtile",
+                 empty_group_string = "Qtile - " + distro.name(),
                  mouse_callbacks = {"Button2": lazy.window.kill()},
                  **decoration_group 
                  ),
