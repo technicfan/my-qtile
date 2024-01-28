@@ -284,8 +284,8 @@ widget_defaults = dict(
 
 decoration_group = {
     "decorations": [
-        RectDecoration(colour="#87a757", radius=10, filled=True, group=True),
-        RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2)
+        RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
+        RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
     ]
 }
 
@@ -312,10 +312,7 @@ widgetbox_systray = widget.WidgetBox(
                          widgets = [
                                  widget.Systray(
                                          padding = 5,
-                                         decorations = [
-                                             RectDecoration(colour="#87a757", radius=10, filled=True, group=True),
-                                             RectDecoration(colour="#133912", radius=8, filled=True, group=True, padding=2),
-                                         ]
+                                         **decoration_group
                                  ),
                                  widget.Spacer(length=6, **decoration_group),
                          ],
