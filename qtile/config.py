@@ -44,12 +44,6 @@ myTerm = "alacritty"      # My terminal of choice
 myBrowser = "firefox"     # My browser of choice
 myFM = "dolphin"          # My filemanager of choice
 
-# Allows you to input a name when adding treetab section.
-@lazy.layout.function
-def add_treetab_section(layout):
-    prompt = qtile.widgets_map["prompt"]
-    prompt.start_input("Section name: ", layout.cmd_add_section)
-
 # A function for hide/show all the windows in a group
 @lazy.function
 def minimize_all(qtile):
@@ -184,35 +178,12 @@ keys = [
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "left",
-        lazy.layout.shuffle_left(),
-        lazy.layout.move_left().when(layout=["treetab"]),
-        desc="Move window to the left/move tab left in treetab"),
+    Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, "shift"], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "down", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "up", lazy.layout.shuffle_up(), desc="Move window downup"),
 
-    Key([mod, "shift"], "right",
-        lazy.layout.shuffle_right(),
-        lazy.layout.move_right().when(layout=["treetab"]),
-        desc="Move window to the right/move tab right in treetab"),
-
-    Key([mod, "shift"], "down",
-        lazy.layout.shuffle_down(),
-        lazy.layout.section_down().when(layout=["treetab"]),
-        desc="Move window down/move down a section in treetab"
-    ),
-    Key([mod, "shift"], "up",
-        lazy.layout.shuffle_up(),
-        lazy.layout.section_up().when(layout=["treetab"]),
-        desc="Move window downup/move up a section in treetab"
-    ),
-
-    # Grow windows up, down, left, right.  Only works in certain layouts.
-    # Works in 'bsp' and 'columns' layout.
-#    Key([mod, "control"], "left", lazy.layout.grow_left(), desc="Grow window to the left"),
-#    Key([mod, "control"], "right", lazy.layout.grow_right(), desc="Grow window to the right"),
-#    Key([mod, "control"], "down", lazy.layout.grow_down(), desc="Grow window down"),
-#    Key([mod, "control"], "up", lazy.layout.grow_up(), desc="Grow window up"),
-#    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-#    Key([mod], "m", lazy.layout.maximize(), desc='Toggle between min and max sizes'),
+    # window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc='toggle floating'),
     Key([mod], "f", maximize_by_switching_layout(), lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
@@ -278,9 +249,6 @@ for i in groups:
 def client_new(client):
     if client.name == "Spotify":
         client.togroup("0"),
-#        client.toggle_minimize(),
-#    if client.name == "Spotify-TUI":
-#        client.togroup("0"),
     if client.name == "Default - Wine desktop":
         client.togroup("9"),
     if client.name == "GitHub Desktop":
