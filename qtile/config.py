@@ -167,9 +167,6 @@ keys = [
     ]),
     
     # Switch between windows
-    # Some layouts like 'monadtall' only need to use j/k to move
-    # through the stack, but other layouts like 'columns' will
-    # require all four directions h/j/k/l to move around.
     Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "down", lazy.layout.down(), desc="Move focus down"),
@@ -177,7 +174,6 @@ keys = [
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
     # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
     Key([mod, "shift"], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "down", lazy.layout.shuffle_down(), desc="Move window down"),
