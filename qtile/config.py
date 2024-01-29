@@ -54,10 +54,10 @@ def minimize_all(qtile):
 @lazy.function
 def maximize_by_switching_layout(qtile):
     current_layout_name = qtile.current_group.layout.name
-    if current_layout_name == 'monadtall':
-        qtile.current_group.layout = 'max'
-    elif current_layout_name == 'max':
-        qtile.current_group.layout = 'monadtall'
+    if current_layout_name == "monadtall":
+        qtile.current_group.layout = "max"
+    elif current_layout_name == "max":
+        qtile.current_group.layout = "monadtall"
 
 # Dmenu theme
 dmenu_theme = {
@@ -75,7 +75,7 @@ dmenu_theme = {
 keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
-    Key([mod], "b", lazy.spawn(myBrowser), desc='Web browser'),
+    Key([mod], "b", lazy.spawn(myBrowser), desc="Web browser"),
     Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Private web browser"),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
     Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
@@ -180,19 +180,19 @@ keys = [
     Key([mod, "shift"], "up", lazy.layout.shuffle_up(), desc="Move window downup"),
 
     # window state control
-    Key([mod], "t", lazy.window.toggle_floating(), desc='toggle floating'),
-    Key([mod], "f", maximize_by_switching_layout(), lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
+    Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
+    Key([mod], "f", maximize_by_switching_layout(), lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 
     # Switch focus of monitors
-    Key([mod], "period", lazy.next_screen(), desc='Move focus to next monitor'),
-    Key([mod], "comma", lazy.prev_screen(), desc='Move focus to prev monitor'),
+    Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
+    Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
     
-    # Dmenu scripts launched using the key chord SUPER+o followed by 'key'
+    # Dmenu scripts launched using the key chord SUPER+o followed by "key"
     KeyChord([mod], "o", [
-        Key([], "h", lazy.spawn("dm-hub"), desc='List all dmscripts'),
-        Key([], "c", lazy.spawn("dm-confedit"), desc='Choose a config file to edit'),
-        Key([], "k", lazy.spawn("dm-kill"), desc='Kill processes'),
+        Key([], "h", lazy.spawn("dm-hub"), desc="List all dmscripts"),
+        Key([], "c", lazy.spawn("dm-confedit"), desc="Choose a config file to edit"),
+        Key([], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
         Key([], "p", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output")
     ]),
 
@@ -401,15 +401,15 @@ def init_widgets_list():
                  ),
         widget.CPU(
                  padding = 10,
-                 format = '\uf2db   {load_percent}% ({freq_current}GHz)',
+                 format = "\uf2db   {load_percent}%",
                  foreground = colors[1],
                  **decoration_group
                  ),
         widget.Memory(
                  padding = 10,
                  foreground = colors[2],
-                 format = '{MemUsed: .0f}{mm}',
-                 fmt = '\uf1c0  {}',
+                 format = "{MemUsed: .0f}{mm}",
+                 fmt = "\uf1c0  {}",
                  **decoration_group
                  ),
         widget.GenPollText(
@@ -417,13 +417,13 @@ def init_widgets_list():
                  update_interval = 30,
                  func = lambda: subprocess.check_output(".config/qtile/scripts/uptime.sh", shell=True, text=True),
                  foreground = colors[1],
-                 fmt = '\uf21e   {}',
+                 fmt = "\uf21e   {}",
                  **decoration_group
                  ),
         widget.Volume(
                  padding = 10,
                  foreground = colors[2],
-                 fmt = '🕫  {}',
+                 fmt = "🕫  {}",
                  step = 5,
                  **decoration_group
                  ),
@@ -438,7 +438,7 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[2],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {'Button1': widgetbox_systray.toggle, "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
+                 mouse_callbacks = {"Button1": widgetbox_systray.toggle, "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
                  **decoration_group
                  ),
         ]
@@ -499,17 +499,17 @@ floating_layout = layout.Floating(
         Match(wm_class="download"),       # downloads
         Match(wm_class="error"),          # error msgs
         Match(wm_class="file_progress"),  # file progress boxes
-        Match(wm_class='kdenlive'),       # kdenlive
+        Match(wm_class="kdenlive"),       # kdenlive
         Match(wm_class="makebranch"),     # gitk
         Match(wm_class="maketag"),        # gitk
         Match(wm_class="notification"),   # notifications
-        Match(wm_class='pinentry-gtk-2'), # GPG key password entry
+        Match(wm_class="pinentry-gtk-2"), # GPG key password entry
         Match(wm_class="ssh-askpass"),    # ssh-askpass
         Match(wm_class="toolbar"),        # toolbars
         Match(wm_class="Yad"),            # yad boxes
         Match(title="branchdialog"),      # gitk
-        Match(title='Confirmation'),      # tastyworks exit box
-        Match(title='Qalculate!'),        # qalculate-gtk
+        Match(title="Confirmation"),      # tastyworks exit box
+        Match(title="Qalculate!"),        # qalculate-gtk
         Match(title="pinentry"),          # GPG key password entry
         Match(title="tastycharts"),       # tastytrade pop-out charts
         Match(title="tastytrade"),        # tastytrade pop-out side gutter
@@ -530,8 +530,8 @@ wl_input_rules = None
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
