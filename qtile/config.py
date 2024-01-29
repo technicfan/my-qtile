@@ -105,7 +105,6 @@ keys = [
             "Calc": "libreoffice --calc",
             "BiBox": "chromium --app=https://bibox2.westermann.de/shelf",
             "Minecraft Bedrock Launcher": "/home/technicfan/Applications/Minecraft_Bedrock_Launcher-x86_64-v0.11.4.721_6a112963f5b0815232f9127d54eef130.AppImage",
-            "ProtonUp-Qt": "/home/technicfan/Applications/ProtonUp-Qt-2.8.2-x86_64_f1d2fd1a010885df42d59cf306bdd908.AppImage",
             "GPT4All": "/mnt/Games/gpt4all/bin/chat",
             "Stable Diffusion WebUI": "alacritty -e /home/technicfan/stable-diffusion-webui/webui.sh",
             "Sunshine": "sunshine",
