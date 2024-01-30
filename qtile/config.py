@@ -380,7 +380,7 @@ def init_widgets_list():
                  padding = 10,
                  max_chars = 70,
                  width = bar.CALCULATED,
-                 empty_group_string = "Qtile - " + distro.name(),
+                 empty_group_string = distro.name() + " - Qtile",
                  **decoration_group 
                  ),
         widget.Spacer(),
