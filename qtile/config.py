@@ -324,16 +324,16 @@ widgetbox_systray = widget.WidgetBox(
 widgetbox_mpris = widget.WidgetBox ( 
                      widgets = [
                              widget.Mpris2(
-                             padding = 10,
-                             no_metadata_text = "Keine Metadaten",
-                             paused_text = "Pausiert: {track}",
-                             format = "{xesam:title} - {xesam:artist}",
-                             foreground = colors[1],
-                             width = 250,
-                             decorations = [
-                                 RectDecoration(colour=colors[2], radius=10, filled=True, group=True),
-                                 RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
-                             ]
+                                 padding = 10,
+                                 no_metadata_text = "Keine Metadaten",
+                                 paused_text = "Pausiert: {track}",
+                                 format = "{xesam:title} - {xesam:artist}",
+                                 foreground = colors[1],
+                                 width = 250,
+                                 decorations = [
+                                     RectDecoration(colour=colors[2], radius=10, filled=True, group=True),
+                                     RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
+                                 ]
                              ),
                      ],
                      text_closed = "",
