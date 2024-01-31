@@ -411,10 +411,10 @@ def init_widgets_list():
                  fmt = "\uf1c0  {}",
                  **decoration_group
                  ),
-        widget.GenPollText(
+        widget.GenPollCommand(
                  padding = 10,
                  update_interval = 30,
-                 func = lambda: subprocess.check_output(".config/qtile/scripts/uptime.sh", shell=True, text=True),
+                 cmd = ".config/qtile/scripts/uptime.sh",
                  foreground = colors[1],
                  fmt = "\uf21e   {}",
                  **decoration_group
