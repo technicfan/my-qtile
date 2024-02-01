@@ -360,6 +360,7 @@ def init_widgets_list():
                  foreground = colors[1],
                  cursor_color = "#87a757",
                  padding = 3,
+                 cursorblink = False,
                  **decoration_group
         ),
         widget.Spacer(length=-2, **decoration_group),
