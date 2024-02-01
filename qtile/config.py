@@ -305,6 +305,7 @@ groupboxes = {
     "other_current_screen_border": colors[1],
     "other_screen_border": colors[2],
     "use_mouse_wheel": False,
+    "toggle": False,
 }
 
 widgetbox_systray = widget.WidgetBox( 
