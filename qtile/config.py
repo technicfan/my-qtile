@@ -314,7 +314,7 @@ widgetbox_systray = widget.WidgetBox(
                          **decoration_group
                     )
 
-widgetbox_mpris = widget.WidgetBox ( 
+widgetbox_spotify = widget.WidgetBox ( 
                      widgets = [
                              widget.Mpris2(
                                  padding = 10,
@@ -333,7 +333,7 @@ widgetbox_mpris = widget.WidgetBox (
                      text_closed = "",
                      text_open = "",
                      close_button_location = "right",
-                     #start_opened = True
+                     start_opened = True
                   )
 
 extension_defaults = widget_defaults.copy()
@@ -383,7 +383,7 @@ def init_widgets_list():
 
         # Middle of the bar
 
-        widgetbox_mpris,
+        widgetbox_spotify,
 
         # Middle of the bar
 
