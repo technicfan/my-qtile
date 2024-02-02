@@ -108,6 +108,7 @@ keys = [
             "GPT4All": "/mnt/Games/gpt4all/bin/chat",
             "Stable Diffusion WebUI": "alacritty -e /home/technicfan/stable-diffusion-webui/webui.sh",
             "Sunshine": "sunshine",
+            "Wolfenstein 3d": "dosbox '/mnt/Games/Heroic/Wolfenstein 3D/Wolf3d.exe'",
         },
         **dmenu_theme,
     )), desc="Run launcher with extra apps"),
