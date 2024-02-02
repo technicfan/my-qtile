@@ -50,14 +50,6 @@ def minimize_all(qtile):
     for win in qtile.current_group.windows:
         if hasattr(win, "toggle_minimize"):
             win.toggle_minimize()
-            
-#@lazy.function
-#def maximize_by_switching_layout(qtile):
-#    current_layout_name = qtile.current_group.layout.name
-#    if current_layout_name == "monadtall":
-#        qtile.current_group.layout = "max"
-#    elif current_layout_name == "max":
-#        qtile.current_group.layout = "monadtall"
 
 # Dmenu theme
 dmenu_theme = {
