@@ -323,6 +323,7 @@ widgetbox_mpris = widget.WidgetBox (
                                  paused_text = "Pausiert: {track}",
                                  format = "{xesam:title} - {xesam:artist}",
                                  foreground = colors[1],
+                                 objname = "org.mpris.MediaPlayer2.spotify",
                                  width = 250,
                                  decorations = [
                                      RectDecoration(colour=colors[2], radius=10, filled=True, group=True),
@@ -332,7 +333,8 @@ widgetbox_mpris = widget.WidgetBox (
                      ],
                      text_closed = "",
                      text_open = "",
-                     close_button_location = "right"
+                     close_button_location = "right",
+                     #start_opened = True
                   )
 
 extension_defaults = widget_defaults.copy()
