@@ -333,7 +333,7 @@ widgetbox_mpris = widget.WidgetBox (
                      text_closed = "",
                      text_open = "",
                      close_button_location = "right",
-                     start_opened = True
+                     #start_opened = True
                   )
 
 extension_defaults = widget_defaults.copy()
