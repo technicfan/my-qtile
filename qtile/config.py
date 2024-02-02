@@ -318,7 +318,7 @@ widgetbox_mpris = widget.WidgetBox (
                      widgets = [
                              widget.Mpris2(
                                  padding = 10,
-                                 no_metadata_text = "Nix",
+                                 no_metadata_text = "D-Bus ist am chillen",
                                  paused_text = "   {track}",
                                  format = "{xesam:title} - {xesam:artist}",
                                  foreground = colors[1],
