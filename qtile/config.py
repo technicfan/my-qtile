@@ -35,8 +35,7 @@ from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
 from libqtile.lazy import lazy
 # Make sure 'qtile-extras' is installed or this config will not work.
 from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration, RectDecoration
-from qtile_extras.popup.templates.mpris2 import COMPACT_LAYOUT, DEFAULT_LAYOUT
+from qtile_extras.widget.decorations import RectDecoration
 import colors
 
 mod = "mod4"              # Sets mod key to SUPER/WINDOWS
@@ -319,8 +318,8 @@ widgetbox_mpris = widget.WidgetBox (
                      widgets = [
                              widget.Mpris2(
                                  padding = 10,
-                                 no_metadata_text = "Keine Metadaten",
-                                 paused_text = "Pausiert: {track}",
+                                 no_metadata_text = "Nix",
+                                 paused_text = "   {track}",
                                  format = "{xesam:title} - {xesam:artist}",
                                  foreground = colors[1],
                                  objname = "org.mpris.MediaPlayer2.spotify",
@@ -334,7 +333,7 @@ widgetbox_mpris = widget.WidgetBox (
                      text_closed = "",
                      text_open = "",
                      close_button_location = "right",
-                     #start_opened = True
+                     start_opened = False
                   )
 
 extension_defaults = widget_defaults.copy()
