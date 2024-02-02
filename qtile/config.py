@@ -51,13 +51,13 @@ def minimize_all(qtile):
         if hasattr(win, "toggle_minimize"):
             win.toggle_minimize()
             
-@lazy.function
-def maximize_by_switching_layout(qtile):
-    current_layout_name = qtile.current_group.layout.name
-    if current_layout_name == "monadtall":
-        qtile.current_group.layout = "max"
-    elif current_layout_name == "max":
-        qtile.current_group.layout = "monadtall"
+#@lazy.function
+#def maximize_by_switching_layout(qtile):
+#    current_layout_name = qtile.current_group.layout.name
+#    if current_layout_name == "monadtall":
+#        qtile.current_group.layout = "max"
+#    elif current_layout_name == "max":
+#        qtile.current_group.layout = "monadtall"
 
 # Dmenu theme
 dmenu_theme = {
@@ -76,7 +76,7 @@ keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
     Key([mod], "b", lazy.spawn(myBrowser), desc="Web browser"),
-    Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Private web browser"),
+    Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Web browser private session"),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
     Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
@@ -141,7 +141,7 @@ keys = [
     Key([], "scroll_lock", lazy.spawn("flameshot full"), desc="Screenshot all screens"),
     Key([mod, "shift"], "s", lazy.spawn("flameshot gui"), desc="Snipping tool"),
 
-    # Spotify
+    # Spotify with three different actions (key chord SUPER+s followed by "key")
     KeyChord([mod], "s", [
         Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
         Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
@@ -181,7 +181,7 @@ keys = [
 
     # window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
-    Key([mod], "f", maximize_by_switching_layout(), lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 
     # Switch focus of monitors
