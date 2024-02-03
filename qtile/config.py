@@ -308,7 +308,7 @@ widgetbox_spotify = widget.WidgetBox (
                      widgets = [
                              widget.Mpris2(
                                  padding = 10,
-                                 no_metadata_text = "D-Bus ist am chillen",
+                                 no_metadata_text = "D-Bus: wtf",
                                  paused_text = "   {track}",
                                  format = "{xesam:title} - {xesam:artist}",
                                  foreground = colors[1],
