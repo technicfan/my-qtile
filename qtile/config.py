@@ -333,7 +333,7 @@ widgetbox_spotify = widget.WidgetBox (
                      text_closed = "",
                      text_open = "",
                      close_button_location = "right",
-                     start_opened = True
+                     start_opened = False
                   )
 
 extension_defaults = widget_defaults.copy()
