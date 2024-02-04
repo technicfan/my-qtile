@@ -354,8 +354,8 @@ def init_widgets_list():
                  padding_y = 2,
                  padding_x = 2,
                  borderwidth = 2,
-                 active = colors[2],
-                 inactive = colors[1],
+                 active = colors[1],
+                 inactive = colors[2],
                  block_highlight_text_color = colors[0],
                  rounded = True,
                  disable_drag = True,
@@ -373,7 +373,7 @@ def init_widgets_list():
         widget.WindowName(
                  foreground = colors[2],
                  padding = 10,
-                 max_chars = 70,
+                 max_chars = 75,
                  width = bar.CALCULATED,
                  empty_group_string = distro.name() + " - Qtile",
                  **decoration_group 
