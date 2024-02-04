@@ -349,15 +349,24 @@ def init_widgets_list():
         ),
         widget.Spacer(length=-2, **decoration_group),
         widget.GroupBox(
-                 visible_groups = ["1", "2", "3", "4", "5", "6"],
-                 **groupboxes,
-                 **decoration_group
-                 ),
-        widget.Spacer(length=-4, **decoration_group),
-        widget.GroupBox(
-                 visible_groups = ["7", "8", "9", "0"],
+                 fontsize = 11,
+                 margin_x = 4,
+                 padding_y = 2,
+                 padding_x = 2,
+                 borderwidth = 2,
+                 active = colors[2],
+                 inactive = colors[1],
+                 block_highlight_text_color = colors[0],
+                 rounded = True,
+                 disable_drag = True,
+                 highlight_method = "block",
+                 this_current_screen_border = colors[1],
+                 this_screen_border = colors [2],
+                 other_current_screen_border = colors[1],
+                 other_screen_border = colors[2],
                  hide_unused = True,
-                 **groupboxes,
+                 use_mouse_wheel = False,
+                 toggle = False,
                  **decoration_group
                  ),
         widget.Spacer(length=-2, **decoration_group),
@@ -440,13 +449,13 @@ def init_widgets_screen1():
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     # not opening systray when clicking on user on screen2
-    widgets_screen2[18].mouse_callbacks = {}
+    widgets_screen2[16].mouse_callbacks = {}
     # python logo
     del widgets_screen2[0:3]
     # mpris
-    del widgets_screen2[7:8]
+    del widgets_screen2[5:6]
     # systray
-    del widgets_screen2[13:14]
+    del widgets_screen2[11:12]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
