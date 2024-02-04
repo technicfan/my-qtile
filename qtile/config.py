@@ -186,7 +186,7 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 #group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ",]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "</>", " ", " ", " ",]
-group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "GIT", "WIN", "MUS",]
+group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "WIN", "MUS",]
 
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
@@ -228,7 +228,7 @@ def client_new(client):
         client.togroup("0"),
     if client.name == "Default - Wine desktop":
         client.togroup("9"),
-    if client.name == "GitHub Desktop":
+    if client.name == "Discord" or client.name == "Discord Updater":
         client.togroup("8"),
     if client.name == "VSCodium":
         client.togroup("7"),
