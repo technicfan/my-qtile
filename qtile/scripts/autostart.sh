@@ -28,7 +28,7 @@ setxkbmap -layout de
 # retro-arco.png
 
 # Arcolinux
-feh --bg-fill "~/.config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png" &
+feh --bg-fill ".config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png" &
 
 # Archlinux
 #feh --bg-fill "path/to/wallpaper" &
