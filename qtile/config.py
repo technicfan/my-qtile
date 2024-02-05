@@ -137,8 +137,8 @@ keys = [
     Key([mod], "m", lazy.widget["widgetbox"].toggle(), desc="Toggle mpris"), 
 
     #Volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/increase_vol.sh"), desc="Raise volume key"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn(".config/qtile/scripts/decrease_vol.sh"), desc="Lower volume key"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/volume.sh increase"), desc="Raise volume key"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(".config/qtile/scripts/volume.sh decrease"), desc="Lower volume key"),
     Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
 
     # Activate Linux
