@@ -229,7 +229,7 @@ def client_name_updated(client):
 
 # Window names
 def ReplaceWindowName(text): 
-    if text == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox" or text == "Windows 11 [ausgeschaltet] - Oracle VM VirtualBox" or text == "Windows 11 [wird angehalten] - Oracle VM VirtualBox":
+    if text == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox" or text == "Windows 11 [ausgeschaltet] - Oracle VM VirtualBox" or text == "Windows 11 [wird ausgeschaltet] - Oracle VM VirtualBox":
         text = "Windows 11"
     else:
         text = text
