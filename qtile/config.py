@@ -233,19 +233,17 @@ def client_name_updated(client):
 colors = colors.Technicfan
 
 ### LAYOUTS ###
-# Some settings that I use on almost every layout, which saves us
-# from having to type these out for each individual layout.
-layout_theme = {"border_width": 2,
-                "margin": 8,
-                "border_focus": colors[1],
-                "border_normal": colors[3]
-                }
 
 layouts = [
-    layout.MonadTall(**layout_theme),
+    layout.MonadTall(
+        border_width = 2,
+        margin = 8,
+        border_focus = colors[1],
+        border_normal = colors[3]
+    ),
     layout.Max(
-         margin = 4,
-         ),
+        margin = [4, 0, 0, 0]
+    ),
 ]
 
 # Some settings that I use on almost every widget, which saves us
@@ -253,7 +251,6 @@ layouts = [
 widget_defaults = dict(
     font="JetBrains Bold",
     fontsize = 12,
-    #background=colors[0]
 )
 
 decoration_group = {
