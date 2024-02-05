@@ -114,9 +114,6 @@ keys = [
         Key([], "l", lazy.spawn("openrgb --startminimized"), desc="rgb lighting as sound visualizer"),
     ]),
 
-    # Github
-    Key([mod], "g", lazy.spawn("github-desktop"), desc="GitHub desktop"),
-
     # Screenshot
     Key([], "print", lazy.spawn("flameshot screen"), desc="Screenshot active screen"),
     Key([], "scroll_lock", lazy.spawn("flameshot full"), desc="Screenshot all screens"),
