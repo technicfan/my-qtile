@@ -8,12 +8,16 @@ function run {
 }
 
 # screen config
-if [ $(cd .config/qtile/screens && ls) -eq 1 ]
+if cat ~/.config/qtile/screens/1
 then
     xrandr --output HDMI-0 --off --output DP-4 --auto
-else
+elif cat ~/.config/qtile/screens/2
+then
     xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
 fi
+
+# mpris widget init
+.config/qtile/scripts/widgetboxes.sh reset
 
 #change your keyboard if you need it
 setxkbmap -layout de
@@ -24,7 +28,7 @@ setxkbmap -layout de
 # retro-arco.png
 
 # Arcolinux
-feh --bg-fill "/home/technicfan/.config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png" &
+feh --bg-fill "~/.config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png" &
 
 # Archlinux
 #feh --bg-fill "path/to/wallpaper" &

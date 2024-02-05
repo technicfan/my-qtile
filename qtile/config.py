@@ -73,8 +73,8 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "r", lazy.spawncmd(prompt="run"), desc="Spawn a command using a prompt widget"),
-    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
+    Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh reset"), desc="Reload the config"),
+    Key([mod, "control"], "r", lazy.restart(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh reset"), desc="Restart qtile"),
 
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
     Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
@@ -96,8 +96,8 @@ keys = [
     Key([mod], "p", lazy.run_extension(extension.CommandSet(
         dmenu_command = "dmenu -p 'Monitors:' -z 300",
         commands = {
-            "Monitor 1": ".config/qtile/scripts/one-screen.sh",
-            "Both Monitors": ".config/qtile/scripts/two-screens.sh",
+            "Monitor 1": ".config/qtile/scripts/screens.sh one",
+            "Both Monitors": ".config/qtile/scripts/screens.sh two",
             "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
             "Off": "xrandr --output HDMI-0 --off --output DP-4 --off",
         },
@@ -131,7 +131,7 @@ keys = [
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
-    Key([mod], "m", lazy.widget["widgetbox"].toggle(), desc="Toggle mpris"), 
+    Key([mod], "m", lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris"), desc="Toggle mpris"), 
 
     #Volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/volume.sh increase"), desc="Raise volume key"),
@@ -311,6 +311,7 @@ widgetbox_spotify = widget.WidgetBox (
                                  foreground = colors[1],
                                  objname = "org.mpris.MediaPlayer2.spotify",
                                  width = 250,
+                                 mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh fix")},
                                  decorations = [
                                      RectDecoration(colour=colors[2], radius=10, filled=True, group=True),
                                      RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
@@ -320,6 +321,7 @@ widgetbox_spotify = widget.WidgetBox (
                      text_closed = "",
                      text_open = "",
                      close_button_location = "right",
+                     name = "mpris",
                      start_opened = False
                   )
 
@@ -429,7 +431,7 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[2],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {"Button1": widgetbox_systray.toggle, "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
+                 mouse_callbacks = {"Button1": lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray"), "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
                  **decoration_group
                  ),
         ]
