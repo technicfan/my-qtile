@@ -227,6 +227,14 @@ def client_name_updated(client):
     if client.name == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox":
         client.togroup("9"),
 
+# Window names
+def ReplaceWindowName(text): 
+    if text == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox":
+        text = "Windows 11"
+    else:
+        text = text
+    return text
+
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
 
@@ -367,6 +375,7 @@ def init_widgets_list():
                  padding = 10,
                  max_chars = 75,
                  width = bar.CALCULATED,
+                 parse_text = ReplaceWindowName,
                  empty_group_string = distro.name() + " - Qtile",
                  **decoration_group 
                  ),
