@@ -82,18 +82,6 @@ keys = [
         dmenu_command = "dmenu_extended_run",
         dmenu_prompt = "Run:",
     )), desc="Run launcher"),
-    Key([mod], "w", lazy.run_extension(extension.CommandSet(
-        dmenu_command = "dmenu -z 300",
-        dmenu_prompt = "Extra Apps:",
-        commands = {
-            "Delphi 7": "wine .wine/drive_c/Program\ Files\ \(x86\)/Borland/Delphi7/Bin/delphi32.exe",
-            "Windows 11": "virtualboxvm --startvm 'Windows 11'",
-            "BiBox": "chromium --app=https://bibox2.westermann.de/shelf",
-            "Sunshine": "sunshine",
-            "Wolfenstein 3d": "dosbox '/mnt/Games/Heroic/Wolfenstein 3D/Wolf3d.exe'",
-        },
-        **dmenu_theme,
-    )), desc="Run launcher with extra apps"),
     Key([mod], "p", lazy.run_extension(extension.CommandSet(
         dmenu_command = "dmenu -p 'Monitors:' -z 300",
         commands = {
@@ -104,6 +92,9 @@ keys = [
         },
         **dmenu_theme,
     )), desc="Monitor configuration"),
+
+    # Windows
+    Key([mod], "w", lazy.spawn("virtualboxvm --startvm 'Windows 11'"), desc="Start Windows 11 VM"),
 
     # Lock
     Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
