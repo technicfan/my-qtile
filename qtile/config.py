@@ -178,7 +178,7 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "WIN", "MUS",]
 
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "max", "monadtall"]
 
 
 for i in range(len(group_names)):
@@ -244,7 +244,6 @@ layout_theme = {"border_width": 2,
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(
-         border_width = 0,
          margin = 4,
          ),
 ]
