@@ -1,7 +1,6 @@
 #!/bin/bash
 
-function diff()
-{
+function diff {
     int=$(echo $(bc <<< "$@/5"))
     float=$(echo $(bc <<< "scale=1; $@/5"))
     diff=$(echo $(bc <<< "scale=1; $float-$int"))
