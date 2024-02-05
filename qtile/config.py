@@ -87,6 +87,7 @@ keys = [
         dmenu_prompt = "Extra Apps:",
         commands = {
             "Delphi 7": "wine .wine/drive_c/Program\ Files\ \(x86\)/Borland/Delphi7/Bin/delphi32.exe",
+            "Windows 11": "virtualboxvm --startvm 'Windows 11'",
             "BiBox": "chromium --app=https://bibox2.westermann.de/shelf",
             "Sunshine": "sunshine",
             "Wolfenstein 3d": "dosbox '/mnt/Games/Heroic/Wolfenstein 3D/Wolf3d.exe'",
@@ -229,6 +230,11 @@ def client_new(client):
         client.togroup("8"),
     if client.name == "VSCodium":
         client.togroup("7"),
+
+@hook.subscribe.client_name_updated
+def client_name_updated(client):
+    if client.name == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox":
+        client.togroup("9"),
 
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
