@@ -38,7 +38,7 @@ run nm-applet &
 run xfce4-power-manager &
 #numlockx on &
 blueman-applet &
-picom --config /home/technicfan/.config/picom/picom.conf &
+picom --config .config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 /usr/lib/kdeconnectd &
