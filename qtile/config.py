@@ -90,11 +90,19 @@ keys = [
             "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
             "Off": "xrandr --output HDMI-0 --off --output DP-4 --off",
         },
-        **dmenu_theme,
+        **dmenu_theme
     )), desc="Monitor configuration"),
+    Key([mod], "w", lazy.run_extension(extension.CommandSet(
+        dmenu_command = "dmenu -p 'Monitors:' -z 300",
+        commands = {
+            "Windows 11": "virtualboxvm --startvm 'Windows 11'",
+            "Windows 7": "virtualboxvm --startvm 'Windows 7'",
+        },
+        **dmenu_theme  
+    )),),
 
     # Windows
-    Key([mod], "w", lazy.spawn("virtualboxvm --startvm 'Windows 11'"), desc="Start Windows 11 VM"),
+    #Key([mod], "w", lazy.spawn("virtualboxvm --startvm 'Windows 11'"), desc="Start Windows 11 VM"),
 
     # Lock
     Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
@@ -224,13 +232,15 @@ def client_new(client):
 
 @hook.subscribe.client_name_updated
 def client_name_updated(client):
-    if client.name == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox":
+    if client.name == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox" or client.name == "Windows 7 [wird ausgeführt] - Oracle VM VirtualBox":
         client.togroup("9"),
 
 # Window names
 def ReplaceWindowName(text): 
     if text == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox" or text == "Windows 11 [ausgeschaltet] - Oracle VM VirtualBox" or text == "Windows 11 [wird ausgeschaltet] - Oracle VM VirtualBox":
         text = "Windows 11"
+    elif text == "Windows 7 [wird ausgeführt] - Oracle VM VirtualBox" or text == "Windows 7 [ausgeschaltet] - Oracle VM VirtualBox" or text == "Windows 7 [wird ausgeschaltet] - Oracle VM VirtualBox":
+        text = "Windows 7"
     else:
         text = text
     return text
