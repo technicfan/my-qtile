@@ -303,13 +303,12 @@ widgetbox_spotify = widget.WidgetBox (
                                  no_metadata_text = "D-Bus: wtf",
                                  paused_text = "   {track}",
                                  format = "{xesam:title} - {xesam:artist}",
-                                 foreground = colors[1],
+                                 foreground = colors[0],
                                  objname = "org.mpris.MediaPlayer2.spotify",
                                  width = 250,
                                  mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh fix")},
                                  decorations = [
-                                     RectDecoration(colour=colors[2], radius=10, filled=True, group=True),
-                                     RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
+                                     RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
                                  ]
                              ),
                      ],
