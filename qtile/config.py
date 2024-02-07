@@ -299,7 +299,7 @@ widgetbox_systray = widget.WidgetBox(
 widgetbox_spotify = widget.WidgetBox ( 
                      widgets = [
                              widget.Mpris2(
-                                 padding = 10,
+                                 padding = 2,
                                  no_metadata_text = "D-Bus: wtf",
                                  paused_text = "   {track}",
                                  format = "{xesam:title} - {xesam:artist}",
