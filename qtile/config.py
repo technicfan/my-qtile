@@ -93,16 +93,20 @@ keys = [
         **dmenu_theme
     )), desc="Monitor configuration"),
     Key([mod], "w", lazy.run_extension(extension.CommandSet(
-        dmenu_command = "dmenu -p 'Monitors:' -z 300",
+        dmenu_command = "dmenu -p 'Windows:' -z 300",
         commands = {
+            "-> Wine": extension.CommandSet(
+                dmenu_command = "dmenu -p 'App:' -z 300",
+                commands = {
+                    "Delphi 7": "wine '.wine/drive_c/Program Files (x86)/Borland/Delphi7/Bin/delphi32.exe'",
+                },
+                **dmenu_theme
+            ),
             "Windows 11": "virtualboxvm --startvm 'Windows 11'",
             "Windows 7": "virtualboxvm --startvm 'Windows 7'",
         },
         **dmenu_theme  
     )),),
-
-    # Windows
-    #Key([mod], "w", lazy.spawn("virtualboxvm --startvm 'Windows 11'"), desc="Start Windows 11 VM"),
 
     # Lock
     Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
