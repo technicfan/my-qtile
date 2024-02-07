@@ -14,13 +14,17 @@ elif [ $1 = "decrease" ]
 then
     difference=-5
     while_change=+1
+elif [ $1 = "toggle" ]
+then
+    amixer sset Master $1
+    exit
 else
     exit
 fi
 
 current_vol=$(amixer sget Master | awk -F "[][]" '/Left:/ { print $2 }' | awk -F "%" '{print $1}')
 
-if [ -z "$current_vol" ]
+if [ -z $current_vol ]
 then
     new_vol=$(($(amixer sget Master | awk -F "[][]" '/Mono:/ { print $2 }' | awk -F "%" '{print $1}')$difference))
 else

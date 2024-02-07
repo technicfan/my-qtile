@@ -140,7 +140,7 @@ keys = [
     #Volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/volume.sh increase"), desc="Raise volume key"),
     Key([], "XF86AudioLowerVolume", lazy.spawn(".config/qtile/scripts/volume.sh decrease"), desc="Lower volume key"),
-    Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
+    Key([], "XF86AudioMute", lazy.spawn(".config/qtile/scripts/volume.sh toggle"), desc="Mute key"),
 
     # Activate Linux
     KeyChord([mod], "a", [
