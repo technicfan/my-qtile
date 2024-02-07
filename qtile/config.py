@@ -282,26 +282,6 @@ decoration_group = {
     ]
 }
 
-groupboxes = {
-    "fontsize": 11,
-    "margin_x": 4,
-    "padding_y": 2,
-    "padding_x": 2,
-    "borderwidth": 2,
-    "active": colors[2],
-    "inactive": colors[1],
-    "block_highlight_text_color": colors[0],
-    "rounded": True,
-    "disable_drag": True,
-    "highlight_method": "block",
-    "this_current_screen_border": colors[1],
-    "this_screen_border": colors [2],
-    "other_current_screen_border": colors[1],
-    "other_screen_border": colors[2],
-    "use_mouse_wheel": False,
-    "toggle": False,
-}
-
 widgetbox_systray = widget.WidgetBox( 
                          widgets = [
                                  widget.Systray(
@@ -362,6 +342,18 @@ def init_widgets_list():
                  **decoration_group
         ),
         widget.Spacer(length=-2, **decoration_group),
+        widget.CurrentLayoutIcon(
+                 foreground = colors[1],
+                 padding = 0,
+                 scale = 0.55,
+                 custom_icon_paths = [".config/qtile/layout-icons/dark_green"],
+                 decorations = [
+                         RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
+                         RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2),
+                         RectDecoration(colour=colors[1], radius=3, filled=True, padding=5, extrawidth=15)
+                 ]
+                 ),
+        widget.TextBox(text="-", foreground= colors[1], padding = 1, **decoration_group),
         widget.GroupBox(
                  fontsize = 11,
                  margin_x = 4,
@@ -393,15 +385,15 @@ def init_widgets_list():
                  empty_group_string = distro.name() + " - Qtile",
                  **decoration_group 
                  ),
-        widget.Spacer(),
 
         # Middle of the bar
 
+        widget.Spacer(),
         widgetbox_spotify,
+        widget.Spacer(),
 
         # Middle of the bar
 
-        widget.Spacer(),
         widget.TextBox(
                  padding = 10,
                  text = "\uf17c   " + subprocess.check_output("printf $(uname -r)", shell=True, text=True),
@@ -464,13 +456,13 @@ def init_widgets_screen1():
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
     # not opening systray when clicking on user on screen2
-    widgets_screen2[16].mouse_callbacks = {}
+    widgets_screen2[18].mouse_callbacks = {}
     # python logo
     del widgets_screen2[0:3]
     # mpris
-    del widgets_screen2[5:6]
+    del widgets_screen2[7:8]
     # systray
-    del widgets_screen2[11:12]
+    del widgets_screen2[13:14]
     return widgets_screen2
 
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
