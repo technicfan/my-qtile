@@ -17,7 +17,7 @@ then
 fi
 
 # mpris widget init
-.config/qtile/scripts/widgetboxes.sh reset
+.config/qtile/scripts/widgetboxes.sh mpris hidden
 
 #change your keyboard if you need it
 setxkbmap -layout de
