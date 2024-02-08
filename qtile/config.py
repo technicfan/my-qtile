@@ -430,7 +430,7 @@ def init_widgets_list():
         widget.Clock(
                  padding = 10,
                  foreground = colors[1],
-                 format = "⏱  %a  %d. %b - KW %W - %H:%M",
+                 format = "⏱  %a  %d. %B - KW %W - %H:%M",
                  **decoration_group
                  ),
         widgetbox_systray,
