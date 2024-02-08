@@ -127,7 +127,7 @@ keys = [
     # Spotify with three different actions (key chord SUPER+s followed by "key")
     KeyChord([mod], "s", [
         Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause && .config/qtile/scripts/widgetboxes.sh mpris show", shell=True), desc="Spotify - auto play"),
-        Key([], "q", lazy.spawn("kill spotify && .config/qtile/scripts/widgetboxes.sh mpris hide", shell=True), desc="Kill Spotify"),
+        Key([], "q", lazy.spawn("kill spotify"), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris hide"), desc="Kill Spotify"),
         Key([], "d", lazy.spawn("com.spotify.Client && .config/qtile/scripts/widgetboxes.sh mpris show", shell=True), desc="Spotify"),
     ]),
 
