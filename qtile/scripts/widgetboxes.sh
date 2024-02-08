@@ -38,6 +38,12 @@ then
             qtile cmd-obj -o widget mpris -f toggle
         fi
         hidden
+    elif [ $2 = "restore" ]
+    then
+        if cat ~/.config/qtile/mpris/1
+        then
+            qtile cmd-obj -o widget mpris -f toggle
+        fi
     elif [ $2 = "shown" ]
     then
         shown
