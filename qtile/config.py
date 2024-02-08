@@ -71,6 +71,7 @@ keys = [
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
     Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "r", lazy.spawncmd(prompt="run"), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh reset"), desc="Reload the config"),
