@@ -253,6 +253,7 @@ def ReplaceWindowName(text):
 # Colors are defined in a separate 'colors.py' file.
 
 colors = colors.Technicfan
+#colors = colors.TechnicfanClean
 
 ### LAYOUTS ###
 

@@ -11,9 +11,9 @@ Technicfan = [
     "#0d2a0e"  # inactive border
     ]
 
-TechnicfanInv = [
+TechnicfanClean = [
     "#133912", # bg
-    "#c678dd", # fg
+    "#87a757", # fg
     "#87a757", # fg2
     "#0d2a0e"  # inactive border
     ]
