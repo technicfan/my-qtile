@@ -126,9 +126,9 @@ keys = [
 
     # Spotify with three different actions (key chord SUPER+s followed by "key")
     KeyChord([mod], "s", [
-        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
-        Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
-        Key([], "d", lazy.spawn("com.spotify.Client"), desc="Spotify"),
+        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause && .config/qtile/scripts/widgetboxes.sh mpris show", shell=True), desc="Spotify - auto play"),
+        Key([], "q", lazy.spawn("kill spotify && .config/qtile/scripts/widgetboxes.sh mpris hide", shell=True), desc="Kill Spotify"),
+        Key([], "d", lazy.spawn("com.spotify.Client && .config/qtile/scripts/widgetboxes.sh mpris show", shell=True), desc="Spotify"),
     ]),
 
     #Media
@@ -261,11 +261,13 @@ colors = colors.Technicfan
 layouts = [
     layout.MonadTall(
         border_width = 2,
-        margin = [4, 8, 8, 8],
+        margin = 8,
         border_focus = colors[1],
         border_normal = colors[3]
     ),
-    layout.Max(),
+    layout.Max(
+        margin = [4, 0, 0, 0]
+    ),
 ]
 
 # Some settings that I use on almost every widget, which saves us
@@ -467,8 +469,8 @@ def init_widgets_screen2():
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=4, background="#00000000")),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=4, background="#00000000"))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[4, 4, 0, 4], background="#00000000")),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[4, 4, 0, 4], background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
