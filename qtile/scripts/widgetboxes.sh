@@ -24,8 +24,8 @@ then
         then
             hidden
         fi
-        elif [ $2 = "show" ]
-        then
+    elif [ $2 = "show" ]
+    then
         if cat ~/.config/qtile/mpris/0
         then
             qtile cmd-obj -o widget mpris -f toggle
