@@ -74,8 +74,8 @@ keys = [
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "r", lazy.spawncmd(prompt="run"), desc="Spawn a command using a prompt widget"),
-    Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh reset"), desc="Reload the config"),
-    Key([mod, "control"], "r", lazy.restart(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh reset"), desc="Restart qtile"),
+    Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris hidden"), desc="Reload the config"),
+    Key([mod, "control"], "r", lazy.restart(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris hidden"), desc="Restart qtile"),
 
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
     Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
@@ -136,7 +136,7 @@ keys = [
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
-    Key([mod], "m", lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris"), desc="Toggle mpris"), 
+    Key([mod], "m", lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris toggle"), desc="Toggle mpris"), 
 
     #Volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/volume.sh increase"), desc="Raise volume key"),
@@ -296,7 +296,7 @@ widgetbox_systray = widget.WidgetBox(
                          **decoration_group
                     )
 
-widgetbox_spotify = widget.WidgetBox ( 
+widgetbox_mpris = widget.WidgetBox ( 
                      widgets = [
                              widget.Mpris2(
                                  padding = 10,
@@ -306,7 +306,7 @@ widgetbox_spotify = widget.WidgetBox (
                                  foreground = colors[0],
                                  objname = "org.mpris.MediaPlayer2.spotify",
                                  width = 250,
-                                 mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh fix")},
+                                 mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris shown")},
                                  decorations = [
                                      RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
                                  ]
@@ -388,7 +388,7 @@ def init_widgets_list():
         # Middle of the bar
 
         widget.Spacer(),
-        widgetbox_spotify,
+        widgetbox_mpris,
         widget.Spacer(),
 
         # Middle of the bar
@@ -438,7 +438,7 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[2],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {"Button1": lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray"), "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
+                 mouse_callbacks = {"Button1": lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray toggle"), "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
                  **decoration_group
                  ),
         ]
