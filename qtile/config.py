@@ -356,7 +356,7 @@ def init_widgets_list():
                          RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2),
                  ]
                  ),
-        widget.Spacer(length=-4, **decoration_group),
+        widget.Spacer(length=-2, **decoration_group),
         widget.GroupBox(
                  fontsize = 11,
                  margin_x = 4,
