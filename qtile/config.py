@@ -259,15 +259,18 @@ colors = colors.Technicfan
 ### LAYOUTS ###
 
 layouts = [
-    layout.MonadTall(
+    layout.Spiral(
+        main_pane = "left",
+        clockwise = True,
+        new_client_position = "after_current",
+        ratio = 0.5,
+        ratio_increment = 0,
         border_width = 2,
-        margin = 8,
+        margin = [4, 8, 8, 8],
         border_focus = colors[1],
         border_normal = colors[3]
     ),
-    layout.Max(
-        margin = [4, 0, 0, 0]
-    ),
+    layout.Max(),
 ]
 
 # Some settings that I use on almost every widget, which saves us
@@ -469,8 +472,8 @@ def init_widgets_screen2():
 # For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[4, 4, 0, 4], background="#00000000")),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[4, 4, 0, 4], background="#00000000"))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=4, background="#00000000")),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=4, background="#00000000"))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
