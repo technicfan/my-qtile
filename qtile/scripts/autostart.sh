@@ -8,35 +8,20 @@ function run {
 }
 
 # screen config
-if cat ~/.config/qtile/screens/1
-then
-    xrandr --output HDMI-0 --off --output DP-4 --auto
-elif cat ~/.config/qtile/screens/2
-then
-    xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
-fi
+.config/qtile/scripts/screens.sh restore
 
 # mpris widget init
 .config/qtile/scripts/widgetboxes.sh mpris hidden
 
+# wallpaper
+.config/qtile/scripts/screens.sh wallpaper
+
 #change your keyboard if you need it
 setxkbmap -layout de
-
-# Arcolinux-text-dark-rounded-1080p.png
-# Archlinux-text-dark-rounded-1080p.png
-# linux.png
-# retro-arco.png
-
-# Arcolinux
-feh --bg-fill ".config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png" &
-
-# Archlinux
-#feh --bg-fill "path/to/wallpaper" &
 
 #starting utility applications at boot time
 run nm-applet &
 run xfce4-power-manager &
-#numlockx on &
 blueman-applet &
 picom --config .config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
