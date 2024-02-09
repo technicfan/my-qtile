@@ -150,17 +150,17 @@ keys = [
     ]),
     
     # Switch between windows
-    Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "down", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "up", lazy.layout.up(), desc="Move focus up"),
+    #Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
+    #Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "right", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "left", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
     # Move windows between left/right columns or move up/down in current stack.
-    Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, "shift"], "down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "up", lazy.layout.shuffle_up(), desc="Move window downup"),
+    #Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    #Key([mod, "shift"], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "right", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "left", lazy.layout.shuffle_up(), desc="Move window downup"),
 
     # window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
