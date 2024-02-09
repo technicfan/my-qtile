@@ -345,19 +345,18 @@ def init_widgets_list():
                  cursorblink = False,
                  **decoration_group
         ),
-        widget.Spacer(length=0, **decoration_group),
+        widget.Spacer(length=-2, **decoration_group),
         widget.CurrentLayoutIcon(
                  foreground = colors[1],
-                 padding = 3,
+                 padding = 7,
                  scale = 0.7,
                  custom_icon_paths = [".config/qtile/layout-icons/green"],
                  decorations = [
                          RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
                          RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2),
-                         #RectDecoration(colour=colors[1], radius=3, filled=True, padding=5, extrawidth=15)
                  ]
                  ),
-        widget.TextBox(text="", foreground= colors[1], padding = 3, **decoration_group),
+        widget.Spacer(length=-4, **decoration_group),
         widget.GroupBox(
                  fontsize = 11,
                  margin_x = 4,
