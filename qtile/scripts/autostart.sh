@@ -8,13 +8,16 @@ function run {
 }
 
 # screen config
-.config/qtile/scripts/screens.sh restore
+~/.config/qtile/scripts/screens.sh restore
 
 # mpris widget init
-.config/qtile/scripts/widgetboxes.sh mpris hidden
+~/.config/qtile/scripts/widgetboxes.sh mpris hidden
 
 # wallpaper
-.config/qtile/scripts/screens.sh wallpaper
+~/.config/qtile/scripts/screens.sh wallpaper
+
+# mouse sensitivity
+~/.config/qtile/scripts/mouse.sh &
 
 #change your keyboard if you need it
 setxkbmap -layout de
@@ -36,5 +39,3 @@ input-remapper-control --command autoload &
 polychromatic-cli -o spectrum &
 polychromatic-cli -o brightness -p 50 &
 polychromatic-cli --dpi 2600 &
-
-.config/qtile/scripts/mouse.sh &
