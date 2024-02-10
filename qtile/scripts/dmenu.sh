@@ -61,21 +61,13 @@ then
         "Bereitschaft"
     )
 
-    declare -a managers
-    while IFS= read -r manager
-    do
-        managers+=("${manager,,}")
-    done < <(uname)
-
     choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Power menu:')
 
     case $choice in
     'Abmelden')
         if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
-            for manager in "${managers[@]}"; do
-                loginctl kill-user "$UID"
-            done
+            pkill -KILL -u $USER
         else
             exit 1
         fi
