@@ -174,10 +174,9 @@ keys = [
     # Dmenu scripts launched using the key chord SUPER+o followed by "key"
     KeyChord([mod], "o", [
         Key([], "h", lazy.spawn("dm-hub"), desc="List all dmscripts"),
-        Key([], "c", lazy.spawn("dm-confedit"), desc="Choose a config file to edit"),
-        Key([], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
         Key([], "p", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output")
     ]),
+    Key([mod], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
 
 ]
 groups = []
