@@ -23,7 +23,7 @@ setxkbmap -layout de
 run nm-applet &
 run xfce4-power-manager &
 blueman-applet &
-picom --config .config/picom/picom.conf &
+picom -b --config .config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 /usr/lib/kdeconnectd &
