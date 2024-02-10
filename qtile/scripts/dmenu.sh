@@ -54,17 +54,20 @@ then
 elif [ $1 = "logout" ]
 then
     declare -a options=(
-        "Sperren"
-        "Abmelden"
-        "Neustarten"
-        "Herunterfahren"
-        "Bereitschaft"
+        "Lock"
+        "Logout"
+        "Reboot"
+        "Shutdown"
+        "Suspend"
     )
 
     choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Power menu:')
 
     case $choice in
-    'Abmelden')
+    'Lock')
+        ${locker}
+        ;;
+    'Logout')
         if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             pkill -KILL -u $USER
@@ -72,10 +75,7 @@ then
             exit 1
         fi
         ;;
-    'Sperren')
-        ${locker}
-        ;;
-    'Neustarten')
+    'Reboot')
         if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             systemctl reboot
@@ -83,7 +83,7 @@ then
             exit 0
         fi
         ;;
-    'Herunterfahren')
+    'Shutdown')
         if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             systemctl poweroff
@@ -91,7 +91,7 @@ then
             exit 0
         fi
         ;;
-    'Bereitschaft')
+    'Suspend')
         if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             systemctl suspend
