@@ -99,6 +99,71 @@ case $1 in
         exit 0
     esac
     ;;
+# own
+"monitor")
+    declare -a options=(
+        "Monitor 1"
+        "Both Monitors"
+        "Mirror"
+        "Off"
+    )
+
+    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Monitors:')
+
+    case $choice in
+    "Monitor 1")
+        ~/.config/qtile/scripts/screens.sh one
+        ;;
+    "Both Monitors")
+        ~/.config/qtile/scripts/screens.sh two
+        ;;
+    "Mirror")
+        xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4
+        ;;
+    "Off")
+        xrandr --output HDMI-0 --off --output DP-4 --off
+        ;;
+    *)
+        exit 0
+    esac
+    ;;
+"ms-windows")
+    declare -a options=(
+        "-> Wine"
+        "Windows 11"
+        "Windows 7"
+    )
+
+    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'MS Windows:')
+
+    case $choice in
+    "Windows 11" | "Windows 7")
+        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "Start ${choice} VM?")" == "Yes" ]]
+        then
+            virtualboxvm --startvm "$choice"
+        else
+            exit 0
+        fi
+        ;;
+    "-> Wine")
+        declare -a options=(
+        "Delphi 7"
+        )
+
+        choice2=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Run:')
+
+        case $choice2 in
+        "Delphi 7")
+            wine "$HOME/.wine/drive_c/Program Files (x86)/Borland/Delphi7/Bin/delphi32.exe"
+            ;;
+        *)
+            exit 0
+        esac
+        ;;
+    *)
+        exit 0
+    esac
+    ;;
 *)
     exit 1
 esac

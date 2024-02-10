@@ -50,17 +50,6 @@ def minimize_all(qtile):
         if hasattr(win, "toggle_minimize"):
             win.toggle_minimize()
 
-# Dmenu theme
-dmenu_theme = {
-    "background": "#133912",
-    "foreground": "#87a757",
-    "selected_background": "#87a757",
-    "selected_foreground": "#133912",
-    "dmenu_font": "JetBrains:Bold:pixelsize=14",
-    "dmenu_ignorecase": True,
-    "dmenu_lines": "20",
-}
-
 # A list of available commands that can be bound to keys can be found
 # at https://docs.qtile.org/en/latest/manual/config/lazy.html
 keys = [
@@ -78,41 +67,14 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(), lazy.spawn("sleep 1 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True), desc="Restart qtile"),
 
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
-    
     # Dmenu scripts stolen from evil DT
     Key([mod], "o", lazy.spawn(".config/qtile/scripts/dmenu.sh output-switcher"), desc="Change pipewire output"),
     Key([mod], "k", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
-
-    Key([mod], "d", lazy.run_extension(extension.DmenuRun(
-        dmenu_command = "dmenu_extended_run",
-        dmenu_prompt = "Run:",
-    )), desc="Run launcher"),
-    Key([mod], "p", lazy.run_extension(extension.CommandSet(
-        dmenu_command = "dmenu -p 'Monitors:' -z 300",
-        commands = {
-            "Monitor 1": ".config/qtile/scripts/screens.sh one",
-            "Both Monitors": ".config/qtile/scripts/screens.sh two",
-            "Mirror": "xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4",
-            "Off": "xrandr --output HDMI-0 --off --output DP-4 --off",
-        },
-        **dmenu_theme
-    )), desc="Monitor configuration"),
-    Key([mod], "w", lazy.run_extension(extension.CommandSet(
-        dmenu_command = "dmenu -p 'Windows:' -z 300",
-        commands = {
-            "-> Wine": extension.CommandSet(
-                dmenu_command = "dmenu -p 'App:' -z 300",
-                commands = {
-                    "Delphi 7": "wine '.wine/drive_c/Program Files (x86)/Borland/Delphi7/Bin/delphi32.exe'",
-                },
-                **dmenu_theme
-            ),
-            "Windows 11": "virtualboxvm --startvm 'Windows 11'",
-            "Windows 7": "virtualboxvm --startvm 'Windows 7'",
-        },
-        **dmenu_theme  
-    )),),
+    # own
+    Key([mod], "d", lazy.spawn("dmenu_extended_run"), desc="Run launcher"),
+    Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
+    Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh ms-windows"), desc="MS Windows (vms/apps)"),
 
     # rgb lighting (key chord SUPER+l followed by "key")
     KeyChord([mod], "l", [
