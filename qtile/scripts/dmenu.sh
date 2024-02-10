@@ -150,9 +150,9 @@ case $1 in
         "Delphi 7"
         )
 
-        choice2=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Run:')
+        choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Run:')
 
-        case $choice2 in
+        case $choice in
         "Delphi 7")
             wine "$HOME/.wine/drive_c/Program Files (x86)/Borland/Delphi7/Bin/delphi32.exe"
             ;;
