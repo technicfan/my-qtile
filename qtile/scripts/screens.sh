@@ -13,19 +13,19 @@ function wallpaper()
     #feh --bg-fill "path/to/wallpaper"
 }
 
-if [ $1 = "one" ]
-then
+case $1 in
+"one")
     xrandr --output HDMI-0 --off --output DP-4 --auto
-    cd .config/qtile/screens
+    cd ~/.config/qtile/screens
     touch 1 && rm 2
-elif [ $1 = "two" ]
-then
+    ;;
+"two")
     xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
     wallpaper
-    cd .config/qtile/screens
+    cd ~/.config/qtile/screens
     touch 2 && rm 1
-elif [ $1 = "restore" ]
-then
+    ;;
+"restore")
     if cat ~/.config/qtile/screens/1
     then
         xrandr --output HDMI-0 --off --output DP-4 --auto
@@ -33,12 +33,15 @@ then
     then
         xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
     fi
-elif [ $1 = "wallpaper" ]
-then
+    ;;
+"wallpaper")
     if [ -z $2 ]
     then
         wallpaper
     else
         feh --bg-fill $2
     fi
-fi
+    ;;
+*)
+    exit 1
+esac

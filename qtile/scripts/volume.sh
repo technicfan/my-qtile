@@ -6,21 +6,22 @@ function diff {
     diff=$(echo $(bc <<< "scale=1; $float-$int"))
 }
 
-if [ $1 = "increase" ]
-then
+case $1 in
+"increase")
     difference=+5
     while_change=-1
-elif [ $1 = "decrease" ]
-then
+    ;;
+"decrease")
     difference=-5
     while_change=+1
-elif [ $1 = "toggle" ]
-then
+    ;;
+"toggle")
     amixer sset Master $1
-    exit
-else
-    exit
-fi
+    exit 0
+    ;;
+*)
+    exit 1
+esac
 
 current_vol=$(amixer sget Master | awk -F "[][]" '/Left:/ { print $2 }' | awk -F "%" '{print $1}')
 

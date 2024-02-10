@@ -4,15 +4,13 @@ dmenu="dmenu -i -l 20 -nb #133912 -nf #87a757 -sb #87a757 -sf #133912 -fn 'JetBr
 dmenu_width=" -z 300 -p"
 locker="i3lock-fancy-dualmonitor"
 
-if [ $1 = "kill" ]
-then
+case $1 in
+"kill")
     dmenu_width=" -z 960 -p"
 
-    selected="$(ps --user "$USER" -F \
-            | $dmenu $dmenu_width "Kill process:" \
-            | awk '{print $2" "$11}')"
+    selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
 
-    if [[ -n $selected ]]
+    if [[ -n $selected && $selected != "PID CMD" ]]
     then
         answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
 
@@ -24,8 +22,8 @@ then
             exit 1
         fi
     fi
-elif [ $1 = "output-switcher" ]
-then
+    ;;
+"output-switcher")
     dmenu_width=" -z 400 -p"
 
     get_default_sink() {
@@ -37,9 +35,7 @@ then
             | current=$(get_default_sink) jq -r '.[] | if .name == env.current then .state="* " else .state="" end | .state + .name'
     }
 
-    choice=$(printf '%s\n' "$(get_all_sinks)" \
-        | sort \
-        | $dmenu $dmenu_width 'Sink:') || exit 1
+    choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $dmenu $dmenu_width 'Sink:') || exit 1
 
     if [ "$choice" ]
     then
@@ -51,8 +47,8 @@ then
     else
         exit 0
     fi
-elif [ $1 = "logout" ]
-then
+    ;;
+"logout")
     declare -a options=(
         "Lock"
         "Logout"
@@ -64,10 +60,10 @@ then
     choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Power menu:')
 
     case $choice in
-    'Lock')
+    "Lock")
         ${locker}
         ;;
-    'Logout')
+    "Logout")
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             pkill -KILL -u $USER
@@ -75,7 +71,7 @@ then
             exit 1
         fi
         ;;
-    'Reboot')
+    "Reboot")
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             systemctl reboot
@@ -83,7 +79,7 @@ then
             exit 0
         fi
         ;;
-    'Shutdown')
+    "Shutdown")
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             systemctl poweroff
@@ -91,7 +87,7 @@ then
             exit 0
         fi
         ;;
-    'Suspend')
+    "Suspend")
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             systemctl suspend
@@ -101,6 +97,8 @@ then
         ;;
     *)
         exit 0
-        ;;
     esac
-fi
+    ;;
+*)
+    exit 1
+esac

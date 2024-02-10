@@ -12,10 +12,10 @@ function hidden()
     touch 0 && rm 1
 }
 
-if [ $1 = "mpris" ]
-then
-    if [ $2 = "toggle" ]
-    then
+case $1 in
+"mpris")
+    case $2 in
+    "toggle")
         qtile cmd-obj -o widget mpris -f toggle
         if cat ~/.config/qtile/mpris/0
         then
@@ -24,37 +24,40 @@ then
         then
             hidden
         fi
-    elif [ $2 = "show" ]
-    then
+        ;;
+    "show")
         if cat ~/.config/qtile/mpris/0
         then
             qtile cmd-obj -o widget mpris -f toggle
         fi
         shown
-    elif [ $2 = "hide" ]
-    then
+        ;;
+    "hide")
         if cat ~/.config/qtile/mpris/1
         then
             qtile cmd-obj -o widget mpris -f toggle
         fi
         hidden
-    elif [ $2 = "restore" ]
-    then
+        ;;
+    "restore")
         if cat ~/.config/qtile/mpris/1
         then
             qtile cmd-obj -o widget mpris -f toggle
         fi
-    elif [ $2 = "shown" ]
-    then
+        ;;
+    "shown")
         shown
-    elif [ $2 = "hidden" ]
-    then
+        ;;
+    "hidden")
         hidden
-    fi
-elif [ $1 = "systray" ]
-then
-    if [ $2 = "toggle" ]
-    then
+        ;;
+    *)
+        exit 1
+    esac
+    ;;
+"systray")
+    case $2 in
+    "toggle")
         if cat ~/.config/qtile/mpris/1
         then
             qtile cmd-obj -o widget mpris -f toggle &
@@ -62,5 +65,11 @@ then
         else
             qtile cmd-obj -o widget widgetbox -f toggle
         fi
-    fi
-fi
+        ;;
+    *)
+        exit 1
+    esac
+    ;;
+*)
+    exit 1
+esac
