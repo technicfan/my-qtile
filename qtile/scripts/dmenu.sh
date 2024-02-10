@@ -49,7 +49,7 @@ then
         fi
         pactl set-default-sink "${choice}"
     else
-        echo "Program terminated." && exit 0
+        exit 0
     fi
 elif [ $1 = "logout" ]
 then
@@ -67,7 +67,7 @@ then
         managers+=("${manager,,}")
     done < <(uname)
 
-    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Shutdown menu:')
+    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Power menu:')
 
     case $choice in
     'Abmelden')
