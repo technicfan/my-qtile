@@ -110,7 +110,7 @@ keys = [
     )),),
 
     # Dmenu scripts created by evil DT
-    Key([], "o", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output"),
+    Key([mod], "o", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output"),
     Key([mod], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
 
     # Lock
