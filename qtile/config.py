@@ -113,14 +113,11 @@ keys = [
     Key([mod], "o", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output"),
     Key([mod], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
 
-    # Lock
-    Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
-
-    # Keyboard
-    KeyChord([mod], "k", [
-        Key([], "k", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
+    # rgb lighting (key chord SUPER+l followed by "key")
+    KeyChord([mod], "l", [
+        Key([], "l", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
         Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0"), desc="no rgb lighting"),
-        Key([], "l", lazy.spawn("openrgb --startminimized"), desc="rgb lighting as sound visualizer"),
+        Key([], "odiaeresis", lazy.spawn("openrgb --startminimized"), desc="rgb lighting as sound visualizer"),
     ]),
 
     # Screenshot
