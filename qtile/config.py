@@ -78,7 +78,12 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(), lazy.spawn("sleep 1 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True), desc="Restart qtile"),
 
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
-    Key([mod], "x", lazy.spawn("dm-logout"), desc="Launch logout script"),
+    
+    # Dmenu scripts stolen from evil DT
+    Key([mod], "o", lazy.spawn(".config/qtile/scripts/dmenu.sh output-switcher"), desc="Change pipewire output"),
+    Key([mod], "k", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
+    Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
+
     Key([mod], "d", lazy.run_extension(extension.DmenuRun(
         dmenu_command = "dmenu_extended_run",
         dmenu_prompt = "Run:",
@@ -108,10 +113,6 @@ keys = [
         },
         **dmenu_theme  
     )),),
-
-    # Dmenu scripts created by evil DT
-    Key([mod], "o", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output"),
-    Key([mod], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
 
     # rgb lighting (key chord SUPER+l followed by "key")
     KeyChord([mod], "l", [
