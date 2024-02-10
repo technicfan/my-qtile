@@ -14,9 +14,9 @@ then
 
     if [[ -n $selected ]]
     then
-        answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
+        answer="$(echo -e "Nein\nJa" | $dmenu $dmenu_width  "Kill $selected?")"
 
-        if [[ $answer == "Yes" ]]
+        if [[ $answer == "Ja" ]]
         then
             kill -9 "${selected%% *}"
             exit 0
@@ -71,7 +71,7 @@ then
 
     case $choice in
     'Abmelden')
-        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             for manager in "${managers[@]}"; do
                 loginctl kill-user "$UID"
@@ -84,7 +84,7 @@ then
         ${locker}
         ;;
     'Neustarten')
-        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             systemctl reboot
         else
@@ -92,7 +92,7 @@ then
         fi
         ;;
     'Herunterfahren')
-        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             systemctl poweroff
         else
@@ -100,7 +100,7 @@ then
         fi
         ;;
     'Bereitschaft')
-        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
         then
             systemctl suspend
         else
