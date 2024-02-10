@@ -14,9 +14,9 @@ then
 
     if [[ -n $selected ]]
     then
-        answer="$(echo -e "Nein\nJa" | $dmenu $dmenu_width  "Kill $selected?")"
+        answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
 
-        if [[ $answer == "Ja" ]]
+        if [[ $answer == "Yes" ]]
         then
             kill -9 "${selected%% *}"
             exit 0
@@ -39,7 +39,7 @@ then
 
     choice=$(printf '%s\n' "$(get_all_sinks)" \
         | sort \
-        | $dmenu $dmenu_width 'Sink: ') || exit 1
+        | $dmenu $dmenu_width 'Sink:') || exit 1
 
     if [ "$choice" ]
     then
@@ -68,7 +68,7 @@ then
         ${locker}
         ;;
     'Logout')
-        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
+        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             pkill -KILL -u $USER
         else
@@ -76,7 +76,7 @@ then
         fi
         ;;
     'Reboot')
-        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
+        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             systemctl reboot
         else
@@ -84,7 +84,7 @@ then
         fi
         ;;
     'Shutdown')
-        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
+        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             systemctl poweroff
         else
@@ -92,7 +92,7 @@ then
         fi
         ;;
     'Suspend')
-        if [[ "$(echo -e "Nein\nJa" | $dmenu $dmenu_width "${choice}?")" == "Ja" ]]
+        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "${choice}?")" == "Yes" ]]
         then
             systemctl suspend
         else

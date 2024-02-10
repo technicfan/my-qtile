@@ -222,8 +222,6 @@ for i in groups:
 def client_new(client):
     if client.name == "Spotify":
         client.togroup("0"),
-    #if client.name == "Default - Wine desktop":
-    #    client.togroup("9"),
     if client.name == "Discord" or client.name == "Discord Updater":
         client.togroup("8"),
     if client.name == "VSCodium":
@@ -484,7 +482,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
@@ -515,7 +513,7 @@ floating_layout = layout.Floating(
         Match(title="tastytrade"),        # tastytrade pop-out side gutter
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
-        Match(wm_class="delphi32.exe"),
+        Match(wm_class="delphi32.exe"), # Delphi 7 IDE
     ]
 )
 auto_fullscreen = True
