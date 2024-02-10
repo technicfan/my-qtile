@@ -109,6 +109,10 @@ keys = [
         **dmenu_theme  
     )),),
 
+    # Dmenu scripts created by evil DT
+    Key([], "o", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output"),
+    Key([mod], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
+
     # Lock
     Key([mod], "l", lazy.spawn("i3lock-fancy-dualmonitor"), desc="Lock screen"),
 
@@ -170,13 +174,6 @@ keys = [
     # Switch focus of monitors
     Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
     Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
-    
-    # Dmenu scripts launched using the key chord SUPER+o followed by "key"
-    KeyChord([mod], "o", [
-        Key([], "h", lazy.spawn("dm-hub"), desc="List all dmscripts"),
-        Key([], "p", lazy.spawn("dm-pipewire-out-switcher"), desc="Change pipewire output")
-    ]),
-    Key([mod], "k", lazy.spawn("dm-kill"), desc="Kill processes"),
 
 ]
 groups = []
