@@ -31,7 +31,7 @@ import socket
 import distro
 import subprocess
 from libqtile import bar, extension, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 # Make sure 'qtile-extras' is installed or this config will not work.
 from qtile_extras import widget
@@ -137,16 +137,16 @@ keys = [
     Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
 
 ]
+
 groups = []
+
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ",]
 group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "WIN", "MUS",]
 
-
 group_layouts = ["spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "max", "spiral"]
-
 
 for i in range(len(group_names)):
     groups.append(
@@ -159,14 +159,12 @@ for i in range(len(group_names)):
 for i in groups:
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
             Key(
                 [mod],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
-            # mod1 + shift + letter of group = move focused window to group
             Key(
                 [mod, "shift"],
                 i.name,
@@ -175,6 +173,14 @@ for i in groups:
             ),
         ]
     )
+
+groups.append(
+    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.4, height=0.5, x=0.3, y=0.2) ]),
+)
+
+keys.extend([
+    Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer")),
+])
 
 
 # Window rules
@@ -474,6 +480,7 @@ floating_layout = layout.Floating(
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
         Match(wm_class="delphi32.exe"), # Delphi 7 IDE
+        Match(wm_class="pavucontrol"),
     ]
 )
 auto_fullscreen = True
