@@ -8,13 +8,13 @@ function run {
 }
 
 # screen config
-~/.config/qtile/scripts/screens.sh restore
+~/.config/qtile/scripts/screens.sh restore &
 
 # mpris widget init
-~/.config/qtile/scripts/widgetboxes.sh mpris hidden
+~/.config/qtile/scripts/widgetboxes.sh mpris hidden &
 
 # wallpaper
-~/.config/qtile/scripts/screens.sh wallpaper
+~/.config/qtile/scripts/screens.sh wallpaper &
 
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh &
