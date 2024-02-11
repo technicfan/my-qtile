@@ -101,14 +101,14 @@ keys = [
         Key([], "d", lazy.spawn("com.spotify.Client && .config/qtile/scripts/widgetboxes.sh mpris show", shell=True), desc="Spotify"),
     ]),
 
-    #Media
+    # Media
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
     Key([mod], "m", lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris toggle"), desc="Toggle mpris"), 
 
-    #Volume
+    # Volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/volume.sh increase"), desc="Raise volume key"),
     Key([], "XF86AudioLowerVolume", lazy.spawn(".config/qtile/scripts/volume.sh decrease"), desc="Lower volume key"),
     Key([], "XF86AudioMute", lazy.spawn(".config/qtile/scripts/volume.sh toggle"), desc="Mute key"),
@@ -132,7 +132,7 @@ keys = [
     Key([mod, "shift"], "right", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "left", lazy.layout.shuffle_up(), desc="Move window downup"),
 
-    # window state control
+    # Window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
@@ -143,6 +143,7 @@ keys = [
 
 ]
 
+# Groups
 groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -178,11 +179,11 @@ for i in groups:
             ),
         ]
     )
-
+# Scratchpads
 groups.append(
-    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
-                               DropDown("term", myTerm, width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
-                               DropDown("monitor", "gnome-system-monitor", width=0.55, height=0.6, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
+    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=True),
+                               DropDown("term", myTerm, width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=True),
+                               DropDown("monitor", "gnome-system-monitor", width=0.55, height=0.6, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=True),
                              ]),
 )
 
@@ -236,8 +237,7 @@ layouts = [
     layout.Max(),
 ]
 
-# Some settings that I use on almost every widget, which saves us
-# from having to type these out for each individual widget.
+# Some settings that are used on almost every widget
 widget_defaults = dict(
     font="JetBrains Bold",
     fontsize = 12,
@@ -286,8 +286,6 @@ widgetbox_mpris = widget.WidgetBox (
                      name = "mpris",
                      start_opened = False
                   )
-
-extension_defaults = widget_defaults.copy()
 
 
 def init_widgets_list():
@@ -431,8 +429,7 @@ def init_widgets_screen2():
     del widgets_screen2[13:14]
     return widgets_screen2
 
-# For adding transparency to your bar, add (background="#00000000") to the "Screen" line(s)
-# For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
+# For adding transparency to the bar, add (background="#00000000") to the "Screen" line(s)
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=4, background="#00000000")),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=4, background="#00000000"))]
@@ -453,10 +450,11 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []
 follow_mouse_focus = True
-bring_front_click = False
+bring_front_click = "floating_only"
 cursor_warp = False
 floating_layout = layout.Floating(
     border_focus=colors[1],
+    border_normal=colors[3],
     border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
@@ -483,7 +481,6 @@ floating_layout = layout.Floating(
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
         Match(wm_class="delphi32.exe"), # Delphi 7 IDE
-        Match(wm_class="pavucontrol"),
     ]
 )
 auto_fullscreen = True
