@@ -31,7 +31,7 @@ import socket
 import distro
 import subprocess
 from libqtile import bar, extension, hook, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, ScratchPad, DropDown
+from libqtile.config import Click, Drag, Group, Key, KeyChord, Match, Screen, ScratchPad, DropDown, Rule
 from libqtile.lazy import lazy
 # Make sure 'qtile-extras' is installed or this config will not work.
 from qtile_extras import widget
@@ -186,18 +186,6 @@ groups.append(
                                DropDown("monitor", "gnome-system-monitor", width=0.55, height=0.6, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=True),
                              ]),
 )
-
-# Window rules
-@hook.subscribe.client_new
-def client_new(client):
-    if client.name == "Spotify":
-        client.togroup("0"),
-    if client.name == "Discord" or client.name == "Discord Updater":
-        client.togroup("8"),
-    if client.name == "VSCodium":
-        client.togroup("7"),
-    if "Delphi 7" in client.name:
-        client.togroup("7"),
 
 @hook.subscribe.client_name_updated
 def client_name_updated(client):
@@ -448,7 +436,12 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []
+# App rules
+dgroups_app_rules = [
+    Rule(Match(title=["Spotify"]), group="0"),
+    Rule(Match(title=["Discord", "Discord Updater"]), group="8"),
+    Rule(Match(wm_class=["vscodium", "delphi32.exe"]), group="7"),
+]
 follow_mouse_focus = True
 bring_front_click = "floating_only"
 cursor_warp = False
