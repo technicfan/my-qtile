@@ -77,6 +77,11 @@ keys = [
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh ms-windows"), desc="MS Windows (vms/apps)"),
 
+    # Scratchpads
+    Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
+    Key([mod, "shift"], "t", lazy.group["scratchpad"].dropdown_toggle("term"), desc="Toggle terminal"),
+    Key([mod, "shift"], "p", lazy.group["scratchpad"].dropdown_toggle("monitor"), desc="Toggle process monitor"),
+
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
         Key([], "k", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
@@ -175,13 +180,11 @@ for i in groups:
     )
 
 groups.append(
-    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.4, height=0.5, x=0.3, y=0.2, on_focus_lost_hide=False) ]),
+    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
+                               DropDown("term", myTerm, width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
+                               DropDown("monitor", "gnome-system-monitor", width=0.5, height=0.6, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
+                             ]),
 )
-
-keys.extend([
-    Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer")),
-])
-
 
 # Window rules
 @hook.subscribe.client_new
