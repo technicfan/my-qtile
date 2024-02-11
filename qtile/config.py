@@ -62,7 +62,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "k", lazy.spawn("xkill"), desc="Kill GUI apps"),
+    Key([mod], "l", lazy.spawn("xkill"), desc="Kill GUI apps"),
     Key([mod], "r", lazy.spawncmd(prompt="run"), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris restore"), desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(), lazy.spawn("sleep 1 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True), desc="Restart qtile"),
@@ -77,11 +77,11 @@ keys = [
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh ms-windows"), desc="MS Windows (vms/apps)"),
 
-    # rgb lighting (key chord SUPER+l followed by "key")
-    KeyChord([mod], "l", [
-        Key([], "l", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
+    # rgb lighting (key chord SUPER+k followed by "key")
+    KeyChord([mod], "k", [
+        Key([], "k", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o spectrum"), lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
         Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0"), desc="no rgb lighting"),
-        Key([], "odiaeresis", lazy.spawn("openrgb --startminimized"), desc="rgb lighting as sound visualizer"),
+        Key([], "l", lazy.spawn("openrgb --startminimized"), desc="rgb lighting as sound visualizer"),
     ]),
 
     # Screenshot
@@ -140,11 +140,8 @@ keys = [
 groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-#group_labels = ["DEV", "WWW", "SYS", "DOC", "VBOX", "CHAT", "MUS", "VID", "GFX",]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
-#group_labels = ["", "", "", "", "", "", "", "", "",]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ",]
-#group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "</>", " ", " ", " ",]
 group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "WIN", "MUS",]
 
 
