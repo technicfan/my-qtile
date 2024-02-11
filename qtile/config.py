@@ -62,6 +62,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "k", lazy.spawn("xkill"), desc="Kill GUI apps"),
     Key([mod], "r", lazy.spawncmd(prompt="run"), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris restore"), desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(), lazy.spawn("sleep 1 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True), desc="Restart qtile"),
@@ -69,7 +70,7 @@ keys = [
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
     # Dmenu scripts stolen from evil DT
     Key([mod], "o", lazy.spawn(".config/qtile/scripts/dmenu.sh output-switcher"), desc="Change pipewire output"),
-    Key([mod], "k", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
+    Key([mod], "i", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
     # own
     Key([mod], "d", lazy.spawn("dmenu_extended_run"), desc="Run launcher"),
