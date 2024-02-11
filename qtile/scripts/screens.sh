@@ -2,15 +2,7 @@
 
 function wallpaper()
 {
-    # Arcolinux
     feh --bg-fill ".config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png"
-
-    # other:
-    # Arcolinux-text-dark-rounded-1080p.png
-    # Archlinux-text-dark-rounded-1080p.png
-    # linux.png
-    # retro-arco.png
-    #feh --bg-fill "path/to/wallpaper"
 }
 
 case $1 in
