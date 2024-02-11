@@ -175,7 +175,7 @@ for i in groups:
     )
 
 groups.append(
-    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.4, height=0.5, x=0.3, y=0.2) ]),
+    ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.4, height=0.5, x=0.3, y=0.2, on_focus_lost_hide=False) ]),
 )
 
 keys.extend([
