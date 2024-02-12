@@ -58,7 +58,6 @@ keys = [
     Key([mod], "b", lazy.spawn(myBrowser), desc="Web browser"),
     Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Web browser private session"),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
-    Key(["control"], "escape", lazy.spawn("ksysguard"), desc="Process explorer"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -80,7 +79,7 @@ keys = [
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
     Key([mod, "shift"], "t", lazy.group["scratchpad"].dropdown_toggle("term"), desc="Toggle terminal"),
-    Key([mod, "shift"], "p", lazy.group["scratchpad"].dropdown_toggle("monitor"), desc="Toggle process monitor"),
+    Key([mod, "shift"], "i", lazy.group["scratchpad"].dropdown_toggle("monitor"), desc="Toggle process monitor"),
 
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
