@@ -8,20 +8,20 @@ function wallpaper()
 case $1 in
 "one")
     xrandr --output HDMI-0 --off --output DP-4 --auto
-    cd ~/.config/qtile/screens
+    cd .config/qtile/screens
     touch 1 && rm 2
     ;;
 "two")
     xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
     wallpaper
-    cd ~/.config/qtile/screens
+    cd .config/qtile/screens
     touch 2 && rm 1
     ;;
 "restore")
-    if cat ~/.config/qtile/screens/1
+    if cat .config/qtile/screens/1
     then
         xrandr --output HDMI-0 --off --output DP-4 --auto
-    elif cat ~/.config/qtile/screens/2
+    elif cat .config/qtile/screens/2
     then
         xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
     fi
