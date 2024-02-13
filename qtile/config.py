@@ -326,7 +326,7 @@ def init_widgets_list():
                  toggle = False,
                  **decoration_group
                  ),
-        widget.Spacer(length=-2, **decoration_group),
+        widget.Spacer(length=-4, **decoration_group),
         widget.WindowName(
                  foreground = colors[2],
                  padding = 10,
