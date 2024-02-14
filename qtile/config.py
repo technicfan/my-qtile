@@ -188,11 +188,6 @@ groups.append(
                              ]),
 )
 
-@hook.subscribe.client_name_updated
-def client_name_updated(client):
-    if client.name == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox" or client.name == "Windows 7 [wird ausgeführt] - Oracle VM VirtualBox":
-        client.togroup("9"),
-
 # Window names
 def ReplaceWindowName(text): 
     if text == "Windows 11 [wird ausgeführt] - Oracle VM VirtualBox" or text == "Windows 11 [ausgeschaltet] - Oracle VM VirtualBox" or text == "Windows 11 [wird ausgeschaltet] - Oracle VM VirtualBox":
@@ -440,6 +435,8 @@ dgroups_key_binder = None
 # App rules
 dgroups_app_rules = [
     Rule(Match(title=["Spotify"]), group="0"),
+    Rule(Match(wm_class=["VirtualBox Machine"]), group="9"),
+    Rule(Match(title=["VirtualBoxVM"]), group="9"),
     Rule(Match(title=["Discord", "Discord Updater"]), group="8"),
     Rule(Match(wm_class=["vscodium", "delphi32.exe"]), group="7"),
 ]
