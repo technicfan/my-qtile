@@ -2,7 +2,7 @@
 
 function wallpaper()
 {
-    feh --bg-fill ".config/qtile/wallpapers/Arcolinux-text-dark-rounded-1080p.png"
+    feh --bg-fill ".config/qtile/wallpapers/enterprise.png"
 }
 
 case $1 in
