@@ -56,7 +56,7 @@ keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
     Key([mod], "b", lazy.spawn(myBrowser), desc="Web browser"),
-    Key([mod], "c", lazy.spawn("firefox --private-window"), desc="Web browser private session"),
+    Key([mod], "v", lazy.spawn("firefox --private-window"), desc="Web browser private session"),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
@@ -75,6 +75,8 @@ keys = [
     Key([mod], "d", lazy.spawn("dmenu_extended_run"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh ms-windows"), desc="MS Windows (vms/apps)"),
+    # clipcat
+    Key([mod], "c", lazy.spawn("clipcat-menu"), desc="dmenu clipboard manager"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
