@@ -435,7 +435,7 @@ dgroups_key_binder = None
 # App rules
 dgroups_app_rules = [
     Rule(Match(title=["Spotify"]), group="0"),
-    Rule(Match(wm_class=["VirtualBox Machine"]), group="9"),
+    Rule(Match(wm_class=["VirtualBox Machine", "spicy", "virt-manager"]), group="9"),
     Rule(Match(title=["VirtualBoxVM"]), group="9"),
     Rule(Match(title=["Discord", "Discord Updater"]), group="8"),
     Rule(Match(wm_class=["vscodium", "delphi32.exe"]), group="7"),
