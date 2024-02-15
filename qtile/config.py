@@ -472,6 +472,7 @@ floating_layout = layout.Floating(
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
         Match(wm_class="delphi32.exe"), # Delphi 7 IDE
+        Match(wm_class="quickgui"), # quickemu gui vm manger
     ]
 )
 auto_fullscreen = True
