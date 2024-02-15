@@ -4,12 +4,14 @@ function shown()
 {
     cd ~/.config/qtile/mpris
     touch 1 && rm 0
+    cd -
 }
 
 function hidden()
 {
     cd ~/.config/qtile/mpris
     touch 0 && rm 1
+    cd -
 }
 
 case $1 in

@@ -10,12 +10,14 @@ case $1 in
     xrandr --output HDMI-0 --off --output DP-4 --auto
     cd .config/qtile/screens
     touch 1 && rm 2
+    cd -
     ;;
 "two")
     xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
     wallpaper
     cd .config/qtile/screens
     touch 2 && rm 1
+    cd -
     ;;
 "restore")
     if cat .config/qtile/screens/1
