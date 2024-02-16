@@ -39,6 +39,7 @@ from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 import colors
 # newest version of it
+#make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
 from widgetbox import WidgetBox
 
 mod = "mod4"              # Sets mod key to SUPER/WINDOWS
