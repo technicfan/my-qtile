@@ -99,6 +99,20 @@ case $1 in
         exit 0
     esac
     ;;
+# stolen from Luke Smith
+"unicode")
+    dmenu_width="-z 400 -p"
+
+    # Get user selection via dmenu from emoji file.
+    chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $dmenu $dmenu_width 'Emoji Picker:' | sed "s/ .*//")
+
+    # Exit if none chosen.
+    [ -z "$chosen" ] && exit
+
+    #show a message that the emoji has been copied.
+    printf "%s" "$chosen" | xclip -selection clipboard
+	notify-send "'$chosen' copied to clipboard." &
+    ;;
 # own
 "monitor")
     declare -a options=(

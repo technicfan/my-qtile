@@ -27,6 +27,7 @@
 import os
 import getpass
 import socket
+import re
 # make sure 'python-distro' is installed
 import distro
 import subprocess
@@ -77,6 +78,8 @@ keys = [
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh ms-windows"), desc="MS Windows (vms/apps)"),
     # clipcat
     Key([mod], "c", lazy.spawn("clipcat-menu"), desc="dmenu clipboard manager"),
+    # stolen from Luke Smith
+    Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
@@ -139,8 +142,7 @@ keys = [
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 
     # Switch focus of monitors
-    Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
-    Key([mod], "comma", lazy.prev_screen(), desc="Move focus to prev monitor"),
+    Key([mod], "comma", lazy.next_screen(), desc="Move focus to next monitor"),
 
 ]
 
@@ -434,11 +436,11 @@ mouse = [
 dgroups_key_binder = None
 # App rules
 dgroups_app_rules = [
-    Rule(Match(title=["Spotify"]), group="0"),
-    Rule(Match(wm_class=["VirtualBox Machine", "spicy", "virt-manager"]), group="9"),
-    Rule(Match(title=["VirtualBoxVM"]), group="9"),
-    Rule(Match(title=["Discord", "Discord Updater"]), group="8"),
-    Rule(Match(wm_class=["vscodium", "delphi32.exe"]), group="7"),
+    Rule(Match(title=re.compile(r"^(Spotify)$")), group="0"),
+    Rule(Match(wm_class=re.compile(r"^(VirtualBox\ Machine|spicy|virt\-manager)$")), group="9"),
+    Rule(Match(title=re.compile(r"^(VirtualBoxVM)$")), group="9"),
+    Rule(Match(title=re.compile(r"^(Discord|Discord\ Updater)$")), group="8"),
+    Rule(Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$")), group="7"),
 ]
 follow_mouse_focus = True
 bring_front_click = "floating_only"
