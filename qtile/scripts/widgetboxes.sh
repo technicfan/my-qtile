@@ -28,23 +28,17 @@ case $1 in
         fi
         ;;
     "show")
-        if cat ~/.config/qtile/mpris/0
-        then
-            qtile cmd-obj -o widget mpris -f toggle
-        fi
+        qtile cmd-obj -o widget mpris -f open
         shown
         ;;
     "hide")
-        if cat ~/.config/qtile/mpris/1
-        then
-            qtile cmd-obj -o widget mpris -f toggle
-        fi
+        qtile cmd-obj -o widget mpris -f close
         hidden
         ;;
     "restore")
         if cat ~/.config/qtile/mpris/1
         then
-            qtile cmd-obj -o widget mpris -f toggle
+            qtile cmd-obj -o widget mpris -f open
         fi
         ;;
     "shown")

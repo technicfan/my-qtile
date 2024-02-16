@@ -38,6 +38,8 @@ from libqtile.lazy import lazy
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 import colors
+# newest version of it
+from widgetbox import WidgetBox
 
 mod = "mod4"              # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"      # My terminal of choice
@@ -236,7 +238,7 @@ decoration_group = {
     ]
 }
 
-widgetbox_systray = widget.WidgetBox( 
+widgetbox_systray = WidgetBox( 
                          widgets = [
                                  widget.Systray(
                                          padding = 5,
@@ -250,7 +252,7 @@ widgetbox_systray = widget.WidgetBox(
                          **decoration_group
                     )
 
-widgetbox_mpris = widget.WidgetBox ( 
+widgetbox_mpris = WidgetBox ( 
                      widgets = [
                              widget.Mpris2(
                                  padding = 10,
