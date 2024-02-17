@@ -442,7 +442,7 @@ dgroups_app_rules = [
     Rule(Match(title=re.compile(r"^(Spotify)$")), group="0"),
     Rule(Match(wm_class=re.compile(r"^(VirtualBox\ Machine|spicy|virt\-manager)$")), group="9"),
     Rule(Match(title=re.compile(r"^(VirtualBoxVM)$")), group="9"),
-    Rule(Match(title=re.compile(r"^(Discord|Discord\ Updater)$")), group="8"),
+    Rule(Match(wm_class=re.compile(r"^(discord)$")), group="8"),
     Rule(Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$")), group="7"),
 ]
 follow_mouse_focus = True
