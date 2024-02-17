@@ -62,7 +62,7 @@ keys = [
     Key([mod], "b", lazy.spawn(myBrowser), desc="Web browser"),
     Key([mod], "v", lazy.spawn("firefox --private-window"), desc="Web browser private session"),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "l", lazy.spawn("xkill"), desc="Kill GUI apps"),
@@ -131,7 +131,6 @@ keys = [
     #Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "right", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "left", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
     # Move windows between left/right columns or move up/down in current stack.
     #Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -146,6 +145,10 @@ keys = [
 
     # Switch focus of monitors
     Key([mod], "comma", lazy.next_screen(), desc="Move focus to next monitor"),
+
+    # Switch groups
+    Key([mod], "Tab", lazy.screen.next_group(), desc="Move to next group"),
+    Key([mod], "XF86Launch5", lazy.screen.prev_group(), desc="Move to prev group"),
 
 ]
 
@@ -171,18 +174,8 @@ for i in range(len(group_names)):
 for i in groups:
     keys.extend(
         [
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
-            ),
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=False),
-                desc="Move focused window to group {}".format(i.name),
-            ),
+            Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen(), desc="Move focused window to group {}".format(i.name)),
         ]
     )
 # Scratchpads
