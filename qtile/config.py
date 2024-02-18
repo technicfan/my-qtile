@@ -256,6 +256,7 @@ widgetbox_mpris = WidgetBox (
                                  foreground = colors[0],
                                  objname = "org.mpris.MediaPlayer2.spotify",
                                  width = 250,
+                                 markup = False,
                                  mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris shown")},
                                  decorations = [
                                      RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
@@ -278,7 +279,7 @@ def init_widgets_list():
                  font = "Ubuntu",
                  padding = 7,
                  foreground = colors[2],
-                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
+                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config"), "Button3": lazy.spawn("kill picom; picom -b --config .config/picom/picom.conf", shell=True)},
                  **decoration_group
                  ),
         widget.Prompt(
