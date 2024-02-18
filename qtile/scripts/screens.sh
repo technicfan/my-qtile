@@ -13,6 +13,9 @@ case $1 in
     cd -
     ;;
 "two")
+    xrandr --output HDMI-0 --auto --output DP-4 --off
+    ;;
+"both")
     xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
     wallpaper
     cd .config/qtile/screens

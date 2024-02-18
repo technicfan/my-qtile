@@ -117,6 +117,7 @@ case $1 in
 "monitor")
     declare -a options=(
         "Monitor 1"
+        "Monitor 2"
         "Both Monitors"
         "Mirror"
         "Off"
@@ -128,8 +129,11 @@ case $1 in
     "Monitor 1")
         ~/.config/qtile/scripts/screens.sh one
         ;;
-    "Both Monitors")
+    "Monitor 2")
         ~/.config/qtile/scripts/screens.sh two
+        ;;
+    "Both Monitors")
+        ~/.config/qtile/scripts/screens.sh both
         ;;
     "Mirror")
         xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4
