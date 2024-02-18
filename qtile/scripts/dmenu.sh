@@ -8,9 +8,14 @@ case $1 in
 "kill")
     dmenu_width=" -z 960 -p"
 
-    selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
+    selected="PID CMD"
 
-    if [[ -n $selected && $selected != "PID CMD" ]]
+    while [[ $selected = "PID CMD" ]]
+    do
+        selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
+    done
+
+    if [[ -n $selected ]]
     then
         answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
 
