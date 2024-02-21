@@ -17,3 +17,10 @@ TechnicfanClean = [
     "#87a757", # fg2
     "#0d2a0e"  # inactive border
     ]
+
+GruvboxMaterial = [
+    "#282828", # bg
+    "#dfbf8e", # fg
+    "#d3869b", # fg2
+    "#453b2c"  # inactive border
+    ]

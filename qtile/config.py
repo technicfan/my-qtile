@@ -199,8 +199,9 @@ def ReplaceWindowName(text):
 ### COLORSCHEME ###
 # Colors are defined in a separate 'colors.py' file.
 
-colors = colors.Technicfan
+#colors = colors.Technicfan
 #colors = colors.TechnicfanClean
+colors = colors.GruvboxMaterial
 
 ### LAYOUTS ###
 
@@ -397,11 +398,21 @@ def init_widgets_list():
 # crash if you try to run multiple instances of it.
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
+    # color for layout icon
+    if colors[1] == "#dfbf8e":
+        widgets_screen1[3].custom_icon_paths = [".config/qtile/layout-icons/gruvbox"]
+    if colors[1] == "#87a757":
+        widgets_screen1[3].custom_icon_paths = [".config/qtile/layout-icons/green"]
     return widgets_screen1
 
 # Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
+    # color for layout icon
+    if colors[1] == "#dfbf8e":
+        widgets_screen2[3].custom_icon_paths = [".config/qtile/layout-icons/gruvbox"]
+    if colors[1] == "#87a757":
+        widgets_screen2[3].custom_icon_paths = [".config/qtile/layout-icons/green"]
     # not opening systray when clicking on user on screen2
     widgets_screen2[18].mouse_callbacks = {}
     # python logo

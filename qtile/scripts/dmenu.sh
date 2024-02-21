@@ -1,6 +1,10 @@
 #!/bin/bash
 
-dmenu="dmenu -i -l 20 -nb #133912 -nf #87a757 -sb #87a757 -sf #133912 -fn 'JetBrains:bold:pixelsize=14'"
+# technicfan
+#dmenu="dmenu -i -l 20 -nb #133912 -nf #87a757 -sb #87a757 -sf #133912 -fn 'JetBrains:bold:pixelsize=14'"
+
+# gruvbox
+dmenu="dmenu -i -l 20 -nb #282828 -nf #dfbf8e -sb #dfbf8e -sf #282828 -fn 'JetBrains:bold:pixelsize=14'"
 dmenu_width=" -z 300 -p"
 locker="i3lock-fancy-dualmonitor"
 

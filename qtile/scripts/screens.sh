@@ -2,7 +2,7 @@
 
 function wallpaper()
 {
-    feh --bg-fill ".config/qtile/wallpapers/enterprise.png"
+    feh --bg-fill ".config/qtile/wallpapers/enterprise-gruvbox.png"
 }
 
 case $1 in
