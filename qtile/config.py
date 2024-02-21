@@ -68,7 +68,11 @@ keys = [
     Key([mod], "l", lazy.spawn("xkill"), desc="Kill GUI apps"),
     Key([mod], "r", lazy.spawncmd(prompt="Run"), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "r", lazy.reload_config(), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris restore"), desc="Reload the config"),
-    Key([mod, "control"], "r", lazy.restart(), lazy.spawn("sleep 1 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True), desc="Restart qtile"),
+    KeyChord([mod, "control"], "r", [
+        Key([], "r", lazy.restart(), lazy.spawn("sleep 1 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True), desc="Restart qtile"),
+        Key([], "p", lazy.spawn("kill picom && picom -b --config .config/picom/picom.conf", shell=True), desc="Restart picom"),
+        Key([], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
+    ]),
 
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
     # Dmenu scripts stolen from evil DT
@@ -280,7 +284,7 @@ def init_widgets_list():
                  font = "Ubuntu",
                  padding = 7,
                  foreground = colors[2],
-                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config"), "Button3": lazy.spawn("kill picom; picom -b --config .config/picom/picom.conf", shell=True)},
+                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
                  **decoration_group
                  ),
         widget.Prompt(
