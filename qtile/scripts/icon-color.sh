@@ -53,10 +53,19 @@ main()
 	then
 
 		selected=$(echo "${colors/"\ "}" | ~/.config/qtile/scripts/dmenu.sh dmenu "Icon Colors:")
+
 		if [[ -n $selected ]]
 		then
-			setcolor $selected
-			notify-send "Your folder icons are now $selected"
+			answer=$(echo -e "No\nYes" | ~/.config/qtile/scripts/dmenu.sh dmenu "Choose $selected?")
+
+			if [[ $answer == "Yes" ]]
+			then
+				setcolor $selected
+				notify-send "Your folder icons are now $selected"
+				exit 0
+			else
+				exit 1
+			fi
 		else
 			exit 0
 		fi
