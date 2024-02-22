@@ -159,12 +159,13 @@ case $1 in
         "-> Wine"
         "Windows 11"
         "Windows 7"
+        "PopOS"
     )
 
     choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'MS Windows:')
 
     case $choice in
-    "Windows 11" | "Windows 7")
+    "Windows 11" | "Windows 7" | "PopOS")
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "Start ${choice} VM?")" == "Yes" ]]
         then
             virtualboxvm --startvm "$choice"
