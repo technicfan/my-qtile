@@ -191,6 +191,14 @@ case $1 in
         exit 0
     esac
     ;;
+"dmenu")
+    if [[ -n $2 ]]
+    then
+        $dmenu$dmenu_width $2
+    else
+        exit 1
+    fi
+    ;;
 *)
     exit 1
 esac
