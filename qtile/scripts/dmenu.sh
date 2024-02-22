@@ -194,7 +194,7 @@ case $1 in
 "dmenu")
     if [[ -n $2 ]]
     then
-        $dmenu$dmenu_width $2
+        $dmenu$dmenu_width "$2"
     else
         exit 1
     fi

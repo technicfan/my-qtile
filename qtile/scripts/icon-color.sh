@@ -52,7 +52,7 @@ main()
 	elif [[ $1 = "dmenu" ]]
 	then
 
-		selected=$(echo "${colors/"\ "}" | ~/.config/qtile/scripts/dmenu.sh dmenu Colors:)
+		selected=$(echo "${colors/"\ "}" | ~/.config/qtile/scripts/dmenu.sh dmenu "Icon Colors:")
 		if [[ -n $selected ]]
 		then
 			setcolor $selected
