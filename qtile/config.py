@@ -122,9 +122,9 @@ keys = [
     Key([mod], "m", lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris toggle"), desc="Toggle mpris"), 
 
     # Volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn(".config/qtile/scripts/volume.sh increase"), desc="Raise volume key"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn(".config/qtile/scripts/volume.sh decrease"), desc="Lower volume key"),
-    Key([], "XF86AudioMute", lazy.spawn(".config/qtile/scripts/volume.sh toggle"), desc="Mute key"),
+    Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Raise volume key"),
+    Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Lower volume key"),
+    Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
 
     # Activate Linux
     KeyChord([mod], "a", [
@@ -379,7 +379,11 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[2],
                  fmt = "🕫  {}",
-                 step = 5,
+                 #step = 5,
+                 volume_up_command = ".config/qtile/scripts/volume.sh increase",
+                 volume_down_command = ".config/qtile/scripts/volume.sh decrease",
+                 mute_command = ".config/qtile/scripts/volume.sh toggle",
+                 get_volume_command = ".config/qtile/scripts/volume.sh get",
                  **decoration_group
                  ),
         widget.Clock(
