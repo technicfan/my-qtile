@@ -20,6 +20,28 @@ get()
     echo $current_vol
 }
 
+check_mute()
+{
+    local status=$(amixer sget Master | awk -F " " '/Left:/ { print $NF }')
+
+    if [ -z $status ]
+    then
+        local status=$(amixer sget Master | awk -F " " '/Mono:/ { print $NF }')
+    fi
+
+    if [[ $status = "[off]" ]]
+    then
+        exit 0
+    else
+        exit 1
+    fi
+}
+
+toggle()
+{
+    amixer sset Master toggle
+}
+
 set()
 {
     amixer sset Master $new_vol%
@@ -42,29 +64,38 @@ in_de()
 
 check()
 {
-    local current_vol=$(get)
-    
-    if [[ $(diff $current_vol) != 0 ]]
+    if $(check_mute)
     then
-        local vol=0
-
-        while (( $vol < $current_vol ))
-        do
-            local vol=$(($vol + 5))
-        done
-
-        if [[ $(($vol - $current_vol)) < 4 ]]
-        then
-            local new_vol=$vol
-        else
-            local new_vol=$(($vol - 5))
-        fi
-
-        set $new_vol
-
-        echo $new_vol%
+        return "[off]"
+        exit
     else
-        echo $current_vol%
+    
+        local current_vol=$(get)
+    
+        if [[ $(diff $current_vol) != 0 ]]
+        then
+            local vol=0
+
+            while (( $vol < $current_vol ))
+            do
+                local vol=$(($vol + 5))
+            done
+
+            echo $vol - $current_vol
+
+            if [[ $(($vol - $current_vol)) < 2 ]]
+            then
+                local new_vol=$vol
+            else
+                local new_vol=$(($vol - 5))
+            fi
+
+            set $new_vol
+
+            echo $new_vol%
+        else
+            echo $current_vol%
+        fi
     fi
 }
 
@@ -78,8 +109,7 @@ main()
         in_de -5 +1
         ;;
     "toggle")
-        amixer sset Master $1
-        exit 0
+        toggle
         ;;
     "get")
         check
