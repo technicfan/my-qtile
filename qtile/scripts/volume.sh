@@ -66,7 +66,7 @@ check()
 {
     if $(check_mute)
     then
-        return "[off]"
+        echo "[off]"
         exit
     else
     
