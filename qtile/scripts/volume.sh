@@ -26,12 +26,7 @@ check_mute()
         local status=$(amixer sget Master | awk -F " " '/Mono:/ { print $NF }')
     fi
 
-    if [[ $status = "[off]" ]]
-    then
-        exit 0
-    else
-        exit 1
-    fi
+    echo $status
 }
 
 toggle()
@@ -63,7 +58,7 @@ up_down()
         diff=$(diff $new_vol)
     done
 
-    if $(check_mute)
+    if [[ $(check_mute) = "[off]" ]]
     then
         toggle
     fi
@@ -73,10 +68,9 @@ up_down()
 
 check()
 {
-    if $(check_mute)
+    if [[ $(check_mute) = "[off]" ]]
     then
         echo "[off]"
-        exit
     else
         local current_vol=$(get)
     
