@@ -74,6 +74,8 @@ keys = [
         Key([], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
     ]),
 
+    Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
+
     # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
     # Dmenu scripts stolen from evil DT
     Key([mod], "o", lazy.spawn(".config/qtile/scripts/dmenu.sh output-switcher"), desc="Change pipewire output"),

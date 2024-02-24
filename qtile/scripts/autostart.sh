@@ -37,8 +37,7 @@ nextcloud &
 caffeine &
 
 input-remapper-control --command autoload &
-#polychromatic-cli -o spectrum &
-polychromatic-cli -e keyboard &
+~/.config/qtile/scripts/numlock.sh match &
 polychromatic-cli -e mouse &
 polychromatic-cli -e mousepad &
 polychromatic-cli -o brightness -p 50 &
