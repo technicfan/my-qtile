@@ -353,8 +353,7 @@ def init_widgets_list():
 
         widget.TextBox(
                  padding = 10,
-                 text = subprocess.check_output("printf $(uname -r | awk -F '-' '{ print $1 }')", shell=True, text=True) + "-" +
-                        subprocess.check_output("printf $(uname -r | awk -F '-' '{ print $2 }')", shell=True, text=True),
+                 text = subprocess.check_output("printf $(uname -r)", shell=True, text=True),
                  fmt = "\uf17c   {}",
                  foreground = colors[2],
                  **decoration_group
