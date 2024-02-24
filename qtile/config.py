@@ -336,7 +336,7 @@ def init_widgets_list():
         widget.WindowName(
                  foreground = colors[2],
                  padding = 10,
-                 max_chars = 75,
+                 max_chars = 85,
                  width = bar.CALCULATED,
                  parse_text = ReplaceWindowName,
                  empty_group_string = distro.name() + " - Qtile",
@@ -353,7 +353,9 @@ def init_widgets_list():
 
         widget.TextBox(
                  padding = 10,
-                 text = "\uf17c   " + subprocess.check_output("printf $(uname -r)", shell=True, text=True),
+                 text = subprocess.check_output("printf $(uname -r | awk -F '-' '{ print $1 }')", shell=True, text=True) + "-" +
+                        subprocess.check_output("printf $(uname -r | awk -F '-' '{ print $2 }')", shell=True, text=True),
+                 fmt = "\uf17c   {}",
                  foreground = colors[2],
                  **decoration_group
                  ),
