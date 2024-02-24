@@ -383,6 +383,8 @@ def init_widgets_list():
                  foreground = colors[2],
                  fmt = "🕫  {}",
                  step = 5,
+                 volume_up_command = ".config/qtile/scripts/volume.sh up",
+                 volume_down_command = ".config/qtile/scripts/volume.sh down",
                  get_volume_command = ".config/qtile/scripts/volume.sh get",
                  **decoration_group
                  ),

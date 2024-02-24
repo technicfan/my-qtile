@@ -2,10 +2,7 @@
 
 diff()
 {
-    local int=$(echo $(bc <<< "$1/5"))
-    local float=$(echo $(bc <<< "scale=1; $1/5"))
-    local diff=$(echo $(bc <<< "scale=1; $float-$int"))
-    echo $diff
+    echo $(bc <<< "scale=1; $1/5" | awk -F "." '{ print $2 }')
 }
 
 get()
@@ -39,25 +36,37 @@ check_mute()
 
 toggle()
 {
-    amixer sset Master toggle
+    amixer -q sset Master toggle
 }
 
 set()
 {
-    amixer sset Master $new_vol%
+    amixer -q sset Master $1%
 }
 
-in_de()
+up_down()
 {
+    if (( $1 < 0 ))
+    then
+        local while_change=+1
+    else
+        local while_change=-1
+    fi
+
     local new_vol=$(($(get)$1))
 
     diff=$(diff $new_vol)
 
     while [ $diff != 0 ]
     do
-        new_vol=$(($new_vol$2))
+        new_vol=$(($new_vol$while_change))
         diff=$(diff $new_vol)
     done
+
+    if $(check_mute)
+    then
+        toggle
+    fi
 
     set $new_vol
 }
@@ -69,7 +78,6 @@ check()
         echo "[off]"
         exit
     else
-    
         local current_vol=$(get)
     
         if [[ $(diff $current_vol) != 0 ]]
@@ -102,11 +110,11 @@ check()
 main()
 {
     case $1 in
-    "increase")
-        in_de +5 -1
+    "up")
+        up_down +5
         ;;
-    "decrease")
-        in_de -5 +1
+    "down")
+        up_down -5
         ;;
     "toggle")
         toggle
