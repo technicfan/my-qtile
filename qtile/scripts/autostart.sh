@@ -32,7 +32,7 @@ picom -b --config .config/picom/picom.conf &
 clipcatd -r &
 /usr/lib/kdeconnectd &
 aw-qt &
-polychromatic-tray-applet &
+#polychromatic-tray-applet &
 nextcloud &
 caffeine &
 
