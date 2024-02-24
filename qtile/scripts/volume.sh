@@ -2,7 +2,7 @@
 
 diff()
 {
-    echo $(bc <<< "scale=1; $1/5" | awk -F "." '{ print $2 }')
+    echo $(bc <<< "scale=1; $1/$2" | awk -F "." '{ print $2 }')
 }
 
 get()
@@ -41,21 +41,25 @@ set()
 
 up_down()
 {
-    if (( $1 < 0 ))
-    then
+    case $1 in
+    "-")
         local while_change=+1
-    else
+        ;;
+    "+")
         local while_change=-1
-    fi
+        ;;
+    *)
+        exit 1
+    esac
 
-    local new_vol=$(($(get)$1))
+    local new_vol=$(($(get)$1$2))
 
-    diff=$(diff $new_vol)
+    diff=$(diff $new_vol $2)
 
     while [ $diff != 0 ]
     do
         new_vol=$(($new_vol$while_change))
-        diff=$(diff $new_vol)
+        diff=$(diff $new_vol $2)
     done
 
     if [[ $(check_mute) = "[off]" ]]
@@ -74,22 +78,22 @@ check()
     else
         local current_vol=$(get)
     
-        if [[ $(diff $current_vol) != 0 ]]
+        if [[ $(diff $current_vol $1) != 0 ]]
         then
             local vol=0
 
             while (( $vol < $current_vol ))
             do
-                local vol=$(($vol + 5))
+                local vol=$(($vol + $1))
             done
 
             echo $vol - $current_vol
 
-            if [[ $(($vol - $current_vol)) < 2 ]]
+            if [[ $(($vol - $current_vol)) < $(($1/2+1)) ]]
             then
                 local new_vol=$vol
             else
-                local new_vol=$(($vol - 5))
+                local new_vol=$(($vol - $1))
             fi
 
             set $new_vol
@@ -105,20 +109,27 @@ main()
 {
     case $1 in
     "up")
-        up_down +5
+        up_down + $2
         ;;
     "down")
-        up_down -5
+        up_down - $2
         ;;
     "toggle")
         toggle
         ;;
     "get")
-        check
+        check $2
+        ;;
+    "help"|"-h"|"-help"|"--help")
+        echo "change volume script by technicfan"
+        echo "up <number>: increase volume by number or by that number which achieves a volume divisible by number"
+        echo "down <number>: decrease volume by number or by that number which achieves a volume divisible by number"
+        echo "check <number>: output volume or change it next volume divisible by number and output this volume"
+        echo "toggle: mute/unmute"
         ;;
     *)
         exit 1
     esac
 }
 
-main $1
+main $1 $2
