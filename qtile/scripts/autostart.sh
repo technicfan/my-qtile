@@ -31,8 +31,7 @@ picom -b --config .config/picom/picom.conf &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 clipcatd -r &
 /usr/lib/kdeconnectd &
-aw-qt &
-#polychromatic-tray-applet &
+aw-qt --no-gui &
 nextcloud &
 caffeine &
 
