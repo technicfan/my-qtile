@@ -145,10 +145,10 @@ case $1 in
         ~/.config/qtile/scripts/screens.sh both
         ;;
     "Mirror")
-        xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4
+        ~/.config/qtile/scripts/screens.sh mirror
         ;;
     "Off")
-        xrandr --output HDMI-0 --off --output DP-4 --off
+        ~/.config/qtile/scripts/screens.sh off
         ;;
     *)
         exit 0
