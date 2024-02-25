@@ -1,4 +1,5 @@
 import os
+import subprocess
 from libqtile import bar, hook
 from libqtile.config import Screen
 
