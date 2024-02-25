@@ -12,6 +12,7 @@ function run {
 
 # mpris widget init
 ~/.config/qtile/scripts/widgetboxes.sh mpris hidden &
+~/.config/qtile/scripts/widgetboxes.sh systray hidden &
 
 # wallpaper
 ~/.config/qtile/scripts/screens.sh wallpaper &

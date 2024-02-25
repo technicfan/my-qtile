@@ -1,39 +1,57 @@
 #!/bin/sh
 
-function shown()
+shown()
 {
-    cd ~/.config/qtile/mpris
+    cd ~/.config/qtile/$1
     touch 1 && rm 0
-    cd -
 }
 
-function hidden()
+hidden()
 {
-    cd ~/.config/qtile/mpris
+    cd ~/.config/qtile/$1
     touch 0 && rm 1
-    cd -
+}
+
+open_query()
+{
+    if cat ~/.config/qtile/$1/0
+    then
+        exit 1
+    elif cat ~/.config/qtile/$1/1
+    then
+        exit 0
+    fi
 }
 
 case $1 in
 "mpris")
     case $2 in
     "toggle")
-        qtile cmd-obj -o widget mpris -f toggle
-        if cat ~/.config/qtile/mpris/0
+        if cat ~/.config/qtile/systray/0
         then
-            shown
-        elif cat ~/.config/qtile/mpris/1
-        then
-            hidden
+            qtile cmd-obj -o widget mpris -f toggle
+            if cat ~/.config/qtile/$1/0
+            then
+                shown $1
+            elif cat ~/.config/qtile/$1/1
+            then
+                hidden $1
+            fi
         fi
         ;;
     "show")
-        qtile cmd-obj -o widget mpris -f open
-        shown
+        if cat ~/.config/qtile/systray/0
+        then
+            qtile cmd-obj -o widget mpris -f open
+        fi
+        shown $1
         ;;
     "hide")
-        qtile cmd-obj -o widget mpris -f close
-        hidden
+        if cat ~/.config/qtile/systray/0
+        then
+            qtile cmd-obj -o widget mpris -f close
+        fi
+        hidden $1
         ;;
     "restore")
         if cat ~/.config/qtile/mpris/1
@@ -42,10 +60,10 @@ case $1 in
         fi
         ;;
     "shown")
-        shown
+        shown $1
         ;;
     "hidden")
-        hidden
+        hidden $1
         ;;
     *)
         exit 1
@@ -57,10 +75,22 @@ case $1 in
         if cat ~/.config/qtile/mpris/1
         then
             qtile cmd-obj -o widget mpris -f toggle &
-            qtile cmd-obj -o widget widgetbox -f toggle
-        else
-            qtile cmd-obj -o widget widgetbox -f toggle
         fi
+
+        qtile cmd-obj -o widget widgetbox -f toggle
+        if cat ~/.config/qtile/$1/0
+        then
+            shown $1
+        elif cat ~/.config/qtile/$1/1
+        then
+            hidden $1
+        fi
+        ;;
+    "shown")
+        shown $1
+        ;;
+    "hidden")
+        hidden $1
         ;;
     *)
         exit 1

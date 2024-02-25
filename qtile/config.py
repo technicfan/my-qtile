@@ -367,7 +367,8 @@ def init_widgets_list():
         widget.Memory(
                  padding = 10,
                  foreground = colors[2],
-                 format = "{MemUsed: .0f}{mm}",
+                 format = "{MemUsed: .2f}{mm}",
+                 measure_mem = "G",
                  fmt = "\uf1c0  {}",
                  **decoration_group
                  ),
