@@ -18,7 +18,7 @@ function run {
 ~/.config/qtile/scripts/screens.sh wallpaper &
 
 # mouse sensitivity
-~/.config/qtile/scripts/mouse.sh &
+~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45 &
 
 #change your keyboard if you need it
 setxkbmap -layout de

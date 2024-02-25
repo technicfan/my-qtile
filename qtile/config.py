@@ -399,7 +399,7 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[2],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {"Button1": lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray toggle"), "Button3": lazy.spawn(".config/qtile/scripts/mouse.sh")},
+                 mouse_callbacks = {"Button1": lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray toggle"), "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')},
                  **decoration_group
                  ),
         ]

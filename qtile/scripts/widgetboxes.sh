@@ -30,13 +30,14 @@ case $1 in
         if cat ~/.config/qtile/systray/0
         then
             qtile cmd-obj -o widget mpris -f toggle
-            if cat ~/.config/qtile/$1/0
-            then
-                shown $1
-            elif cat ~/.config/qtile/$1/1
-            then
-                hidden $1
-            fi
+        fi
+        
+        if cat ~/.config/qtile/$1/0
+        then
+            shown $1
+        elif cat ~/.config/qtile/$1/1
+        then
+            hidden $1
         fi
         ;;
     "show")
