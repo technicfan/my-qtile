@@ -3,9 +3,9 @@ from libqtile.lazy import lazy
 
 from functions import minimize_all
 from groups import groups, group_names
+from colors import colors, myTerm
 
 mod = "mod4"
-myTerm = "alacritty"
 myBrowser = "firefox"
 myFM = "dolphin"
 
