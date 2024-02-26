@@ -13,7 +13,7 @@ def start_once():
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.run([script])
 
-### other things ###
+### OTHER ###
 dgroups_key_binder = None
 follow_mouse_focus = True
 bring_front_click = "floating_only"
