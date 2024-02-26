@@ -1,4 +1,3 @@
-from libqtile import qtile
 from libqtile.lazy import lazy
 
 # A function for hide/show all the windows in a group

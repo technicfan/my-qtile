@@ -1,7 +1,6 @@
 import os
 import subprocess
 from libqtile import hook
-from libqtile.config import Screen
 
 from keybindings import mouse, keys
 from groups import groups, dgroups_app_rules
