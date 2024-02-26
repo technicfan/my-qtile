@@ -11,7 +11,7 @@ from widgets import screens, widget_defaults
 ### AUTOSTART ###
 @hook.subscribe.startup_once
 def start_once():
-    script = os.path.expanduser("~/.config/qtile/autostart.sh")
+    script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.run([script])
 
 ### other things ###
