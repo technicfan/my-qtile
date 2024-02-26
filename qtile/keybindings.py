@@ -2,7 +2,7 @@ from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
 from functions import minimize_all
-from windows_groups import groups
+from groups import groups, group_names
 
 mod = "mod4"
 myTerm = "alacritty"
@@ -114,7 +114,7 @@ keys = [
 ]
 
 for i in groups:
-    if i.name.isdigit():
+    if any([i.name in x for x in group_names]):
         keys.extend(
             [
                 Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),

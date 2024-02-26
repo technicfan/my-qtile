@@ -4,18 +4,15 @@ from libqtile import bar, hook
 from libqtile.config import Screen
 
 from keybindings import mouse, keys
-from windows_groups import groups, layouts, floating_layout, dgroups_app_rules
-from widgets import widgets_screen1, widgets_screen2, widget_defaults
+from groups import groups, dgroups_app_rules
+from layouts import layouts, floating_layout
+from widgets import screens, widget_defaults
 
 ### AUTOSTART ###
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
-
-### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=widgets_screen1, size=28, margin=4, background="#00000000")),
-           Screen(top=bar.Bar(widgets=widgets_screen2, size=28, margin=4, background="#00000000"))]
 
 ### other things ###
 dgroups_key_binder = None

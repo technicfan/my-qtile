@@ -4,6 +4,7 @@ import socket
 import distro
 import subprocess
 from libqtile import widget, bar
+from libqtile.config import Screen
 from libqtile.lazy import lazy
 # Make sure 'qtile-extras' is installed or this config will not work.
 from qtile_extras import widget
@@ -189,6 +190,7 @@ def init_widgets_list():
         ]
     return widgets_list
 
+### WIDGET INITIALISATION ###
 # Monitor 1 will display ALL widgets in widgets_list. It is important that this
 # is the only monitor that displays all widgets because the systray widget will
 # crash if you try to run multiple instances of it.
@@ -219,5 +221,7 @@ def init_widgets_screen2():
     del widgets_screen2[13:14]
     return widgets_screen2
 
-widgets_screen1 = init_widgets_screen1()
-widgets_screen2 = init_widgets_screen2()
+
+### SCREENS ###
+screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=4, background="#00000000")),
+           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=4, background="#00000000"))]
