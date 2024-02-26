@@ -114,14 +114,13 @@ keys = [
 ]
 
 for i in groups:
-    if "ScratchPad" in str(i):
-        break
-    keys.extend(
-        [
-            Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen(), desc="Move focused window to group {}".format(i.name)),
-        ]
-    )
+    if i.name.isdigit():
+        keys.extend(
+            [
+                Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
+                Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen(), desc="Move focused window to group {}".format(i.name)),
+            ]
+        )
 
 # Drag floating layouts.
 mouse = [
