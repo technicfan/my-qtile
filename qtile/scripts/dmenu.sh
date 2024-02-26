@@ -154,27 +154,33 @@ case $1 in
         exit 0
     esac
     ;;
-"ms-windows")
-    declare -a options=(
+"wine_vm")
+    options=(
         "-> Wine"
-        "Windows 11"
-        "Windows 7"
-        "PopOS"
     )
 
-    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'MS Windows:')
+    for i in $(seq 1 $(ls --format single-column ~/VirtualBox\ VMs | wc -l))
+    do
+        options[$(($i +1))]=$(ls --format commas ~/VirtualBox\ VMs | awk -F ", " '{ print $(shell_var='"$i"') }' )
+    done
 
-    case $choice in
-    "Windows 11" | "Windows 7" | "PopOS")
+    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Wine/VM:')
+
+    unset options[0]
+
+    if [[ "${options[*]}" = *"$choice"* && -n $choice ]]
+    then
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "Start ${choice} VM?")" == "Yes" ]]
         then
             virtualboxvm --startvm "$choice"
         else
             exit 0
         fi
-        ;;
+    fi
+
+    case $choice in
     "-> Wine")
-        declare -a options=(
+        options=(
         "Delphi 7"
         )
 
