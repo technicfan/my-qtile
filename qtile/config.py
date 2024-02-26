@@ -1,6 +1,6 @@
 import os
 import subprocess
-from libqtile import bar, hook
+from libqtile import hook
 from libqtile.config import Screen
 
 from keybindings import mouse, keys
@@ -11,8 +11,8 @@ from widgets import screens, widget_defaults
 ### AUTOSTART ###
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser("~")
-    subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
+    script = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.run([script])
 
 ### other things ###
 dgroups_key_binder = None
