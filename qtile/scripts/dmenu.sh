@@ -155,24 +155,21 @@ case $1 in
     esac
     ;;
 "wine_vm")
-    options=(
-        "-> Wine"
-    )
 
     for i in $(seq 1 $(ls --format single-column ~/VirtualBox\ VMs | wc -l))
     do
-        options[$(($i +1))]=$(ls --format commas ~/VirtualBox\ VMs | awk -F ", " '{ print $(shell_var='"$i"') }' )
+        options[$i]=$(ls --format commas ~/VirtualBox\ VMs | awk -F ", " '{ print $(shell_var='"$i"') }' )
     done
 
-    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Wine/VM:')
+    choice=$(printf '%s\n' "-> Wine" "${options[@]}" | $dmenu $dmenu_width 'Wine/VM:')
 
-    unset options[0]
-
-    if [[ "${options[*]}" = *"$choice"* && -n $choice ]]
+    if [[ -n $choice && "${options[*]}" = *"$choice"* ]]
     then
         if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "Start ${choice} VM?")" == "Yes" ]]
         then
-            virtualboxvm --startvm "$choice"
+            file=$(ls --format single-column "$(echo ~)/VirtualBox VMs/$choice/" | grep .vbox | grep -n "" | grep 1: | awk -F ":" '{ print $2 }')
+            vm=$(cat "$(echo ~)/VirtualBox VMs/$choice/$file" | grep "Machine uuid" | awk -F "=" '{ print $3}' | awk -F "\"" '{ print $2 }')
+            virtualboxvm --startvm "$vm"
         else
             exit 0
         fi
