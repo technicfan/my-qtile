@@ -8,20 +8,20 @@ dmenu="dmenu -i -l 20 -nb #282828 -nf #dfbf8e -sb #dfbf8e -sf #282828 -fn 'JetBr
 dmenu_width=" -z 300 -p"
 locker="i3lock-fancy-dualmonitor"
 
-case $1 in
-"kill")
-    dmenu_width=" -z 960 -p"
+kill()
+{
+    local dmenu_width=" -z 960 -p"
 
-    selected="PID CMD"
+    local selected="PID CMD"
 
     while [[ $selected = "PID CMD" ]]
     do
-        selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
+        local selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
     done
 
     if [[ -n $selected ]]
     then
-        answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
+        local answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
 
         if [[ $answer == "Yes" ]]
         then
@@ -31,9 +31,11 @@ case $1 in
             exit 1
         fi
     fi
-    ;;
-"output-switcher")
-    dmenu_width=" -z 400 -p"
+}
+
+output-switcher()
+{
+    local dmenu_width=" -z 400 -p"
 
     get_default_sink() {
         pactl --format=json info | jq -r .default_sink_name
@@ -44,7 +46,7 @@ case $1 in
             | current=$(get_default_sink) jq -r '.[] | if .name == env.current then .state="* " else .state="" end | .state + .name'
     }
 
-    choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $dmenu $dmenu_width 'Sink:') || exit 1
+    local choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $dmenu $dmenu_width 'Sink:') || exit 1
 
     if [ "$choice" ]
     then
@@ -56,9 +58,11 @@ case $1 in
     else
         exit 0
     fi
-    ;;
-"logout")
-    declare -a options=(
+}
+
+logout()
+{
+    local options=(
         "Lock"
         "Logout"
         "Reboot"
@@ -66,7 +70,7 @@ case $1 in
         "Suspend"
     )
 
-    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Power menu:')
+    local choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Power menu:')
 
     case $choice in
     "Lock")
@@ -107,13 +111,15 @@ case $1 in
     *)
         exit 0
     esac
-    ;;
+}
+
 # stolen from Luke Smith
-"unicode")
-    dmenu_width="-z 400 -p"
+unicode()
+{
+    local dmenu_width="-z 400 -p"
 
     # Get user selection via dmenu from emoji file.
-    chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $dmenu $dmenu_width 'Emoji Picker:' | sed "s/ .*//")
+    local chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $dmenu $dmenu_width 'Emoji Picker:' | sed "s/ .*//")
 
     # Exit if none chosen.
     [ -z "$chosen" ] && exit
@@ -121,10 +127,11 @@ case $1 in
     #show a message that the emoji has been copied.
     printf "%s" "$chosen" | xclip -selection clipboard
 	notify-send "'$chosen' copied to clipboard." &
-    ;;
-# own
-"monitor")
-    declare -a options=(
+}
+
+monitor()
+{
+    local options=(
         "Monitor 1"
         "Monitor 2"
         "Both Monitors"
@@ -132,7 +139,7 @@ case $1 in
         "Off"
     )
 
-    choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Monitors:')
+    local choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Monitors:')
 
     case $choice in
     "Monitor 1")
@@ -153,38 +160,39 @@ case $1 in
     *)
         exit 0
     esac
-    ;;
-"wine_vm")
+}
 
-    for i in $(seq 1 $(ls --format single-column ~/VirtualBox\ VMs | wc -l))
+wine_vm()
+{
+    for i in $(seq 1 $(ls -1 ~/VirtualBox\ VMs | wc -l))
     do
-        options[$i]=$(ls --format commas ~/VirtualBox\ VMs | awk -F ", " '{ print $(shell_var='"$i"') }' )
+        local options[$i]=$(ls -m ~/VirtualBox\ VMs | awk -F ", " '{ print $(shell_var='"$i"') }' )
     done
 
-    choice=$(printf '%s\n' "-> Wine" "${options[@]}" | $dmenu $dmenu_width 'Wine/VM:')
+    local choice=$(printf '%s\n' "-> Wine" "${options[@]}" | $dmenu $dmenu_width 'Wine/VM:')
 
     if [[ -n $choice && "${options[*]}" = *"$choice"* ]]
     then
-        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "Start ${choice} VM?")" == "Yes" ]]
+        if [[ "$(echo -e "No\nYes" | $dmenu $dmenu_width "Start VM \"$choice\"?")" == "Yes" ]]
         then
-            file=$(ls --format single-column "$(echo ~)/VirtualBox VMs/$choice/" | grep .vbox | grep -n "" | grep 1: | awk -F ":" '{ print $2 }')
-            vm=$(cat "$(echo ~)/VirtualBox VMs/$choice/$file" | grep "Machine uuid" | awk -F "=" '{ print $3}' | awk -F "\"" '{ print $2 }')
+            local file=$(ls -1 "$HOME/VirtualBox VMs/$choice/" | grep .vbox | grep -n "" | grep 1: | awk -F ":" '{ print $2 }')
+            local vm=$(cat "$HOME/VirtualBox VMs/$choice/$file" | grep "Machine uuid" | awk -F "=" '{ print $3}' | awk -F "\"" '{ print $2 }')
             if [[ -n $vm ]]
             then
                 virtualboxvm --startvm "$vm"
+            else
+                notify-send "VM \"$choice\" not found"
             fi
         else
             exit 0
         fi
-    fi
-
-    case $choice in
-    "-> Wine")
-        options=(
-        "Delphi 7"
+    elif [[ $choice = "-> Wine" ]]
+    then
+        local options=(
+            "Delphi 7"
         )
 
-        choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Run:')
+        local choice=$(printf '%s\n' "${options[@]}" | $dmenu $dmenu_width 'Run:')
 
         case $choice in
         "Delphi 7")
@@ -193,10 +201,29 @@ case $1 in
         *)
             exit 0
         esac
-        ;;
-    *)
-        exit 0
-    esac
+    fi
+}
+
+case $1 in
+"kill")
+    $1
+    ;;
+"output-switcher")
+    $1
+    ;;
+"logout")
+    $1
+    ;;
+# stolen from Luke Smith
+"unicode")
+    $1
+    ;;
+# own
+"monitor")
+    $1
+    ;;
+"wine_vm")
+    $1
     ;;
 "dmenu")
     if [[ -n $2 ]]
