@@ -2,7 +2,7 @@
 
 wallpaper()
 {
-    feh --bg-fill ".config/qtile/wallpapers/enterprise-gruvbox.png"
+    feh --bg-fill ".config/qtile/wallpapers/enterprise-gruvbox2.png"
 }
 
 one()
@@ -81,4 +81,4 @@ main()
     esac
 }
 
-main $1
+main $1 $2
