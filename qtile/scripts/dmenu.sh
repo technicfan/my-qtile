@@ -10,13 +10,13 @@ locker="i3lock-fancy-dualmonitor"
 
 process-manager()
 {
-    dmenu_width=" -z 960 -p"
+    local dmenu_width=" -z 960 -p"
 
-    selected="PID CMD"
+    local selected="PID CMD"
 
     while [[ $selected = "PID CMD" ]]
     do
-        selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
+        local selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
     done
 
     echo $(echo $selected | awk -F " " '{ print $1 }')
