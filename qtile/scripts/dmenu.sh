@@ -8,24 +8,24 @@ dmenu="dmenu -i -l 20 -nb #282828 -nf #dfbf8e -sb #dfbf8e -sf #282828 -fn 'JetBr
 dmenu_width=" -z 300 -p"
 locker="i3lock-fancy-dualmonitor"
 
-kill()
+process-manager()
 {
-    local dmenu_width=" -z 960 -p"
+    dmenu_width=" -z 960 -p"
 
-    local selected="PID CMD"
+    selected="PID CMD"
 
     while [[ $selected = "PID CMD" ]]
     do
-        local selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
+        selected="$(ps --user "$USER" -F | $dmenu $dmenu_width "Kill process:" | awk '{print $2" "$11}')"
     done
+
+    echo $(echo $selected | awk -F " " '{ print $1 }')
 
     if [[ -n $selected ]]
     then
-        local answer="$(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?")"
-
-        if [[ $answer == "Yes" ]]
+        if [[ $(echo -e "No\nYes" | $dmenu $dmenu_width  "Kill $selected?") == "Yes" ]]
         then
-            kill -9 "${selected%% *}"
+            kill "$(echo $selected | awk -F " " '{ print $1 }')"
             exit 0
         else
             exit 1
@@ -206,7 +206,7 @@ wine_vm()
 
 case $1 in
 "kill")
-    $1
+    process-manager
     ;;
 "output-switcher")
     $1
