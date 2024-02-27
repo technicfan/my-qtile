@@ -169,7 +169,10 @@ case $1 in
         then
             file=$(ls --format single-column "$(echo ~)/VirtualBox VMs/$choice/" | grep .vbox | grep -n "" | grep 1: | awk -F ":" '{ print $2 }')
             vm=$(cat "$(echo ~)/VirtualBox VMs/$choice/$file" | grep "Machine uuid" | awk -F "=" '{ print $3}' | awk -F "\"" '{ print $2 }')
-            virtualboxvm --startvm "$vm"
+            if [[ -n $vm ]]
+            then
+                virtualboxvm --startvm "$vm"
+            fi
         else
             exit 0
         fi
