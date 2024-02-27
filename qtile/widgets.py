@@ -94,7 +94,9 @@ def init_widgets_list():
 
         # Middle of the bar
 
-        widget.Spacer(),
+        widget.Spacer(
+            #**decoration_group
+        ),
         WidgetBox ( 
              widgets = [
                     widget.Mpris2(
@@ -103,10 +105,12 @@ def init_widgets_list():
                          paused_text = "   {track}",
                          format = "{xesam:title} - {xesam:artist}",
                          foreground = colors[0],
+                         #foreground = colors[1],
                          objname = "org.mpris.MediaPlayer2.spotify",
                          width = 250,
                          markup = False,
                          mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris shown")},
+                         #**decoration_group
                          decorations = [
                               RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
                          ]
@@ -116,9 +120,12 @@ def init_widgets_list():
              text_open = "",
              close_button_location = "right",
              name = "mpris",
-             start_opened = False
+             start_opened = False,
+             #**decoration_group
         ),
-        widget.Spacer(),
+        widget.Spacer(
+            #**decoration_group
+        ),
 
         # Middle of the bar
 
@@ -223,5 +230,5 @@ def init_widgets_screen2():
 
 
 ### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=4, background="#00000000")),
-           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=4, background="#00000000"))]
+screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, margin=[8, 8, 4, 8], background="#00000000")),
+           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, margin=[8, 8, 4, 8], background="#00000000"))]
