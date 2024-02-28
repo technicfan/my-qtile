@@ -2,7 +2,7 @@
 
 wallpaper()
 {
-    feh --bg-fill ".config/qtile/wallpapers/enterprise-gruvbox2.png"
+    feh --bg-fill ".config/qtile/wallpapers/communism2.png"
 }
 
 one()
