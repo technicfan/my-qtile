@@ -1,5 +1,19 @@
 #!/bin/sh
 
+check()
+{
+    # had to use full path because it needs to be run by root for sddm xscreen config
+    echo $(cat /home/technicfan/.config/qtile/states/states.conf | awk -F " = " '/screen_state/ {print $2}')
+}
+
+set_state()
+{
+    if ! check = $1
+    then
+        sed -i "s/screen_state = .*/screen_state = $1/g" ~/.config/qtile/states/states.conf
+    fi
+}
+
 wallpaper()
 {
     feh --bg-fill ".config/qtile/wallpapers/communism2.png"
@@ -31,42 +45,38 @@ main()
     case $1 in
     "one")
         $1
-        cd .config/qtile/screens
-        touch 1 && rm 2; rm 3; rm 4
+        set_state 1
         ;;
     "two")
         $1
-        cd .config/qtile/screens
-        touch 2 && rm 1; rm 3; rm 4
+        set_state 2
         ;;
     "both")
         $1
         wallpaper
-        cd .config/qtile/screens
-        touch 3 && rm 1; rm 2; rm 4
+        set_state 3
         ;;
     "mirror")
         $1
-        cd .config/qtile/screens
-        touch 4 && rm 1; rm 2; rm 3
+        set_state 4
         ;;
     "off")
         xrandr --output HDMI-0 --off --output DP-4 --off
         ;;
     "restore")
-        if cat .config/qtile/screens/1
-        then
+        case $(check) in
+        "1")
             one
-        elif cat .config/qtile/screens/2
-        then
+            ;;
+        "2")
             two
-        elif cat .config/qtile/screens/3
-        then
+            ;;
+        "3")
             both
-        elif cat .config/qtile/screens/4
-        then
+            ;;
+        "4")
             mirror
-        fi
+        esac
         ;;
     "wallpaper")
         if [ -z $2 ]

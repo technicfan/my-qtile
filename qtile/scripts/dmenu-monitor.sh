@@ -2,55 +2,31 @@
 
 main()
 {
-    echo $DMENU
-
-    local locker="i3lock-fancy-dualmonitor"
-
     local options=(
-        "Lock"
-        "Logout"
-        "Reboot"
-        "Shutdown"
-        "Suspend"
+        "Monitor 1"
+        "Monitor 2"
+        "Both Monitors"
+        "Mirror"
+        "Off"
     )
 
-    local choice=$(printf '%s\n' "${options[@]}" | $DMENU $DMENU_WIDTH 'Power menu:')
+    local choice=$(printf '%s\n' "${options[@]}" | $DMENU $DMENU_WIDTH 'Monitors:')
 
     case $choice in
-    "Lock")
-        $locker
+    "Monitor 1")
+        ~/.config/qtile/scripts/screens.sh one
         ;;
-    "Logout")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
-        then
-            pkill -KILL -u $USER
-        else
-            exit 1
-        fi
+    "Monitor 2")
+        ~/.config/qtile/scripts/screens.sh two
         ;;
-    "Reboot")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
-        then
-            systemctl reboot
-        else
-            exit 0
-        fi
+    "Both Monitors")
+        ~/.config/qtile/scripts/screens.sh both
         ;;
-    "Shutdown")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
-        then
-            systemctl poweroff
-        else
-            exit 0
-        fi
+    "Mirror")
+        ~/.config/qtile/scripts/screens.sh mirror
         ;;
-    "Suspend")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
-        then
-            systemctl suspend
-        else
-            exit 0
-        fi
+    "Off")
+        ~/.config/qtile/scripts/screens.sh off
         ;;
     *)
         exit 0

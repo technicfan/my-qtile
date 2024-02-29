@@ -1,15 +1,31 @@
 #!/bin/sh
 
+check()
+{
+    local exit=$(cat ~/.config/qtile/states/states.conf | awk -F " = " '/'$1'/ {print $2}')
+
+    if [[ $exit = 1 || $exit = 0 ]]
+    then
+        return $exit
+    else
+        exit 1
+    fi
+}
+
 shown()
 {
-    cd ~/.config/qtile/$1
-    touch 1 && rm 0
+    if check $1
+    then
+        sed -i "s/$1 = 0/$1 = 1/g" ~/.config/qtile/states/states.conf
+    fi
 }
 
 hidden()
 {
-    cd ~/.config/qtile/$1
-    touch 0 && rm 1
+    if ! check $1
+    then
+        sed -i "s/$1 = 1/$1 = 0/g" ~/.config/qtile/states/states.conf
+    fi
 }
 
 open_query()
@@ -27,35 +43,34 @@ case $1 in
 "mpris")
     case $2 in
     "toggle")
-        if cat ~/.config/qtile/systray/0
+        if check systray
         then
             qtile cmd-obj -o widget mpris -f toggle
         fi
         
-        if cat ~/.config/qtile/$1/0
+        if check $1
         then
             shown $1
-        elif cat ~/.config/qtile/$1/1
-        then
+        else
             hidden $1
         fi
         ;;
     "show")
-        if cat ~/.config/qtile/systray/0
+        if check systray
         then
             qtile cmd-obj -o widget mpris -f open
         fi
         shown $1
         ;;
     "hide")
-        if cat ~/.config/qtile/systray/0
+        if check systray
         then
             qtile cmd-obj -o widget mpris -f close
         fi
         hidden $1
         ;;
     "restore")
-        if cat ~/.config/qtile/mpris/1
+        if ! check $1
         then
             qtile cmd-obj -o widget mpris -f open
         fi
@@ -73,17 +88,16 @@ case $1 in
 "systray")
     case $2 in
     "toggle")
-        if cat ~/.config/qtile/mpris/1
+        if ! check mpris
         then
             qtile cmd-obj -o widget mpris -f toggle &
         fi
 
         qtile cmd-obj -o widget widgetbox -f toggle
-        if cat ~/.config/qtile/$1/0
+        if check $1
         then
             shown $1
-        elif cat ~/.config/qtile/$1/1
-        then
+        else
             hidden $1
         fi
         ;;
