@@ -178,6 +178,7 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[1],
                  format = "⏱  %a  %d. %B - KW %W - %H:%M",
+                 mouse_callbacks = {"Button1": lazy.spawn("galendae")},
                  **decoration_group
                  ),
         WidgetBox( 
