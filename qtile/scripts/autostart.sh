@@ -7,9 +7,6 @@ function run {
   fi
 }
 
-# screen config
-~/.config/qtile/scripts/screens.sh restore &
-
 # mpris widget init
 ~/.config/qtile/scripts/widgetboxes.sh mpris hidden &
 ~/.config/qtile/scripts/widgetboxes.sh systray hidden &

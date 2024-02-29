@@ -8,7 +8,7 @@ check()
 
 set_state()
 {
-    if ! check = $1
+    if ! [[ check = $1 ]]
     then
         sed -i "s/screen_state = .*/screen_state = $1/g" ~/.config/qtile/states/states.conf
     fi
