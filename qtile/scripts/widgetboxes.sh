@@ -16,7 +16,7 @@ shown()
 {
     if check $1
     then
-        sed -i "s/$1 = 0/$1 = 1/g" ~/.config/qtile/states/states.conf
+        sed -i "s/$1 = .*/$1 = 1/g" ~/.config/qtile/states/states.conf
     fi
 }
 
@@ -24,18 +24,7 @@ hidden()
 {
     if ! check $1
     then
-        sed -i "s/$1 = 1/$1 = 0/g" ~/.config/qtile/states/states.conf
-    fi
-}
-
-open_query()
-{
-    if cat ~/.config/qtile/$1/0
-    then
-        exit 1
-    elif cat ~/.config/qtile/$1/1
-    then
-        exit 0
+        sed -i "s/$1 = .*/$1 = 0/g" ~/.config/qtile/states/states.conf
     fi
 }
 
