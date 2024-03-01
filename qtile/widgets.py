@@ -83,7 +83,6 @@ def init_widgets_list():
                  other_current_screen_border = colors[1],
                  other_screen_border = colors[2],
                  hide_unused = True,
-                 use_mouse_wheel = False,
                  toggle = False,
                  **decoration_group
                  ),
