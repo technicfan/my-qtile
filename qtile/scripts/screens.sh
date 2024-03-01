@@ -2,6 +2,11 @@
 
 check()
 {
+    if ! cat /home/technicfan/.config/qtile/states/states.conf
+    then
+        cp /home/technicfan/.config/qtile/states/default-states.conf /home/technicfan/.config/qtile/states/states.conf
+    fi
+
     # had to use full path because it needs to be run by root for sddm xscreen config
     echo $(cat /home/technicfan/.config/qtile/states/states.conf | awk -F " = " '/screen_state/ {print $2}')
 }
