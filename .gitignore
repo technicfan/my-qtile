@@ -1,3 +1,5 @@
 __pycache__
 widgetbox.py
 states.conf
+qtile/scripts/widgetboxes.py
+qtile/states/states.ini
