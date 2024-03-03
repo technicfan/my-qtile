@@ -60,10 +60,7 @@ def init_widgets_list():
                  padding = 7,
                  scale = 0.7,
                  custom_icon_paths = [".config/qtile/layout-icons/green"],
-                 decorations = [
-                         RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
-                         RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2),
-                 ]
+                 **decoration_group
                  ),
         widget.Spacer(length=-2, **decoration_group),
         widget.GroupBox(
@@ -99,9 +96,7 @@ def init_widgets_list():
 
         # Middle of the bar
 
-        widget.Spacer(
-            #**decoration_group
-        ),
+        widget.Spacer(),
         WidgetBox ( 
              widgets = [
                     widget.Mpris2(
@@ -110,12 +105,10 @@ def init_widgets_list():
                          paused_text = "   {track}",
                          format = "{xesam:title} - {xesam:artist}",
                          foreground = colors[0],
-                         #foreground = colors[1],
                          objname = "org.mpris.MediaPlayer2.spotify",
                          width = 250,
                          markup = False,
                          mouse_callbacks = {"Button3": lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris shown")},
-                         #**decoration_group
                          decorations = [
                               RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
                          ]
@@ -126,11 +119,8 @@ def init_widgets_list():
              close_button_location = "right",
              name = "mpris",
              start_opened = False,
-             #**decoration_group
         ),
-        widget.Spacer(
-            #**decoration_group
-        ),
+        widget.Spacer(),
 
         # Middle of the bar
 
