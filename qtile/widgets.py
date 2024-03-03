@@ -170,7 +170,7 @@ def init_widgets_list():
                  step = 5,
                  volume_up_command = ".config/qtile/scripts/volume.sh up 5",
                  volume_down_command = ".config/qtile/scripts/volume.sh down 5",
-                 get_volume_command = ".config/qtile/scripts/volume.sh get 5",
+                 #get_volume_command = ".config/qtile/scripts/volume.sh get 5",
                  **decoration_group
                  ),
         widget.Clock(
