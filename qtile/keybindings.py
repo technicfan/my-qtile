@@ -33,7 +33,7 @@ keys = [
                              lazy.spawn("python .config/qtile/scripts/widgetboxes.py mpris restore"),
                              lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray hidden"), desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               lazy.spawn("sleep 1 && python .config/qtile/scripts/widgetboxes.py mpris restore", shell=True),
+                               lazy.spawn("sleep 0.5 && python .config/qtile/scripts/widgetboxes.py mpris restore", shell=True),
                                lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray hidden"), desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
