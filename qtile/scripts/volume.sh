@@ -2,7 +2,7 @@
 
 diff()
 {
-    echo $(bc <<< "scale=1; $1/$2" | awk -F "." '{ print $2 }')
+    echo $(($1 % $2))
 }
 
 get()
@@ -41,33 +41,30 @@ set()
 
 up_down()
 {
+    local diff=$(diff $(get) $2)
+
     case $1 in
     "-")
-        local while_change=+1
+        if ! [[ $diff = 0 ]]
+        then
+            local change=$((-$2 + $diff))
+        else
+            local change=0
+        fi
         ;;
     "+")
-        local while_change=-1
+        local change=$((-$diff))
         ;;
     *)
         exit 1
     esac
-
-    local new_vol=$(($(get)$1$2))
-
-    diff=$(diff $new_vol $2)
-
-    while [ $diff != 0 ]
-    do
-        new_vol=$(($new_vol$while_change))
-        diff=$(diff $new_vol $2)
-    done
 
     if [[ $(check_mute) = "[off]" ]]
     then
         toggle
     fi
 
-    set $new_vol
+    set $(($(get)$1$2$1$change))
 }
 
 check()
@@ -77,23 +74,15 @@ check()
         echo "[off]"
     else
         local current_vol=$(get)
+        local diff=$(diff $current_vol $1)
     
-        if [[ $(diff $current_vol $1) != 0 ]]
+        if ! [[ $diff = 0 ]]
         then
-            local vol=0
-
-            while (( $vol < $current_vol ))
-            do
-                local vol=$(($vol + $1))
-            done
-
-            echo $vol - $current_vol
-
-            if [[ $(($vol - $current_vol)) < $(($1/2+1)) ]]
+            if [[ $diff < $(($1/2+1)) ]]
             then
-                local new_vol=$vol
+                local new_vol=$(($current_vol-$diff))
             else
-                local new_vol=$(($vol - $1))
+                local new_vol=$(($current_vol+$1-$diff))
             fi
 
             set $new_vol
