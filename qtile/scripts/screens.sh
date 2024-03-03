@@ -2,20 +2,15 @@
 
 check()
 {
-    if ! [ -e /home/technicfan/.config/qtile/states/states.conf ]
-    then
-        cp /home/technicfan/.config/qtile/states/default-states.conf /home/technicfan/.config/qtile/states/states.conf
-    fi
-
     # had to use full path because it needs to be run by root for sddm xscreen config
-    echo $(awk -F " = " '/screen_state/ {print $2}' /home/technicfan/.config/qtile/states/states.conf)
+    echo $(awk -F " = " '/screen_state/ {print $2}' /home/technicfan/.config/qtile/states/states.ini)
 }
 
 set_state()
 {
     if ! [[ $(check) = $1 ]]
     then
-        sed -i "s/screen_state = .*/screen_state = $1/g" ~/.config/qtile/states/states.conf
+        sed -i "s/screen_state = .*/screen_state = $1/g" ~/.config/qtile/states/states.ini
     fi
 }
 

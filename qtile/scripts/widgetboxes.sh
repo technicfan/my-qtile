@@ -2,12 +2,7 @@
 
 check()
 {
-    if ! [ -e ~/.config/qtile/states/states.conf ]
-    then
-        cp ~/.config/qtile/states/default-states.conf ~/.config/qtile/states/states.conf
-    fi
-    
-    local exit=$(awk -F " = " '/'$1'/ {print $2}' ~/.config/qtile/states/states.conf)
+    local exit=$(awk -F " = " '/'$1'/ {print $2}' ~/.config/qtile/states/states.ini)
 
     if [[ $exit = 1 || $exit = 0 ]]
     then
@@ -21,7 +16,7 @@ shown()
 {
     if check $1
     then
-        sed -i "s/$1 = .*/$1 = 1/g" ~/.config/qtile/states/states.conf
+        sed -i "s/$1 = .*/$1 = 1/g" ~/.config/qtile/states/states.ini
     fi
 }
 
@@ -29,7 +24,7 @@ hidden()
 {
     if ! check $1
     then
-        sed -i "s/$1 = .*/$1 = 0/g" ~/.config/qtile/states/states.conf
+        sed -i "s/$1 = .*/$1 = 0/g" ~/.config/qtile/states/states.ini
     fi
 }
 

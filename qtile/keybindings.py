@@ -4,6 +4,7 @@
 #| |_| | |___ ___) || | |  _ <| |_| || |   | |___ / ___ \|  __/| |  | |/ ___ \| |___ | | ___) | |  | | |_|
 #|____/|_____|____/ |_| |_| \_\\___/ |_|    \____/_/   \_\_|  |___| |_/_/   \_\_____|___|____/|_|  |_| (_)
 
+import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
@@ -29,11 +30,11 @@ keys = [
     Key([mod], "r", lazy.spawncmd(prompt="Run"), desc="Spawn a command using a prompt widget"),
     Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key([mod, "shift"], "r", lazy.reload_config(),
-                             lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris restore"),
-                             lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray hidden"), desc="Reload the config"),
+                             lazy.spawn("python .config/qtile/scripts/widgetboxes.py mpris restore"),
+                             lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray hidden"), desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               lazy.spawn("sleep 0.5 && .config/qtile/scripts/widgetboxes.sh mpris restore", shell=True),
-                               lazy.spawn(".config/qtile/scripts/widgetboxes.sh systray hidden"), desc="Restart qtile"),
+                               lazy.spawn("sleep 1 && python .config/qtile/scripts/widgetboxes.py mpris restore", shell=True),
+                               lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray hidden"), desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
@@ -84,7 +85,7 @@ keys = [
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
-    Key([mod], "m", lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris toggle"), desc="Toggle mpris"), 
+    Key([mod], "m", lazy.spawn("python .config/qtile/scripts/widgetboxes.py mpris toggle"), desc="Toggle mpris"), 
 
     # Volume
     Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Raise volume key"),
