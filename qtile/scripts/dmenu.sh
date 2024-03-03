@@ -39,6 +39,10 @@ main()
         load
         ./dmenu-${1}.sh
         ;;
+    "icon-color")
+        load
+        ./${1}.sh dmenu
+        ;;
     "dmenu")
         load
         if [[ -n $2 ]]

@@ -52,11 +52,11 @@ main()
 	elif [[ $1 = "dmenu" ]]
 	then
 
-		selected=$(echo "${colors/"\ "}" | ~/.config/qtile/scripts/dmenu.sh dmenu "Icon Colors:")
+		selected=$(echo "${colors/"\ "}" | $DMENU$DMENU_WIDTH "Icon Colors:")
 
 		if [[ -n $selected ]]
 		then
-			answer=$(echo -e "No\nYes" | ~/.config/qtile/scripts/dmenu.sh dmenu "Choose $selected?")
+			answer=$(echo -e "No\nYes" | $DMENU$DMENU_WIDTH "Choose $selected?")
 
 			if [[ $answer == "Yes" ]]
 			then

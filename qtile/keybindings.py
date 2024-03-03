@@ -48,7 +48,7 @@ keys = [
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh wine_vm"), desc="MS Windows (vms/apps)"),
     # cool folder icon color changer
-    Key([mod], "minus", lazy.spawn(".config/qtile/scripts/icon-color.sh dmenu"), desc="Change folder colors of gruvbox icon theme"),
+    Key([mod], "minus", lazy.spawn(".config/qtile/scripts/dmenu.sh icon-color"), desc="Change folder colors of gruvbox icon theme"),
     # clipcat
     Key([mod], "c", lazy.spawn("clipcat-menu"), desc="dmenu clipboard manager"),
     # stolen from Luke Smith
