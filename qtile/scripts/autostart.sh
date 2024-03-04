@@ -13,6 +13,9 @@ function run {
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45 &
 
+# numblock rgb
+#~/.config/qtile/scripts/numlock.sh match &
+
 #change your keyboard if you need it
 setxkbmap -layout de
 
@@ -30,7 +33,7 @@ nextcloud &
 caffeine &
 
 input-remapper-control --command autoload &
-~/.config/qtile/scripts/numlock.sh match &
+polychromatic-cli -e keyboard+numblock &
 polychromatic-cli -e mouse &
 polychromatic-cli -e mousepad &
 polychromatic-cli -o brightness -p 50 &
