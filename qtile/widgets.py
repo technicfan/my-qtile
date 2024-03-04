@@ -20,7 +20,6 @@ from qtile_extras.widget.decorations import RectDecoration
 #make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
 from widgetbox import WidgetBox
 
-from functions import ReplaceWindowName
 from colors import colors
 
 # Some settings that are used on almost every widget
@@ -89,7 +88,6 @@ def init_widgets_list():
                  padding = 10,
                  max_chars = 85,
                  width = bar.CALCULATED,
-                 parse_text = ReplaceWindowName,
                  empty_group_string = distro.name() + " - Qtile",
                  **decoration_group 
                  ),
