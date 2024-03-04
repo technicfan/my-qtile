@@ -32,7 +32,7 @@ case $1 in
 "mpris")
     case $2 in
     "toggle")
-        if check systray
+        if check tray
         then
             qtile cmd-obj -o widget mpris -f toggle
         fi
@@ -45,14 +45,14 @@ case $1 in
         fi
         ;;
     "show")
-        if check systray
+        if check tray
         then
             qtile cmd-obj -o widget mpris -f open
         fi
         shown $1
         ;;
     "hide")
-        if check systray
+        if check tray
         then
             qtile cmd-obj -o widget mpris -f close
         fi
@@ -74,7 +74,7 @@ case $1 in
         exit 1
     esac
     ;;
-"systray")
+"tray")
     case $2 in
     "toggle")
         if ! check mpris
@@ -82,7 +82,7 @@ case $1 in
             qtile cmd-obj -o widget mpris -f toggle &
         fi
 
-        qtile cmd-obj -o widget widgetbox -f toggle
+        qtile cmd-obj -o widget tray -f toggle
         if check $1
         then
             shown $1

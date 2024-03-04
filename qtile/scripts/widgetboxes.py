@@ -34,7 +34,7 @@ if not config_file.is_file():
 
     config["widgetboxes"] = {
         "mpris": "0",
-        "systray": "0"
+        "tray": "0"
     }
 
     config["screens"] = {
@@ -51,18 +51,18 @@ match sys.argv[1]:
     case "mpris":
         match sys.argv[2]:
             case "toggle":
-                if not check("systray"):
+                if not check("tray"):
                     client.widget["mpris"].toggle()          
                 if check("mpris"):
                     hidden("mpris")
                 else:
                     shown("mpris")
             case "show":
-                if not check("systray"):
+                if not check("tray"):
                     client.widget["mpris"].open()
                 shown("mpris")
             case "hide":
-                if not check("systray"):
+                if not check("tray"):
                     client.widget["mpris"].close()
                 hidden("mpris")
             case "restore":
@@ -72,17 +72,17 @@ match sys.argv[1]:
                 shown("mpris")
             case "hidden":
                 hidden("mpris")
-    case "systray":
+    case "tray":
         match sys.argv[2]:
             case "toggle":
                 if check("mpris"):
                     client.widget["mpris"].toggle()
-                client.widget["widgetbox"].toggle()
-                if check("systray"):
-                    hidden("systray")
+                client.widget["tray"].toggle()
+                if check("tray"):
+                    hidden("tray")
                 else:
-                    shown("systray")
+                    shown("tray")
             case "shown":
-                shown("systray")
+                shown("tray")
             case "hidden":
-                hidden("systray")
+                hidden("tray")

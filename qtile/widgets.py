@@ -116,7 +116,6 @@ def init_widgets_list():
              text_open = "",
              close_button_location = "right",
              name = "mpris",
-             start_opened = False,
         ),
         widget.Spacer(),
 
@@ -179,13 +178,14 @@ def init_widgets_list():
                  text_closed = "",
                  text_open = "",
                  close_button_location = "right",
+                 name = "tray",
                  **decoration_group
         ),
         widget.TextBox(
                  padding = 10,
                  foreground = colors[2],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {"Button1": lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray toggle"), "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')},
+                 mouse_callbacks = {"Button1": lazy.spawn("python .config/qtile/scripts/widgetboxes.py tray toggle"), "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')},
                  **decoration_group
                  ),
         ]
