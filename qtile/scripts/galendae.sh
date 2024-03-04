@@ -12,7 +12,7 @@ check()
     fi
 }
 
-if check systray
+if check tray
 then
     galendae
 else
