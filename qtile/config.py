@@ -12,12 +12,15 @@ from keybindings import mouse, keys
 from groups import groups, dgroups_app_rules
 from layouts import layouts, floating_layout
 from widgets import screens, widget_defaults
+from functions import change_mpris, change_tray
 
 ### AUTOSTART ###
 @hook.subscribe.startup_once
 def start_once():
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.run([script])
+    change_mpris("reset")
+    change_tray("reset")
 
 ### OTHER ###
 dgroups_key_binder = None

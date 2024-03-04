@@ -20,6 +20,7 @@ from qtile_extras.widget.decorations import RectDecoration
 #make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
 from widgetbox import WidgetBox
 
+from functions import change_tray
 from colors import colors
 
 # Some settings that are used on almost every widget
@@ -106,7 +107,6 @@ def init_widgets_list():
                          objname = "org.mpris.MediaPlayer2.spotify",
                          width = 250,
                          markup = False,
-                         mouse_callbacks = {"Button3": lazy.spawn("python .config/qtile/scripts/widgetboxes.py mpris shown")},
                          decorations = [
                               RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
                          ]
@@ -185,7 +185,7 @@ def init_widgets_list():
                  padding = 10,
                  foreground = colors[2],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {"Button1": lazy.spawn("python .config/qtile/scripts/widgetboxes.py tray toggle"), "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')},
+                 mouse_callbacks = {"Button1": change_tray("toggle"), "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')},
                  **decoration_group
                  ),
         ]

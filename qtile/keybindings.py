@@ -8,7 +8,7 @@ import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from functions import minimize_all
+from functions import minimize_all, change_mpris, change_tray
 from groups import groups, group_names
 from colors import colors, myTerm
 
@@ -30,11 +30,11 @@ keys = [
     Key([mod], "r", lazy.spawncmd(prompt="Run"), desc="Spawn a command using a prompt widget"),
     Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key([mod, "shift"], "r", lazy.reload_config(),
-                             lazy.spawn("python .config/qtile/scripts/widgetboxes.py mpris restore"),
-                             lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray hidden"), desc="Reload the config"),
+                             change_mpris("restore"),
+                             change_tray("reset"), desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               lazy.spawn("sleep 0.5 && python .config/qtile/scripts/widgetboxes.py mpris restore", shell=True),
-                               lazy.spawn("python .config/qtile/scripts/widgetboxes.py systray hidden"), desc="Restart qtile"),
+                               change_mpris("restore"),
+                               change_tray("reset"), desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
@@ -75,9 +75,9 @@ keys = [
 
     # Spotify with three different actions (key chord SUPER+s followed by "key")
     KeyChord([mod], "s", [
-        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris show"), desc="Spotify - auto play"),
-        Key([], "q", lazy.spawn("kill spotify"), lazy.spawn(".config/qtile/scripts/widgetboxes.sh mpris hide"), desc="Kill Spotify"),
-        Key([], "d", lazy.spawn("com.spotify.Client && .config/qtile/scripts/widgetboxes.sh mpris show", shell=True), desc="Spotify"),
+        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), change_mpris("open"), desc="Spotify - auto play"),
+        Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
+        Key([], "d", change_mpris("open"), desc="Spotify"),
     ]),
 
     # Media
@@ -85,7 +85,7 @@ keys = [
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
-    Key([mod], "m", lazy.spawn("python .config/qtile/scripts/widgetboxes.py mpris toggle"), desc="Toggle mpris"), 
+    Key([mod], "m", change_mpris("toggle"), desc="Toggle mpris"), 
 
     # Volume
     Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Raise volume key"),
