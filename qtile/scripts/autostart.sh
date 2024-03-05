@@ -10,6 +10,9 @@ function run {
 # wallpaper
 ~/.config/qtile/scripts/screens.sh wallpaper &
 
+# rounded corners
+xcorners -b -r 10
+
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45 &
 
