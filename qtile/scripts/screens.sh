@@ -16,7 +16,7 @@ set_state()
 
 wallpaper()
 {
-    feh --bg-fill ".config/qtile/wallpapers/communism2.png"
+    feh --bg-fill ".config/qtile/wallpapers/motivation.png"
 }
 
 one()
