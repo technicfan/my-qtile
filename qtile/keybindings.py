@@ -8,7 +8,7 @@ import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from functions import minimize_all, change_mpris, change_tray
+from functions import minimize_all, change_mpris, change_tray, volume_up_down
 from groups import groups, group_names
 from colors import colors, myTerm
 
@@ -88,8 +88,8 @@ keys = [
     Key([mod], "m", change_mpris("toggle"), desc="Toggle mpris"), 
 
     # Volume
-    Key([], "XF86AudioRaiseVolume", lazy.widget["volume"].increase_vol(), desc="Raise volume key"),
-    Key([], "XF86AudioLowerVolume", lazy.widget["volume"].decrease_vol(), desc="Lower volume key"),
+    Key([], "XF86AudioRaiseVolume", volume_up_down("up"), desc="Increase volume key"),
+    Key([], "XF86AudioLowerVolume", volume_up_down("down"), desc="Decrease volume key"),
     Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
 
     # Activate Linux

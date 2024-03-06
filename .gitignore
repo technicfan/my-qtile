@@ -2,3 +2,4 @@ __pycache__
 widgetbox.py
 states.conf
 states.ini
+qtile/volume.py

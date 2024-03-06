@@ -5,6 +5,7 @@
 #|____/|_____|____/ |_| |_| \_\\___/ |_|    \____/_/   \_\_|  |___| |_/_/   \_\_____|___|____/|_|  |_| (_)
 
 import os
+import alsaaudio
 from configparser import ConfigParser
 from libqtile.lazy import lazy
 
@@ -79,3 +80,20 @@ def change_tray(qtile, action):
                 hidden("tray")
         case "reset":
             hidden("tray")
+
+# volume function
+@lazy.function
+def volume_up_down(qtile, way):
+        m = alsaaudio.Mixer()
+        step = qtile.widgets_map["volume"].step
+        vol = m.getvolume()[0]
+        diff = vol % step
+        if way == "up":
+            new_vol = vol + step - diff
+        if way == "down":
+            if diff != 0:
+                new_vol = vol - diff
+            else:
+                new_vol = vol - step
+        m.setmute(0)
+        m.setvolume(new_vol)

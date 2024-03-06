@@ -16,11 +16,11 @@ from libqtile.lazy import lazy
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 
-# newest version of it
+# newest version from git
 #make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
 from widgetbox import WidgetBox
 
-from functions import change_tray
+from functions import change_tray, volume_up_down
 from colors import colors
 
 # Some settings that are used on almost every widget
@@ -155,9 +155,7 @@ def init_widgets_list():
                  foreground = colors[2],
                  fmt = "🕫  {}",
                  step = 5,
-                 volume_up_command = ".config/qtile/scripts/volume.sh up 5",
-                 volume_down_command = ".config/qtile/scripts/volume.sh down 5",
-                 #get_volume_command = ".config/qtile/scripts/volume.sh get 5",
+                 mouse_callbacks = {"Button4": volume_up_down("up"), "Button5": volume_up_down("down")},
                  **decoration_group
                  ),
         widget.Clock(
