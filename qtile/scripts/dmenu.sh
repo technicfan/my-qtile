@@ -43,6 +43,10 @@ main()
         load
         ./${1}.sh dmenu
         ;;
+    "wallpaper")
+        load
+        ./dmenu-${1}.sh 
+        ;;   
     "dmenu")
         load
         if [[ -n $2 ]]

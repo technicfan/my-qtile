@@ -47,6 +47,7 @@ keys = [
     Key([mod], "d", lazy.spawn("dmenu_extended_run"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh wine_vm"), desc="MS Windows (vms/apps)"),
+    Key([mod], "n", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
     # cool folder icon color changer
     Key([mod], "minus", lazy.spawn(".config/qtile/scripts/dmenu.sh icon-color"), desc="Change folder colors of gruvbox icon theme"),
     # clipcat
