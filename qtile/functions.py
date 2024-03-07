@@ -5,6 +5,7 @@
 #|____/|_____|____/ |_| |_| \_\\___/ |_|    \____/_/   \_\_|  |___| |_/_/   \_\_____|___|____/|_|  |_| (_)
 
 import os
+# make shure to install 'python-pyalsaaudio'
 import alsaaudio
 from configparser import ConfigParser
 from libqtile.lazy import lazy
