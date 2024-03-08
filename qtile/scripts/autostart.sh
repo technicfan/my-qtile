@@ -28,7 +28,7 @@ run xfce4-power-manager &
 blueman-applet &
 picom -b --config .config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/usr/lib/xfce4/notifyd/xfce4-notifyd &
+dunst &
 clipcatd -r &
 /usr/lib/kdeconnectd &
 aw-qt --no-gui &

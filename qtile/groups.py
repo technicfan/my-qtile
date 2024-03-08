@@ -32,7 +32,8 @@ for i in range(len(group_names)):
 groups.append(
     ScratchPad("scratchpad", [ DropDown("mixer", "pavucontrol", width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
                                DropDown("term", myTerm, width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
-                               DropDown("monitor", "gnome-system-monitor", width=0.55, height=0.6, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
+                               DropDown("proc-monitor", "gnome-system-monitor", width=0.55, height=0.6, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
+                               DropDown("bluetooth", "blueman-manager", width=0.5, height=0.5, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
                              ]),
 )
 
