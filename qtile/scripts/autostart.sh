@@ -14,7 +14,7 @@ function run {
 xcorners -b -r 10 &
 
 # mouse sensitivity
-~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45 &
+~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
 
 # numblock rgb
 #~/.config/qtile/scripts/numlock.sh match &
@@ -40,4 +40,4 @@ polychromatic-cli -e keyboard+numblock &
 polychromatic-cli -e mouse &
 polychromatic-cli -e mousepad &
 polychromatic-cli -o brightness -p 50 &
-polychromatic-cli --dpi 2600 &
+polychromatic-cli --dpi 2350 &
