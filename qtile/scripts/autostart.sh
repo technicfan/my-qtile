@@ -40,4 +40,4 @@ polychromatic-cli -e keyboard+numblock &
 polychromatic-cli -e mouse &
 polychromatic-cli -e mousepad &
 polychromatic-cli -o brightness -p 50 &
-polychromatic-cli --dpi 2350 &
+polychromatic-cli --dpi 2300 &
