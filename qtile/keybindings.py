@@ -33,7 +33,7 @@ keys = [
                              change_mpris("restore"),
                              change_tray("reset"), desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               change_mpris("restore"),
+                               change_mpris("reset"),
                                change_tray("reset"), desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
