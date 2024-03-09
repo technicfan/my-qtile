@@ -5,9 +5,11 @@
 #|____/|_____|____/ |_| |_| \_\\___/ |_|    \____/_/   \_\_|  |___| |_/_/   \_\_____|___|____/|_|  |_| (_)
 
 import os
+import sys
 import subprocess
 from libqtile import hook
 
+sys.path.insert(0, os.path.expanduser("~/.config/qtile/modules"))
 from keybindings import mouse, keys
 from groups import groups, dgroups_app_rules
 from layouts import layouts, floating_layout
