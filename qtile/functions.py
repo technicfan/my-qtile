@@ -99,5 +99,7 @@ def volume_up_down(qtile, way):
                 new_vol = vol - step
         m.setmute(0)
         m.setvolume(new_vol)
-        
+        # make widget update instantly
+        qtile.widgets_map["volume"].update()
+        # volume osd using dunst
         subprocess.call(f"dunstify -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)
