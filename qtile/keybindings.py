@@ -79,7 +79,7 @@ keys = [
     KeyChord([mod], "s", [
         Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), change_mpris("open"), desc="Spotify - auto play"),
         Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
-        Key([], "d", change_mpris("open"), desc="Spotify"),
+        Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
     ]),
 
     # Media

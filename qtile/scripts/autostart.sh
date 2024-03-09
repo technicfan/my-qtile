@@ -35,6 +35,7 @@ aw-qt --no-gui &
 nextcloud &
 caffeine &
 
+nvidia-settings --assign FXAA=1 &
 nvidia-settings -l &
 input-remapper-control --command autoload &
 polychromatic-cli -e keyboard+numblock &
