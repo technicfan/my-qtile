@@ -6,7 +6,7 @@ m=$(awk '{print int(($1%3600)/60)}' /proc/uptime)
 
 if [[ $d = 0 && $h = 0 && $m < 1 ]]
 then
-    printf "unter 1min"
+    printf "under 1min"
 elif [[ $d = 0 && $h = 0 ]]
 then
     printf $m"min"
