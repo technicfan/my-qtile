@@ -95,7 +95,7 @@ def init_widgets_list():
 
         # Middle of the bar
 
-        widget.Spacer(),
+        widget.Spacer(**decoration_group),
         WidgetBox ( 
              widgets = [
                     widget.Mpris2(
@@ -108,6 +108,8 @@ def init_widgets_list():
                          width = 250,
                          markup = False,
                          decorations = [
+                              RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
+                              RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2),
                               RectDecoration(colour=colors[1], radius=10, filled=True, group=True)
                          ]
                     ),
@@ -116,8 +118,9 @@ def init_widgets_list():
              text_open = "",
              close_button_location = "right",
              name = "mpris",
+             **decoration_group
         ),
-        widget.Spacer(),
+        widget.Spacer(**decoration_group),
 
         # Middle of the bar
 
@@ -131,7 +134,7 @@ def init_widgets_list():
         widget.CPU(
                  padding = 10,
                  format = "\uf2db   {load_percent}%",
-                 foreground = colors[1],
+                 foreground = colors[2],
                  **decoration_group
                  ),
         widget.Memory(
@@ -152,7 +155,7 @@ def init_widgets_list():
                  ),
         widget.Volume(
                  padding = 10,
-                 foreground = colors[2],
+                 foreground = colors[1],
                  fmt = "🕫  {}",
                  step = 5,
                  mouse_callbacks = {"Button4": volume_up_down("up"), "Button5": volume_up_down("down")},
