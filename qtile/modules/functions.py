@@ -19,27 +19,28 @@ def minimize_all(qtile):
             win.toggle_minimize()
 
 
-# stupid widgetboxes script now directly in config(still with file)
+# stupid widgetboxes script now directly in config (still with file)
 
-config_file = os.path.expanduser("~/.config/qtile/states/states.ini")
+def file():
+    return os.path.expanduser("~/.config/qtile/states/states.ini")
 
 def shown(widget):
     config = ConfigParser()
-    config.read(config_file)
+    config.read(file())
     config["widgetboxes"][widget] = "1"
     with open(config_file, 'w') as conf:
         config.write(conf)
 
 def hidden(widget):
     config = ConfigParser()
-    config.read(config_file)
+    config.read(file())
     config["widgetboxes"][widget] = "0"
     with open(config_file, 'w') as conf:
         config.write(conf)
 
 def check(widget):
     config = ConfigParser()
-    config.read(config_file)
+    config.read(file())
     if config["widgetboxes"][widget] == "1":
         return True
 
