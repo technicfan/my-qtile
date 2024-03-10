@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# technicfan
-#dmenu="dmenu -i -l 20 -nb #133912 -nf #87a757 -sb #87a757 -sf #133912 -fn 'JetBrains:bold:pixelsize=14'"
-
 load()
 {
     cd ~/.config/qtile/scripts
