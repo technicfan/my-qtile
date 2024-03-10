@@ -2,20 +2,11 @@
 
 main()
 {
-    local DMENU_POS="-l 20 -z 928 -p"
-
-    local selected="PID CMD"
-
-    while [[ $selected = "PID CMD" ]]
-    do
-        local selected="$(ps -u $USER -f | $DMENU $DMENU_POS "Kill process:" | awk '{print $2" "$8}')"
-    done
-
-    echo $(echo $selected | awk -F " " '{ print $1 }')
+    local selected="$(ps -u $USER -f | grep -v PID | awk '{print $2" - "$5" - "$8}' | $DMENU $DMENU_POS "Kill process:" | awk '{print $1" "$5}')"
 
     if [[ -n $selected ]]
     then
-        if [[ $(echo -e "No\nYes" | $DMENU $DMENU_POS  "Kill $selected?") == "Yes" ]]
+        if [[ $(echo -e "No\nYes" | $DMENU $DMENU_POS  "Kill $(echo $selected | awk '{print $2}')?") == "Yes" ]]
         then
             kill "$(echo $selected | awk -F " " '{ print $1 }')"
             exit 0
