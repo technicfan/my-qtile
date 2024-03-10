@@ -13,7 +13,7 @@ main()
         if [[ $(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "Set \"$choice\" as default?") = "Yes" ]]
         then
             sed -i "s/wallpapers\/.*/wallpapers\/$choice\"/g" ~/.config/qtile/scripts/screens.sh
-            notify-send "\"$choice\" set as default"
+            notify-send "\"$choice\" is your new default"
         else
             exit 1
         fi
