@@ -38,7 +38,7 @@ keys = [
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
-    # dmenu - make sure to apply x,y,z patch and install 'dmenu-extended-git'
+    # dmenu - make sure to apply x,y,z + height + border patch and install 'dmenu-extended-git'
     # Dmenu scripts stolen from evil DT
     Key([mod], "o", lazy.spawn(".config/qtile/scripts/dmenu.sh output-switcher"), desc="Change pipewire output"),
     Key([mod], "i", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),

@@ -12,14 +12,14 @@ main()
         "Suspend"
     )
 
-    local choice=$(printf '%s\n' "${options[@]}" | $DMENU $DMENU_WIDTH 'Power menu:')
+    local choice=$(printf '%s\n' "${options[@]}" | $DMENU $DMENU_POS 'Power menu:')
 
     case $choice in
     "Lock")
         $locker
         ;;
     "Logout")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_POS "${choice}?")" == "Yes" ]]
         then
             pkill -KILL -u $USER
         else
@@ -27,7 +27,7 @@ main()
         fi
         ;;
     "Reboot")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_POS "${choice}?")" == "Yes" ]]
         then
             systemctl reboot
         else
@@ -35,7 +35,7 @@ main()
         fi
         ;;
     "Shutdown")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_POS "${choice}?")" == "Yes" ]]
         then
             systemctl poweroff
         else
@@ -43,7 +43,7 @@ main()
         fi
         ;;
     "Suspend")
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_WIDTH "${choice}?")" == "Yes" ]]
+        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_POS "${choice}?")" == "Yes" ]]
         then
             systemctl suspend
         else

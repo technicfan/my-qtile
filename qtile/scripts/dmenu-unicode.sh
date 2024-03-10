@@ -2,9 +2,9 @@
 
 main()
 {
-    local DMENU_WIDTH="-z 400 -p"
+    #local DMENU_POS="-z 400 -p"
 
-    local chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $DMENU $DMENU_WIDTH 'Emoji Picker:' | sed "s/ .*//")
+    local chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $DMENU $DMENU_POS 'Emoji Picker:' | sed "s/ .*//")
 
     [ -z "$chosen" ] && exit
 

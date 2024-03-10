@@ -6,8 +6,8 @@
 load()
 {
     cd ~/.config/qtile/scripts
-    export DMENU="dmenu -i -l 20 -nb #282828 -nf #dfbf8e -sb #dfbf8e -sf #282828 -fn 'JetBrains:bold:pixelsize=14'"
-    export DMENU_WIDTH=" -z 300 -p"
+    export DMENU="dmenu -i -nb #282828 -nf #d3869b -sb #dfbf8e -sf #282828 -fn 'JetBrains:bold:pixelsize=12' -x 8 -y 8 -bw 2"
+    export DMENU_POS=" -z 1900 -h 24 -p"
 }
 
 main()
@@ -41,7 +41,7 @@ main()
         ;;
     "icon-color")
         load
-        ./${1}.sh dmenu
+        ./dmenu-${1}.sh dmenu
         ;;
     "wallpaper")
         load
@@ -51,7 +51,7 @@ main()
         load
         if [[ -n $2 ]]
         then
-            $DMENU$DMENU_WIDTH "$2"
+            $DMENU$DMENU_POS "$2"
         else
             exit 1
         fi

@@ -2,7 +2,7 @@
 
 main()
 {
-    local DMENU_WIDTH=" -z 400 -p"
+    #local DMENU_POS=" -z 400 -p"
 
     get_default_sink() {
         pactl --format=json info | jq -r .default_sink_name
@@ -13,7 +13,7 @@ main()
             | current=$(get_default_sink) jq -r '.[] | if .name == env.current then .state="* " else .state="" end | .state + .name'
     }
 
-    local choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $DMENU $DMENU_WIDTH 'Sink:') || exit 1
+    local choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $DMENU $DMENU_POS 'Sink:') || exit 1
 
     if [ "$choice" ]
     then
