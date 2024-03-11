@@ -8,7 +8,7 @@ import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from functions import minimize_all, change_mpris, change_tray, volume_up_down
+from functions import minimize_all, change_mpris, volume_up_down
 from groups import groups, group_names
 from colors import colors, myTerm
 
@@ -30,11 +30,11 @@ keys = [
     Key([mod], "r", lazy.spawncmd(prompt="Run"), desc="Spawn a command using a prompt widget"),
     Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key([mod, "shift"], "r", lazy.reload_config(),
-                             change_mpris("restore"),
-                             change_tray("reset"), desc="Reload the config"),
+                             lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
+                             desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               lazy.spawn("sleep .5 && python ~/.config/qtile/scripts/widgetboxes.py mpris restore", shell=True),
-                               change_tray("reset"), desc="Restart qtile"),
+                               lazy.spawn("sleep .5 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
+                               desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
@@ -78,8 +78,8 @@ keys = [
     # Spotify with three different actions (key chord SUPER+s followed by "key")
     KeyChord([mod], "s", [
         Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), change_mpris("open"), desc="Spotify - auto play"),
-        Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
         Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
+        Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
     ]),
 
     # Media

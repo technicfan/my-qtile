@@ -19,73 +19,33 @@ def minimize_all(qtile):
             win.toggle_minimize()
 
 
-# stupid widgetboxes script now directly in config (still with file)
-
-def file():
-    return os.path.expanduser("~/.config/qtile/states/states.ini")
-
-def shown(widget):
-    config = ConfigParser()
-    config_file = file()
-    config.read(config_file)
-    config["widgetboxes"][widget] = "1"
-    with open(config_file, 'w') as conf:
-        config.write(conf)
-
-def hidden(widget):
-    config = ConfigParser()
-    config_file = file()
-    config.read(config_file)
-    config["widgetboxes"][widget] = "0"
-    with open(config_file, 'w') as conf:
-        config.write(conf)
-
-def check(widget):
-    config = ConfigParser()
-    config_file = file()
-    config.read(config_file)
-    if config["widgetboxes"][widget] == "1":
-        return True
-
+# widgetboxes functions
 @lazy.function
 def change_mpris(qtile, action):
+    config = ConfigParser()
+    config_file = os.path.expanduser("~/.config/qtile/states/states.ini")
+    config.read(config_file)
     match action:
         case "toggle":
-            if not qtile.widgets_map["tray"].box_is_open:
-                qtile.widgets_map["mpris"].toggle()      
-
+            qtile.widgets_map["mpris"].toggle()
             if qtile.widgets_map["mpris"].box_is_open:
-                shown("mpris")
+                config["widgetboxes"]["mpris"] = "1"
             else:
-                hidden("mpris")
+                config["widgetboxes"]["mpris"] = "0"
         case "open":
-            if not qtile.widgets_map["tray"].box_is_open:
-                qtile.widgets_map["mpris"].open()
-            shown("mpris")
+            qtile.widgets_map["mpris"].open()
+            config["widgetboxes"]["mpris"] = "1"
         case "close":
-            if not qtile.widgets_map["tray"].box_is_open:
-                qtile.widgets_map["mpris"].close()
-            hidden("mpris")
-        case "restore":
-            if check("mpris"):
-                qtile.widgets_map["mpris"].open()
-        case "reset":
-            hidden("mpris")
+            qtile.widgets_map["mpris"].close()
+            config["widgetboxes"]["mpris"] = "0"
+    with open(config_file, 'w') as conf:
+         config.write(conf)
 
 @lazy.function
-def change_tray(qtile, action):
-    match action:
-        case "toggle":
-            if check("mpris"):
-                qtile.widgets_map["mpris"].toggle()
-            qtile.widgets_map["tray"].toggle()
+def toggle_tray(qtile):
+    qtile.widgets_map["tray"].toggle()
+    qtile.widgets_map["datetime"].toggle()
 
-            if qtile.widgets_map["tray"].box_is_open:
-                shown("tray")
-            else:
-                hidden("tray")
-        case "reset":
-            hidden("tray")
 
 # volume function
 @lazy.function

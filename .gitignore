@@ -1,5 +1,5 @@
 __pycache__
-widgetbox.py
+qtile/modules/widgetbox.py
 states.conf
 states.ini
 volume.py

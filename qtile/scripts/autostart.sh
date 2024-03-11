@@ -16,9 +16,8 @@ xcorners -b -r 10 &
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
 
-# widgetboxes
-python ~/.config/qtile/scripts/widgetboxes.py mpris reset
-python ~/.config/qtile/scripts/widgetboxes.py tray reset
+# mpris widgetbox
+~/.config/qtile/scripts/widgetbox.py reset
 
 #change your keyboard if you need it
 setxkbmap -layout de
