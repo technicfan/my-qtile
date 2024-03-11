@@ -45,7 +45,7 @@ keys = [
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
     # own
     Key([mod], "d", lazy.spawn("dmenu_extended_run"), desc="Run launcher"),
-    Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh monitor"), desc="Monitor configuration"),
+    Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh wine_vm"), desc="MS Windows (vms/apps)"),
     Key([mod], "n", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
     # cool folder icon color changer

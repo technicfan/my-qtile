@@ -28,7 +28,7 @@ main()
         ./dmenu-${1}.sh
         ;;
     # own
-    "monitor")
+    "screens")
         load
         ./dmenu-${1}.sh
         ;;
