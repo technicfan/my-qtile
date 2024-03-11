@@ -26,21 +26,24 @@ def file():
 
 def shown(widget):
     config = ConfigParser()
-    config.read(file())
+    config_file = file()
+    config.read(config_file)
     config["widgetboxes"][widget] = "1"
     with open(config_file, 'w') as conf:
         config.write(conf)
 
 def hidden(widget):
     config = ConfigParser()
-    config.read(file())
+    config_file = file()
+    config.read(config_file)
     config["widgetboxes"][widget] = "0"
     with open(config_file, 'w') as conf:
         config.write(conf)
 
 def check(widget):
     config = ConfigParser()
-    config.read(file())
+    config_file = file()
+    config.read(config_file)
     if config["widgetboxes"][widget] == "1":
         return True
 
