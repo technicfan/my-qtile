@@ -22,12 +22,10 @@ main()
         load
         ./dmenu-power-menu.sh
         ;;
-    # stolen from Luke Smith
     "unicode")
         load
         ./dmenu-${1}.sh
         ;;
-    # own
     "screens")
         load
         ./dmenu-${1}.sh

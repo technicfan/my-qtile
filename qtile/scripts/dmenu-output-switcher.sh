@@ -2,8 +2,6 @@
 
 main()
 {
-    #local DMENU_POS=" -z 400 -p"
-
     get_default_sink() {
         pactl --format=json info | jq -r .default_sink_name
     }
