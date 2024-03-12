@@ -8,13 +8,8 @@ revert()
 
 main()
 {
-    for i in $(seq 1 $(ls -1 ~/.config/qtile/wallpapers | wc -l))
-    do
-        local wallpapers[$i]=$(ls -m ~/.config/qtile/wallpapers/ | awk -F ", " '{ print $(shell_var='"$i"') }' )
-    done
     local default=$(cat ~/.config/qtile/scripts/screens.sh | awk -F "/" '/wallpapers/ {print $5}' | awk -F "\"" '{print $1}')
-
-    local choice=$(printf '%s\n' "Revert to default" "${wallpapers[@]}" | $DMENU $DMENU_POS 'Wallpapers:')
+    local choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed 's/\/home\/technicfan\/.config\/qtile\/wallpapers\///g')" | $DMENU $DMENU_POS 'Wallpapers:')
 
     if [[ $choice = "Revert to default" ]]
     then
@@ -29,7 +24,8 @@ main()
             local choice2=$(echo -e "No\nYes\nRevert to default" | $DMENU $DMENU_POS "Set \"$choice\" as default?")
             if [[ -n $choice2 && $choice2 = "Yes" ]]
             then
-                sed -i "s/wallpapers\/.*/wallpapers\/$choice\"/g" ~/.config/qtile/scripts/screens.sh
+                local sed_choice=$(echo $choice | sed 's/\//\\\//g')
+                sed -i "s/wallpapers\/.*/wallpapers\/$(echo $sed_choice)\"/g" ~/.config/qtile/scripts/screens.sh
                 notify-send "\"$choice\" is your new default"
             elif [[ $choice2 = "Revert to default" ]]
             then
