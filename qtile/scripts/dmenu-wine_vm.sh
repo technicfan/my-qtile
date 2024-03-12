@@ -9,22 +9,8 @@ main()
 
     local choice=$(printf '%s\n' "-> Wine" "${options[@]}" | $DMENU $DMENU_POS 'Wine/VM:')
 
-    if [[ -n $choice && "${options[*]}" = *"$choice"* ]]
-    then
-        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_POS "Start VM \"$choice\"?")" == "Yes" ]]
-        then
-            local file=$(ls -1 "$HOME/VirtualBox VMs/$choice/" | grep .vbox | grep -n "" | grep 1: | awk -F ":" '{ print $2 }')
-            local vm=$(cat "$HOME/VirtualBox VMs/$choice/$file" | grep "Machine uuid" | awk -F "=" '{ print $3}' | awk -F "\"" '{ print $2 }')
-            if [[ -n $vm ]]
-            then
-                virtualboxvm --startvm "$vm"
-            else
-                notify-send "VM \"$choice\" not found"
-            fi
-        else
-            exit 0
-        fi
-    elif [[ $choice = "-> Wine" ]]
+
+    if [[ $choice = "-> Wine" ]]
     then
         local options=(
             "Delphi 7"
@@ -39,6 +25,22 @@ main()
         *)
             exit 0
         esac
+    elif [[ -n $choice ]]
+    then
+        if [[ "$(echo -e "No\nYes" | $DMENU $DMENU_POS "Start VM \"$choice\"?")" == "Yes" ]]
+        then
+            local file=$(ls -1 "$HOME/VirtualBox VMs/$choice/" | grep .vbox | grep -n "" | grep 1: | awk -F ":" '{ print $2 }')
+            local vm=$(cat "$HOME/VirtualBox VMs/$choice/$file" | grep "Machine uuid" | awk -F "=" '{ print $3}' | awk -F "\"" '{ print $2 }')
+            if [[ -n $vm ]]
+            then
+                notify-send "starting VM \"$choice\""
+                virtualboxvm --startvm "$vm"
+            else
+                notify-send "VM \"$choice\" not found"
+            fi
+        else
+            exit 0
+        fi
     fi
 }
 
