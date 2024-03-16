@@ -1,12 +1,5 @@
 #!/bin/bash
 
-function run {
-  if ! pgrep -x $(basename $1 | head -c 15) 1>/dev/null;
-  then
-    $@&
-  fi
-}
-
 # wallpaper
 ~/.config/qtile/scripts/screens.sh wallpaper &
 
@@ -23,8 +16,8 @@ xcorners -b -r 10 &
 setxkbmap -layout de
 
 #starting utility applications at boot time
-run nm-applet &
-run xfce4-power-manager &
+nm-applet &
+xfce4-power-manager &
 blueman-applet &
 picom -b --config .config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
