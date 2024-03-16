@@ -20,6 +20,14 @@ import calendar
 import datetime
 """
 
+# window name function
+def window_name(name):
+    if "- Oracle VM VirtualBox" in name:
+        return name.split("[",1)[0]
+    else:
+        return name
+
+
 # A function for hide/show all the windows in a group
 @lazy.function
 def minimize_all(qtile):

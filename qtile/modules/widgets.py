@@ -20,7 +20,7 @@ from qtile_extras.widget.decorations import RectDecoration
 #make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
 from widgetbox import WidgetBox
 
-from functions import toggle_tray, volume_up_down
+from functions import toggle_tray, volume_up_down, window_name
 from colors import colors
 
 # Some settings that are used on almost every widget
@@ -95,6 +95,7 @@ def init_widgets_list():
                  padding = 10,
                  max_chars = 85,
                  width = bar.CALCULATED,
+                 parse_text = window_name,
                  empty_group_string = distro.name() + " - Qtile",
                  **decoration_group 
                  ),
