@@ -10,6 +10,15 @@ import alsaaudio
 import subprocess
 from configparser import ConfigParser
 from libqtile.lazy import lazy
+"""
+from qtile_extras.popup.toolkit import (
+    PopupRelativeLayout,
+    PopupImage,
+    PopupText
+)
+import calendar
+import datetime
+"""
 
 # A function for hide/show all the windows in a group
 @lazy.function
@@ -65,3 +74,36 @@ def volume_up_down(qtile, way):
         m.setvolume(new_vol)
         # volume osd using dunst
         subprocess.call(f"notify-send -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)
+
+
+"""
+# popup calendar
+@lazy.function
+def show_calendar(qtile):
+
+    day = datetime.datetime.now().day
+    month = datetime.datetime.now().month
+    year = datetime.datetime.now().year
+    cal = calendar.TextCalendar(calendar.MONDAY).formatmonth(year,month,0,0)
+
+    controls = [
+        PopupText(
+            text=cal,
+            pos_x=0,
+            pos_y=0,
+            width=1,
+            height=1,
+        )
+    ]
+
+    layout = PopupRelativeLayout(
+        qtile,
+        width=150,
+        height=150,
+        controls=controls,
+        background="282828",
+        initial_focus=None,
+    )
+
+    layout.show(x=1575, y=44)
+"""
