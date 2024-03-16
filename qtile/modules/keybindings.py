@@ -47,13 +47,13 @@ keys = [
     Key([mod], "d", lazy.spawn("dmenu_extended_run"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh wine_vm"), desc="MS Windows (vms/apps)"),
-    Key([mod], "n", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
+    Key([mod], "comma", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
     # cool folder icon color changer
     Key([mod], "minus", lazy.spawn(".config/qtile/scripts/dmenu.sh icon-color"), desc="Change folder colors of gruvbox icon theme"),
     # clipcat
     Key([mod], "c", lazy.spawn("clipcat-menu"), desc="dmenu clipboard manager"),
     # stolen from Luke Smith
-    Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
+    Key([mod], "numbersign", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
@@ -118,7 +118,7 @@ keys = [
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 
     # Switch focus of monitors
-    Key([mod], "comma", lazy.next_screen(), desc="Move focus to next monitor"),
+    Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
 
     # Switch groups
     Key([mod], "Tab", lazy.screen.next_group(), desc="Move to next group"),
