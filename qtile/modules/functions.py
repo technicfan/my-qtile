@@ -22,13 +22,12 @@ import datetime
 
 # window name function
 def window_name(name):
-    match name:
-        case "- Oracle VM VirtualBox":
-            return name.split("[",1)[0]
-        case "GLava":
-            return ""
-        case _:
-            return name
+    if "- Oracle VM VirtualBox" in name:
+        return name.split("[",1)[0]
+    elif name == "GLava":
+        return ""
+    else:
+        return name
 
 
 # A function for hide/show all the windows in a group
