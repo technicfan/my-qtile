@@ -31,16 +31,16 @@ widget_defaults = dict(
 
 decoration_group = {
     "decorations": [
-        RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
-        RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2)
+        RectDecoration(colour=colors[1], radius=0, filled=True, group=True),
+        RectDecoration(colour=colors[0], radius=0, filled=True, group=True, padding=2)
     ]
 }
 
 decoration_group2 = {
     "decorations": [
-        RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
-        RectDecoration(colour=colors[0], radius=8, filled=True, group=True, padding=2),
-        RectDecoration(colour=colors[1], radius=10, filled=True, group=True),
+        RectDecoration(colour=colors[1], radius=0, filled=True, group=True),
+        RectDecoration(colour=colors[0], radius=0, filled=True, group=True, padding=2),
+        RectDecoration(colour=colors[1], radius=0, filled=True, group=True),
     ]
 }
 
