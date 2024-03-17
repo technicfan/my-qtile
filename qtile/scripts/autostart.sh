@@ -19,7 +19,7 @@ setxkbmap -layout de
 nm-applet &
 xfce4-power-manager &
 blueman-applet &
-picom -b --config .config/picom/picom.conf &
+picom -b --config .config/qtile/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 clipcatd -r &
