@@ -3,7 +3,7 @@
 revert()
 {
     ~/.config/qtile/scripts/screens.sh wallpaper
-    notify-send "reverted to \"$1\""
+    notify-send "reverted to \"$(echo $1 | awk -F "/" '{print $2}')\""
 }
 
 main()
