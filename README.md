@@ -4,7 +4,7 @@ personal qtile config originally based on evil DT's config (https://gitlab.com/d
 
 place qtile folder in .config
 
-# Screenshots(outdated):
+# Screenshots(really outdated):
 normal:
 <img src="screenshots/screen-one-normal.png">
 with unhidden systray:
