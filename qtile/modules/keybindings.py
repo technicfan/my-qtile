@@ -60,6 +60,7 @@ keys = [
     Key([mod, "shift"], "t", lazy.group["scratchpad"].dropdown_toggle("term"), desc="Toggle terminal"),
     Key([mod, "shift"], "i", lazy.group["scratchpad"].dropdown_toggle("proc-monitor"), desc="Toggle process monitor"),
     Key([mod, "shift"], "p", lazy.group["scratchpad"].dropdown_toggle("bluetooth"), desc="Toggle bluetooth manager"),
+    Key([mod, "shift"], "u", lazy.group["scratchpad"].dropdown_toggle("calculator"), desc="Toggle calculator"),
 
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
