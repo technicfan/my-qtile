@@ -71,7 +71,7 @@ def init_widgets_list():
                  font = "Ubuntu",
                  padding = 7,
                  foreground = colors[0],
-                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile-and-picom-config")},
+                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile")},
                  **decoration_group2
                  ),
         widget.Prompt(
