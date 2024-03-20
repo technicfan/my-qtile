@@ -1,4 +1,4 @@
-# my-qtile-and-picom-config
+# my-qtile
 
 personal qtile config originally based on evil DT's config (https://gitlab.com/dwt1/dotfiles/-/tree/master/.config/qtile?ref_type=heads)
 
