@@ -13,12 +13,16 @@ main()
     if [[ $choice = "-> Wine" ]]
     then
         local options=(
+            "Remarkable Desktop"
             "Delphi 7"
         )
 
         local choice=$(printf '%s\n' "${options[@]}" | $DMENU $DMENU_POS 'Run:')
 
         case $choice in
+        "Remarkable Desktop")
+            wine "$HOME/.wine/drive_c/Program Files (x86)/reMarkable/reMarkable.exe"
+            ;;
         "Delphi 7")
             wine "$HOME/.wine/drive_c/Program Files (x86)/Borland/Delphi7/Bin/delphi32.exe"
             ;;
