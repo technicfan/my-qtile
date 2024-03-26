@@ -31,6 +31,13 @@ GruvboxMaterial = [
     "#453b2c"  # inactive border
     ]
 
+Gruvbox = [
+    "#282828", # bg
+    "#ebdbb2", # fg
+    "#d3869b", # fg2
+    "#453b2c"  # inactive border
+]
+
 colors = GruvboxMaterial
 
 myTerm = "alacritty"
