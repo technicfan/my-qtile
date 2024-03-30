@@ -4,7 +4,7 @@
 ~/.config/qtile/scripts/screens.sh wallpaper &
 
 # rounded corners
-xcorners -b -r $(cat ~/.config/qtile/picom/picom.conf | grep corner-radius | awk -F " = " '{print $2}') &
+#xcorners -b -r $(cat ~/.config/qtile/picom/picom.conf | grep corner-radius | awk -F " = " '{print $2}') &
 
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
