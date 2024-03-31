@@ -10,15 +10,7 @@ import alsaaudio
 import subprocess
 from configparser import ConfigParser
 from libqtile.lazy import lazy
-"""
-from qtile_extras.popup.toolkit import (
-    PopupRelativeLayout,
-    PopupImage,
-    PopupText
-)
-import calendar
-import datetime
-"""
+
 
 # window name function
 def window_name(name):
@@ -69,51 +61,18 @@ def toggle_tray(qtile):
 # volume function
 @lazy.function
 def volume_up_down(qtile, way):
-        m = alsaaudio.Mixer()
+        mixer = alsaaudio.Mixer()
         step = qtile.widgets_map["volume"].step
-        vol = m.getvolume()[0]
-        diff = vol % step
+        vol = mixer.getvolume()[0]
+        mod = vol % step
         if way == "up":
-            new_vol = vol + step - diff
+            new_vol = vol + step - mod
         if way == "down":
-            if diff != 0:
-                new_vol = vol - diff
+            if mod != 0:
+                new_vol = vol - mod
             else:
                 new_vol = vol - step
-        m.setmute(0)
-        m.setvolume(new_vol)
+        mixer.setmute(0)
+        mixer.setvolume(new_vol)
         # volume osd using dunst
         subprocess.call(f"notify-send -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)
-
-
-"""
-# popup calendar
-@lazy.function
-def show_calendar(qtile):
-
-    day = datetime.datetime.now().day
-    month = datetime.datetime.now().month
-    year = datetime.datetime.now().year
-    cal = calendar.TextCalendar(calendar.MONDAY).formatmonth(year,month,0,0)
-
-    controls = [
-        PopupText(
-            text=cal,
-            pos_x=0,
-            pos_y=0,
-            width=1,
-            height=1,
-        )
-    ]
-
-    layout = PopupRelativeLayout(
-        qtile,
-        width=150,
-        height=150,
-        controls=controls,
-        background="282828",
-        initial_focus=None,
-    )
-
-    layout.show(x=1575, y=44)
-"""
