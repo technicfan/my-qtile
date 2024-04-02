@@ -1,7 +1,7 @@
 #!/bin/sh
 
 d=$(awk '{print int($1/86400)}' /proc/uptime)
-h=$(awk '{print int($1/3600)}' /proc/uptime)
+h=$(awk '{print int(($1%86400)/3600)}' /proc/uptime)
 m=$(awk '{print int(($1%3600)/60)}' /proc/uptime)
 
 if [[ $d = 0 && $h = 0 && $m < 1 ]]

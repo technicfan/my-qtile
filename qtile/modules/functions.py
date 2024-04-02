@@ -30,6 +30,25 @@ def minimize_all(qtile):
             win.toggle_minimize()
 
 
+# get uptime
+def get_uptime():
+    with open("/proc/uptime", "r") as f:
+        uptime_seconds = int((f.readline().split(".")[0]))
+    if uptime_seconds < 60:
+        return "under 1min"
+    else:
+        uptime_splits = [
+            str(uptime_seconds // 86400) + "d",
+            str(uptime_seconds % 86400 // 3600) + "h",
+            str(uptime_seconds % 3600 // 60) + "min"
+        ]
+        uptime = ""
+        for i in uptime_splits:
+            if i[0] != "0":
+                uptime += i + " "
+        return uptime[:-1]
+
+
 # widgetboxes functions
 @lazy.function
 def change_mpris(qtile, action):

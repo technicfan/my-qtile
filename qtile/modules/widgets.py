@@ -39,7 +39,7 @@ from qtile_extras.widget.decorations import RectDecoration
 #make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
 from widgetbox import WidgetBox
 
-from functions import toggle_tray, volume_up_down, window_name
+from functions import toggle_tray, volume_up_down, window_name, get_uptime
 from colors import colors
 
 # Some settings that are used on almost every widget
@@ -168,10 +168,10 @@ def init_widgets_list():
                  fmt = "\uf1c0  {}",
                  **decoration_group
                  ),
-        widget.GenPollCommand(
+        widget.GenPollText(
                  padding = 10,
                  update_interval = 30,
-                 cmd = ".config/qtile/scripts/uptime.sh",
+                 func = get_uptime,
                  foreground = colors[2],
                  fmt = "\uf21e   {}",
                  **decoration_group
