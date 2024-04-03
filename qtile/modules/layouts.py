@@ -33,16 +33,14 @@ from colors import colors
 ### LAYOUTS ###
 layouts = [
     Spiral(
-        main_pane = "left",
         i3_style = True,
         new_client_position = "after_current",
         ratio = 0.5,
         ratio_increment = 0,
         border_width = 2,
-        margin = [4, 8, 8, 8],
+        margin = 8,
         border_focus = colors[1],
-        border_normal = colors[3],
-        order = []
+        border_normal = colors[3]
     ),
     layout.Max(),
 ]
