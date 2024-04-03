@@ -33,19 +33,19 @@ def minimize_all(qtile):
 # get uptime
 def get_uptime():
     with open("/proc/uptime", "r") as f:
-        uptime_seconds = int((f.readline().split(".")[0]))
+        uptime_seconds = int(f.readline().split(".")[0])
     if uptime_seconds < 60:
         return "under 1min"
     else:
         uptime_splits = [
-            str(uptime_seconds // 86400) + "d",
-            str(uptime_seconds % 86400 // 3600) + "h",
-            str(uptime_seconds % 3600 // 60) + "min"
+            str(uptime_seconds // 86400) + "d ",
+            str(uptime_seconds % 86400 // 3600) + "h ",
+            str(uptime_seconds % 3600 // 60) + "min "
         ]
         uptime = ""
         for i in uptime_splits:
             if i[0] != "0":
-                uptime += i + " "
+                uptime += i
         return uptime[:-1]
 
 
