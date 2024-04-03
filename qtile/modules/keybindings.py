@@ -54,7 +54,7 @@ keys = [
     Key([mod, "control"], "r", lazy.restart(),
                                lazy.spawn("sleep .5 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
                                desc="Restart qtile"),
-    Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom -b --config .config/qtile/picom/picom.conf"), desc="Restart picom"),
+    Key([mod, "control"], "p", lazy.spawn("kill xcompmgr"), lazy.spawn("xcompmgr"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
     # dmenu - make sure to apply x,y,z + height + border patch and install 'dmenu-extended-git'
