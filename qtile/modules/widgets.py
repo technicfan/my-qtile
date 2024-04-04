@@ -31,12 +31,9 @@ import subprocess
 from libqtile import widget, bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
-# Make sure 'qtile-extras' is installed or this config will not work.
-from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration
 
 # newest version from git
-#make shure to place either a copy of widgetbox.py or a symlink to a copy of it in root config dir
+#make shure to place either a copy of widgetbox.py or a symlink to a copy of it in modules dir
 from widgetbox import WidgetBox
 
 from functions import toggle_tray, volume_up_down, window_name, get_uptime
@@ -46,13 +43,8 @@ from colors import colors
 widget_defaults = dict(
     font="JetBrains Bold",
     fontsize = 12,
+    background = colors[0]
 )
-
-decoration_group = {
-    "decorations": [
-        BorderDecoration(colour=colors[1], border_width=[0,0,2,0], group=True)
-    ]
-}
 
 def init_widgets_list():
     widgets_list = [
@@ -61,8 +53,7 @@ def init_widgets_list():
                  background = colors[1],
                  cursor_color = colors[0],
                  padding = 5,
-                 cursorblink = False,
-                 **decoration_group
+                 cursorblink = False
         ),
         widget.GroupBox(
                  fontsize = 11,
@@ -81,14 +72,12 @@ def init_widgets_list():
                  other_current_screen_border = colors[1],
                  other_screen_border = colors[2],
                  hide_unused = True,
-                 toggle = False,
-                 **decoration_group
+                 toggle = False
                  ),
-        widget.Spacer(length=8, **decoration_group),
+        widget.Spacer(length=8),
         widget.CurrentLayoutIcon(
                  padding = 0,
-                 scale = 0.7,
-                 **decoration_group
+                 scale = 0.7
                  ),
         widget.WindowName(
                  foreground = colors[2],
@@ -96,13 +85,12 @@ def init_widgets_list():
                  max_chars = 85,
                  width = bar.CALCULATED,
                  parse_text = window_name,
-                 empty_group_string = distro.name() + " - Qtile",
-                 **decoration_group 
+                 empty_group_string = distro.name() + " - Qtile"
                  ),
 
         # Middle of the bar
 
-        widget.Spacer(**decoration_group),
+        widget.Spacer(),
         WidgetBox ( 
              widgets = [
                     widget.Mpris2(
@@ -114,17 +102,15 @@ def init_widgets_list():
                          foreground = colors[0],
                          objname = "org.mpris.MediaPlayer2.spotify",
                          width = 275,
-                         markup = False,
-                         **decoration_group
+                         markup = False
                     ),
              ],
              text_closed = "",
              text_open = "",
              close_button_location = "right",
-             name = "mpris",
-             **decoration_group
+             name = "mpris"
         ),
-        widget.Spacer(**decoration_group),
+        widget.Spacer(),
 
         # Middle of the bar
 
@@ -132,38 +118,33 @@ def init_widgets_list():
                  padding = 10,
                  text = subprocess.check_output("printf $(uname -r)", shell=True, text=True),
                  fmt = "\uf17c   {}",
-                 foreground = colors[2],
-                 **decoration_group
+                 foreground = colors[2]
                  ),
         widget.CPU(
                  padding = 10,
                  format = "\uf2db   {load_percent}%",
-                 foreground = colors[2],
-                 **decoration_group
+                 foreground = colors[2]
                  ),
         widget.Memory(
                  padding = 10,
                  foreground = colors[2],
                  format = "{MemUsed: .2f}{mm}",
                  measure_mem = "G",
-                 fmt = "\uf1c0  {}",
-                 **decoration_group
+                 fmt = "\uf1c0  {}"
                  ),
         widget.GenPollText(
                  padding = 10,
                  update_interval = 30,
                  func = get_uptime,
                  foreground = colors[2],
-                 fmt = "\uf21e   {}",
-                 **decoration_group
+                 fmt = "\uf21e   {}"
                  ),
         widget.Volume(
                  padding = 10,
                  foreground = colors[2],
                  fmt = "🕫  {}",
                  step = 5,
-                 mouse_callbacks = {"Button4": volume_up_down("up"), "Button5": volume_up_down("down")},
-                 **decoration_group
+                 mouse_callbacks = {"Button4": volume_up_down("up"), "Button5": volume_up_down("down")}
                  ),
         WidgetBox ( 
              widgets = [
@@ -171,30 +152,24 @@ def init_widgets_list():
                              padding = 10,
                              foreground = colors[2],
                              format = "⏱  %a  %d. %B - KW %W - %H:%M",
-                             mouse_callbacks = {"Button1": lazy.spawn("galendae")},
-                             **decoration_group
+                             mouse_callbacks = {"Button1": lazy.spawn("galendae")}
                     ),
              ],
              text_closed = "",
              text_open = "",
              close_button_location = "right",
              start_opened = True,
-             name = "datetime",
-             **decoration_group
+             name = "datetime"
         ),
         WidgetBox( 
                  widgets = [
-                        widget.Systray(
-                                 padding = 5,
-                                 **decoration_group
-                        ),
-                        widget.Spacer(length=6, **decoration_group),
+                        widget.Systray(padding = 5),
+                        widget.Spacer(length=6),
                  ],
                  text_closed = "",
                  text_open = "",
                  close_button_location = "right",
-                 name = "tray",
-                 **decoration_group
+                 name = "tray"
         ),
         widget.TextBox(
                  padding = 10,
@@ -204,9 +179,8 @@ def init_widgets_list():
                  mouse_callbacks = {"Button1": toggle_tray,
                                     "Button2": lazy.spawn("vscodium GitHub/my-qtile"),
                                     "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')
-                                   },
-                 **decoration_group
-                 ),
+                                   }
+        ),
         ]
     return widgets_list
 
