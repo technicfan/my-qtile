@@ -8,7 +8,7 @@
 # Then, you can use RGBA color codes to add transparency to the colors below.
 # For ex: colors = [["#282c34ee", "#282c34dd"], ...
 
-# Own colors
+from libqtile.utils import guess_terminal
 
 Technicfan = [
     "#133912", # bg
@@ -40,4 +40,4 @@ Gruvbox = [
 
 colors = GruvboxMaterial
 
-myTerm = "alacritty"
+myTerm = guess_terminal()
