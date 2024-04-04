@@ -56,27 +56,12 @@ decoration_group = {
 
 def init_widgets_list():
     widgets_list = [
-        widget.TextBox(
-                 text = "\uf3e2",
-                 fontsize = 21,
-                 font = "Ubuntu",
-                 padding = 7,
-                 foreground = colors[0],
-                 background = colors[1],
-                 mouse_callbacks = {"Button1": lazy.spawn("vscodium GitHub/my-qtile")},
-                 **decoration_group
-                 ),
         widget.Prompt(
                  foreground = colors[0],
                  background = colors[1],
                  cursor_color = colors[0],
-                 padding = 3,
+                 padding = 5,
                  cursorblink = False,
-                 **decoration_group
-        ),
-        widget.Spacer(
-                 length = 4,
-                 background = colors[1],
                  **decoration_group
         ),
         widget.GroupBox(
@@ -203,8 +188,7 @@ def init_widgets_list():
                                  padding = 5,
                                  **decoration_group
                         ),
-                        widget.Spacer(length=6, **decoration_group
-                        ),
+                        widget.Spacer(length=6, **decoration_group),
                  ],
                  text_closed = "",
                  text_open = "",
@@ -217,7 +201,10 @@ def init_widgets_list():
                  foreground = colors[0],
                  background = colors[1],
                  text = getpass.getuser() + "@" + socket.gethostname(),
-                 mouse_callbacks = {"Button1": toggle_tray(), "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')},
+                 mouse_callbacks = {"Button1": toggle_tray,
+                                    "Button2": lazy.spawn("vscodium GitHub/my-qtile"),
+                                    "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')
+                                   },
                  **decoration_group
                  ),
         ]
@@ -228,11 +215,11 @@ def init_widgets_colorscheme():
     widgets_colorscheme = init_widgets_list()
     match colors[2]:
         case "#c678dd":
-            widgets_colorscheme[5].custom_icon_paths = [".config/qtile/layout-icons/pink"]
+            widgets_colorscheme[3].custom_icon_paths = [".config/qtile/layout-icons/pink"]
         case "#87a757":
-            widgets_colorscheme[5].custom_icon_paths = [".config/qtile/layout-icons/green"]
+            widgets_colorscheme[3].custom_icon_paths = [".config/qtile/layout-icons/green"]
         case "#d3869b":
-            widgets_colorscheme[5].custom_icon_paths = [".config/qtile/layout-icons/gruvbox_magenta"]
+            widgets_colorscheme[3].custom_icon_paths = [".config/qtile/layout-icons/gruvbox_magenta"]
     return widgets_colorscheme
 
 def init_widgets_screen1():
@@ -243,13 +230,13 @@ def init_widgets_screen1():
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_colorscheme()
     # not opening systray when clicking on user on screen2
-    widgets_screen2[17].mouse_callbacks = {}
+    widgets_screen2[15].mouse_callbacks = {}
     # extend window name on second screen
-    widgets_screen2[6].max_chars = 125
+    widgets_screen2[4].max_chars = 125
     # run prompt
-    del widgets_screen2[0:3]
+    del widgets_screen2[0:1]
     # mpris
-    del widgets_screen2[6:7]
+    del widgets_screen2[5:6]
     # systray
     del widgets_screen2[12:13]
     return widgets_screen2

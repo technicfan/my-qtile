@@ -46,7 +46,7 @@ keys = [
     Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "l", lazy.spawn("xkill"), desc="Kill GUI apps"),
-    Key([mod], "r", lazy.spawncmd(prompt="Run"), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawncmd(prompt=" Run"), desc="Spawn a command using a prompt widget"),
     Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key([mod, "shift"], "r", lazy.reload_config(),
                              lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),

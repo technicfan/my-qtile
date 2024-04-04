@@ -3,8 +3,8 @@
 load()
 {
     cd ~/.config/qtile/scripts
-    export DMENU="dmenu -i -nb #282828 -nf #d3869b -sb #dfbf8e -sf #282828 -fn 'JetBrains:bold:pixelsize=12' -bw 2 -y -2 -x -2"
-    export DMENU_POS=" -h 26 -p"
+    export DMENU="dmenu -i -nb #282828 -nf #d3869b -sb #dfbf8e -sf #282828 -fn 'JetBrains:bold:pixelsize=12'"
+    export DMENU_POS=" -h 28 -p"
 }
 
 main()
