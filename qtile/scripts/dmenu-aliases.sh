@@ -19,7 +19,7 @@ main()
         "chromium --app=https://chat.openai.com/"
         "chromium --app=https://mail.proton.me"
         "dosbox '/mnt/Games/Heroic/Wolfenstein 3D/Wolf3d.exe'"
-        "pkexec manager-linux-x64.run"
+        "gksu manager-linux-x64.run"
     )
 
     local choice=$(printf '%s\n' "-> VMs" "$(printf '%s\n' "${apps[@]}" | sort)" | $DMENU 'Aliases:')
