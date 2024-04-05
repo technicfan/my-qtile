@@ -2,7 +2,7 @@
 
 main()
 {
-    local chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $DMENU $DMENU_POS 'Emoji Picker:' | sed "s/ .*//")
+    local chosen=$(cut -d ';' -f1 ~/.config/qtile/chars/* | $DMENU 'Emoji Picker:' | sed "s/ .*//")
 
     [ -z "$chosen" ] && exit
 

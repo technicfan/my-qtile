@@ -15,19 +15,19 @@ revert()
 main()
 {
     local default=$(cat ~/.config/qtile/scripts/screens.sh | grep wallpapers | sed 's/.*wallpapers\///g' | awk -F "\"" '{print $1}')
-    local choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed 's/\/home\/technicfan\/.config\/qtile\/wallpapers\///g')" | $DMENU $DMENU_POS 'Wallpapers:')
+    local choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed 's/\/home\/technicfan\/.config\/qtile\/wallpapers\///g')" | $DMENU  'Wallpapers:')
 
     if [[ $choice = "Revert to default" ]]
     then
         revert $default
-    elif [[ -n $choice && $(echo -e "No\nYes" | $DMENU $DMENU_POS "Choose \"$choice\"?") = "Yes" ]]
+    elif [[ -n $choice && $(echo -e "No\nYes" | $DMENU "Choose \"$choice\"?") = "Yes" ]]
     then
         feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/$choice"
         notify-send "\"$(echo $choice | awk -F "/" '{print $NF}')\" is your new wallpaper"
 
         if [[ -n $default && $default != $choice ]]
         then
-            local choice2=$(echo -e "No\nYes\nRevert to default" | $DMENU $DMENU_POS "Set \"$choice\" as default?")
+            local choice2=$(echo -e "No\nYes\nRevert to default" | $DMENU "Set \"$choice\" as default?")
             if [[ -n $choice2 && $choice2 = "Yes" ]]
             then
                 local sed_choice=$(echo $choice | sed 's/\//\\\//g')

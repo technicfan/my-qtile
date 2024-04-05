@@ -11,7 +11,7 @@ main()
             | current=$(get_default_sink) jq -r '.[] | if .name == env.current then .state="* " else .state="" end | .state + .name'
     }
 
-    local choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $DMENU $DMENU_POS 'Sink:') || exit 1
+    local choice=$(printf '%s\n' "$(get_all_sinks)" | sort | $DMENU 'Sink:') || exit 1
 
     if [ "$choice" ]
     then

@@ -10,7 +10,7 @@ main()
         "Off"
     )
 
-    local choice=$(printf '%s\n' "${options[@]}" | $DMENU $DMENU_POS 'Monitors:')
+    local choice=$(printf '%s\n' "${options[@]}" | $DMENU 'Monitors:')
 
     case $choice in
     "Monitor 1")

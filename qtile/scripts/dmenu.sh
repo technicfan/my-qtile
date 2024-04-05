@@ -3,8 +3,7 @@
 load()
 {
     cd ~/.config/qtile/scripts
-    export DMENU="dmenu -i -nb #282828 -nf #d3869b -sb #dfbf8e -sf #282828 -fn 'JetBrains:bold:pixelsize=12'"
-    export DMENU_POS=" -h 28 -p"
+    export DMENU="dmenu -i -p"
 }
 
 main()
@@ -30,7 +29,7 @@ main()
         load
         ./dmenu-${1}.sh
         ;;
-    "wine_vm")
+    "aliases")
         load
         ./dmenu-${1}.sh
         ;;
@@ -46,7 +45,7 @@ main()
         load
         if [[ -n $2 ]]
         then
-            $DMENU$DMENU_POS "$2"
+            $DMENU "$2"
         else
             exit 1
         fi
