@@ -10,6 +10,7 @@ main()
         "Proton Mail"
         "Wolfenstein 3D"
         "xampp-manager"
+        "Minecraft Bedrock Launcher"
     )
 
     local commands=(
@@ -20,6 +21,7 @@ main()
         "chromium --app=https://mail.proton.me"
         "dosbox '/mnt/Games/Heroic/Wolfenstein 3D/Wolf3d.exe'"
         "gksu manager-linux-x64.run"
+        "$HOME/Applications/Minecraft*.AppImage"
     )
 
     local choice=$(printf '%s\n' "-> VMs" "$(printf '%s\n' "${apps[@]}" | sort)" | $DMENU 'Aliases:')
