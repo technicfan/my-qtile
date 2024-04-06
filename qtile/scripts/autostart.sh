@@ -20,7 +20,6 @@ nm-applet &
 xfce4-power-manager &
 blueman-applet &
 picom --config .config/qtile/picom/picom.conf &
-#xcompmgr &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 clipcatd -r &
@@ -28,6 +27,7 @@ clipcatd -r &
 aw-qt --no-gui &
 nextcloud &
 caffeine &
+unclutter -idle 3 &
 
 nvidia-settings --assign FXAA=1 &
 nvidia-settings -l &
