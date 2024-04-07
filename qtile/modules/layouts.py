@@ -38,7 +38,7 @@ layouts = [
         ratio = 0.5,
         ratio_increment = 0,
         border_width = 2,
-        margin = 8,
+        margin = 0,
         border_focus = colors[1],
         border_normal = colors[3]
     ),
