@@ -29,7 +29,7 @@ main()
         load
         ./dmenu-${1}.sh
         ;;
-    "aliases")
+    "vms")
         load
         ./dmenu-${1}.sh
         ;;
