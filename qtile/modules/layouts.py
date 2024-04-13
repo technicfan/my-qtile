@@ -30,6 +30,13 @@ from spiral import Spiral
 
 from colors import colors
 
+layout_defaults = {"border_width": 2,
+                   "margin": 2,
+                   "border_focus": colors[1],
+                   "border_normal": colors[3]
+                  }
+
+
 ### LAYOUTS ###
 layouts = [
     Spiral(
@@ -37,11 +44,9 @@ layouts = [
         new_client_position = "after_current",
         ratio = 0.5,
         ratio_increment = 0,
-        border_width = 2,
-        margin = 2,
-        border_focus = colors[1],
-        border_normal = colors[3]
+        **layout_defaults
     ),
+#    layout.MonadTall(**layout_defaults),
     layout.Max(),
 ]
 
@@ -73,6 +78,5 @@ floating_layout = layout.Floating(
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
         Match(wm_class="delphi32.exe"), # Delphi 7 IDE
-        Match(wm_class="quickgui"), # quickemu gui vm manger
     ]
 )
