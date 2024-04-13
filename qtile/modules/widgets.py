@@ -32,10 +32,6 @@ from libqtile import widget, bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 
-# newest version from git
-#make shure to place either a copy of widgetbox.py or a symlink to a copy of it in modules dir
-from widgetbox import WidgetBox
-
 from functions import toggle_tray, volume_up_down, window_name, get_uptime
 from colors import colors
 
@@ -91,7 +87,7 @@ def init_widgets_list():
         # Middle of the bar
 
         widget.Spacer(),
-        WidgetBox ( 
+        widget.WidgetBox ( 
              widgets = [
                     widget.Mpris2(
                          padding = 10,
@@ -146,7 +142,7 @@ def init_widgets_list():
                  step = 5,
                  mouse_callbacks = {"Button4": volume_up_down("up"), "Button5": volume_up_down("down")}
                  ),
-        WidgetBox ( 
+        widget.WidgetBox ( 
              widgets = [
                     widget.Clock(
                              padding = 10,
@@ -161,7 +157,7 @@ def init_widgets_list():
              start_opened = True,
              name = "datetime"
         ),
-        WidgetBox( 
+        widget.WidgetBox( 
                  widgets = [
                         widget.Systray(padding = 5),
                         widget.Spacer(length=6),
