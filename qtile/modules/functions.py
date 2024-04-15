@@ -16,8 +16,8 @@ from libqtile.lazy import lazy
 def window_name(name):
     if "- Oracle VM VirtualBox" in name:
         return name.split("[",1)[0]
-    elif name == "GLava":
-        return ""
+    elif name == "web.whatsapp.com":
+        return "WhatsApp"
     else:
         return name
 
