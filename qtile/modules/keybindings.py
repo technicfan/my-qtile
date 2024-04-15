@@ -36,13 +36,6 @@ mod2 = "XF86Launch6"
 myBrowser = "firefox"
 myFM = "dolphin"
 
-modifier_keys = {
-   'M': 'mod4',
-   'A': 'XF86Launch6',
-   'S': 'shift',
-   'C': 'control',
-}
-
 ### KEYBINDINGS ###
 keys = [
     # The essentials
