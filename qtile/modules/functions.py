@@ -95,6 +95,6 @@ def volume_up_down(qtile, way):
             mixer.setmute(1)
         else:
             mixer.setmute(0)
-            mixer.setvolume(new_vol)
+        mixer.setvolume(new_vol)
         # volume osd using dunst
         subprocess.call(f"notify-send -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)
