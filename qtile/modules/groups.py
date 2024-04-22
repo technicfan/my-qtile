@@ -35,9 +35,9 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 group_layouts = ["spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "max", "spiral"]
 
-#group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9",]
-#group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ",]
-group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "VM", "MUS",]
+#group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+#group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "X"]
+group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "VM", "MUS"]
 
 for i in range(len(group_names)):
     groups.append(
