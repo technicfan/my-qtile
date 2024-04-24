@@ -32,7 +32,7 @@ unclutter -idle 3 &
 nvidia-settings --assign FXAA=1 &
 nvidia-settings -l &
 input-remapper-control --command autoload &
-polychromatic-cli -e keyboard+numblock &
+polychromatic-cli -e keyboard &
 polychromatic-cli -e mouse &
 polychromatic-cli -e mousepad &
 polychromatic-cli -o brightness -p 50 &
