@@ -69,6 +69,7 @@ keys = [
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh vms"), desc="Dirty solution for aliases"),
     Key([mod], "n", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
+    Key([mod], "g", lazy.spawn(".config/qtile/scripts/dmenu.sh git-repos"), desc="Open repo with vscodium"),
     # cool folder icon color changer
     Key([mod], "minus", lazy.spawn(".config/qtile/scripts/dmenu.sh icon-color"), desc="Change folder colors of gruvbox icon theme"),
     # clipcat

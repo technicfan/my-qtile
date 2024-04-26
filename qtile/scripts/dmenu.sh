@@ -41,6 +41,10 @@ main()
         load
         ./dmenu-${1}.sh 
         ;;   
+    "git-repos")
+        load
+        ./dmenu-${1}.sh
+        ;;
     "dmenu")
         load
         if [[ -n $2 ]]
