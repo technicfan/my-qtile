@@ -26,7 +26,7 @@ clipcatd -r &
 /usr/lib/kdeconnectd &
 aw-qt --no-gui &
 nextcloud &
-caffeine &
+#caffeine &
 unclutter -idle 3 &
 
 nvidia-settings --assign FXAA=1 &
