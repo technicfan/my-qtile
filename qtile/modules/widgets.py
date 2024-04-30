@@ -97,8 +97,7 @@ def init_widgets_list():
                          background = colors[1],
                          foreground = colors[0],
                          objname = "org.mpris.MediaPlayer2.spotify",
-                         width = 275,
-                         markup = False
+                         width = 275
                     ),
              ],
              text_closed = "",
