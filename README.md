@@ -9,7 +9,7 @@ dependencies:
     - python-pyalsaaudio
     - feh
 
-# Screenshots(really outdated):
+# Screenshots(really outdated - not even green anymore):
 normal:
 <img src="screenshots/screen-one-normal.png">
 with unhidden systray:
