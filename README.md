@@ -7,6 +7,7 @@ place qtile folder in .config
 dependencies:
     - python-distro
     - python-pyalsaaudio
+    - feh
 
 # Screenshots(really outdated):
 normal:
