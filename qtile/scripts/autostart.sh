@@ -22,7 +22,6 @@ blueman-applet &
 picom --config .config/qtile/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
-clipcatd -r &
 /usr/lib/kdeconnectd &
 aw-qt --no-gui &
 nextcloud &
