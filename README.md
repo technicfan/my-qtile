@@ -4,6 +4,10 @@ personal qtile config originally based on evil DT's config (https://gitlab.com/d
 
 place qtile folder in .config
 
+dependencies:
+    - python-distro
+    - python-pyalsaaudio
+
 # Screenshots(really outdated):
 normal:
 <img src="screenshots/screen-one-normal.png">
