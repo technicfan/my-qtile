@@ -26,6 +26,7 @@ dunst &
 aw-qt --no-gui &
 nextcloud &
 #caffeine &
+clipcat -r &
 unclutter -idle 3 &
 
 nvidia-settings --assign FXAA=1 &
