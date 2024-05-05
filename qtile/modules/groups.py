@@ -64,4 +64,5 @@ dgroups_app_rules = [
     Rule(Match(title=re.compile(r"^(VirtualBoxVM)$")), group="9"),
     Rule(Match(wm_class=re.compile(r"^(discord|signal|web.whatsapp.com|chat.openai.com|GPT4All|lm studio)$")), group="8"),
     Rule(Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$")), group="7"),
+    Rule(Match(wm_class=re.compile(r"^(firefox)$")), group="1"),
 ]
