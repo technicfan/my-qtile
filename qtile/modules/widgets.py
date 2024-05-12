@@ -31,6 +31,7 @@ import subprocess
 from libqtile import widget, bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
+from qtile_extras import widget
 
 from functions import toggle_tray, volume_up_down, window_name, get_uptime
 from colors import colors
@@ -158,7 +159,10 @@ def init_widgets_list():
         ),
         widget.WidgetBox( 
                  widgets = [
-                        widget.Systray(padding = 5),
+                        widget.Systray(
+                            padding = 10,
+                            icon_theme = "Gruvbox Plus Dark"
+                        ),
                         widget.Spacer(length=6),
                  ],
                  text_closed = "",
