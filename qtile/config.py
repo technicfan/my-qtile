@@ -27,6 +27,9 @@ import os
 import sys
 import subprocess
 from libqtile import hook
+import qtile_extras.hook
+
+import alsaaudio
 
 sys.path.insert(0, os.path.expanduser("~/.config/qtile/modules"))
 from keybindings import mouse, keys
@@ -44,6 +47,17 @@ def start_once():
 @hook.subscribe.client_focus
 def set_hint(window):
     window.window.set_property("IS_FLOATING", int(window.floating), type = "CARDINAL", format = 8)
+
+#@qtile_extras.hook.volume_change
+#def check_vol(volume, muted):
+#    mixer = alsaaudio.Mixer()
+#    step = qtile.widgets_map["volume"].step
+#    mod = volume % step
+#    if mod != 0:
+#        if mod < step / 2:
+#            mixer.setvolume(volume-mod)
+#        else:
+#            mixer.setvolume(volume+step-mod)
 
 ### OTHER ###
 dgroups_key_binder = None
