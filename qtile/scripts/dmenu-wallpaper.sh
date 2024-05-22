@@ -20,14 +20,14 @@ main()
     if [[ $choice = "Revert to default" ]]
     then
         revert $default
-    elif [[ -n $choice && $(echo -e "No\nYes" | $DMENU "Choose \"$choice\"?") = "Yes" ]]
+    elif [[ -n $choice ]]
     then
         feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/$choice"
         notify-send "\"$(echo $choice | awk -F "/" '{print $NF}')\" is your new wallpaper"
 
         if [[ -n $default && $default != $choice ]]
         then
-            local choice2=$(echo -e "No\nYes\nRevert to default" | $DMENU "Set \"$choice\" as default?")
+            local choice2=$(echo -e "No\nRevert to default\nYes" | $DMENU "Set \"$choice\" as default?")
             if [[ -n $choice2 && $choice2 = "Yes" ]]
             then
                 local sed_choice=$(echo $choice | sed 's/\//\\\//g')
