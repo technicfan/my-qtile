@@ -30,8 +30,8 @@ from spiral import Spiral
 
 from colors import colors
 
-layout_defaults = {"border_width": 2,
-                   "margin": 2,
+layout_defaults = {"border_width": 0,
+                   "margin": 0,
                    "border_focus": colors[1],
                    "border_normal": colors[3]
                   }
@@ -53,7 +53,7 @@ layouts = [
 floating_layout = layout.Floating(
     border_focus=colors[1],
     border_normal=colors[3],
-    border_width=2,
+    border_width=0,
     float_rules=[
         *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),   # gitk
