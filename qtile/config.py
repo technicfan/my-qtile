@@ -27,9 +27,9 @@ import os
 import sys
 import subprocess
 from libqtile import hook
-import qtile_extras.hook
+#import qtile_extras.hook
 
-import alsaaudio
+#import alsaaudio
 
 sys.path.insert(0, os.path.expanduser("~/.config/qtile/modules"))
 from keybindings import mouse, keys
