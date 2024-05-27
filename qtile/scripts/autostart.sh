@@ -28,6 +28,7 @@ nextcloud &
 #caffeine &
 clipcatd -r &
 unclutter -idle 3 &
+flameshot &
 
 nvidia-settings --assign FXAA=1 &
 nvidia-settings -l &
