@@ -60,7 +60,7 @@ groups.append(
 ### WINDOW RULES ###
 dgroups_app_rules = [
     Rule(Match(wm_class=re.compile(r"^(spotify)$")), group="0"),
-    Rule(Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager)$")), group="9"),
+    Rule(Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), group="9"),
     Rule(Match(title=re.compile(r"^(VirtualBoxVM)$")), group="9"),
     Rule(Match(wm_class=re.compile(r"^(discord|signal|web.whatsapp.com|chatgpt.com|GPT4All|lm studio)$")), group="8"),
     Rule(Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$")), group="7"),
