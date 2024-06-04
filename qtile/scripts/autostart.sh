@@ -24,6 +24,7 @@ picom --config .config/qtile/picom/picom.conf &
 dunst &
 /usr/lib/kdeconnectd &
 aw-qt --no-gui &
+sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" &
 nextcloud &
 #caffeine &
 clipcatd -r &
