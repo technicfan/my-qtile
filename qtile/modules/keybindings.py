@@ -116,7 +116,7 @@ keys = [
     # Volume
     Key([], "XF86AudioRaiseVolume", volume_up_down("up"), desc="Increase volume key"),
     Key([], "XF86AudioLowerVolume", volume_up_down("down"), desc="Decrease volume key"),
-    Key([], "XF86AudioMute", lazy.widget["volume"].mute(), desc="Mute key"),
+    Key([], "XF86AudioMute", volume_up_down("toggle"), desc="Mute key"),
 
     # Activate Linux
     KeyChord([mod], "a", [

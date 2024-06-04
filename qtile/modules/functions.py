@@ -81,20 +81,26 @@ def toggle_tray(qtile):
 @lazy.function
 def volume_up_down(qtile, way):
         mixer = alsaaudio.Mixer()
-        step = qtile.widgets_map["volume"].step
-        vol = mixer.getvolume()[0]
-        mod = vol % step
-        if way == "up":
-            new_vol = vol + step - mod
-        if way == "down":
-            if mod != 0:
-                new_vol = vol - mod
+        if way == "toggle":
+            if mixer.getmute()[0] == 1:
+                mixer.setmute(0)
             else:
-                new_vol = vol - step
-        if new_vol <= 0:
-            mixer.setmute(1)
+                mixer.setmute(1)
         else:
-            mixer.setmute(0)
-        mixer.setvolume(new_vol)
-        # volume osd using dunst
-        subprocess.call(f"notify-send -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)
+            step = qtile.widgets_map["volume"].step
+            vol = mixer.getvolume()[0]
+            mod = vol % step
+            if way == "up":
+                new_vol = vol + step - mod
+            if way == "down":
+                if mod != 0:
+                    new_vol = vol - mod
+                else:
+                    new_vol = vol - step
+            if new_vol <= 0:
+                mixer.setmute(1)
+            else:
+                mixer.setmute(0)
+            mixer.setvolume(new_vol)
+            # volume osd using dunst
+            subprocess.call(f"notify-send -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)

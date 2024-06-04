@@ -140,7 +140,7 @@ def init_widgets_list():
                  foreground = colors[2],
                  fmt = "🕫  {}",
                  step = 5,
-                 mouse_callbacks = {"Button4": volume_up_down("up"), "Button5": volume_up_down("down")}
+                 mouse_callbacks = {"Button1": volume_up_down("toggle"), "Button4": volume_up_down("up"), "Button5": volume_up_down("down")}
                  ),
         widget.WidgetBox ( 
              widgets = [
