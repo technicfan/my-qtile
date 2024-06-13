@@ -147,7 +147,7 @@ def init_widgets_list():
                     widget.Clock(
                              padding = 10,
                              foreground = colors[2],
-                             format = "⏱  %a  %d. %B - KW %W - %H:%M",
+                             format = "⏱  %a  %d. %B - %H:%M",
                              mouse_callbacks = {"Button1": lazy.spawn("galendae")}
                     ),
              ],
