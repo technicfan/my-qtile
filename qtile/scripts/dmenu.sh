@@ -2,7 +2,7 @@
 
 load()
 {
-    cd ~/.config/qtile/scripts
+    cd ~/.config/qtile/scripts || exit 1
     export DMENU="dmenu -i -p"
 }
 
@@ -35,7 +35,7 @@ main()
         ;;
     "icon-color")
         load
-        ./dmenu-${1}.sh dmenu
+        ./dmenu-${1}.sh
         ;;
     "wallpaper")
         load

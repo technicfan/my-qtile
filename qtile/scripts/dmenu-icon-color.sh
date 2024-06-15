@@ -1,86 +1,56 @@
 #!/bin/bash
 
-checksetcolor()
+checkselected()
 {
-	for i in $(seq 1 $(echo $colors | wc -w))
+	for color in ${colors[@]}
 	do
-		colorsel=$(echo $colors | awk -F " " '{print $(shell_var='"$i"') }')
-			
-		if [[ $1 = $colorsel ]]
+		if [[ "$color" = "$1" ]]
 		then
-			colortest=1
-			break
-		else
-			colortest=0
+			return 0
 		fi
 	done
-
-	if [[ $colortest = 1 ]]
-	then
-		setcolor $color
-	else
-		echo This color is not available. Check colors with list option.
-		exit 1
-	fi
+	return 1
 }
 
 setcolor()
 {
-	files=$(ls | grep $1)
-
-	for i in $(seq 1 $(echo $files | wc -w))
+	for file in $(ls | grep "$1")
 	do
-		file=$(echo $files | awk -F " " '{print $(shell_var='"$i"') }')
-		link=$(echo $file | awk -F "-$1" '{print $2}')
-		prefix=$(echo $file | awk -F "-$1" '{print $1}')
-
-		ln -sfn $file $prefix$link
+		link=$(echo "$file" | awk -F "-$1" '{print $2}')
+		prefix=$(echo "$file" | awk -F "-$1" '{print $1}')
+		ln -sfn "$file" "$prefix$link"
 	done
 }
 
 main()
 {
-	cd ~/.icons/Gruvbox-Plus-Dark/places/scalable/
+	cd ~/.icons/Gruvbox-Plus-Dark/places/scalable/ || exit 1
 
-	colors=$(ls | grep linux.svg  | awk -F "-" '{print $2}' | grep -v .svg)
+	colors=$(ls | grep linux.svg | awk -F "-" '{print $2}' | grep -v .svg)
 
-	if [[ $1 = "list" ]]
+	selected=$(echo "${colors}" | $DMENU "Icon Colors:")
+
+	if [[ -n $selected ]]
 	then
-
-	echo "${colors/"\ "}"
-
-	elif [[ $1 = "dmenu" ]]
-	then
-
-		selected=$(echo "${colors/"\ "}" | $DMENU "Icon Colors:")
-
-		if [[ -n $selected ]]
+		if checkselected "$selected"
 		then
 			answer=$(echo -e "No\nYes" | $DMENU "Choose $selected?")
-
+			
 			if [[ $answer == "Yes" ]]
 			then
-				setcolor $selected
+				setcolor "$selected"
 				notify-send "Your folder icons are now $selected"
 				exit 0
 			else
 				exit 1
 			fi
 		else
-			exit 0
+			notify-send "\"$selected\" is not a valid color"
+			main
 		fi
-	
-	elif [[ -n $1 ]]
-	then
-
-		color=$(echo $1)
-		checksetcolor $color
-		echo "Your folder icons are now $color"
-
 	else
-		echo You need to specify a color. Check available colors with list option.
-		exit 1
+		exit 0
 	fi
 }
 
-main $1
+main
