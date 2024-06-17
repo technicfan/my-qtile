@@ -99,7 +99,7 @@ def init_widgets_list():
                          foreground = colors[0],
                          objname = "org.mpris.MediaPlayer2.spotify",
                          width = 275,
-                         mouse_callbacks = {"Button4": None, "Button5": None}
+                         #mouse_callbacks = {"Button4": None, "Button5": None}
                     ),
              ],
              text_closed = "",
