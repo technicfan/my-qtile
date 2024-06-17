@@ -92,13 +92,14 @@ def init_widgets_list():
              widgets = [
                     widget.Mpris2(
                          padding = 10,
-                         no_metadata_text = "D-Bus: wtf",
+                         no_metadata_text = "<d-bus> wtf",
                          paused_text = "   {track}",
                          format = "{xesam:title} - {xesam:artist}",
                          background = colors[1],
                          foreground = colors[0],
                          objname = "org.mpris.MediaPlayer2.spotify",
-                         width = 275
+                         width = 275,
+                         mouse_callbacks = {"Button4": None, "Button5": None}
                     ),
              ],
              text_closed = "",
