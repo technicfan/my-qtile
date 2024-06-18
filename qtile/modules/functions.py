@@ -33,19 +33,19 @@ def minimize_all(qtile):
 # get uptime
 def get_uptime():
     with open("/proc/uptime", "r") as f:
-        uptime_seconds = int(f.readline().split(".")[0])
-    if uptime_seconds < 60:
+        seconds = int(f.readline().split(".")[0])
+    if seconds < 60:
         return "under 1min"
     else:
-        uptime_splits = [
-            str(uptime_seconds // 86400) + "d ",
-            str(uptime_seconds % 86400 // 3600) + "h ",
-            str(uptime_seconds % 3600 // 60) + "min "
+        splits = [
+            str(seconds // 86400) + "d ",
+            str(seconds % 86400 // 3600) + "h ",
+            str(seconds % 3600 // 60) + "min "
         ]
         uptime = ""
-        for i in uptime_splits:
-            if i[0] != "0":
-                uptime += i
+        for split in splits:
+            if split[0] != "0":
+                uptime += split
         return uptime[:-1]
 
 
@@ -103,4 +103,6 @@ def volume_up_down(qtile, way):
                 mixer.setmute(0)
             mixer.setvolume(new_vol)
             # volume osd using dunst
-            subprocess.call(f"notify-send -a qtile-volume -h string:x-dunst-stack-tag:test -h int:value:{new_vol} 'Volume: {new_vol}%'", shell=True)
+            subprocess.call(f"notify-send -a qtile-volume\
+                -h string:x-dunst-stack-tag:test -h int:value:{new_vol}\
+                    'Volume: {new_vol}%'", shell=True)
