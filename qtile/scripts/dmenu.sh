@@ -45,6 +45,13 @@ main()
         load
         ./dmenu-${1}.sh
         ;;
+    "clear-clipcat")
+        load
+        if [[ "$(echo -e "No\nYes" | $DMENU "Clear Clipboard?")" == "Yes" ]]
+        then
+            clipcatctl clear
+        fi
+        ;;
     "dmenu")
         load
         if [[ -n $2 ]]

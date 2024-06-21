@@ -16,7 +16,7 @@ set_state()
 
 wallpaper()
 {
-    feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/destroy-big-tech.png"
+    feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/firefox.png"
 }
 
 one()

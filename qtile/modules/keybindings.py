@@ -75,6 +75,8 @@ keys = [
     Key([mod], "minus", lazy.spawn(".config/qtile/scripts/dmenu.sh icon-color"), desc="Change folder colors of gruvbox icon theme"),
     # clipcat
     Key([mod], "c", lazy.spawn("clipcat-menu"), desc="dmenu clipboard manager"),
+    Key([mod], "numbersign", lazy.spawn("clipcat-menu --config .config/clipcat/clipcat-menu-rm.toml remove"), desc="remove items from clipboard history"),
+    Key([mod], "plus", lazy.spawn(".config/qtile/scripts/dmenu.sh clear-clipcat"), desc="remove all items from clipboard history"),
     # stolen from Luke Smith
     Key([mod], "comma", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
 

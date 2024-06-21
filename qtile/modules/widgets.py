@@ -40,6 +40,7 @@ from colors import colors
 widget_defaults = dict(
     font="JetBrains Bold",
     fontsize = 12,
+#    background = "#00000000"
     background = colors[0]
 )
 
@@ -217,5 +218,5 @@ def init_widgets_screen2():
 
 
 ### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background="#282828")),
-           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, background="#282828"))]
+screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background=colors[0])),
+           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, background=colors[0]))]
