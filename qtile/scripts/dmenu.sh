@@ -47,7 +47,7 @@ main()
         ;;
     "clear-clipcat")
         load
-        if [[ "$(echo -e "No\nYes" | $DMENU "Clear Clipboard?")" == "Yes" ]]
+        if [[ "$(echo -e "No\nYes" | $DMENU "Clear Clipboard History?")" == "Yes" ]]
         then
             clipcatctl clear
         fi
