@@ -21,9 +21,9 @@ main()
     "Logout")
         if [[ "$(echo -e "No\nYes" | $DMENU "${choice}?")" == "Yes" ]]
         then
-            pkill -KILL -u $USER
+            qtile cmd-obj -o cmd -f shutdown
         else
-            exit 1
+            exit 0
         fi
         ;;
     "Reboot")
