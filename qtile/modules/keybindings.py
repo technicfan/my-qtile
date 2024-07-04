@@ -78,7 +78,7 @@ keys = [
     Key([mod], "numbersign", lazy.spawn("clipcat-menu --config .config/clipcat/clipcat-menu-rm.toml remove"), desc="remove items from clipboard history"),
     Key([mod], "plus", lazy.spawn(".config/qtile/scripts/dmenu.sh clear-clipcat"), desc="remove all items from clipboard history"),
     # stolen from Luke Smith
-    Key([mod], "comma", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
+    Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
@@ -149,7 +149,7 @@ keys = [
     Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 
     # Switch focus of monitors
-    Key([mod], "period", lazy.next_screen(), desc="Move focus to next monitor"),
+    Key([mod], "comma", lazy.next_screen(), desc="Move focus to next monitor"),
 
     # Switch groups
     Key([mod], "Tab", lazy.screen.next_group(), desc="Move to next group"),
