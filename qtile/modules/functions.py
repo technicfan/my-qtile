@@ -5,7 +5,7 @@
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import os
-# make shure to install 'python-pyalsaaudio'
+# make sure to install 'python-pyalsaaudio'
 import alsaaudio
 import subprocess
 from configparser import ConfigParser
