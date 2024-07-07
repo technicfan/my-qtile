@@ -29,14 +29,14 @@ usage()
 }
 
 # Process CLI parameters
-for var in "$@"
+for arg in "$@"
 do
-    case $var in
-        -h|--help)
+    case $arg in
+    -h|--help)
         usage
         ;;
-        -d=*|--dmenu=*)
-        menu=$(echo "$var" | awk -F "=" '{print $2}');
+    -d=*|--dmenu=*)
+        menu=$(echo "$arg" | awk -F "=" '{print $2}')
         ;;
     esac
 done
@@ -44,7 +44,7 @@ done
 # Grab the answer
 if [ -n "$1" ]
 then
-    answer=$(echo "$1" | qalc +u8 -color=never -terse | awk '!/^>/ && !/^$/ {gsub(/^[ \t]+|[ \t]+$/, "", $0); print}')
+    answer=$(qalc +u8 -t "$1")
 fi
 
 # Path to menu application
@@ -59,26 +59,25 @@ then
     fi
 fi
 
-action=$(echo -e "Copy to clipboard\nClear\nClose" | $menu -p "= $answer")
+action=$(echo -e "Copy to clipboard\nClear" | $menu -p "= $answer")
 
 # check if ANS in action and replace it
 if [[ "$action" = *"ANS"* && -n "$answer" ]]
 then
-	#action=$(echo "$action" | sed 's/ANS/'$answer'/g')
     action=${action//ANS/$answer}
 	answer=""
 fi
 
 case $action in
-    "Clear")
+"Clear")
     $0
     ;;
-    "Copy to clipboard")
+"Copy to clipboard")
     echo -n "$answer" | xclip -selection clipboard
     ;;
-    "Close"|"")
+"")
     ;;
-    *)
+*)
     $0 "$answer $action" "--dmenu=$menu"
     ;;
 esac
