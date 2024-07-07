@@ -76,9 +76,11 @@ keys = [
     # clipcat
     Key([mod], "c", lazy.spawn("clipcat-menu"), desc="dmenu clipboard manager"),
     Key([mod], "numbersign", lazy.spawn("clipcat-menu --config .config/clipcat/clipcat-menu-rm.toml remove"), desc="remove items from clipboard history"),
-    Key([mod], "plus", lazy.spawn(".config/qtile/scripts/dmenu.sh clear-clipcat"), desc="remove all items from clipboard history"),
+    Key([mod], "adiaeresis", lazy.spawn(".config/qtile/scripts/dmenu.sh clear-clipcat"), desc="remove all items from clipboard history"),
     # stolen from Luke Smith
     Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
+    # menu-calc
+    Key([mod], "plus", lazy.spawn("= --dmenu=dmenu"), desc="dmenu calculator"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
