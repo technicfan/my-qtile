@@ -79,8 +79,8 @@ keys = [
     Key([mod], "adiaeresis", lazy.spawn(".config/qtile/scripts/dmenu.sh clear-clipcat"), desc="remove all items from clipboard history"),
     # stolen from Luke Smith
     Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
-    # menu-calc
-    Key([mod], "plus", lazy.spawn("= --dmenu=dmenu"), desc="dmenu calculator"),
+    # menu-qalc
+    Key([mod], "plus", lazy.spawn(".config/qtile/scripts/menu-qalc.sh"), desc="dmenu calculator"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
