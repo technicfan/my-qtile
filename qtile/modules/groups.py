@@ -26,7 +26,7 @@
 import re
 from libqtile.config import Group, Match, ScratchPad, DropDown, Rule
 
-from colors import colors, myTerm
+from .colors import colors, myTerm
 
 ### GROUPS ###
 groups = []
@@ -58,7 +58,7 @@ groups.append(
 
 ### WINDOW RULES ###
 dgroups_app_rules = [
-    Rule(Match(wm_class=re.compile(r"^(spotify)$")), group="0"),
+    Rule(Match(wm_class=re.compile(r"^(spotify|spotify-qt)$")), group="0"),
     Rule(Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), group="9"),
     Rule(Match(title=re.compile(r"^(VirtualBoxVM)$")), group="9"),
     Rule(Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844)$")), group="8"),

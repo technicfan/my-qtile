@@ -16,7 +16,7 @@ set_state()
 
 wallpaper()
 {
-    feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/firefox.png"
+    feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/more/gruv-commit.png"
 }
 
 one()

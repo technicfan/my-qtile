@@ -27,9 +27,9 @@ import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from functions import minimize_all, change_mpris, volume_up_down
-from groups import groups, group_names
-from colors import colors, myTerm
+from .functions import minimize_all, change_mpris, volume_up_down
+from .groups import groups, group_names
+from .colors import colors, myTerm
 
 mod = "mod4"
 mod2 = "XF86Launch6"
@@ -65,7 +65,7 @@ keys = [
     Key([mod], "i", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
     # own
-    Key([mod], "d", lazy.spawn("l7-dmenu-desktop -i -p ~prompt~"), desc="Run launcher"),
+    Key([mod], "d", lazy.spawn("l7-dmenu-desktop"), desc="Run launcher"),
     # Key([mod], "d", lazy.spawn("env SHELL=/bin/bash j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:''"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh vms"), desc="Dirty solution for aliases"),
@@ -81,6 +81,7 @@ keys = [
     Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
     # menu-qalc
     Key([mod], "plus", lazy.spawn(".config/qtile/scripts/menu-qalc.sh"), desc="dmenu calculator"),
+    #Key([mod], "plus", lazy.spawn("dmenu -C -p qalc:"), desc="dmenu calculator"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),

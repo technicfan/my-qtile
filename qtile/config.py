@@ -28,11 +28,10 @@ import sys
 import subprocess
 from libqtile import hook
 
-sys.path.insert(0, os.path.expanduser("~/.config/qtile/modules"))
-from keybindings import mouse, keys
-from groups import groups, dgroups_app_rules
-from layouts import layouts, floating_layout
-from widgets import screens, widget_defaults
+from modules.keybindings import mouse, keys
+from modules.groups import groups, dgroups_app_rules
+from modules.layouts import layouts, floating_layout
+from modules.widgets import screens, widget_defaults
 
 ### AUTOSTART ###
 @hook.subscribe.startup_once
@@ -41,9 +40,9 @@ def start_once():
     subprocess.run([script])
 
 # property for picom shadow exclude list
-@hook.subscribe.client_focus
-def set_hint(window):
-    window.window.set_property("IS_FLOATING", int(window.floating), type = "CARDINAL", format = 8)
+#@hook.subscribe.client_focus
+#def set_hint(window):
+#    window.window.set_property("IS_FLOATING", int(window.floating), type = "CARDINAL", format = 8)
 
 ### OTHER ###
 dgroups_key_binder = None

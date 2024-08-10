@@ -27,13 +27,14 @@ aw-qt --no-gui &
 sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" &
 nextcloud &
 tutanota-desktop -a &
-#caffeine &
+caffeine-indicator &
 clipcatd -r &
 unclutter -idle 3 &
 flameshot &
 
-nvidia-settings --assign FXAA=1 &
-nvidia-settings -l &
+#spotifyd &
+#nvidia-settings --assign FXAA=1 &
+#nvidia-settings -l &
 input-remapper-control --command autoload &
 polychromatic-cli -e keyboard &
 polychromatic-cli -e mouse &
