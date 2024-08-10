@@ -42,7 +42,7 @@ do
 done
 
 # Grab the answer
-if [ -n "$1" ]
+if [[ -n "$1" && "$1" != "--d"*"="* ]]
 then
     answer=$(qalc +u8 -t "$1")
 fi
