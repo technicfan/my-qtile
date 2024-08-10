@@ -167,7 +167,7 @@ def init_widgets_list():
                             padding = 10,
                             icon_theme = "Gruvbox Plus Dark"
                         ),
-                        widget.Spacer(length=6),
+                        widget.Spacer(length=10),
                  ],
                  text_closed = "",
                  text_open = "",

@@ -80,6 +80,8 @@ def toggle_tray(qtile):
 # volume function
 @lazy.function
 def volume_up_down(qtile, way):
+        if way not in "toggle|up|down":
+            return
         mixer = alsaaudio.Mixer()
         if way == "toggle":
             if mixer.getmute()[0] == 1:
