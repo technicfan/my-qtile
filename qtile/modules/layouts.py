@@ -46,7 +46,7 @@ layouts = [
         ratio_increment = 0,
         **layout_defaults
     ),
-#    layout.MonadTall(**layout_defaults),
+    #layout.MonadTall(**layout_defaults),
     layout.Max(),
 ]
 

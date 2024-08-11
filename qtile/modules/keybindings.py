@@ -141,9 +141,9 @@ keys = [
     Key([mod, "shift"], "right", lazy.layout.shuffle_up(), desc="Move window up"),
 
     # Window size control
-    Key([mod, "shift"], "k", lazy.layout.grow(), desc="Grow window"),
-    Key([mod, "shift"], "l", lazy.layout.shrink(), desc="Shrink window"),
-    Key([mod, "shift"], "n", lazy.layout.reset(), desc="Shrink window"),
+    Key([mod, "control"], "right", lazy.layout.grow(), desc="Grow window"),
+    Key([mod, "control"], "left", lazy.layout.shrink(), desc="Shrink window"),
+    Key([mod, "control"], "n", lazy.layout.reset(), desc="Shrink window"),
 
     # Window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
@@ -172,5 +172,6 @@ for i in groups:
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod, "shift"], "Button1", lazy.window.set_position(), start=lazy.window.get_position()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
