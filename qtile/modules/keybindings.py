@@ -54,7 +54,7 @@ keys = [
                              lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
                              desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               lazy.spawn("sleep .6 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
+                               lazy.spawn("sleep .75 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
                                desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom --config .config/qtile/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
