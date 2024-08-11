@@ -1,22 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 check()
 {
     # had to use full path because it needs to be run by root for sddm xscreen config
-    echo $(awk -F " = " '/screen_state/ {print $2}' /home/technicfan/.config/qtile/states/states.ini)
+    echo "$(awk -F " = " '/screen_state/ {print $2}' /home/technicfan/.config/qtile/states/states.ini)"
 }
 
 set_state()
 {
-    if ! [[ $(check) = $1 ]]
+    if ! [[ $(check) = "$1" ]]
     then
         sed -i "s/screen_state = .*/screen_state = $1/g" ~/.config/qtile/states/states.ini
     fi
-}
-
-wallpaper()
-{
-    feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/more/gruv-commit.png"
 }
 
 one()
@@ -77,14 +72,6 @@ main()
         "4")
             mirror
         esac
-        ;;
-    "wallpaper")
-        if [ -z $2 ]
-        then
-            wallpaper
-        else
-            feh --bg-fill $2
-        fi
         ;;
     *)
         exit 1

@@ -2,8 +2,8 @@
 
 revert()
 {
-    ~/.config/qtile/scripts/screens.sh wallpaper
-    local name=$(echo $1 | awk -F "/" '{print $2}')
+    feh --bg-fill "$2/$1"
+    name=$(awk -F "/" '{print $2}' <<< "$1")
     if [[ -n $name ]]
     then
         notify-send "reverted to \"$name\""
@@ -14,28 +14,34 @@ revert()
 
 main()
 {
-    local default=$(cat ~/.config/qtile/scripts/screens.sh | grep wallpapers | sed 's/.*wallpapers\///g' | awk -F "\"" '{print $1}')
-    local choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed 's/\/home\/technicfan\/.config\/qtile\/wallpapers\///g')" | $DMENU  'Wallpapers:')
+    dir="$HOME/.config/qtile/wallpapers"
+    default="more/gruv-commit.png"
 
+    if [[ $1 = "print" ]]
+    then
+        echo "$dir/$default"
+        return
+    fi
+
+    choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed "s|$dir/||g")" | $DMENU  'Wallpapers:')
     if [[ $choice = "Revert to default" ]]
     then
-        revert $default
+        revert "$default" "$dir"
     elif [[ -n $choice ]]
     then
-        feh --bg-fill "$(echo ~)/.config/qtile/wallpapers/$choice"
-        notify-send "\"$(echo $choice | awk -F "/" '{print $NF}')\" is your new wallpaper"
+        feh --bg-fill "$dir/$choice"
+        notify-send "\"$(awk -F "/" '{print $NF}' <<< "$choice")\" is your new wallpaper"
 
-        if [[ -n $default && $default != $choice ]]
+        if [[ "$default" != "$choice" ]]
         then
-            local choice2=$(echo -e "No\nRevert to default\nYes" | $DMENU "Set \"$choice\" as default?")
-            if [[ -n $choice2 && $choice2 = "Yes" ]]
+            choice2=$(echo -e "No\nRevert to default\nYes" | $DMENU "Set \"$choice\" as default?")
+            if [[ $choice2 = "Yes" ]]
             then
-                local sed_choice=$(echo $choice | sed 's/\//\\\//g')
-                sed -i "s/wallpapers\/.*/wallpapers\/$(echo $sed_choice)\"/g" ~/.config/qtile/scripts/screens.sh
-                notify-send "\"$(echo $choice | awk -F "/" '{print $NF}')\" is your new default"
+                sed -i "s|default=\".*\"|default=\"$choice\"|" ~/.config/qtile/scripts/dmenu-wallpaper.sh && \
+                notify-send "\"$(awk -F "/" '{print $NF}' <<< "$choice")\" is your new default"
             elif [[ $choice2 = "Revert to default" ]]
             then
-                revert $default
+                revert "$default" "$dir"
             else
                 exit 1
             fi
@@ -47,4 +53,4 @@ main()
     fi
 }
 
-main
+main "$@"

@@ -220,5 +220,9 @@ def init_widgets_screen2():
 
 
 ### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background=colors[0])),
-           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, background=colors[0]))]
+screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background=colors[0]), 
+                  wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
+                  wallpaper_mode='fill'),
+           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, background=colors[0]), 
+                  wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
+                  wallpaper_mode='fill')]
