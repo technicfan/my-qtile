@@ -2,9 +2,9 @@
 
 main()
 {
-    local locker="i3lock-fancy-dualmonitor"
+    locker="i3lock-fancy-dualmonitor"
 
-    local options=(
+    options=(
         "Lock"
         "Logout"
         "Reboot"
@@ -12,7 +12,7 @@ main()
         "Suspend"
     )
 
-    local choice=$(printf '%s\n' "${options[@]}" | $DMENU 'Power menu:')
+    choice=$(printf '%s\n' "${options[@]}" | $DMENU 'Power menu:')
 
     case $choice in
     "Lock")
@@ -27,9 +27,23 @@ main()
         fi
         ;;
     "Reboot")
-        if [[ "$(echo -e "No\nYes" | $DMENU "${choice}?")" == "Yes" ]]
+        choice=$(echo -e "System\nBIOS\nWindows" | $DMENU 'Reboot destination:')
+        if [[ $choice =~ System|BIOS|Windows && "$(echo -e "No\nYes" | $DMENU "Reboot to ${choice}?")" == "Yes" ]]
         then
-            systemctl reboot
+            case $choice in
+            "System")
+                systemctl reboot
+            ;;
+            "BIOS")
+                systemctl reboot --firmware-setup
+                ;;
+            "Windows")
+                systemctl reboot --boot-loader-entry=windows.conf
+                ;;
+            *)
+                exit 0
+                ;;
+            esac
         else
             exit 0
         fi
