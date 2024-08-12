@@ -34,7 +34,6 @@ from .colors import colors, myTerm
 mod = "mod4"
 mod2 = "XF86Launch6"
 myBrowser = "firefox"
-#myFM = myTerm + " -e yazi"
 myFM = "dolphin"
 
 ### KEYBINDINGS ###
