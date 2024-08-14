@@ -91,7 +91,7 @@ keys = [
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
         Key([], "k", lazy.spawn("kill openrgb"),
-                     lazy.spawn("polychromatic-cli -e keyboard && polychromatic-cli -e mouse && polychromatic-cli -e mousepad", shell=True),
+                     lazy.spawn("polychromatic-cli -e keyboard && polychromatic-cli -e mouse", shell=True),
                      lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
         Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0"), desc="no rgb lighting"),
         Key([], "l", lazy.spawn("polychromatic-cli -o spectrum && openrgb --startminimized", shell=True), desc="rgb lighting as sound visualizer"),
