@@ -26,12 +26,12 @@ two()
 
 both()
 {
-    xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4 --primary
+    xrandr --output DP-4 --auto --primary --output HDMI-0 --auto --right-of DP-4
 }
 
 mirror()
 {
-    xrandr --output DP-4 --auto --output HDMI-0 --auto --same-as DP-4
+    xrandr --output DP-4 --auto --primary --output HDMI-0 --auto --same-as DP-4
 }
 
 
