@@ -16,17 +16,17 @@ set_state()
 
 one()
 {
-    xrandr --output HDMI-0 --off --output DP-4 --auto
+    xrandr --output HDMI-0 --off --output DP-4 --auto --primary
 }
 
 two()
 {
-    xrandr --output HDMI-0 --auto --output DP-4 --off
+    xrandr --output HDMI-0 --auto --primary --output DP-4 --off
 }
 
 both()
 {
-    xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4
+    xrandr --output DP-4 --auto --output HDMI-0 --auto --right-of DP-4 --primary
 }
 
 mirror()
