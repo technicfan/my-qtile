@@ -26,7 +26,8 @@
 import re
 from libqtile.config import Group, Match, ScratchPad, DropDown, Rule
 
-from .colors import colors, myTerm
+from .colors import colors
+from .functions import myTerm
 
 ### GROUPS ###
 groups = []

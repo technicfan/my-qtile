@@ -27,6 +27,7 @@ import os
 import sys
 import subprocess
 from libqtile import hook
+from libqtile.backend.wayland import InputConfig
 
 from modules.keybindings import mouse, keys
 from modules.groups import groups, dgroups_app_rules
@@ -58,7 +59,10 @@ reconfigure_screens = True
 auto_minimize = False
 
 # When using the Wayland backend, this can be used to configure input devices.
-wl_input_rules = None
+wl_input_rules = {
+    "type:mouse": InputConfig(pointer_accel=-0.5),
+    "type:keyboard": InputConfig(kb_layout="de")
+}
 
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.

@@ -32,6 +32,7 @@ import re
 from libqtile import bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
+from libqtile import qtile
 from qtile_extras import widget
 from qtile_extras.widget.decorations import BorderDecoration
 
@@ -144,7 +145,9 @@ def init_widgets_list():
                  foreground = colors[2],
                  fmt = "🕫  {}",
                  step = 5,
-                 mouse_callbacks = {"Button1": volume_up_down("toggle"), "Button4": volume_up_down("up"), "Button5": volume_up_down("down")}
+                 mouse_callbacks = {"Button1": volume_up_down("toggle"),
+                                    "Button4": volume_up_down("up"),
+                                    "Button5": volume_up_down("down")}
                  ),
         widget.WidgetBox ( 
              widgets = [
@@ -165,7 +168,7 @@ def init_widgets_list():
                  widgets = [
                         widget.Systray(
                             padding = 10,
-                            icon_theme = "Gruvbox Plus Dark"
+                            icon_theme = "Gruvbox-Plus-Dark"
                         ),
                         widget.Spacer(length=10),
                  ],
@@ -201,6 +204,16 @@ def init_widgets_colorscheme():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_colorscheme()
+    # replace systray with statusnotifier under wayland
+    if qtile.core.name == "wayland":
+        widgets_screen1[14].widgets[0] = widget.StatusNotifier(
+            padding = 10, icon_size = 20, icon_theme = "Gruvbox-Plus-Dark",
+            highlight_radius = 0, show_menu_icons = False, menu_width = 250,
+            menu_background = colors[0], highlight_colour = colors[1],
+            menu_foreground = colors[2], menu_foreground_highlighted = colors[0],
+            menu_foreground_disabled = colors[4], separator_colour = colors[4],
+            menu_font = "JetBrains Bold",
+        )
     return widgets_screen1
 
 # Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed

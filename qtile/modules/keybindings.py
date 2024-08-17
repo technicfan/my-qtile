@@ -27,9 +27,9 @@ import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from .functions import minimize_all, change_mpris, volume_up_down
+from .functions import minimize_all, change_mpris, volume_up_down, myTerm
 from .groups import groups, group_names
-from .colors import colors, myTerm
+from .colors import colors
 
 mod = "mod4"
 mod2 = "XF86Launch6"

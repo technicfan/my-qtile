@@ -10,7 +10,10 @@ import alsaaudio
 import subprocess
 from configparser import ConfigParser
 from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
 
+# guess terminal
+myTerm = guess_terminal()
 
 # window name function
 def window_name(name):
