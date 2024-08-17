@@ -46,6 +46,7 @@ def start_once():
 
 ### OTHER ###
 dgroups_key_binder = None
+dgroups_app_rules = []
 follow_mouse_focus = True
 bring_front_click = "floating_only"
 cursor_warp = False
