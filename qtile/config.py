@@ -24,13 +24,12 @@
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import os
-import sys
 import subprocess
 from libqtile import hook
 from libqtile.backend.wayland import InputConfig
 
 from modules.keybindings import mouse, keys
-from modules.groups import groups, dgroups_app_rules
+from modules.groups import groups
 from modules.layouts import layouts, floating_layout
 from modules.widgets import screens, widget_defaults
 

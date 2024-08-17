@@ -25,18 +25,14 @@
 
 import getpass
 import socket
-# make sure 'python-distro' is installed
-import distro
 import subprocess
-import re
 from libqtile import bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile import qtile
 from qtile_extras import widget
-from qtile_extras.widget.decorations import BorderDecoration
 
-from .functions import toggle_tray, volume_up_down, window_name, get_uptime
+from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro
 from .colors import colors
 
 # Some settings that are used on almost every widget
@@ -85,7 +81,7 @@ def init_widgets_list():
                  max_chars = 85,
                  width = bar.CALCULATED,
                  parse_text = window_name,
-                 empty_group_string = distro.name() + " - Qtile"
+                 empty_group_string = get_distro("Linux") + " - Qtile"
                  ),
 
         # Middle of the bar
@@ -216,7 +212,8 @@ def init_widgets_screen1():
         )
     return widgets_screen1
 
-# Now the python logo, the mpris widget and the systray are removed alongside with some spacers and the user mousecallbacks get removed
+# Now the python logo, the mpris widget and the systray are removed 
+# alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_colorscheme()
     # not opening systray when clicking on user on screen2
@@ -233,7 +230,7 @@ def init_widgets_screen2():
 
 
 ### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background=colors[0]), 
+screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background=colors[0]),
                   wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
                   wallpaper_mode='fill'),
            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, background=colors[0]), 

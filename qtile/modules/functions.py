@@ -5,15 +5,29 @@
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import os
-# make sure to install 'python-pyalsaaudio'
-import alsaaudio
 import subprocess
 from configparser import ConfigParser
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 # guess terminal
-myTerm = guess_terminal()
+def get_term(default: str):
+    term = guess_terminal()
+    if term == None:
+        term = default
+    return term
+
+# get distro
+def get_distro(default: str):
+    try:
+        import distro
+        return distro.name()
+    except:
+        try:
+            return subprocess.getoutput("awk -F '=| ' 'NR==1 {print $2}' \
+                    <<< \"$((distro1 || cat /etc/os-release) 2>/dev/null)\"")
+        except:
+            return default
 
 # window name function
 def window_name(name):
@@ -85,6 +99,12 @@ def toggle_tray(qtile):
 def volume_up_down(qtile, way):
         if way not in "toggle|up|down":
             return
+        try:
+            import alsaaudio
+        except:
+            subprocess.call("notify-send -a qtile\
+                'Install pyalsaaudio to control the volume'", shell=True)
+            return
         mixer = alsaaudio.Mixer()
         if way == "toggle":
             if mixer.getmute()[0] == 1:
@@ -111,3 +131,5 @@ def volume_up_down(qtile, way):
             subprocess.call(f"notify-send -a qtile-volume\
                 -h string:x-dunst-stack-tag:test -h int:value:{new_vol}\
                     'Volume: {new_vol}%'", shell=True)
+
+myTerm = get_term("alacritty")

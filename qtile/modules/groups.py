@@ -24,9 +24,8 @@
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import re
-from libqtile.config import Group, Match, ScratchPad, DropDown, Rule
+from libqtile.config import Group, Match, ScratchPad, DropDown
 
-from .colors import colors
 from .functions import myTerm
 
 ### GROUPS ###
@@ -35,6 +34,19 @@ groups = []
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 group_layouts = ["spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "max", "spiral"]
+
+group_matches = [
+    [Match(wm_class=re.compile(r"^(firefox)$"))],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$"))],
+    [Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844)$"))],
+    [Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), Match(title=re.compile(r"^(VirtualBoxVM)$"))],
+    [Match(wm_class=re.compile(r"^(spotify|spotify-qt)$"))],
+]
 
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "X"]
@@ -46,6 +58,7 @@ for i in range(len(group_names)):
             name=group_names[i],
             layout=group_layouts[i],
             label=group_labels[i],
+            matches=group_matches[i]
         ))
 
 ### SCRATCHPADS ###
@@ -56,13 +69,3 @@ groups.append(
                                DropDown("bluetooth", "blueman-manager", width=0.5, height=0.5, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
                              ]),
 )
-
-### WINDOW RULES ###
-dgroups_app_rules = [
-    Rule(Match(wm_class=re.compile(r"^(spotify|spotify-qt)$")), group="0"),
-    Rule(Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), group="9"),
-    Rule(Match(title=re.compile(r"^(VirtualBoxVM)$")), group="9"),
-    Rule(Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844)$")), group="8"),
-    Rule(Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$")), group="7"),
-    Rule(Match(wm_class=re.compile(r"^(firefox)$")), group="1"),
-]

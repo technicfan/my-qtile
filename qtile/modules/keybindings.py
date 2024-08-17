@@ -28,11 +28,10 @@ from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
 from .functions import minimize_all, change_mpris, volume_up_down, myTerm
-from .groups import groups, group_names
+from .groups import group_names
 from .colors import colors
 
 mod = "mod4"
-mod2 = "XF86Launch6"
 myBrowser = "firefox"
 myFM = "dolphin"
 
@@ -158,14 +157,13 @@ keys = [
 
 ]
 
-for i in groups:
-    if any([i.name in x for x in group_names]):
-        keys.extend(
-            [
-                Key([mod], i.name, lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
-                Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen(), desc="Move focused window to group {}".format(i.name)),
-            ]
-        )
+for group in group_names:
+    keys.extend(
+        [
+            Key([mod], group, lazy.group[group].toscreen(), desc="Switch to group {}".format(group)),
+            Key([mod, "shift"], group, lazy.window.togroup(group) , lazy.group[group].toscreen(), desc="Move focused window to group {}".format(group)),
+        ]
+    )
 
 # Drag floating layouts.
 mouse = [
