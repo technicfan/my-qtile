@@ -21,22 +21,36 @@ def get_term(default: str):
 def get_distro(default: str):
     try:
         import distro
-        return distro.name()
+        return distro.name().lower()
     except:
         try:
             return subprocess.getoutput("awk -F '=| ' 'NR==1 {print $2}' \
-                    <<< \"$((distro1 || cat /etc/os-release) 2>/dev/null)\"")
+                    <<< \"$((distro1 || cat /etc/os-release) 2>/dev/null)\"").lower()
         except:
-            return default
+            return default.lower()
+
+def get_vram_usage():
+    unit = "G"
+    b = int(subprocess.getoutput("nvidia-smi --query-gpu=memory.used \
+            --format=csv,noheader,nounits")) * 2**20
+    match unit:
+        case "Mi":
+            return str(b*2**-20) + "Mi"
+        case "Gi":
+            return str(round(b*2**10,2)) + "Gi"
+        case "M":
+            return str(round(b*10**-6)) + "M"
+        case "G":
+            return str(round(b*10**-9,2)) + "G"
 
 # window name function
 def window_name(name):
     if "- Oracle VM VirtualBox" in name:
-        return name.split("[",1)[0]
+        return name.split("[",1)[0].lower()
     elif name == "web.whatsapp.com":
-        return "WhatsApp"
+        return name.split(".")[1]
     else:
-        return name
+        return name.lower()
 
 
 # A function for hide/show all the windows in a group
@@ -88,10 +102,26 @@ def change_mpris(qtile, action):
     with open(config_file, 'w') as conf:
          config.write(conf)
 
+
 @lazy.function
 def toggle_tray(qtile):
     qtile.widgets_map["tray"].toggle()
     qtile.widgets_map["datetime"].toggle()
+
+@lazy.function
+def toggle_swap(qtile):
+    config = ConfigParser()
+    config_file = os.path.expanduser("~/.config/qtile/states/states.ini")
+    config.read(config_file)
+    if qtile.widgets_map["mpris"].box_is_open and \
+        config["widgetboxes"]["mpris"] == "1" and \
+         not qtile.widgets_map["swap"].box_is_open:
+        qtile.widgets_map["mpris"].close()
+    elif config["widgetboxes"]["mpris"] == "1" and \
+          not qtile.widgets_map["mpris"].box_is_open and \
+           qtile.widgets_map["swap"].box_is_open:
+        qtile.widgets_map["mpris"].open()
+    qtile.widgets_map["swap"].toggle()
 
 
 # volume function

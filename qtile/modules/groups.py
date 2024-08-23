@@ -57,7 +57,7 @@ for i in range(len(group_names)):
         Group(
             name=group_names[i],
             layout=group_layouts[i],
-            label=group_labels[i],
+            label=group_labels[i].lower(),
             matches=group_matches[i]
         ))
 

@@ -25,9 +25,9 @@
 
 from libqtile import layout
 from libqtile.config import Match
+
 # custom spiral
 from .spiral import Spiral
-
 from .colors import colors
 
 layout_defaults = {"border_width": 0,
