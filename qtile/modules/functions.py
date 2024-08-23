@@ -25,7 +25,7 @@ def get_distro(default: str):
     except:
         try:
             return subprocess.getoutput("awk -F '=| ' 'NR==1 {print $2}' \
-                    <<< \"$((distro || cat /etc/os-release) 2>/dev/null)\"").lower()
+                    <<< \"$((distro || cat /etc/os-release | sed 's/\"//g') 2>/dev/null)\"").lower()
         except:
             return default.lower()
 
