@@ -26,7 +26,7 @@
 import getpass
 import socket
 import subprocess
-from libqtile import bar
+from libqtile import widget, bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile import qtile

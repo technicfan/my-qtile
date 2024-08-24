@@ -32,7 +32,7 @@ def get_distro(default: str):
 def get_vram_usage():
     try:
         import psutil
-        return "bat: " + str(psutil.sensors_battery().percent)
+        return "bat: " + str(round(psutil.sensors_battery().percent, 2)) + "%"
     except:
         b = int(subprocess.getoutput("nvidia-smi --query-gpu=memory.used \
                 --format=csv,noheader,nounits")) * 2**20
