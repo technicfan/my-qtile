@@ -30,18 +30,23 @@ def get_distro(default: str):
             return default.lower()
 
 def get_vram_usage():
-    unit = "G"
-    b = int(subprocess.getoutput("nvidia-smi --query-gpu=memory.used \
-            --format=csv,noheader,nounits")) * 2**20
-    match unit:
-        case "Mi":
-            return str(b*2**-20) + "Mi"
-        case "Gi":
-            return str(round(b*2**10,2)) + "Gi"
-        case "M":
-            return str(round(b*10**-6)) + "M"
-        case "G":
-            return str(round(b*10**-9,2)) + "G"
+    try:
+        import psutil
+        return "bat: " + str(psutil.sensors_battery().percent)
+    except:
+        b = int(subprocess.getoutput("nvidia-smi --query-gpu=memory.used \
+                --format=csv,noheader,nounits")) * 2**20
+        unit = "G"
+        match unit:
+            case "Mi":
+                usage = str(b*2**-20) + "Mi"
+            case "Gi":
+                usage = str(round(b*2**10,2)) + "Gi"
+            case "M":
+                usage = str(round(b*10**-6)) + "M"
+            case "G":
+                usage = str(round(b*10**-9,2)) + "G"
+        return "vram: " + usage
 
 # window name function
 def window_name(name):

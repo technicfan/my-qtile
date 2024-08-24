@@ -154,7 +154,7 @@ def init_widgets_list():
                  func = get_vram_usage,
                  foreground = colors[6],
                  #fmt = "\uf1c0   {}"
-                 fmt = "vram: {}",
+                 fmt = "{}",
                  mouse_callbacks = {"Button1": toggle_swap}
                  ),
         widget.GenPollText(
