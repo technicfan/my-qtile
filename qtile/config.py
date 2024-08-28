@@ -39,11 +39,6 @@ def start_once():
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.run([script])
 
-# property for picom shadow exclude list
-#@hook.subscribe.client_focus
-#def set_hint(window):
-#    window.window.set_property("IS_FLOATING", int(window.floating), type = "CARDINAL", format = 8)
-
 ### OTHER ###
 dgroups_key_binder = None
 dgroups_app_rules = []

@@ -58,13 +58,13 @@ keys = [
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
     # dmenu - make sure to apply x,y,z + height + border patch and install 'dmenu-extended-git'
-    # Dmenu scripts stolen from evil DT
+    # dmenu scripts stolen from DT
     Key([mod], "o", lazy.spawn(".config/qtile/scripts/dmenu.sh output-switcher"), desc="Change pipewire output"),
     Key([mod], "i", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
     # own
     Key([mod], "d", lazy.spawn("l7-dmenu-desktop -p 'run:'"), desc="Run launcher"),
-    # Key([mod], "d", lazy.spawn("env SHELL=/bin/bash j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:''"), desc="Run launcher"),
+    #Key([mod], "d", lazy.spawn("env SHELL=/bin/bash j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:''"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh vms"), desc="Dirty solution for aliases"),
     Key([mod], "n", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
@@ -158,12 +158,8 @@ keys = [
 ]
 
 for group in group_names:
-    keys.extend(
-        [
-            Key([mod], group, lazy.group[group].toscreen(), desc="Switch to group {}".format(group)),
-            Key([mod, "shift"], group, lazy.window.togroup(group) , lazy.group[group].toscreen(), desc="Move focused window to group {}".format(group)),
-        ]
-    )
+    keys.extend([Key([mod], group, lazy.group[group].toscreen(), desc="Switch to group {}".format(group)),
+                 Key([mod, "shift"], group, lazy.window.togroup(group) , lazy.group[group].toscreen(), desc="Move focused window to group {}".format(group))])
 
 # Drag floating layouts.
 mouse = [

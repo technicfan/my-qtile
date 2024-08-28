@@ -24,7 +24,6 @@
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import getpass
-import socket
 import subprocess
 from libqtile import widget, bar
 from libqtile.config import Screen
@@ -32,7 +31,7 @@ from libqtile.lazy import lazy
 from libqtile import qtile
 from qtile_extras import widget
 
-from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage, toggle_swap
+from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage
 from .colors import colors
 from .clock import Clock
 from .mpris2widget import Mpris2
@@ -44,7 +43,7 @@ widget_defaults = dict(
     background = colors[0]
 )
 
-def init_widgets_list():
+def init_widgets():
     widgets_list = [
         widget.Prompt(
                  foreground = colors[0],
@@ -74,14 +73,18 @@ def init_widgets_list():
                  hide_unused = True,
                  toggle = False,
                  ),
+        widget.TextBox(
+            text = "-",
+            foreground = colors[7],
+            padding = 3
+        ),
         widget.WindowName(
                  foreground = colors[9],
-                 padding = 3,
+                 padding = 5,
                  max_chars = 85,
                  width = bar.CALCULATED,
                  parse_text = window_name,
-                 empty_group_string = get_distro("Linux") + " - Qtile".lower(),
-                 fmt = "-  {}"
+                 empty_group_string = get_distro("Linux") + " - Qtile".lower()
                  ),
 
         # Middle of the bar
@@ -96,10 +99,8 @@ def init_widgets_list():
                          format = "{xesam:title} - {xesam:artist}",
                          background = colors[0],
                          foreground = colors[8],
-                         #objname = "org.mpris.MediaPlayer2.spotifyd",
                          objname = "org.mpris.MediaPlayer2.spotify",
                          width = 275,
-                         #mouse_callbacks = {"Button4": None, "Button5": None}
                     ),
              ],
              text_closed = "",
@@ -114,13 +115,11 @@ def init_widgets_list():
         widget.TextBox(
                  padding = 7,
                  text = subprocess.check_output("printf $(uname -r)", shell=True, text=True),
-                 #fmt = "\uf17c   {}",
                  fmt = "kernel: {}",
                  foreground = colors[1]
                  ),
         widget.CPU(
                  padding = 7,
-                 #format = "\uf2db   {load_percent}%",
                  format = "cpu: {load_percent}%",
                  foreground = colors[2]
                  ),
@@ -129,46 +128,24 @@ def init_widgets_list():
                  foreground = colors[5],
                  format = "{MemUsed: .2f}{mm}",
                  measure_mem = "G",
-                 #fmt = "\uf1c0  {}",
                  fmt = "ram: {}"
                  ),
-        widget.WidgetBox(
-                 widgets = [
-                    widget.Memory(
-                    padding = 7,
-                    foreground = colors[5],
-                    format = "{SwapUsed: .2f}{ms}",
-                    measure_swap = "G",
-                    #fmt = "\uf1c0  {}"
-                    fmt = "swap: {}"
-                    ),
-                 ],
-                 text_closed = "",
-                 text_open = "",
-                 close_button_location = "right",
-                 name = "swap"
-        ),
         widget.GenPollText(
                  padding = 7,
                  update_interval = 1,
                  func = get_vram_usage,
                  foreground = colors[6],
-                 #fmt = "\uf1c0   {}"
-                 fmt = "{}",
-                 mouse_callbacks = {"Button1": toggle_swap}
                  ),
         widget.GenPollText(
                  padding = 7,
                  update_interval = 30,
                  func = get_uptime,
                  foreground = colors[7],
-                 #fmt = "\uf21e   {}"
                  fmt = "up: {}"
                  ),
         widget.Volume(
                  padding = 7,
                  foreground = colors[8],
-                 #fmt = "🕫  {}",
                  fmt = "vol: {}",
                  step = 5,
                  mouse_callbacks = {"Button1": volume_up_down("toggle"),
@@ -180,7 +157,6 @@ def init_widgets_list():
                     Clock(
                              padding = 7,
                              foreground = colors[9],
-                             #format = "⏱  %a  %d. %B - %H:%M",
                              format = "%a  %d. %B - %H:%M",
                              mouse_callbacks = {"Button1": lazy.spawn("galendae")}
                     ),
@@ -208,8 +184,6 @@ def init_widgets_list():
         widget.TextBox(
                  padding = 7,
                  foreground = colors[2],
-                 #background = colors[1],
-                 #text = (getpass.getuser() + "@" + socket.gethostname()).lower(),
                  text = getpass.getuser().lower(),
                  mouse_callbacks = {"Button1": toggle_tray,
                                     "Button2": lazy.spawn("vscodium GitHub/my-qtile"),
@@ -220,22 +194,11 @@ def init_widgets_list():
     return widgets_list
 
 ### WIDGET INITIALISATION ###
-def init_widgets_colorscheme():
-    widgets_colorscheme = init_widgets_list()
-    match colors[2]:
-        case "#c678dd":
-            widgets_colorscheme[3].custom_icon_paths = [".config/qtile/layout-icons/pink"]
-        case "#87a757":
-            widgets_colorscheme[3].custom_icon_paths = [".config/qtile/layout-icons/green"]
-        case "#d3869b":
-            widgets_colorscheme[3].custom_icon_paths = [".config/qtile/layout-icons/gruvbox_magenta"]
-    return widgets_colorscheme
-
 def init_widgets_screen1():
-    widgets_screen1 = init_widgets_colorscheme()
+    widgets = init_widgets()
     # replace systray with statusnotifier under wayland
     if qtile.core.name == "wayland":
-        widgets_screen1[14].widgets[0] = widget.StatusNotifier(
+        widgets[14].widgets[0] = widget.StatusNotifier(
             padding = 7, icon_size = 17, icon_theme = "Gruvbox-Plus-Dark",
             highlight_radius = 0, show_menu_icons = False, menu_width = 250,
             menu_background = colors[0], highlight_colour = colors[1],
@@ -243,23 +206,21 @@ def init_widgets_screen1():
             menu_foreground_disabled = colors[4], separator_colour = colors[4],
             menu_font = "JetBrains Bold",
         )
-    return widgets_screen1
+    return widgets
 
-# Now the python logo, the mpris widget and the systray are removed 
-# alongside with some spacers and the user mousecallbacks get removed
 def init_widgets_screen2():
-    widgets_screen2 = init_widgets_colorscheme()
+    widgets = init_widgets()
     # not opening systray when clicking on user on screen2
-    widgets_screen2[15].mouse_callbacks = {}
+    widgets[15].mouse_callbacks = {}
     # extend window name on second screen
-    widgets_screen2[2].max_chars = 125
+    widgets[2].max_chars = 125
     # run prompt
-    del widgets_screen2[0:1]
+    del widgets[0:1]
     # mpris
-    del widgets_screen2[3:4]
+    del widgets[4:5]
     # systray
-    del widgets_screen2[12:13]
-    return widgets_screen2
+    del widgets[12:13]
+    return widgets
 
 
 ### SCREENS ###

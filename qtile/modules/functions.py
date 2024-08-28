@@ -1,3 +1,22 @@
+# Copyright (c) 2024 Technicfan
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 # _____ _____ ____ _   _ _   _ ___ ____ _____ _    _   _    ____ ____  _____    _  _____ ___ ___  _   _   _
 #|_   _| ____/ ___| | | | \ | |_ _/ ___|  ___/ \  | \ | |  / ___|  _ \| ____|  / \|_   _|_ _/ _ \| \ | | | |
 #  | | |  _|| |   | |_| |  \| || | |   | |_ / _ \ |  \| | | |   | |_) |  _|   / _ \ | |  | | | | |  \| | | |
@@ -10,12 +29,14 @@ from configparser import ConfigParser
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+
 # guess terminal
 def get_term(default: str):
     term = guess_terminal()
     if term == None:
         term = default
     return term
+
 
 # get distro
 def get_distro(default: str):
@@ -29,10 +50,12 @@ def get_distro(default: str):
         except:
             return default.lower()
 
+
 def get_vram_usage():
     try:
         import psutil
-        return "bat: " + str(round(psutil.sensors_battery().percent)) + "%"
+        return "bat: " + str(round(psutil.sensors_battery().percent
+        )) + "%"
     except:
         b = int(subprocess.getoutput("nvidia-smi --query-gpu=memory.used \
                 --format=csv,noheader,nounits")) * 2**20
@@ -47,6 +70,7 @@ def get_vram_usage():
             case "G":
                 usage = str(round(b*10**-9,2)) + "G"
         return "vram: " + usage
+
 
 # window name function
 def window_name(name):
@@ -113,21 +137,6 @@ def toggle_tray(qtile):
     qtile.widgets_map["tray"].toggle()
     qtile.widgets_map["datetime"].toggle()
 
-@lazy.function
-def toggle_swap(qtile):
-    config = ConfigParser()
-    config_file = os.path.expanduser("~/.config/qtile/states/states.ini")
-    config.read(config_file)
-    if qtile.widgets_map["mpris"].box_is_open and \
-        config["widgetboxes"]["mpris"] == "1" and \
-         not qtile.widgets_map["swap"].box_is_open:
-        qtile.widgets_map["mpris"].close()
-    elif config["widgetboxes"]["mpris"] == "1" and \
-          not qtile.widgets_map["mpris"].box_is_open and \
-           qtile.widgets_map["swap"].box_is_open:
-        qtile.widgets_map["mpris"].open()
-    qtile.widgets_map["swap"].toggle()
-
 
 # volume function
 @lazy.function
@@ -137,34 +146,32 @@ def volume_up_down(qtile, way):
         try:
             import alsaaudio
         except:
-            subprocess.call("notify-send -a qtile\
+            subprocess.run("notify-send -a qtile\
                 'Install pyalsaaudio to control the volume'", shell=True)
             return
         mixer = alsaaudio.Mixer()
         if way == "toggle":
-            if mixer.getmute()[0] == 1:
-                mixer.setmute(0)
-            else:
-                mixer.setmute(1)
+            mixer.setmute(-(mixer.getmute()[0]-1))
         else:
             step = qtile.widgets_map["volume"].step
             vol = mixer.getvolume()[0]
-            mod = vol % step
+            diff = vol % step
             if way == "up":
-                new_vol = vol + step - mod
-            if way == "down":
-                if mod != 0:
-                    new_vol = vol - mod
+                vol += step - diff
+            else:
+                if diff != 0:
+                    vol -= diff
                 else:
-                    new_vol = vol - step
-            if new_vol <= 0:
+                    vol -= step
+            if vol <= 0:
                 mixer.setmute(1)
             else:
                 mixer.setmute(0)
-            mixer.setvolume(new_vol)
+            mixer.setvolume(vol)
             # volume osd using dunst
-            subprocess.call(f"notify-send -a qtile-volume\
-                -h string:x-dunst-stack-tag:test -h int:value:{new_vol}\
-                    'Volume: {new_vol}%'", shell=True)
+            subprocess.run(f"notify-send -a qtile-volume\
+                -h string:x-dunst-stack-tag:test -h int:value:{vol}\
+                    'Volume: {vol}%'", shell=True)
+
 
 myTerm = get_term("alacritty")
