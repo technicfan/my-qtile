@@ -1,4 +1,5 @@
 # Copyright (c) 2022 elParaguayo
+# Copyright (c) 2024 Technicfan
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +28,7 @@ from libqtile import layout
 from libqtile.config import Match
 
 # custom spiral
-from .spiral import Spiral
+from layout.spiral import Spiral
 from .colors import colors
 
 layout_defaults = {"border_width": 0,

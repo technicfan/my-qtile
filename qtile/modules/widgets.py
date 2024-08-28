@@ -1,4 +1,5 @@
 # Copyright (c) 2022 elParaguayo
+# Copyright (c) 2024 Technicfan
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -33,8 +34,8 @@ from qtile_extras import widget
 
 from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage
 from .colors import colors
-from .clock import Clock
-from .mpris2widget import Mpris2
+from widget.clock import Clock
+from widget.mpris2widget import Mpris2
 
 # Some settings that are used on almost every widget
 widget_defaults = dict(
