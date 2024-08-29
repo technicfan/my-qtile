@@ -44,7 +44,7 @@ group_matches = [
     [],
     [],
     [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$"))],
-    [Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844)$"))],
+    [Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844|alpaca)$"))],
     [Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), Match(title=re.compile(r"^(VirtualBoxVM)$"))],
     [Match(wm_class=re.compile(r"^(spotify|spotify-qt)$"))],
 ]
