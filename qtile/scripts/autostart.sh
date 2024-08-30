@@ -12,6 +12,12 @@
 #change your keyboard if you need it
 setxkbmap -layout de
 
+# stupid libadwaita dark bug fix
+if [[ $(gsettings get org.gnome.desktop.interface color-scheme) != "'prefer-dark'" ]]
+then
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+fi
+
 #starting utility applications at boot time
 nm-applet &
 xfce4-power-manager &

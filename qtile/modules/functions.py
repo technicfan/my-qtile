@@ -24,7 +24,9 @@
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import os
+import psutil
 import subprocess
+import alsaaudio
 from configparser import ConfigParser
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -53,7 +55,6 @@ def get_distro(default: str):
 
 def get_vram_usage():
     try:
-        import psutil
         return "bat: " + str(round(psutil.sensors_battery().percent
         )) + "%"
     except:
@@ -142,12 +143,6 @@ def toggle_tray(qtile):
 @lazy.function
 def volume_up_down(qtile, way):
         if way not in "toggle|up|down":
-            return
-        try:
-            import alsaaudio
-        except:
-            subprocess.run("notify-send -a qtile\
-                'Install pyalsaaudio to control the volume'", shell=True)
             return
         mixer = alsaaudio.Mixer()
         if way == "toggle":
