@@ -31,34 +31,20 @@ from libqtile.config import Screen
 from libqtile.lazy import lazy
 from libqtile import qtile
 from qtile_extras import widget
+from qtile_extras.widget.decorations import RectDecoration
 
 from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage
 from .colors import colors
 from widget.clock import Clock
 from widget.mpris2widget import Mpris2
 
-# Some settings that are used on almost every widget
-widget_defaults = dict(
-    font="JetBrains Bold",
-    fontsize = 12,
-    background = colors[0]
-)
-
 def init_widgets():
     widgets_list = [
-        widget.Prompt(
-                 foreground = colors[0],
-                 background = colors[1],
-                 cursor_color = colors[0],
-                 padding = 5,
-                 cursorblink = False
-        ),
         widget.GroupBox(
-                 #fontsize = 11,
-                 margin_x = 0,
-                 padding_x = 0,
-                 padding_y = 8,
-                 borderwidth = 5,
+                 margin_x = 10,
+                 padding = 0,
+                 borderwidth = 0,
+                 spacing = 8,
                  active = colors[2],
                  block_highlight_text_color = colors[0],
                  rounded = False,
@@ -72,28 +58,35 @@ def init_widgets():
                  urgent_border = colors[5],
                  urgent_text = colors[0],
                  hide_unused = True,
-                 toggle = False,
+                 toggle = False
                  ),
         widget.TextBox(
-            text = "-",
-            foreground = colors[7],
-            padding = 3
+                 text = "-",
+                 foreground = colors[7],
+                 padding = 0
         ),
         widget.WindowName(
                  foreground = colors[9],
-                 padding = 5,
+                 padding = 10,
                  max_chars = 85,
                  width = bar.CALCULATED,
                  parse_text = window_name,
                  empty_group_string = get_distro("Linux") + " - Qtile".lower()
-                 ),
+        ),
+        widget.Prompt(
+                 foreground = colors[6],
+                 cursor_color = colors[0],
+                 padding = 0,
+                 cursorblink = False
+        ),
 
         # Middle of the bar
 
         widget.Spacer(),
         widget.WidgetBox ( 
              widgets = [
-                    Mpris2(
+                    widget.modify(
+                         Mpris2,
                          padding = 7,
                          no_metadata_text = "<d-bus> wtf",
                          paused_text = "   {track}",
@@ -101,7 +94,7 @@ def init_widgets():
                          background = colors[0],
                          foreground = colors[8],
                          objname = "org.mpris.MediaPlayer2.spotify",
-                         width = 275,
+                         width = 275
                     ),
              ],
              text_closed = "",
@@ -114,38 +107,38 @@ def init_widgets():
         # Middle of the bar
 
         widget.TextBox(
-                 padding = 7,
+                 padding = 2,
                  text = subprocess.check_output("printf $(uname -r)", shell=True, text=True),
                  fmt = "kernel: {}",
                  foreground = colors[1]
                  ),
         widget.CPU(
-                 padding = 7,
+                 padding = 12,
                  format = "cpu: {load_percent}%",
                  foreground = colors[2]
                  ),
         widget.Memory(
-                 padding = 7,
+                 padding = 2,
                  foreground = colors[5],
                  format = "{MemUsed: .2f}{mm}",
                  measure_mem = "G",
                  fmt = "ram: {}"
                  ),
         widget.GenPollText(
-                 padding = 7,
+                 padding = 12,
                  update_interval = 1,
                  func = get_vram_usage,
-                 foreground = colors[6],
+                 foreground = colors[6]
                  ),
         widget.GenPollText(
-                 padding = 7,
+                 padding = 2,
                  update_interval = 30,
                  func = get_uptime,
                  foreground = colors[7],
                  fmt = "up: {}"
                  ),
         widget.Volume(
-                 padding = 7,
+                 padding = 12,
                  foreground = colors[8],
                  fmt = "vol: {}",
                  step = 5,
@@ -155,11 +148,12 @@ def init_widgets():
                  ),
         widget.WidgetBox( 
              widgets = [
-                    Clock(
-                             padding = 7,
-                             foreground = colors[9],
-                             format = "%a  %d. %B - %H:%M",
-                             mouse_callbacks = {"Button1": lazy.spawn("galendae")}
+                    widget.modify(
+                        Clock,
+                        padding = 2,
+                        foreground = colors[9],
+                        format = "%a  %d. %B - %H:%M",
+                        mouse_callbacks = {"Button1": lazy.spawn("gsimplecal")}
                     ),
              ],
              text_closed = "",
@@ -171,11 +165,10 @@ def init_widgets():
         widget.WidgetBox( 
                  widgets = [
                         widget.Systray(
-                            padding = 7,
+                            padding = 5,
                             icon_theme = "Gruvbox-Plus-Dark",
-                            icon_size = 17,
-                        ),
-                        widget.Spacer(length=3),
+                            icon_size = 17
+                        )
                  ],
                  text_closed = "",
                  text_open = "",
@@ -183,13 +176,13 @@ def init_widgets():
                  name = "tray"
         ),
         widget.TextBox(
-                 padding = 7,
+                 padding = 12,
                  foreground = colors[2],
                  text = getpass.getuser().lower(),
                  mouse_callbacks = {"Button1": toggle_tray,
                                     "Button2": lazy.spawn("vscodium GitHub/my-qtile"),
                                     "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')
-                                   },
+                                   }
         ),
         ]
     return widgets_list
@@ -216,18 +209,27 @@ def init_widgets_screen2():
     # extend window name on second screen
     widgets[2].max_chars = 125
     # run prompt
-    del widgets[0:1]
+    del widgets[3:4]
     # mpris
     del widgets[4:5]
     # systray
     del widgets[12:13]
     return widgets
 
+# Some settings that are used on almost every widget
+widget_defaults = dict(
+    font="JetBrains Bold",
+    fontsize = 12,
+    background = colors[0],
+    decorations = [
+        RectDecoration(line_colour=colors[1], line_width=2, radius=10, filled=False, group=True)
+    ]
+)
 
 ### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, background=colors[0]),
+screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=30, background=colors[0], margin=[4,4,0,4]),
                   wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
                   wallpaper_mode='fill'),
-           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=28, background=colors[0]), 
+           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=30, background=colors[0], margin=[4,4,0,4]), 
                   wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
                   wallpaper_mode='fill')]

@@ -26,17 +26,17 @@
 
 from libqtile import layout
 from libqtile.config import Match
+from qtile_extras.layout.decorations.borders import RoundedCorners
 
 # custom spiral
 from layout.spiral import Spiral
 from .colors import colors
 
-layout_defaults = {"border_width": 0,
-                   "margin": 0,
+layout_defaults = {"border_width": 2,
+                   "margin": 4,
                    "border_focus": colors[1],
                    "border_normal": colors[3]
                   }
-
 
 ### LAYOUTS ###
 layouts = [

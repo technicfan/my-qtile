@@ -34,7 +34,7 @@ from modules.groups import groups
 from modules.layouts import layouts, floating_layout
 from modules.widgets import screens, widget_defaults
 
-### AUTOSTART ###
+### HOOKS ###
 @hook.subscribe.startup_once
 def start_once():
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
@@ -48,7 +48,7 @@ bring_front_click = "floating_only"
 cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-reconfigure_screens = True
+reconfigure_screens = False
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
