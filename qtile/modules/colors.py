@@ -27,22 +27,6 @@
 # Then, you can use RGBA color codes to add transparency to the colors below.
 # For ex: colors = [["#282c34ee", "#282c34dd"], ...
 
-Technicfan = [
-    "#133912", # bg
-    "#87a757", # fg
-    "#c678dd", # fg2
-    "#0d2a0e", # inactive border
-    "#555555"  # seperator
-    ]
-
-TechnicfanClean = [
-    "#133912", # bg
-    "#87a757", # fg
-    "#87a757", # fg2
-    "#0d2a0e", # inactive border
-    "#555555"  # seperator
-    ]
-
 GruvboxMaterial = [
     "#282828", # bg
     "#dfbf8e", # fg
@@ -55,13 +39,5 @@ GruvboxMaterial = [
     "#7daea3", # blue
     "#89b482"  # cyan
     ]
-
-Gruvbox = [
-    "#282828", # bg
-    "#ebdbb2", # fg
-    "#d3869b", # fg2
-    "#453b2c", # inactive border
-    "#555555"  # seperator
-]
 
 colors = GruvboxMaterial
