@@ -64,7 +64,7 @@ keys = [
     Key([mod], "i", lazy.spawn(".config/qtile/scripts/dmenu.sh kill"), desc="Kill processes"),
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
     # own
-    Key([mod], "d", lazy.spawn("l7-dmenu-desktop -p 'run:'"), desc="Run launcher"),
+    Key([mod], "d", lazy.spawn("l7-dmenu-desktop"), desc="Run launcher"),
     #Key([mod], "d", lazy.spawn("env SHELL=/bin/bash j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:''"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh vms"), desc="Dirty solution for aliases"),
