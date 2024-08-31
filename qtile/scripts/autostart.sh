@@ -1,22 +1,22 @@
 #!/bin/bash
 
 # rounded corners
-#xcorners -b -r $(cat ~/.config/qtile/picom/picom.conf | grep corner-radius | awk -F " = " '{print $2}') &
+xcorners -b -r $(cat ~/.config/qtile/picom/picom.conf | grep corner-radius | awk -F " = " '{print $2}') &
 
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
 
 # mpris widgetbox
-~/.config/qtile/scripts/widgetbox.py reset
+~/.config/qtile/scripts/widgetbox.py reset &
 
 #change your keyboard if you need it
-setxkbmap -layout de
+setxkbmap -layout de &
 
 # stupid libadwaita dark bug fix
 if [[ $(gsettings get org.gnome.desktop.interface color-scheme) != "'prefer-dark'" ]]
 then
-    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-fi
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark &
+fi &
 
 #starting utility applications at boot time
 nm-applet &
@@ -27,7 +27,7 @@ picom --config .config/qtile/picom/picom.conf &
 dunst &
 /usr/lib/kdeconnectd &
 aw-qt --no-gui &
-sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" &
+( sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" ) &
 nextcloud &
 tutanota-desktop -a &
 caffeine-indicator &
