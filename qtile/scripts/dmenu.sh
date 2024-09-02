@@ -6,6 +6,12 @@ load()
     export DMENU="dmenu -i -p"
 }
 
+load_noi()
+{
+    cd ~/.config/qtile/scripts || exit 1
+    export DMENU="dmenu -i -noi -p"
+}
+
 main()
 {
     case $1 in
@@ -14,11 +20,11 @@ main()
         ./dmenu-process-manager.sh
         ;;
     "output-switcher")
-        load
+        load_noi
         ./dmenu-${1}.sh
         ;;
     "logout")
-        load
+        load_noi
         ./dmenu-power-menu.sh
         ;;
     "unicode")
@@ -26,7 +32,7 @@ main()
         ./dmenu-${1}.sh
         ;;
     "screens")
-        load
+        load_noi
         ./dmenu-${1}.sh
         ;;
     "vms")
@@ -46,7 +52,7 @@ main()
         ./dmenu-${1}.sh
         ;;
     "clear-clipcat")
-        load
+        load_noi
         if [[ "$(echo -e "No\nYes" | $DMENU "Clear Clipboard History?")" == "Yes" ]]
         then
             clipcatctl clear
