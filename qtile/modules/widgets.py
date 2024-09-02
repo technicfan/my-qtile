@@ -152,7 +152,7 @@ def init_widgets():
                         Clock,
                         padding = 2,
                         foreground = colors[9],
-                        format = "%a  %d. %B - %H:%M",
+                        format = "%a  %-d. %B - %-H:%M",
                         mouse_callbacks = {"Button1": lazy.spawn("gsimplecal")}
                     ),
              ],
