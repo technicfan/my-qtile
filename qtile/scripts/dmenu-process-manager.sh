@@ -2,7 +2,7 @@
 
 main()
 {
-    local selected=$(ps -u $USER -f | grep -v PID | awk '{output=""; for (i=8; i<=NF; i++) {output=output$i" "} print $2" - "$5" - "output}' | $DMENU "Kill process:" | awk '{print $1" "$5}')
+    local selected=$(ps -u $USER -f | grep -v PID | awk '{output=""; for (i=8; i<=NF; i++) {output=output$i" "} print $2" - "$5" - "output}' | $DMENU "Kill process:" -F | awk '{print $1" "$5}')
 
     if [[ -n $selected ]]
     then

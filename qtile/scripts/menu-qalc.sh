@@ -52,7 +52,7 @@ if [ -z "$menu" ]
 then
     if [[ -n $(command -v dmenu) ]]
     then
-        menu="$(command -v dmenu) -noi"
+        menu="$(command -v dmenu)"
     else
         >&2 echo "dmenu not found and no other menu specified"
         exit

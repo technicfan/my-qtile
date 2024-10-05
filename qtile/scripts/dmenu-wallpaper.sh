@@ -3,7 +3,7 @@
 revert()
 {
     feh --bg-fill "$2/$1"
-    name=$(awk -F "/" '{print $2}' <<< "$1")
+    name=$(sed 's/.*\///g' <<< "$1")
     if [[ -n $name ]]
     then
         notify-send "reverted to \"$name\""
@@ -15,7 +15,7 @@ revert()
 main()
 {
     dir="$HOME/.config/qtile/wallpapers"
-    default="more/gruv-commit.png"
+    default="more/own/antifa.png"
 
     if [[ $1 = "print" ]]
     then

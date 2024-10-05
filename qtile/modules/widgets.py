@@ -33,7 +33,7 @@ from libqtile import qtile
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 
-from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage
+from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage, get_battery
 from .colors import colors
 from widget.clock import Clock
 from widget.mpris2widget import Mpris2
@@ -188,8 +188,15 @@ def init_widgets():
     return widgets_list
 
 ### WIDGET INITIALISATION ###
-def init_widgets_screen1():
+def init_widgets_temp():
     widgets = init_widgets()
+    # replace vram widget with battery if nvidia-smi not found
+    if subprocess.call("command -v nvidia-smi", shell=True):
+        widgets[10].update_interval, widgets[10].func = 30, get_battery
+    return widgets
+
+def init_widgets_screen1():
+    widgets = init_widgets_temp()
     # replace systray with statusnotifier under wayland
     if qtile.core.name == "wayland":
         widgets[14].widgets[0] = widget.StatusNotifier(
@@ -203,7 +210,7 @@ def init_widgets_screen1():
     return widgets
 
 def init_widgets_screen2():
-    widgets = init_widgets()
+    widgets = init_widgets_temp()
     # not opening systray when clicking on user on screen2
     widgets[15].mouse_callbacks = {}
     # extend window name on second screen
