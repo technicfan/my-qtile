@@ -26,6 +26,7 @@
 
 import getpass
 import subprocess
+from dbus_next import Variant
 from libqtile import widget, bar
 from libqtile.config import Screen
 from libqtile.lazy import lazy
@@ -35,8 +36,14 @@ from qtile_extras.widget.decorations import RectDecoration
 
 from .functions import toggle_tray, volume_up_down, window_name, get_uptime, get_distro, get_vram_usage, get_battery
 from .colors import colors
-from widget.clock import Clock
-from widget.mpris2widget import Mpris2
+
+class Clock(widget.Clock):
+    def poll(self):
+        return super().poll().lower()
+
+class Mpris2(widget.Mpris2):
+    def get_track_info(self, metadata: dict[str, Variant]) -> str:
+        return super().get_track_info(metadata).lower()
 
 def init_widgets():
     widgets_list = [

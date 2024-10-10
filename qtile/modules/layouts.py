@@ -28,9 +28,17 @@ from libqtile import layout
 from libqtile.config import Match
 from qtile_extras.layout.decorations.borders import RoundedCorners
 
-# custom spiral
-from layout.spiral import Spiral
 from .colors import colors
+
+class Spiral(layout.Spiral):
+    def __init__(self, **config):
+        self.defaults.append(("i3_style", False, "i3 like layout (right bottom corner)"))
+        super().__init__(**config)
+
+        if self.i3_style:
+            order = ["left", "top", "left", "top"]
+            idx = order.index(self.main_pane)
+            self.splits = order[idx : idx + 4]
 
 layout_defaults = {"border_width": 2,
                    "margin": 4,
@@ -79,5 +87,6 @@ floating_layout = layout.Floating(
         Match(title="tastytrade - Portfolio Report"), # tastytrade pop-out allocation
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
         Match(wm_class="delphi32.exe"), # Delphi 7 IDE
+        Match(title="vector tools"),
     ]
 )
