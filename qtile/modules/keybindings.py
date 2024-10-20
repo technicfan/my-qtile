@@ -87,7 +87,7 @@ keys = [
     Key([mod, "shift"], "t", lazy.group["scratchpad"].dropdown_toggle("term"), desc="Toggle terminal"),
     Key([mod, "shift"], "i", lazy.group["scratchpad"].dropdown_toggle("proc-monitor"), desc="Toggle process monitor"),
     Key([mod, "shift"], "p", lazy.group["scratchpad"].dropdown_toggle("bluetooth"), desc="Toggle bluetooth manager"),
-    Key([mod, "shift"], "m", lazy.group["scratchpad"].dropdown_toggle("spotify"), desc="Toggle Spotify"),
+    Key([mod], "m", lazy.group["scratchpad"].dropdown_toggle("spotify"), desc="Toggle Spotify"),
 
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
@@ -104,18 +104,18 @@ keys = [
     Key([], "XF86Tools", lazy.spawn("flameshot gui"), desc="Snipping tool"),
 
     # Spotify with three different actions (key chord SUPER+s followed by "key")
-    #KeyChord([mod], "s", [
-    #    Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), change_mpris("open"), desc="Spotify - auto play"),
+    KeyChord([mod], "s", [
+        Key([], "s", lazy.group["scratchpad"].dropdown_toggle("spotify"), lazy.spawn("sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
     #    Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
-    #    Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
-    #]),
+        Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
+    ]),
 
     # Media
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
-    Key([mod], "m", change_mpris("toggle"), desc="Toggle mpris"), 
+    Key([mod, "shift"], "m", lazy.widget["mpris"].toggle(), desc="Toggle mpris"), 
 
     # Volume
     Key([], "XF86AudioRaiseVolume", volume_up_down("up"), desc="Increase volume key"),
