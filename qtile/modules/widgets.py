@@ -107,7 +107,8 @@ def init_widgets():
              text_closed = "",
              text_open = "",
              close_button_location = "right",
-             name = "mpris"
+             name = "mpris",
+             start_opened = True,
         ),
         widget.Spacer(),
 

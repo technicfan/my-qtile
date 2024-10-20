@@ -84,14 +84,6 @@ def window_name(name):
         return name.lower()
 
 
-# A function for hide/show all the windows in a group
-@lazy.function
-def minimize_all(qtile):
-    for win in qtile.current_group.windows:
-        if hasattr(win, "toggle_minimize"):
-            win.toggle_minimize()
-
-
 # get uptime
 def get_uptime():
     with open("/proc/uptime", "r") as f:

@@ -28,7 +28,7 @@ import os
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from .functions import minimize_all, change_mpris, volume_up_down, myTerm
+from .functions import volume_up_down, myTerm
 from .groups import group_names
 from .colors import colors
 
@@ -50,10 +50,10 @@ keys = [
     Key([mod], "r", lazy.spawncmd(prompt=" Run".lower()), desc="Spawn a command using a prompt widget"),
     Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key([mod, "shift"], "r", lazy.reload_config(),
-                             lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
+                             #lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
                              desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               lazy.spawn("sleep .9 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
+                               #lazy.spawn("sleep .9 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
                                desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom --config .config/qtile/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
@@ -87,6 +87,7 @@ keys = [
     Key([mod, "shift"], "t", lazy.group["scratchpad"].dropdown_toggle("term"), desc="Toggle terminal"),
     Key([mod, "shift"], "i", lazy.group["scratchpad"].dropdown_toggle("proc-monitor"), desc="Toggle process monitor"),
     Key([mod, "shift"], "p", lazy.group["scratchpad"].dropdown_toggle("bluetooth"), desc="Toggle bluetooth manager"),
+    Key([mod, "shift"], "m", lazy.group["scratchpad"].dropdown_toggle("spotify"), desc="Toggle Spotify"),
 
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
@@ -103,11 +104,11 @@ keys = [
     Key([], "XF86Tools", lazy.spawn("flameshot gui"), desc="Snipping tool"),
 
     # Spotify with three different actions (key chord SUPER+s followed by "key")
-    KeyChord([mod], "s", [
-        Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), change_mpris("open"), desc="Spotify - auto play"),
-        Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
-        Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
-    ]),
+    #KeyChord([mod], "s", [
+    #    Key([], "s", lazy.spawn("com.spotify.Client && sleep 0.5 && playerctl play-pause", shell=True), change_mpris("open"), desc="Spotify - auto play"),
+    #    Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
+    #    Key([], "q", lazy.spawn("kill spotify"), change_mpris("close"), desc="Kill Spotify"),
+    #]),
 
     # Media
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
@@ -147,7 +148,6 @@ keys = [
     # Window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
-    Key([mod, "shift"], "m", minimize_all(), desc="Toggle hide/show all windows on current group"),
 
     # Switch focus of monitors
     Key([mod], "comma", lazy.next_screen(), desc="Move focus to next monitor"),

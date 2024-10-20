@@ -43,15 +43,17 @@ group_matches = [
     [],
     [],
     [],
+    [],
     [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe)$"))],
     [Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844|alpaca|WebApp-OllamaWebUI0953)$"))],
     [Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), Match(title=re.compile(r"^(VirtualBoxVM)$"))],
-    [Match(wm_class=re.compile(r"^(spotify|spotify-qt)$"))],
+    #[Match(wm_class=re.compile(r"^(spotify|spotify-qt)$"))],
 ]
 
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 #group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "X"]
-group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "VM", "MUS"]
+#group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "VM", "MUS"]
+group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -68,5 +70,6 @@ groups.append(
                                DropDown("term", myTerm, width=0.5, height=0.5, x=0.25, y=0.1, opacity=1, on_focus_lost_hide=False),
                                DropDown("proc-monitor", "gnome-system-monitor", width=0.55, height=0.6, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
                                DropDown("bluetooth", "blueman-manager", width=0.5, height=0.5, x=0.225, y=0.1, opacity=1, on_focus_lost_hide=False),
+                               DropDown("spotify", "com.spotify.Client", match=Match(wm_class="spotify"), width=0.9, height=0.85, x=0.05, y=0.05, opacity=1, on_focus_lost_hide=True),
                              ]),
 )
