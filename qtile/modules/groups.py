@@ -1,4 +1,3 @@
-# Copyright (c) 2022 elParaguayo
 # Copyright (c) 2024 Technicfan
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +33,7 @@ groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-group_layouts = ["spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "max", "spiral"]
+group_layouts = ["spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "spiral", "max"]
 
 group_matches = [
     [Match(wm_class=re.compile(r"^(firefox)$"))],

@@ -1,4 +1,3 @@
-# Copyright (c) 2022 elParaguayo
 # Copyright (c) 2024 Technicfan
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
