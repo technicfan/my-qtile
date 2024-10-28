@@ -15,7 +15,7 @@ revert()
 main()
 {
     dir="$HOME/.config/qtile/wallpapers"
-    default="more/own/antifa.png"
+    default="more/ai/A foreboding, cartoony illustration of an undiscovered island shrouded in a dense jungle, with a predominantly dark grey and earthy brown colour palette, accented by muted greens and an underlying yellow tint, evoking a.png"
 
     if [[ $1 = "print" ]]
     then
@@ -23,7 +23,7 @@ main()
         return
     fi
 
-    choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed "s|$dir/||g")" | $DMENU  'Wallpapers:')
+    choice=$(printf '%s\n' "Revert to default" "$(find -L ~/.config/qtile/wallpapers -type f | sed "s|$dir/||g")" | $DMENU 'Wallpapers:' -F)
     if [[ $choice = "Revert to default" ]]
     then
         revert "$default" "$dir"
