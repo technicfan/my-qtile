@@ -15,7 +15,7 @@ revert()
 main()
 {
     dir="$HOME/.config/qtile/wallpapers"
-    default="more/ai/A foreboding, cartoony illustration of an undiscovered island shrouded in a dense jungle, with a predominantly dark grey and earthy brown colour palette, accented by muted greens and an underlying yellow tint, evoking a.png"
+    default="more/own/mw2.png"
 
     if [[ $1 = "print" ]]
     then

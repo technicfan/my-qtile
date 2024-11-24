@@ -110,7 +110,7 @@ keys = [
         Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
     ]),
 
-    Key([mod], "e", lazy.spawn(".config/qtile/scripts/ollama.sh"), desc="unload all ollama models"),
+    Key([mod], "u", lazy.spawn(".config/qtile/scripts/ollama.sh"), desc="unload all ollama models"),
 
     Key([mod, "control"], "c", lazy.spawn(".config/qtile/scripts/unirich.py"), desc="cool"),
 
