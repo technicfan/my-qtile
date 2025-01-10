@@ -29,15 +29,6 @@ import subprocess
 import alsaaudio
 from configparser import ConfigParser
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
-
-
-# guess terminal
-def get_term(default: str):
-    term = guess_terminal()
-    if term == None:
-        term = default
-    return term
 
 
 # get distro
@@ -160,6 +151,3 @@ def volume_up_down(qtile, way):
             subprocess.run(f"notify-send -a qtile-volume\
                 -h string:x-dunst-stack-tag:test -h int:value:{vol}\
                     'Volume: {vol}%'", shell=True)
-
-
-myTerm = get_term("alacritty")

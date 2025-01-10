@@ -28,13 +28,14 @@ import subprocess
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
-from .functions import volume_up_down, myTerm
+from .functions import volume_up_down
 from .groups import group_names
 from .colors import colors
 
 mod = "mod4"
 myBrowser = "firefox"
 myFM = "dolphin"
+myTerm = "kitty"
 
 ### KEYBINDINGS ###
 keys = [

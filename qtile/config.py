@@ -55,7 +55,7 @@ auto_minimize = False
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
-    "type:mouse": InputConfig(pointer_accel=-0.5),
+    "type:mouse": InputConfig(pointer_accel=0),
     "type:keyboard": InputConfig(kb_layout="de")
 }
 

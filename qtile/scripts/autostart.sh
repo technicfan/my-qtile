@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # rounded corners
-xcorners -b -r "$(grep "corner-radius" ~/.config/qtile/picom/picom.conf | awk -F " = " '{print $2}')" &
+radius=$(grep "corner-radius" ~/.config/qtile/picom/picom.conf | awk -F " = " '{print $2}')
+if [[ $radius != 0 ]]
+then
+    xcorners -b -r "$radius" &
+fi
 
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
@@ -30,6 +34,7 @@ aw-qt --no-gui &
 ( sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" ) &
 nextcloud &
 tutanota-desktop -a &
+caffeine &
 caffeine-indicator &
 clipcatd -r &
 unclutter -idle 3 &

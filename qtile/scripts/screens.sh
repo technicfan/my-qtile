@@ -16,7 +16,12 @@ set_state()
 
 one()
 {
-    xrandr --output HDMI-0 --off --output DP-4 --auto --primary
+    if [[ $XDG_SESSION_TYPE = "wayland" ]]
+    then
+        one-wlr
+    else
+        xrandr --output HDMI-0 --off --output DP-4 --auto --primary
+    fi
 }
 
 two()
@@ -26,12 +31,37 @@ two()
 
 both()
 {
-    xrandr --output DP-4 --auto --primary --output HDMI-0 --auto --right-of DP-4
+    if [[ $XDG_SESSION_TYPE = "wayland" ]]
+    then
+        both-wlr
+    else
+        xrandr --output DP-4 --auto --primary --output HDMI-0 --auto --right-of DP-4
+    fi
 }
 
 mirror()
 {
     xrandr --output DP-4 --auto --primary --output HDMI-0 --auto --same-as DP-4
+}
+
+one-wlr()
+{
+    wlr-randr --output HDMI-A-1 --off --output DP-3 --mode 1920x1080 --preferred
+}
+
+two-wlr()
+{
+    xrandr --output HDMI-0 --on  --primary --output DP-4 --off
+}
+
+both-wlr()
+{
+    wlr-randr --output DP-3 --mode 1920x1080 --preferred --output HDMI-A-1 --on --mode 1920x1080 --pos 1920, 0
+}
+
+mirror-wlr()
+{
+    echo "nix"
 }
 
 

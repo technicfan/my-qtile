@@ -159,7 +159,7 @@ def init_widgets():
                         Clock,
                         padding = 2,
                         foreground = colors[9],
-                        format = "%a  %-d. %B - %-H:%M",
+                        format = "%a %-d. %B - %-H:%M",
                         mouse_callbacks = {"Button1": lazy.spawn("gsimplecal")}
                     ),
              ],
@@ -187,48 +187,47 @@ def init_widgets():
                  foreground = colors[2],
                  text = getpass.getuser().lower(),
                  mouse_callbacks = {"Button1": toggle_tray,
-                                    "Button2": lazy.spawn("vscodium GitHub/my-qtile"),
+                                    "Button2": lazy.spawn("kitty --name nvim -d GitHub/my-qtile --hold nvim"),
                                     "Button3": lazy.spawn('.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45')
                                    }
         ),
         ]
     return widgets_list
 
-### WIDGET INITIALISATION ###
-def init_widgets_temp():
+### SCREEN INITIALISATION ###
+def init_screen(screen: int) -> Screen:
     widgets = init_widgets()
     # replace vram widget with battery if nvidia-smi not found
     if subprocess.call("command -v nvidia-smi", shell=True):
         widgets[10].update_interval, widgets[10].func = 30, get_battery
-    return widgets
 
-def init_widgets_screen1():
-    widgets = init_widgets_temp()
-    # replace systray with statusnotifier under wayland
-    if qtile.core.name == "wayland":
-        widgets[14].widgets[0] = widget.StatusNotifier(
-            padding = 7, icon_size = 17, icon_theme = "Gruvbox-Plus-Dark",
-            highlight_radius = 0, show_menu_icons = False, menu_width = 250,
-            menu_background = colors[0], highlight_colour = colors[1],
-            menu_foreground = colors[2], menu_foreground_highlighted = colors[0],
-            menu_foreground_disabled = colors[4], separator_colour = colors[4],
-            menu_font = "JetBrains Bold",
-        )
-    return widgets
+    match screen:
+        case 1:
+            # replace systray with statusnotifier under wayland
+            if qtile.core.name == "wayland":
+                widgets[14].widgets[0] = widget.StatusNotifier(
+                    padding = 7, icon_size = 17, icon_theme = "Gruvbox-Plus-Dark",
+                    highlight_radius = 0, show_menu_icons = False, menu_width = 250,
+                    menu_background = colors[0], highlight_colour = colors[1],
+                    menu_foreground = colors[2], menu_foreground_highlighted = colors[0],
+                    menu_foreground_disabled = colors[4], separator_colour = colors[4],
+                    menu_font = "JetBrains Bold",
+                )
+        case 2:
+            # not opening systray when clicking on user on screen2
+            widgets[15].mouse_callbacks = {}
+            # extend window name on second screen
+            widgets[2].max_chars = 125
+            # run prompt
+            del widgets[3:4]
+            # mpris
+            del widgets[4:5]
+            # systray
+            del widgets[12:13]
 
-def init_widgets_screen2():
-    widgets = init_widgets_temp()
-    # not opening systray when clicking on user on screen2
-    widgets[15].mouse_callbacks = {}
-    # extend window name on second screen
-    widgets[2].max_chars = 125
-    # run prompt
-    del widgets[3:4]
-    # mpris
-    del widgets[4:5]
-    # systray
-    del widgets[12:13]
-    return widgets
+    return Screen(top=bar.Bar(widgets=widgets, size=30, background=colors[0], margin=[4,4,0,4]),
+                  wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
+                  wallpaper_mode='fill')
 
 # Some settings that are used on almost every widget
 widget_defaults = dict(
@@ -236,14 +235,9 @@ widget_defaults = dict(
     fontsize = 12,
     background = colors[0],
     decorations = [
-        RectDecoration(line_colour=colors[1], line_width=2, radius=10, filled=False, group=True)
+        RectDecoration(line_colour=colors[1], line_width=2, radius=0, filled=False, group=True)
     ]
 )
 
 ### SCREENS ###
-screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=30, background=colors[0], margin=[4,4,0,4]),
-                  wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
-                  wallpaper_mode='fill'),
-           Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=30, background=colors[0], margin=[4,4,0,4]), 
-                  wallpaper=subprocess.getoutput("~/.config/qtile/scripts/dmenu-wallpaper.sh print"),
-                  wallpaper_mode='fill')]
+screens = [init_screen(i) for i in range(1, 3)]
