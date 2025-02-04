@@ -2,35 +2,66 @@
 
 main()
 {
-    local options=(
-        "Monitor 1"
-        "Monitor 2"
-        "Both Monitors"
-        "Mirror"
-        "Off"
-    )
+    connected="$(xrandr | grep -w 'connected')"
+    declare -a outputs
+    primary="$(grep -w 'primary' <<< "$connected" | awk '{ print $1 }')"
+    if [[ -n "$primary" ]]
+    then
+        outputs+=( "$primary (primary)" )
+        outputs+=( "$(grep -vw 'primary' <<< "$connected" | awk '{ print $1 }')" )
+    else
+        primary="$(awk 'NR==1{ print $1 }' <<< "$connected")"
+        outputs+=( "$primary (primary)" )
+        outputs+=( "$(grep -vw 'primary' <<< "$connected" | awk 'NR>1{ print $1 }')" )
+    fi
+    options=( "all-right" "all-left" "mirror" "off" )
 
-    local choice=$(printf '%s\n' "${options[@]}" | $DMENU 'Monitors:')
+    choice=$(printf '%s\n' "${outputs[@]}" "${options[@]}" | $DMENU 'Monitors:')
 
-    case $choice in
-    "Monitor 1")
-        ~/.config/qtile/scripts/screens.sh one
-        ;;
-    "Monitor 2")
-        ~/.config/qtile/scripts/screens.sh two
-        ;;
-    "Both Monitors")
-        ~/.config/qtile/scripts/screens.sh both
-        ;;
-    "Mirror")
-        ~/.config/qtile/scripts/screens.sh mirror
-        ;;
-    "Off")
-        ~/.config/qtile/scripts/screens.sh off
-        ;;
-    *)
-        exit 0
-    esac
+    if [[ -n "$choice" ]]
+    then
+        case "$choice" in
+        "all"*)
+            for i in "${!outputs[@]}"
+            do
+                if [[ "${outputs[i]}" =~ ^.*\(primary\)$ ]]
+                then
+                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --primary --auto
+                else
+                    xrandr --output "${outputs[i]}" --auto --"${choice//all-/}"-of "$(awk '{ print $1 }' <<< "${outputs[$(( i-1 ))]}")"
+                fi
+            done
+            ;;
+        "mirror")
+            for i in "${!outputs[@]}"
+            do
+                if [[ "${outputs[i]}" =~ ^.*\(primary\)$ ]]
+                then
+                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --primary --auto
+                else
+                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --auto --same-as "$primary"
+                fi
+            done
+            ;;
+        "off")
+            for i in "${!outputs[@]}"
+            do
+                xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --off
+            done
+            ;;
+        *)
+            for i in "${!outputs[@]}"
+            do
+                if [[ "${outputs[i]}" = "$choice" ]]
+                then
+                    xrandr --output "$(awk '{ print $1 }' <<< "$choice")" --primary --auto
+                else
+                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --off
+                fi
+            done
+            ;;
+        esac
+    fi
 }
 
 main

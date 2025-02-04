@@ -15,7 +15,7 @@ revert()
 main()
 {
     dir="$HOME/.config/qtile/wallpapers"
-    default="firefox.png"
+    default="more/rick.png"
 
     if [[ $1 = "print" ]]
     then
