@@ -28,16 +28,16 @@
 # For ex: colors = [["#282c34ee", "#282c34dd"], ...
 
 GruvboxMaterial = [
-    "#282828", # bg
-    "#dfbf8e", # fg
-    "#d3869b", # fg2
-    "#453b2c", # inactive border
-    "#555555", # seperator
-    "#ea6962", # red
-    "#a9b665", # green
-    "#e78a4e", # yellow
-    "#7daea3", # blue
-    "#89b482"  # cyan
+    "#282828",  # bg
+    "#dfbf8e",  # fg
+    "#d3869b",  # fg2
+    "#453b2c",  # inactive border
+    "#555555",  # seperator
+    "#ea6962",  # red
+    "#a9b665",  # green
+    "#e78a4e",  # yellow
+    "#7daea3",  # blue
+    "#89b482"   # cyan
     ]
 
 colors = GruvboxMaterial

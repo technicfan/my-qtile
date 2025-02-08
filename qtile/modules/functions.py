@@ -45,8 +45,7 @@ def get_distro(default: str):
 
 
 def get_battery():
-    return "bat: " + str(round(psutil.sensors_battery().percent
-        )) + "%"
+    return "bat: " + str(round(psutil.sensors_battery().percent)) + "%"
 
 
 def get_vram_usage():
@@ -57,18 +56,18 @@ def get_vram_usage():
         case "Mi":
             usage = str(b*2**-20) + "Mi"
         case "Gi":
-            usage = str(round(b*2**10,2)) + "Gi"
+            usage = str(round(b*2**10, 2)) + "Gi"
         case "M":
             usage = str(round(b*10**-6)) + "M"
         case "G":
-            usage = str(round(b*10**-9,2)) + "G"
+            usage = str(round(b*10**-9, 2)) + "G"
     return "vram: " + usage
 
 
 # window name function
 def window_name(name):
     if "- Oracle VM VirtualBox" in name:
-        return name.split("[",1)[0].lower()
+        return name.split("[", 1)[0].lower()
     elif name == "web.whatsapp.com":
         return name.split(".")[1]
     else:
@@ -114,7 +113,7 @@ def change_mpris(qtile, action):
             qtile.widgets_map["mpris"].close()
             config["widgetboxes"]["mpris"] = "0"
     with open(config_file, 'w') as conf:
-         config.write(conf)
+        config.write(conf)
 
 
 @lazy.function
@@ -126,28 +125,28 @@ def toggle_tray(qtile):
 # volume function
 @lazy.function
 def volume_up_down(qtile, way):
-        if way not in "toggle|up|down":
-            return
-        mixer = alsaaudio.Mixer()
-        if way == "toggle":
-            mixer.setmute(-(mixer.getmute()[0]-1))
+    if way not in "toggle|up|down":
+        return
+    mixer = alsaaudio.Mixer()
+    if way == "toggle":
+        mixer.setmute(-(mixer.getmute()[0]-1))
+    else:
+        step = qtile.widgets_map["volume"].step
+        vol = mixer.getvolume()[0]
+        diff = vol % step
+        if way == "up":
+            vol += step - diff
         else:
-            step = qtile.widgets_map["volume"].step
-            vol = mixer.getvolume()[0]
-            diff = vol % step
-            if way == "up":
-                vol += step - diff
+            if diff != 0:
+                vol -= diff
             else:
-                if diff != 0:
-                    vol -= diff
-                else:
-                    vol -= step
-            if vol <= 0:
-                mixer.setmute(1)
-            else:
-                mixer.setmute(0)
-            mixer.setvolume(vol)
-            # volume osd using dunst
-            subprocess.run(f"notify-send -a qtile-volume\
-                -h string:x-dunst-stack-tag:test -h int:value:{vol}\
-                    'Volume: {vol}%'", shell=True)
+                vol -= step
+        if vol <= 0:
+            mixer.setmute(1)
+        else:
+            mixer.setmute(0)
+        mixer.setvolume(vol)
+        # volume osd using dunst
+        subprocess.run(f"notify-send -a qtile-volume\
+            -h string:x-dunst-stack-tag:test -h int:value:{vol}\
+                'Volume: {vol}%'", shell=True)

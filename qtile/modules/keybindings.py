@@ -23,14 +23,11 @@
 #  | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
 #  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
-import os
-import subprocess
 from libqtile.config import Key, KeyChord, Drag, Click
 from libqtile.lazy import lazy
 
 from .functions import volume_up_down
 from .groups import group_names
-from .colors import colors
 
 mod = "mod4"
 myBrowser = "firefox"
@@ -51,11 +48,11 @@ keys = [
     Key([mod], "r", lazy.spawncmd(prompt=" Run".lower()), desc="Spawn a command using a prompt widget"),
     Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key([mod, "shift"], "r", lazy.reload_config(),
-                             #lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
-                             desc="Reload the config"),
+        # lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
+        desc="Reload the config"),
     Key([mod, "control"], "r", lazy.restart(),
-                               #lazy.spawn("sleep .9 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
-                               desc="Restart qtile"),
+        # lazy.spawn("sleep .9 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
+        desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom --config .config/qtile/picom/picom.conf"), desc="Restart picom"),
     Key([mod, "control"], "v", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
@@ -66,7 +63,7 @@ keys = [
     Key([mod], "x", lazy.spawn(".config/qtile/scripts/dmenu.sh logout"), desc="Launch logout script"),
     # own
     Key([mod], "d", lazy.spawn("l7-dmenu-desktop"), desc="Run launcher"),
-    #Key([mod], "d", lazy.spawn("j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:'' --no-generic --term alacritty"), desc="Run launcher"),
+    # Key([mod], "d", lazy.spawn("j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:'' --no-generic --term alacritty"), desc="Run launcher"),
     Key([mod], "p", lazy.spawn(".config/qtile/scripts/dmenu.sh screens"), desc="Monitor configuration"),
     Key([mod], "w", lazy.spawn(".config/qtile/scripts/dmenu.sh vms"), desc="Dirty solution for aliases"),
     Key([mod], "n", lazy.spawn(".config/qtile/scripts/dmenu.sh wallpaper"), desc="Change wallpaper"),
@@ -81,7 +78,7 @@ keys = [
     Key([mod], "period", lazy.spawn(".config/qtile/scripts/dmenu.sh unicode"), desc="dmenu emoji picker"),
     # menu-qalc
     Key([mod], "plus", lazy.spawn(".config/qtile/scripts/menu-qalc.sh"), desc="dmenu calculator"),
-    #Key([mod], "plus", lazy.spawn("dmenu -C -p qalc:"), desc="dmenu calculator"),
+    # Key([mod], "plus", lazy.spawn("dmenu -C -p qalc:"), desc="dmenu calculator"),
 
     # Scratchpads
     Key([mod, "shift"], "o", lazy.group["scratchpad"].dropdown_toggle("mixer"), desc="Toggle sound mixer"),
@@ -93,8 +90,8 @@ keys = [
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord([mod], "k", [
         Key([], "k", lazy.spawn("kill openrgb"),
-                     lazy.spawn("polychromatic-cli -e keyboard && polychromatic-cli -e mouse", shell=True),
-                     lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
+            lazy.spawn("polychromatic-cli -e keyboard && polychromatic-cli -e mouse", shell=True),
+            lazy.spawn("polychromatic-cli -o brightness -p 50"), desc="normal rgb lighting"),
         Key([], "o", lazy.spawn("kill openrgb"), lazy.spawn("polychromatic-cli -o brightness -p 0"), desc="no rgb lighting"),
         Key([], "l", lazy.spawn("polychromatic-cli -o spectrum && openrgb --startminimized", shell=True), desc="rgb lighting as sound visualizer"),
     ]),
@@ -107,7 +104,7 @@ keys = [
     # Spotify with three different actions (key chord SUPER+s followed by "key")
     KeyChord([mod], "s", [
         Key([], "s", lazy.group["scratchpad"].dropdown_toggle("spotify"), lazy.spawn("sleep 0.5 && playerctl play-pause", shell=True), desc="Spotify - auto play"),
-    #    Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
+        # Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
         Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
     ]),
 
@@ -120,7 +117,7 @@ keys = [
     Key([], "XF86AudioPause", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next media key"),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"),
-    Key([mod, "shift"], "m", lazy.widget["mpris"].toggle(), desc="Toggle mpris"), 
+    Key([mod, "shift"], "m", lazy.widget["mpris"].toggle(), desc="Toggle mpris"),
 
     # Volume
     Key([], "XF86AudioRaiseVolume", volume_up_down("up"), desc="Increase volume key"),
@@ -134,14 +131,14 @@ keys = [
     ]),
     
     # Switch between windows
-    #Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
-    #Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
+    # Key([mod], "left", lazy.layout.left(), desc="Move focus to left"),
+    # Key([mod], "right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "left", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "right", lazy.layout.up(), desc="Move focus up"),
 
     # Move windows between left/right columns or move up/down in current stack.
-    #Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    #Key([mod, "shift"], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    # Key([mod, "shift"], "left", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    # Key([mod, "shift"], "right", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "left", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "right", lazy.layout.shuffle_up(), desc="Move window up"),
 
@@ -165,7 +162,7 @@ keys = [
 
 for group in group_names:
     keys.extend([Key([mod], group, lazy.group[group].toscreen(), desc="Switch to group {}".format(group)),
-                 Key([mod, "shift"], group, lazy.window.togroup(group) , lazy.group[group].toscreen(), desc="Move focused window to group {}".format(group))])
+                 Key([mod, "shift"], group, lazy.window.togroup(group), lazy.group[group].toscreen(), desc="Move focused window to group {}".format(group))])
 
 # Drag floating layouts.
 mouse = [
