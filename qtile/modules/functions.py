@@ -36,7 +36,7 @@ def get_distro(default: str):
     try:
         import distro
         return distro.name().lower()
-    except:
+    except ImportError:
         try:
             return subprocess.getoutput("awk -F '=| ' 'NR==1 {print $2}' \
                     <<< \"$((distro || cat /etc/os-release | sed 's/\"//g') 2>/dev/null)\"").lower()
@@ -61,7 +61,8 @@ def get_vram_usage():
             usage = str(round(b*10**-6)) + "M"
         case "G":
             usage = str(round(b*10**-9, 2)) + "G"
-    return "vram: " + usage
+    # return "vram: " + usage
+    return "  " + usage
 
 
 # window name function

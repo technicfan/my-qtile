@@ -120,12 +120,14 @@ def init_widgets():
         widget.TextBox(
                  padding=2,
                  text=subprocess.check_output("printf $(uname -r)", shell=True, text=True),
-                 fmt="kernel: {}",
+                 # fmt="kernel: {}",
+                 fmt="  {}",
                  foreground=colors[1]
                  ),
         widget.CPU(
                  padding=12,
-                 format="cpu: {load_percent}%",
+                 # format="cpu: {load_percent}%",
+                 format="  {load_percent}%",
                  foreground=colors[2]
                  ),
         widget.Memory(
@@ -133,7 +135,8 @@ def init_widgets():
                  foreground=colors[5],
                  format="{MemUsed: .2f}{mm}",
                  measure_mem="G",
-                 fmt="ram: {}"
+                 # fmt="ram: {}"
+                 fmt=" {}"
                  ),
         widget.GenPollText(
                  padding=12,
@@ -146,12 +149,14 @@ def init_widgets():
                  update_interval=30,
                  func=get_uptime,
                  foreground=colors[7],
-                 fmt="up: {}"
+                 # fmt="up: {}"
+                 fmt="󰁫 {}"
                  ),
         widget.Volume(
                  padding=12,
                  foreground=colors[8],
-                 fmt="vol: {}",
+                 # fmt="vol: {}",
+                 fmt="  {}",
                  step=5,
                  mouse_callbacks={"Button1": volume_up_down("toggle"),
                                   "Button4": volume_up_down("up"),
@@ -236,8 +241,8 @@ def init_screen(screen: int) -> Screen:
 
 # Some settings that are used on almost every widget
 widget_defaults = dict(
-    # font="VictorMono Nerd Font Bold Italic",
-    font="Sans Bold",
+    font="VictorMono Nerd Font Bold",
+    # font="Sans Bold",
     fontsize=12,
     background=colors[0],
     decorations=[

@@ -54,7 +54,7 @@ keys = [
         # lazy.spawn("sleep .9 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
         desc="Restart qtile"),
     Key([mod, "control"], "p", lazy.spawn("kill picom"), lazy.spawn("picom --config .config/qtile/picom/picom.conf"), desc="Restart picom"),
-    Key([mod, "control"], "v", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
+    Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
 
     # dmenu - make sure to apply x,y,z + height + border patch and install 'dmenu-extended-git'
     # dmenu scripts stolen from DT
@@ -110,7 +110,7 @@ keys = [
 
     Key([mod], "u", lazy.spawn(".config/qtile/scripts/ollama.sh"), desc="unload all ollama models"),
 
-    Key([mod, "control"], "c", lazy.spawn(".config/qtile/scripts/unirich.py"), desc="cool"),
+    Key([mod, "control"], "v", lazy.spawn(".config/qtile/scripts/unirich.py"), desc="cool"),
 
     # Media
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause media key"),

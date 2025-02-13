@@ -47,13 +47,13 @@ group_matches = [
     [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe|nvim)$"))],
     [Match(wm_class=re.compile(r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844|alpaca|WebApp-OllamaWebUI0953)$"))],
     [Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")), Match(title=re.compile(r"^(VirtualBoxVM)$"))],
-    #[Match(wm_class=re.compile(r"^(spotify|spotify-qt)$"))],
 ]
 
 # group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 # group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "X"]
 # group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "VM", "MUS"]
-group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
+# group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
+group_labels = ["WEB", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
 
 for i in range(len(group_names)):
     groups.append(
