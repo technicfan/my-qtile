@@ -28,16 +28,16 @@ from libqtile.config import Match
 
 from .colors import colors
 
-
-class Spiral(layout.Spiral):
-    def __init__(self, **config):
-        self.defaults.append(("i3_style", False, "i3 like layout (right bottom corner)"))
-        super().__init__(**config)
-
-        if self.i3_style:
-            order = ["left", "top", "left", "top"]
-            idx = order.index(self.main_pane)
-            self.splits = order[idx: idx + 4]
+#
+# class Spiral(layout.Spiral):
+#     def __init__(self, **config):
+#         self.defaults.append(("i3_style", False, "i3 like layout (right bottom corner)"))
+#         super().__init__(**config)
+#
+#         if self.i3_style:
+#             order = ["left", "top", "left", "top"]
+#             idx = order.index(self.main_pane)
+#             self.splits = order[idx: idx + 4]
 
 
 layout_defaults = {"border_width": 2,
@@ -47,14 +47,14 @@ layout_defaults = {"border_width": 2,
 
 ### LAYOUTS ###
 layouts = [
-    Spiral(
-        i3_style=True,
-        new_client_position="after_current",
-        ratio=0.5,
-        ratio_increment=0,
-        **layout_defaults
-    ),
-    # layout.MonadTall(**layout_defaults),
+    # Spiral(
+    #     i3_style=True,
+    #     new_client_position="after_current",
+    #     ratio=0.5,
+    #     ratio_increment=0,
+    #     **layout_defaults
+    # ),
+    layout.MonadTall(**layout_defaults),
     layout.Max(),
 ]
 

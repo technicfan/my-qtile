@@ -2,7 +2,17 @@
 
 main()
 {
-    connected="$(xrandr | grep -w 'connected')"
+    if [[ $XDG_SESSION_TYPE = "wayland" ]]
+    then
+        randr="wlr-randr"
+        primary_display="preferred"
+        connected="$(wlr-randr | grep -v '^ ')"
+    else
+        randr="xrandr"
+        primary_display="primary"
+        connected="$(xrandr | grep -w 'connected')"
+    fi
+
     declare -a outputs
     primary="$(grep -w 'primary' <<< "$connected" | awk '{ print $1 }')"
     if [[ -n "$primary" ]]
@@ -11,8 +21,7 @@ main()
         outputs+=( "$(grep -vw 'primary' <<< "$connected" | awk '{ print $1 }')" )
     else
         primary="$(awk 'NR==1{ print $1 }' <<< "$connected")"
-        outputs+=( "$primary (primary)" )
-        outputs+=( "$(grep -vw 'primary' <<< "$connected" | awk 'NR>1{ print $1 }')" )
+        outputs+=( "$(grep -vw 'primary' <<< "$connected" | awk '{ print $1 }')" )
     fi
     options=( "all-right" "all-left" "mirror" "off" )
 
@@ -26,9 +35,9 @@ main()
             do
                 if [[ "${outputs[i]}" =~ ^.*\(primary\)$ ]]
                 then
-                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --primary --auto
+                    "$randr" --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --"$primary_display" --mode 1920x1080
                 else
-                    xrandr --output "${outputs[i]}" --auto --"${choice//all-/}"-of "$(awk '{ print $1 }' <<< "${outputs[$(( i-1 ))]}")"
+                    "$randr" --output "${outputs[i]}" --mode 1920x1080 --"${choice//all-/}"-of "$(awk '{ print $1 }' <<< "${outputs[$(( i-1 ))]}")"
                 fi
             done
             ;;
@@ -37,16 +46,16 @@ main()
             do
                 if [[ "${outputs[i]}" =~ ^.*\(primary\)$ ]]
                 then
-                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --primary --auto
+                    "$randr" --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --"$primary_display" --mode 1920x1080
                 else
-                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --auto --same-as "$primary"
+                    "$randr" --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --mode 1920x1080 --same-as "$primary"
                 fi
             done
             ;;
         "off")
             for i in "${!outputs[@]}"
             do
-                xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --off
+                "$randr" --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --off
             done
             ;;
         *)
@@ -54,9 +63,9 @@ main()
             do
                 if [[ "${outputs[i]}" = "$choice" ]]
                 then
-                    xrandr --output "$(awk '{ print $1 }' <<< "$choice")" --primary --auto
+                    $randr --output "$(awk '{ print $1 }' <<< "$choice")" --$primary_display --mode 1920x1080
                 else
-                    xrandr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --off
+                    $randr --output "$(awk '{ print $1 }' <<< "${outputs[i]}")" --off
                 fi
             done
             ;;
