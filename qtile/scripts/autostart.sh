@@ -26,7 +26,7 @@ fi &
 nm-applet &
 xfce4-power-manager &
 blueman-applet &
-picom --config .config/qtile/picom/picom.conf &
+picom -b --config .config/qtile/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 /usr/lib/kdeconnectd &
@@ -43,7 +43,8 @@ flameshot &
 #spotifyd &
 #nvidia-settings --assign FXAA=1 &
 #nvidia-settings -l &
-input-remapper-control --command autoload &
+keyd-application-mapper -d &
+# input-remapper-control --command autoload &
 polychromatic-cli -e keyboard &
 polychromatic-cli -e mouse &
 polychromatic-cli -e mousepad &

@@ -17,17 +17,18 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# _____ _____ ____ _   _ _   _ ___ ____ _____ _    _   _    ____ ____  _____    _  _____ ___ ___  _   _   _
-#|_   _| ____/ ___| | | | \ | |_ _/ ___|  ___/ \  | \ | |  / ___|  _ \| ____|  / \|_   _|_ _/ _ \| \ | | | |
-#  | | |  _|| |   | |_| |  \| || | |   | |_ / _ \ |  \| | | |   | |_) |  _|   / _ \ | |  | | | | |  \| | | |
-#  | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
-#  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
+#  _____ _____ ____ _   _ _   _ ___ ____ _____ _    _   _    ____ ____  _____    _  _____ ___ ___  _   _   _
+# |_   _| ____/ ___| | | | \ | |_ _/ ___|  ___/ \  | \ | |  / ___|  _ \| ____|  / \|_   _|_ _/ _ \| \ | | | |
+#   | | |  _|| |   | |_| |  \| || | |   | |_ / _ \ |  \| | | |   | |_) |  _|   / _ \ | |  | | | | |  \| | | |
+#   | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
+#   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import os
-import psutil
 import subprocess
-import alsaaudio
 from configparser import ConfigParser
+
+import alsaaudio
+import psutil
 from libqtile.lazy import lazy
 
 
@@ -35,11 +36,14 @@ from libqtile.lazy import lazy
 def get_distro(default: str):
     try:
         import distro
+
         return distro.name().lower()
     except ImportError:
         try:
-            return subprocess.getoutput("awk -F '=| ' 'NR==1 {print $2}' \
-                    <<< \"$((distro || cat /etc/os-release | sed 's/\"//g') 2>/dev/null)\"").lower()
+            return subprocess.getoutput(
+                "awk -F '=| ' 'NR==1 {print $2}' \
+                    <<< \"$((distro || cat /etc/os-release | sed 's/\"//g') 2>/dev/null)\""
+            ).lower()
         except:
             return default.lower()
 
@@ -49,18 +53,25 @@ def get_battery():
 
 
 def get_vram_usage():
-    b = int(subprocess.getoutput("nvidia-smi --query-gpu=memory.used \
-            --format=csv,noheader,nounits")) * 2**20
+    b = (
+        int(
+            subprocess.getoutput(
+                "nvidia-smi --query-gpu=memory.used \
+            --format=csv,noheader,nounits"
+            )
+        )
+        * 2**20
+    )
     unit = "G"
     match unit:
         case "Mi":
-            usage = str(b*2**-20) + "Mi"
+            usage = str(b * 2**-20) + "Mi"
         case "Gi":
-            usage = str(round(b*2**10, 2)) + "Gi"
+            usage = str(round(b * 2**10, 2)) + "Gi"
         case "M":
-            usage = str(round(b*10**-6)) + "M"
+            usage = str(round(b * 10**-6)) + "M"
         case "G":
-            usage = str(round(b*10**-9, 2)) + "G"
+            usage = str(round(b * 10**-9, 2)) + "G"
     # return "vram: " + usage
     return "  " + usage
 
@@ -85,7 +96,7 @@ def get_uptime():
         splits = [
             str(seconds // 86400) + "d ",
             str(seconds % 86400 // 3600) + "h ",
-            str(seconds % 3600 // 60) + "min "
+            str(seconds % 3600 // 60) + "min ",
         ]
         uptime = ""
         for split in splits:
@@ -113,7 +124,7 @@ def change_mpris(qtile, action):
         case "close":
             qtile.widgets_map["mpris"].close()
             config["widgetboxes"]["mpris"] = "0"
-    with open(config_file, 'w') as conf:
+    with open(config_file, "w") as conf:
         config.write(conf)
 
 
@@ -130,7 +141,7 @@ def volume_up_down(qtile, way):
         return
     mixer = alsaaudio.Mixer()
     if way == "toggle":
-        mixer.setmute(-(mixer.getmute()[0]-1))
+        mixer.setmute(-(mixer.getmute()[0] - 1))
     else:
         step = qtile.widgets_map["volume"].step
         vol = mixer.getvolume()[0]
@@ -148,6 +159,9 @@ def volume_up_down(qtile, way):
             mixer.setmute(0)
         mixer.setvolume(vol)
         # volume osd using dunst
-        subprocess.run(f"notify-send -a qtile-volume\
+        subprocess.run(
+            f"notify-send -a qtile-volume\
             -h string:x-dunst-stack-tag:test -h int:value:{vol}\
-                'Volume: {vol}%'", shell=True)
+                'Volume: {vol}%'",
+            shell=True,
+        )

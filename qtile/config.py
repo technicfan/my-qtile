@@ -17,21 +17,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-# _____ _____ ____ _   _ _   _ ___ ____ _____ _    _   _    ____ ____  _____    _  _____ ___ ___  _   _   _
-#|_   _| ____/ ___| | | | \ | |_ _/ ___|  ___/ \  | \ | |  / ___|  _ \| ____|  / \|_   _|_ _/ _ \| \ | | | |
-#  | | |  _|| |   | |_| |  \| || | |   | |_ / _ \ |  \| | | |   | |_) |  _|   / _ \ | |  | | | | |  \| | | |
-#  | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
-#  |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
+#  _____ _____ ____ _   _ _   _ ___ ____ _____ _    _   _    ____ ____  _____    _  _____ ___ ___  _   _   _
+# |_   _| ____/ ___| | | | \ | |_ _/ ___|  ___/ \  | \ | |  / ___|  _ \| ____|  / \|_   _|_ _/ _ \| \ | | | |
+#   | | |  _|| |   | |_| |  \| || | |   | |_ / _ \ |  \| | | |   | |_) |  _|   / _ \ | |  | | | | |  \| | | |
+#   | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
+#   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import os
 import subprocess
-from libqtile import hook
-from libqtile.backend.wayland import InputConfig
 
-from modules.keybindings import mouse, keys
-from modules.groups import groups
-from modules.layouts import layouts, floating_layout
-from modules.widgets import screens, widget_defaults
+from libqtile import hook
+from libqtile.backend.wayland.inputs import InputConfig
+from modules.groups import groups  # noqa: F401
+from modules.keybindings import keys, mouse  # noqa: F401
+from modules.layouts import floating_layout, layouts  # noqa: F401
+from modules.widgets import screens, widget_defaults  # noqa: F401
 
 
 ### HOOKS ###
@@ -58,7 +58,7 @@ auto_minimize = False
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
     "type:mouse": InputConfig(pointer_accel=0),
-    "type:keyboard": InputConfig(kb_layout="de")
+    "type:keyboard": InputConfig(kb_layout="de"),
 }
 
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in

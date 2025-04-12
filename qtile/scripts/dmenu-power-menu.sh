@@ -2,7 +2,7 @@
 
 main()
 {
-    locker="i3lock-fancy-dualmonitor"
+    locker="i3lock-fancy"
 
     options=(
         "Lock"

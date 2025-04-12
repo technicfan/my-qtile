@@ -6,6 +6,7 @@ main()
     if [[ -n "$chosen" ]]
     then
         kitty --name nvim -d "$chosen" nvim
+        # cd "$chosen" && neovide
     fi
 }
 
