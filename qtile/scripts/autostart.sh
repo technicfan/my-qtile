@@ -43,7 +43,7 @@ flameshot &
 #spotifyd &
 #nvidia-settings --assign FXAA=1 &
 #nvidia-settings -l &
-keyd-application-mapper -d &
+# keyd-application-mapper -d &
 # input-remapper-control --command autoload &
 polychromatic-cli -e keyboard &
 polychromatic-cli -e mouse &

@@ -54,7 +54,7 @@ group_matches = [
     [],
     [],
     [Match(wm_class=re.compile(r"^joplin$"))],
-    [Match(wm_class=re.compile(r"^Minecraft\* .*$"))],
+    [Match(wm_class=re.compile(r"(^Minecraft\* .*$|mcpelauncher-client)"))],
     [
         Match(
             wm_class=re.compile(
@@ -67,9 +67,9 @@ group_matches = [
         Match(
             wm_class=re.compile(
                 r"^(discord|signal|WebApp-WhatsApp5304|WebApp-ChatGPT6070|GPT4All|lm studio|fluffychat|element|WebApp-Cinny7844|WebApp-OllamaWebUI0953)$"
-            ),
-            title="Alpaca",
-        )
+            )
+        ),
+        Match(title="Alpaca"),
     ],
     [
         Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")),
