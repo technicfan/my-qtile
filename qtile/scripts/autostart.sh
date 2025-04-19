@@ -10,9 +10,6 @@ fi
 # mouse sensitivity
 ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
 
-# mpris widgetbox
-~/.config/qtile/scripts/widgetbox.py reset &
-
 #change your keyboard if you need it
 setxkbmap -layout de &
 
@@ -39,14 +36,3 @@ caffeine-indicator &
 clipcatd -r &
 unclutter -idle 3 &
 flameshot &
-
-#spotifyd &
-#nvidia-settings --assign FXAA=1 &
-#nvidia-settings -l &
-# keyd-application-mapper -d &
-# input-remapper-control --command autoload &
-polychromatic-cli -e keyboard &
-polychromatic-cli -e mouse &
-polychromatic-cli -e mousepad &
-polychromatic-cli -o brightness -p 50 &
-polychromatic-cli --dpi 2300 &

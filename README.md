@@ -4,18 +4,25 @@ personal qtile config originally based on DT's config (https://gitlab.com/dwt1/d
 
 place qtile folder in .config
 
+---
+
 dependencies:
-    - python-distro
-    - python-pyalsaaudio
-    - feh
 
-# Screenshots(really outdated - not even green anymore):
+- python-distro
+- python-pyalsaaudio
+- feh
+- openrazer and polychromatic (optional for Razer control)
+
+# Features
+
+- for second screen the systray is removed
+- wayland is not complete
+  - group rules are not setup for wayland
+  - systray is replaced by statusnotifier automatically
+
+# Screenshots:
+
 normal:
-<img src="screenshots/screen-one-normal.png">
+<img src="screenshots/normal.png">
 with unhidden systray:
-<img src="screenshots/screen-one-systray.png">
-with music player:
-<img src="screenshots/screen-one-mpris.png">
-
-second screen:
-<img src="screenshots/screen-two.png">
+<img src="screenshots/systray.png">

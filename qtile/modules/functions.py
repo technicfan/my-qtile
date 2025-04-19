@@ -23,9 +23,7 @@
 #   | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
 #   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
-import os
 import subprocess
-from configparser import ConfigParser
 
 import alsaaudio
 import psutil
@@ -105,27 +103,55 @@ def get_uptime():
         return uptime[:-1]
 
 
-# widgetboxes functions
+# polychromatic custom effect
+def razer_apply_effects(effects: list):
+    import polychromatic.procpid as procpid
+    from polychromatic.effects import EffectFileManagement
+
+    effectman = EffectFileManagement()
+
+    file_list = effectman.get_item_list()
+    for name in effects:
+        path = None
+        for effect in file_list:
+            if effect["name"] == name:
+                path = effect["path"]
+                break
+
+        if path is not None:
+            data = effectman.get_item(path)
+
+            procmgr = procpid.ProcessManager("helper")
+            procmgr.start_component(
+                ["--run-fx", path, "--device-name", data["map_device"]]
+            )
+
+
+# openrazer dpi
+def razer_set_dpi(dpi: int):
+    from openrazer.client import DeviceManager
+
+    device_manager = DeviceManager()
+
+    for device in device_manager.devices:
+        if device.has("dpi"):
+            device.dpi = (dpi, dpi)
+
+
+# openrazer brightness
+def razer_set_brightness(brightness: float):
+    from openrazer.client import DeviceManager
+
+    device_manager = DeviceManager()
+
+    for device in device_manager.devices:
+        device.brightness = brightness
+
+
+# set normal on keypress
 @lazy.function
-def change_mpris(qtile, action):
-    config = ConfigParser()
-    config_file = os.path.expanduser("~/.config/qtile/states/states.ini")
-    config.read(config_file)
-    match action:
-        case "toggle":
-            qtile.widgets_map["mpris"].toggle()
-            if qtile.widgets_map["mpris"].box_is_open:
-                config["widgetboxes"]["mpris"] = "1"
-            else:
-                config["widgetboxes"]["mpris"] = "0"
-        case "open":
-            qtile.widgets_map["mpris"].open()
-            config["widgetboxes"]["mpris"] = "1"
-        case "close":
-            qtile.widgets_map["mpris"].close()
-            config["widgetboxes"]["mpris"] = "0"
-    with open(config_file, "w") as conf:
-        config.write(conf)
+def make_lazy(qtile, func, *args):
+    func(*args)
 
 
 @lazy.function

@@ -26,7 +26,12 @@
 from libqtile.config import Click, Drag, Key, KeyChord
 from libqtile.lazy import lazy
 
-from .functions import volume_up_down
+from .functions import (
+    make_lazy,
+    razer_apply_effects,
+    razer_set_brightness,
+    volume_up_down,
+)
 from .groups import group_names
 
 mod = "mod4"
@@ -56,19 +61,16 @@ keys = [
         lazy.spawncmd(prompt=" Run".lower()),
         desc="Spawn a command using a prompt widget",
     ),
-    Key([], "XF86Launch6", lazy.spawn(".config/qtile/scripts/numlock.sh toggle")),
     Key(
         [mod, "shift"],
         "r",
         lazy.reload_config(),
-        # lazy.spawn(os.path.expanduser("~/.config/qtile/scripts/widgetbox.py restore")),
         desc="Reload the config",
     ),
     Key(
         [mod, "control"],
         "r",
         lazy.restart(),
-        # lazy.spawn("sleep .9 && ~/.config/qtile/scripts/widgetbox.py restore", shell=True),
         desc="Restart qtile",
     ),
     Key(
@@ -79,8 +81,7 @@ keys = [
         desc="Restart picom",
     ),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
-    # dmenu - make sure to apply x,y,z + height + border patch and install 'dmenu-extended-git'
-    # dmenu scripts stolen from DT
+    # dmenu - make sure to apply x,y,z + height + border patch
     Key(
         [mod],
         "o",
@@ -101,7 +102,6 @@ keys = [
     ),
     # own
     Key([mod], "d", lazy.spawn("l7-dmenu-desktop"), desc="Run launcher"),
-    # Key([mod], "d", lazy.spawn("j4-dmenu-desktop --dmenu='dmenu -i -p 'Run:'' --no-generic --term alacritty"), desc="Run launcher"),
     Key(
         [mod],
         "p",
@@ -161,7 +161,6 @@ keys = [
         lazy.spawn(".config/qtile/scripts/menu-qalc.sh"),
         desc="dmenu calculator",
     ),
-    # Key([mod], "plus", lazy.spawn("dmenu -C -p qalc:"), desc="dmenu calculator"),
     # Scratchpads
     Key(
         [mod, "shift"],
@@ -201,29 +200,16 @@ keys = [
             Key(
                 [],
                 "k",
-                lazy.spawn("kill openrgb"),
-                lazy.spawn(
-                    "polychromatic-cli -e keyboard && polychromatic-cli -e mouse",
-                    shell=True,
-                ),
-                lazy.spawn("polychromatic-cli -o brightness -p 50"),
+                make_lazy(razer_apply_effects, ["mouse", "keyboard"]),
+                make_lazy(razer_set_brightness, 50),
                 desc="normal rgb lighting",
             ),
             Key(
                 [],
                 "o",
                 lazy.spawn("kill openrgb"),
-                lazy.spawn("polychromatic-cli -o brightness -p 0"),
+                make_lazy(razer_set_brightness, 0),
                 desc="no rgb lighting",
-            ),
-            Key(
-                [],
-                "l",
-                lazy.spawn(
-                    "polychromatic-cli -o spectrum && openrgb --startminimized",
-                    shell=True,
-                ),
-                desc="rgb lighting as sound visualizer",
             ),
         ],
     ),
@@ -233,7 +219,7 @@ keys = [
         [mod, "shift"], "s", lazy.spawn("flameshot full"), desc="Screenshot all screens"
     ),
     Key([], "XF86Tools", lazy.spawn("flameshot gui"), desc="Snipping tool"),
-    # Spotify with three different actions (key chord SUPER+s followed by "key")
+    # Spotify (key chord SUPER+s followed by "key")
     KeyChord(
         [mod],
         "s",
@@ -245,7 +231,6 @@ keys = [
                 lazy.spawn("sleep 0.5 && playerctl play-pause", shell=True),
                 desc="Spotify - auto play",
             ),
-            # Key([], "d", lazy.spawn("com.spotify.Client"), change_mpris("open"), desc="Spotify"),
             Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
         ],
     ),

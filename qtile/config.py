@@ -28,6 +28,7 @@ import subprocess
 
 from libqtile import hook
 from libqtile.backend.wayland.inputs import InputConfig
+from modules.functions import razer_apply_effects, razer_set_brightness, razer_set_dpi
 from modules.groups import groups  # noqa: F401
 from modules.keybindings import keys, mouse  # noqa: F401
 from modules.layouts import floating_layout, layouts  # noqa: F401
@@ -37,6 +38,12 @@ from modules.widgets import screens, widget_defaults  # noqa: F401
 ### HOOKS ###
 @hook.subscribe.startup_once
 def start_once():
+    try:
+        razer_set_dpi(2300)
+        razer_set_brightness(50)
+        razer_apply_effects(["mouse", "keyboard"])
+    except ImportError:
+        pass
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
     subprocess.run([script])
 
