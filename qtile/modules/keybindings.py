@@ -73,13 +73,6 @@ keys = [
         lazy.restart(),
         desc="Restart qtile",
     ),
-    Key(
-        [mod, "control"],
-        "p",
-        lazy.spawn("kill picom"),
-        lazy.spawn("picom --config .config/qtile/picom/picom.conf"),
-        desc="Restart picom",
-    ),
     Key([mod, "control"], "c", lazy.spawn("clipcatd -r"), desc="Restart clipcat"),
     # dmenu - make sure to apply x,y,z + height + border patch
     Key(

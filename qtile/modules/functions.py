@@ -42,7 +42,7 @@ def get_distro(default: str):
                 "awk -F '=| ' 'NR==1 {print $2}' \
                     <<< \"$((distro || cat /etc/os-release | sed 's/\"//g') 2>/dev/null)\""
             ).lower()
-        except:
+        except Exception:
             return default.lower()
 
 
@@ -50,7 +50,7 @@ def get_battery():
     return "bat: " + str(round(psutil.sensors_battery().percent)) + "%"
 
 
-def get_vram_usage():
+def get_vram_usage(unit="G"):
     b = (
         int(
             subprocess.getoutput(
@@ -60,7 +60,6 @@ def get_vram_usage():
         )
         * 2**20
     )
-    unit = "G"
     match unit:
         case "Mi":
             usage = str(b * 2**-20) + "Mi"

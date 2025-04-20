@@ -39,9 +39,9 @@ from modules.widgets import screens, widget_defaults  # noqa: F401
 @hook.subscribe.startup_once
 def start_once():
     try:
-        razer_set_dpi(2300)
-        razer_set_brightness(50)
         razer_apply_effects(["mouse", "keyboard"])
+        razer_set_brightness(50)
+        razer_set_dpi(2300)
     except ImportError:
         pass
     script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
