@@ -23,11 +23,13 @@
 #   | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
 #   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
+import asyncio
 import os
 import subprocess
 
-from libqtile import hook
+from libqtile import hook, qtile
 from libqtile.backend.wayland.inputs import InputConfig
+from libqtile.config import ScratchPad
 from modules.functions import razer_apply_effects, razer_set_brightness, razer_set_dpi
 from modules.groups import groups  # noqa: F401
 from modules.keybindings import keys, mouse  # noqa: F401
@@ -48,6 +50,33 @@ def start_once():
     subprocess.run([script])
 
 
+@hook.subscribe.client_new
+def new_client(client):
+    async def sleep_until_window_exists(name, show=True) -> None:
+        while not (
+            dropdown := scratchpad.dropdowns.get(name)
+        ):  # we need this, because scratchpad rely on the client_new hook
+            await asyncio.sleep(
+                0.1
+            )  # switch control to the main loop, so we won't block qtile by waiting for the window to appear
+        if show:
+            dropdown.show()
+        else:
+            dropdown.hide()
+
+    match client.name:
+        case "Spotify":
+            scratchpad: ScratchPad = qtile.groups_map["scratchpad"]  # type: ignore
+
+            for dropdown_name, dropdown_config in scratchpad._dropdownconfig.items():  # type: str, DropDown
+                if dropdown_name == "spotify":
+                    scratchpad._spawn(dropdown_config)
+                    asyncio.create_task(sleep_until_window_exists(dropdown_name))
+        case "Bitwarden":
+            client.togroup(qtile.current_group.name)
+            client.center()
+
+
 ### OTHER ###
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
@@ -64,7 +93,7 @@ auto_minimize = False
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
-    "type:mouse": InputConfig(pointer_accel=0),
+    "type:mouse": InputConfig(accel_profile="flat", pointer_accel=0),
     "type:keyboard": InputConfig(kb_layout="de"),
 }
 

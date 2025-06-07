@@ -189,9 +189,9 @@ def init_widgets():
             mouse_callbacks={
                 "Button1": toggle_tray,
                 "Button2": lazy.spawn("kitty --name nvim -d GitHub/my-qtile nvim"),
-                "Button3": lazy.spawn(
-                    '.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45'
-                ),
+                # "Button3": lazy.spawn(
+                #     '.config/qtile/scripts/mouse.sh "Razer Basilisk V3" 0.45'
+                # ),
             },
         ),
     ]

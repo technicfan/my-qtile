@@ -8,7 +8,7 @@ then
 fi
 
 # mouse sensitivity
-~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
+# ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
 
 #change your keyboard if you need it
 setxkbmap -layout de &
@@ -24,12 +24,14 @@ nm-applet &
 xfce4-power-manager &
 blueman-applet &
 # picom -b --config .config/qtile/picom/picom.conf &
+# xcompmgr -n &
+bitwarden-desktop &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 /usr/lib/kdeconnectd &
 aw-qt --no-gui &
 ( sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" ) &
-nextcloud &
+# nextcloud &
 tutanota-desktop -a &
 caffeine &
 caffeine-indicator &

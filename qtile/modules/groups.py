@@ -49,16 +49,16 @@ group_layouts = [
 ]
 
 group_matches = [
-    [Match(wm_class=re.compile(r"^(firefox|firefox-esr|LibreWolf)$"))],
+    [Match(wm_class=re.compile(r"^(firefox|firefox-esr|librewolf)$"))],
     [],
     [],
     [],
     [Match(wm_class=re.compile(r"^joplin$"))],
-    [Match(wm_class=re.compile(r"(^Minecraft\* .*$|mcpelauncher-client)"))],
+    [Match(wm_class=re.compile(r"(^Minecraft\*? .*$|mcpelauncher-client)"))],
     [
         Match(
             wm_class=re.compile(
-                r"^(no-risk-client|prismlauncher|lunarclient|minecraft-launcher|Minecraft Linux Launcher UI)$"
+                r"^(noriskclient-launcher-v3|no-risk-client|prismlauncher|lunarclient|minecraft-launcher|Minecraft Linux Launcher UI)$"
             )
         )
     ],
@@ -147,7 +147,7 @@ groups.append(
                 x=0.05,
                 y=0.05,
                 opacity=1,
-                on_focus_lost_hide=True,
+                on_focus_lost_hide=False,
             ),
         ],
     ),

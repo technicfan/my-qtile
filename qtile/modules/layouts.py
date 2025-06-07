@@ -88,5 +88,6 @@ floating_layout = layout.Floating(
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"),  # tastytrade settings
         Match(wm_class="delphi32.exe"),  # Delphi 7 IDE
         Match(title="vector tools"),
+        Match(wm_class="bitwarden"),
     ],
 )

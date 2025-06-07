@@ -27,9 +27,9 @@
 # Then, you can use RGBA color codes to add transparency to the colors below.
 # For ex: colors = [["#282c34ee", "#282c34dd"], ...
 
-GruvboxMaterial = [
+gruvboxmaterial = [
     "#282828",  # bg
-    "#dfbf8e",  # fg
+    "#d4be98",  # fg
     "#d3869b",  # fg2
     "#453b2c",  # inactive border
     "#555555",  # seperator
@@ -40,4 +40,4 @@ GruvboxMaterial = [
     "#89b482",  # cyan
 ]
 
-colors = GruvboxMaterial
+colors = gruvboxmaterial
