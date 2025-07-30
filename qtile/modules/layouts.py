@@ -41,6 +41,7 @@ from .colors import colors
 
 layout_defaults = {
     "border_width": 1,
+    "single_border_width": 0,
     "margin": 0,
     "border_focus": colors[1],
     "border_normal": colors[3],
