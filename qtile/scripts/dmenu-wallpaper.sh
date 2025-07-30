@@ -15,7 +15,7 @@ revert()
 main()
 {
     dir="$HOME/.config/qtile/wallpapers"
-    default="more/rick.png"
+    default="more/valka_s_bewilderbeast_and_cloudjumper_by_diphos_dd77puw.jpg"
 
     if [[ $1 = "print" ]]
     then

@@ -163,7 +163,7 @@ def init_widgets():
                     Clock,
                     padding=5,
                     foreground=colors[9],
-                    format="%a %-d. %B  %-H:%M",
+                    format="%a %-d. %B %-H:%M",
                     mouse_callbacks={"Button1": lazy.spawn("gsimplecal")},
                 ),
             ],
@@ -173,10 +173,10 @@ def init_widgets():
             start_opened=True,
             name="datetime",
         ),
-        widget.Spacer(length=6),
+        widget.Spacer(length=0),
         widget.Spacer(
             length=10,
-            background=colors[3],
+            # background=colors[3],
             mouse_callbacks={"Button1": toggle_tray},
         ),
     ]
