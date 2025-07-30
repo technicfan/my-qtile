@@ -54,15 +54,15 @@ group_matches = [
     [],
     [],
     [Match(wm_class=re.compile(r"^joplin$"))],
-    [Match(wm_class=re.compile(r"(^Minecraft\*? .*$|mcpelauncher-client)"))],
+    [Match(wm_class=re.compile(r"(^Minecraft\*? ([0-9]|\.)*$|mcpelauncher-client)"))],
     [
         Match(
             wm_class=re.compile(
-                r"^(noriskclient-launcher-v3|no-risk-client|prismlauncher|lunarclient|minecraft-launcher|Minecraft Linux Launcher UI)$"
+                r"^(noriskclient-launcher-v3|no-risk-client|prismlauncher|lunarclient|minecraft-launcher|mcpelauncher-ui-qt)$"
             )
         )
     ],
-    [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe|nvim)$"))],
+    [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe|nvim|jetbrains-idea-ce)$"))],
     [
         Match(
             wm_class=re.compile(
@@ -77,11 +77,11 @@ group_matches = [
     ],
 ]
 
-# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 # group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ", "Ⅸ", "X"]
 # group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "DEV", "CHAT", "VM", "MUS"]
 # group_labels = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
-group_labels = ["WEB", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
+# group_labels = ["WEB", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "DEV", "CHAT", "VM"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -147,7 +147,7 @@ groups.append(
                 x=0.05,
                 y=0.05,
                 opacity=1,
-                on_focus_lost_hide=False,
+                on_focus_lost_hide=True,
             ),
         ],
     ),

@@ -69,8 +69,8 @@ def get_vram_usage(unit="G"):
             usage = str(round(b * 10**-6)) + "M"
         case "G":
             usage = str(round(b * 10**-9, 2)) + "G"
-    # return "vram: " + usage
-    return "  " + usage
+    return "vram: " + usage
+    # return "  " + usage
 
 
 # window name function

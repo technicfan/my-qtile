@@ -41,8 +41,8 @@ from modules.widgets import screens, widget_defaults  # noqa: F401
 @hook.subscribe.startup_once
 def start_once():
     try:
-        razer_apply_effects(["mouse", "keyboard"])
         razer_set_brightness(50)
+        razer_apply_effects(["mouse", "keyboard"])
         razer_set_dpi(2300)
     except ImportError:
         pass
@@ -93,7 +93,7 @@ auto_minimize = False
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
-    "type:mouse": InputConfig(accel_profile="flat", pointer_accel=0),
+    "type:pointer": InputConfig(accel_profile="flat", pointer_accel=0),
     "type:keyboard": InputConfig(kb_layout="de"),
 }
 

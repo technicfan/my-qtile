@@ -40,8 +40,8 @@ from .colors import colors
 
 
 layout_defaults = {
-    "border_width": 2,
-    "margin": 4,
+    "border_width": 1,
+    "margin": 0,
     "border_focus": colors[1],
     "border_normal": colors[3],
 }
@@ -62,7 +62,7 @@ layouts = [
 floating_layout = layout.Floating(
     border_focus=colors[1],
     border_normal=colors[3],
-    border_width=2,
+    border_width=1,
     float_rules=[
         *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
@@ -89,5 +89,6 @@ floating_layout = layout.Floating(
         Match(wm_class="delphi32.exe"),  # Delphi 7 IDE
         Match(title="vector tools"),
         Match(wm_class="bitwarden"),
+        Match(wm_class="noriskclient-launcher-v3"),
     ],
 )
