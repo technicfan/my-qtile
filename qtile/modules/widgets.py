@@ -194,13 +194,15 @@ def init_screen(screen: int) -> Screen:
         case 1:
             # replace systray with statusnotifier under wayland
             if qtile.core.name == "wayland":
-                widgets[12].widgets[0] = widget.StatusNotifier(
+                widgets[11].widgets[0] = widget.StatusNotifier(
                     padding=7,
                     icon_size=17,
                     icon_theme="Gruvbox-Plus-Dark",
                     highlight_radius=0,
                     show_menu_icons=False,
                     menu_width=250,
+                    menu_border_width=1,
+                    menu_border=colors[1],
                     menu_background=colors[0],
                     highlight_colour=colors[1],
                     menu_foreground=colors[2],
