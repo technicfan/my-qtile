@@ -25,7 +25,8 @@ xfce4-power-manager &
 blueman-applet &
 # picom -b --config .config/qtile/picom/picom.conf &
 # xcompmgr -n &
-bitwarden-desktop &
+# bitwarden-desktop &
+goldwarden daemonize &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 /usr/lib/kdeconnectd &

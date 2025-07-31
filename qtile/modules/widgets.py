@@ -94,7 +94,7 @@ def init_widgets():
                     Mpris2,
                     padding=7,
                     no_metadata_text="<d-bus> wtf",
-                    paused_text="   {track}",
+                    paused_text="  {track}",
                     format="{xesam:title} - {xesam:artist}",
                     background=colors[0],
                     foreground=colors[8],

@@ -54,7 +54,13 @@ group_matches = [
     [],
     [],
     [Match(wm_class=re.compile(r"^joplin$"))],
-    [Match(wm_class=re.compile(r"(^Minecraft\*? ([0-9]|\.)*$|mcpelauncher-client)"))],
+    [
+        Match(
+            wm_class=re.compile(
+                r"(^Minecraft\*? ([0-9]|\.)*$|mcpelauncher-client|Vintage Story)"
+            )
+        )
+    ],
     [
         Match(
             wm_class=re.compile(
