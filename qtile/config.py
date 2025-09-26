@@ -94,7 +94,7 @@ auto_minimize = False
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
     "type:pointer": InputConfig(accel_profile="flat", pointer_accel=0),
-    "type:keyboard": InputConfig(kb_layout="de"),
+    "type:keyboard": InputConfig(kb_layout="de", kb_options="nodeadkeys"),
 }
 
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in

@@ -27,13 +27,16 @@ main()
         fi
         ;;
     "Reboot")
-        choice=$(echo -e "System\nBIOS\nWindows" | $DMENU 'Reboot destination:')
-        if [[ $choice =~ System|BIOS|Windows && "$(echo -e "No\nYes" | $DMENU "Reboot to ${choice}?")" == "Yes" ]]
+        choice=$(echo -e "System\nSoft\nBIOS\nWindows" | $DMENU 'Reboot destination:')
+        if [[ $choice =~ System|Soft|BIOS|Windows && "$(echo -e "No\nYes" | $DMENU "Reboot to ${choice}?")" == "Yes" ]]
         then
             case $choice in
             "System")
                 systemctl reboot
             ;;
+            "Soft")
+                systemctl soft-reboot
+                ;;
             "BIOS")
                 systemctl reboot --firmware-setup
                 ;;

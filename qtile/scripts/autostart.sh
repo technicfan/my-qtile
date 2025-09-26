@@ -10,9 +10,6 @@ fi
 # mouse sensitivity
 # ~/.config/qtile/scripts/mouse.sh "Razer Basilisk V3" &
 
-#change your keyboard if you need it
-setxkbmap -layout de &
-
 # stupid libadwaita dark bug fix
 if [[ $(gsettings get org.gnome.desktop.interface color-scheme) != "'prefer-dark'" ]]
 then
@@ -25,8 +22,8 @@ xfce4-power-manager &
 blueman-applet &
 # picom -b --config .config/qtile/picom/picom.conf &
 # xcompmgr -n &
-# bitwarden-desktop &
-goldwarden daemonize &
+bitwarden-desktop &
+# goldwarden daemonize &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 /usr/lib/kdeconnectd &
@@ -39,3 +36,6 @@ caffeine-indicator &
 clipcatd -r &
 unclutter -idle 3 &
 flameshot &
+
+#change your keyboard if you need it
+setxkbmap -layout de nodeadkeys &
