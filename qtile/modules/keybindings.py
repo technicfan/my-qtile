@@ -94,7 +94,7 @@ keys = [
         desc="Launch logout script",
     ),
     # own
-    Key([mod], "d", lazy.spawn("l7-dmenu-desktop"), desc="Run launcher"),
+    Key([mod], "d", lazy.spawn("dmenu-desktop-go"), desc="Run launcher"),
     Key(
         [mod],
         "p",
