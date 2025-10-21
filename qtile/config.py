@@ -28,6 +28,7 @@ import os
 import subprocess
 
 from libqtile import hook, qtile
+from libqtile.backend.base.window import Window
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.config import ScratchPad
 from modules.functions import razer_apply_effects, razer_set_brightness, razer_set_dpi
@@ -51,7 +52,7 @@ def start_once():
 
 
 @hook.subscribe.client_new
-def new_client(client):
+def new_client(client: Window):
     async def sleep_until_window_exists(name, show=True) -> None:
         while not (
             dropdown := scratchpad.dropdowns.get(name)
@@ -75,6 +76,10 @@ def new_client(client):
         case "Bitwarden":
             client.togroup(qtile.current_group.name)
             client.center()
+        case "flameshot":
+            if qtile.core.name == "wayland":
+                client.float_x, client.float_y = 0, 0
+                client.enable_fullscreen()
 
 
 ### OTHER ###
