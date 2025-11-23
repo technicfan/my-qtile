@@ -204,6 +204,12 @@ keys = [
                 make_lazy(razer_set_brightness, 0),
                 desc="no rgb lighting",
             ),
+            Key(
+                [],
+                "d",
+                lazy.spawn(".config/qtile/scripts/switch-deadkeys.sh"),
+                desc="switch between normal and nodeadkeys",
+            ),
         ],
     ),
     # Screenshot
