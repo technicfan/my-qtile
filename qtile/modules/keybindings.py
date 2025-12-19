@@ -26,6 +26,7 @@
 from libqtile.config import Click, Drag, Key, KeyChord
 from libqtile.lazy import lazy
 
+from .floating_window_snapping import move_snap_window
 from .functions import (
     make_lazy,
     razer_apply_effects,
@@ -331,7 +332,7 @@ mouse = [
     Drag(
         [mod],
         "Button1",
-        lazy.window.set_position_floating(),
+        move_snap_window(snap_dist=20),
         start=lazy.window.get_position(),
     ),
     Drag(
