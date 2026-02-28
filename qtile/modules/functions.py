@@ -51,14 +51,12 @@ def get_battery():
 
 
 def get_vram_usage(unit="G"):
-    b = (
-        int(
-            subprocess.getoutput(
-                "nvidia-smi --query-gpu=memory.used \
-            --format=csv,noheader,nounits"
-            )
+    b = int(
+        subprocess.getoutput(
+            #     "nvidia-smi --query-gpu=memory.used \
+            # --format=csv,noheader,nounits"
+            "cat /sys/class/drm/card1/device/mem_info_vram_used"
         )
-        * 2**20
     )
     match unit:
         case "Mi":
@@ -69,6 +67,8 @@ def get_vram_usage(unit="G"):
             usage = str(round(b * 10**-6)) + "M"
         case "G":
             usage = str(round(b * 10**-9, 2)) + "G"
+        case _:
+            usage = "error"
     return "vram: " + usage
     # return "  " + usage
 

@@ -32,7 +32,6 @@ from qtile_extras import widget
 
 from .colors import colors
 from .functions import (
-    get_battery,
     get_distro,
     get_uptime,
     get_vram_usage,
@@ -187,8 +186,8 @@ def init_widgets():
 def init_screen(screen: int) -> Screen:
     widgets = init_widgets()
     # replace vram widget with battery if nvidia-smi not found
-    if subprocess.call("command -v nvidia-smi", shell=True):
-        widgets[9].update_interval, widgets[9].func = 30, get_battery
+    # if subprocess.call("command -v nvidia-smi", shell=True):
+    #     widgets[9].update_inerval, widgets[9].func = 30, get_battery
 
     match screen:
         case 1:

@@ -57,14 +57,14 @@ group_matches = [
     [
         Match(
             wm_class=re.compile(
-                r"(^Minecraft\*? ([0-9]|\.)*$|mcpelauncher-client|Vintage Story)"
+                r"(^Minecraft\*? ([0-9]|\.)*$|mcpelauncher-client|Vintage Story|steam_app_[0-9]+)"
             )
         )
     ],
     [
         Match(
             wm_class=re.compile(
-                r"^(noriskclient-launcher-v3|no-risk-client|prismlauncher|lunarclient|minecraft-launcher|mcpelauncher-ui-qt)$"
+                r"^(noriskclient-launcher-v3|no-risk-client|prismlauncher|lunarclient|minecraft-launcher|mcpelauncher-ui-qt|steam)$"
             )
         )
     ],

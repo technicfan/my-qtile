@@ -30,7 +30,7 @@ dunst &
 aw-qt --no-gui &
 ( sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" ) &
 # nextcloud &
-tutanota-desktop -a &
+# tutanota-desktop -a &
 caffeine &
 caffeine-indicator &
 clipcatd -r &

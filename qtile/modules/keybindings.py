@@ -23,6 +23,7 @@
 #   | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
 #   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
+from libqtile import qtile
 from libqtile.config import Click, Drag, Key, KeyChord
 from libqtile.lazy import lazy
 
@@ -152,7 +153,7 @@ keys = [
     Key(
         [mod],
         "plus",
-        lazy.spawn(".config/qtile/scripts/menu-qalc.sh"),
+        lazy.spawn('.config/qtile/scripts/menu-qalc.sh --dmenu="rofi -dmenu"'),
         desc="dmenu calculator",
     ),
     # Scratchpads
@@ -328,11 +329,16 @@ for group in group_names:
     )
 
 # Drag floating layouts.
+if qtile.core.name == "wayland":
+    move_window = lazy.window.set_position_floating
+else:
+    move_window = move_snap_window
+
 mouse = [
     Drag(
         [mod],
         "Button1",
-        move_snap_window(snap_dist=20),
+        move_window(),
         start=lazy.window.get_position(),
     ),
     Drag(
