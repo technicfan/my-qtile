@@ -23,6 +23,9 @@
 #   | | | |__| |___|  _  | |\  || | |___|  _/ ___ \| |\  | | |___|  _ <| |___ / ___ \| |  | | |_| | |\  | |_|
 #   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
+
+import re
+
 from libqtile import layout
 from libqtile.config import Match
 
@@ -90,5 +93,7 @@ floating_layout = layout.Floating(
         Match(wm_class="delphi32.exe"),  # Delphi 7 IDE
         Match(title="vector tools"),
         Match(wm_class="bitwarden"),
+        Match(wm_class=re.compile(r"xdg-desktop-portal-.+")),
+        Match(func=lambda c: c.is_transient_for() is not None),
     ],
 )

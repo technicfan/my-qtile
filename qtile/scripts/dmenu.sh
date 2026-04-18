@@ -3,13 +3,13 @@
 load()
 {
     cd ~/.config/qtile/scripts || exit 1
-    export DMENU="rofi -dmenu -i -p"
+    export DMENU="rofi -sync -dmenu -i -p"
 }
 
 load_noi()
 {
     cd ~/.config/qtile/scripts || exit 1
-    export DMENU="rofi -dmenu -i -no-custom -p"
+    export DMENU="rofi -sync -dmenu -i -no-custom -p"
 }
 
 main()

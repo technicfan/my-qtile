@@ -153,7 +153,7 @@ keys = [
     Key(
         [mod],
         "plus",
-        lazy.spawn('.config/qtile/scripts/menu-qalc.sh --dmenu="rofi -dmenu"'),
+        lazy.spawn('.config/qtile/scripts/menu-qalc.sh --dmenu="rofi -sync -dmenu"'),
         desc="dmenu calculator",
     ),
     # Scratchpads

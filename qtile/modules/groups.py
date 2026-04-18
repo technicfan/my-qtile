@@ -53,22 +53,28 @@ group_matches = [
     [],
     [],
     [],
-    [Match(wm_class=re.compile(r"^joplin$"))],
+    [Match(wm_class=re.compile(r"^(joplin|net.cozic.joplin_desktop)$"))],
     [
         Match(
             wm_class=re.compile(
-                r"(^Minecraft\*? ([0-9]|\.)*$|mcpelauncher-client|Vintage Story|steam_app_[0-9]+)"
+                r"(^Minecraft\*? ([0-9]|\.)*$|com\.mojang\.minecraft|mcpelauncher-client|Vintage Story|steam_app_[0-9]+)"
             )
         )
     ],
     [
         Match(
             wm_class=re.compile(
-                r"^(noriskclient-launcher-v3|no-risk-client|prismlauncher|lunarclient|minecraft-launcher|mcpelauncher-ui-qt|steam)$"
+                r"^(noriskclient-launcher-v3|no-risk-client|PrismLauncher|org.prismlauncher.PrismLauncher|lunarclient|minecraft-launcher|mcpelauncher-ui-qt|io.mrarm.mcpelauncher-ui-qt|steam)$"
             )
         )
     ],
-    [Match(wm_class=re.compile(r"^(vscodium|delphi32.exe|nvim|jetbrains-idea-ce)$"))],
+    [
+        Match(
+            wm_class=re.compile(
+                r"^(vscodium|delphi32.exe|nvim|jetbrains-idea-ce|jetbrains-idea)$"
+            )
+        )
+    ],
     [
         Match(
             wm_class=re.compile(

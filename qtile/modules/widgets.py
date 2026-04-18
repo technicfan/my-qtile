@@ -219,7 +219,7 @@ def init_screen(screen: int) -> Screen:
             del widgets[3:4]
             # systray
             del widgets[9:10]
-            del widgets[11:12]
+            # del widgets[11:12]
 
     return Screen(
         top=bar.Bar(
