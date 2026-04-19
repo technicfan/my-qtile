@@ -24,9 +24,10 @@
 #   |_| |_____\____|_| |_|_| \_|___\____|_|/_/   \_\_| \_|  \____|_| \_\_____/_/   \_\_| |___\___/|_| \_| (_)
 
 import subprocess
+import typing
 
-import alsaaudio
 import psutil
+from alsaaudio import Mixer
 from libqtile.lazy import lazy
 
 
@@ -47,7 +48,8 @@ def get_distro(default: str):
 
 
 def get_battery():
-    return "bat: " + str(round(psutil.sensors_battery().percent)) + "%"
+    battery = psutil.sensors_battery()
+    return "bat: " + str(round(100 if battery is None else battery.percent)) + "%"
 
 
 def get_vram_usage(unit="G"):
@@ -129,12 +131,11 @@ def razer_apply_effects(effects: list):
 # openrazer dpi
 def razer_set_dpi(dpi: int):
     from openrazer.client import DeviceManager
+    from openrazer.client.device import RazerMouse
 
-    device_manager = DeviceManager()
-
-    for device in device_manager.devices:
+    for device in DeviceManager().devices:
         if device.has("dpi"):
-            device.dpi = (dpi, dpi)
+            typing.cast(RazerMouse, device).dpi = (dpi, dpi)
 
 
 # openrazer brightness
@@ -149,7 +150,7 @@ def razer_set_brightness(brightness: float):
 
 # set normal on keypress
 @lazy.function
-def make_lazy(qtile, func, *args):
+def make_lazy(_, func, *args):
     func(*args)
 
 
@@ -164,12 +165,12 @@ def toggle_tray(qtile):
 def volume_up_down(qtile, way):
     if way not in "toggle|up|down":
         return
-    mixer = alsaaudio.Mixer()
+    mixer = Mixer()
     if way == "toggle":
-        mixer.setmute(-(mixer.getmute()[0] - 1))
+        mixer.setmute(bool((mixer.getmute()[0] - 1)))
     else:
         step = qtile.widgets_map["volume"].step
-        vol = mixer.getvolume()[0]
+        vol = typing.cast(list[int], mixer.getvolume())[0]
         diff = vol % step
         if way == "up":
             vol += step - diff
@@ -179,9 +180,9 @@ def volume_up_down(qtile, way):
             else:
                 vol -= step
         if vol <= 0:
-            mixer.setmute(1)
+            mixer.setmute(True)
         else:
-            mixer.setmute(0)
+            mixer.setmute(False)
         mixer.setvolume(vol)
         # volume osd using dunst
         subprocess.run(

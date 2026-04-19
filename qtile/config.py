@@ -44,18 +44,16 @@ from modules.widgets import screens, widget_defaults  # noqa: F401
 ### HOOKS ###
 @hook.subscribe.startup_once
 def start_once():
+    subprocess.run([os.path.expanduser("~/.config/qtile/scripts/autostart.sh")])
     try:
         razer_apply_effects(["mouse", "keyboard"])
         razer_set_brightness(50)
         razer_set_dpi(2300)
     except ImportError:
         pass
-    script = os.path.expanduser("~/.config/qtile/scripts/autostart.sh")
-    subprocess.run([script])
 
 
 @hook.subscribe.client_new
-@hook.subscribe.client_name_updated
 def new_client(client: Window):
     classes = client.get_wm_class()
     if classes is not None:
@@ -67,6 +65,13 @@ def new_client(client: Window):
                 if qtile.core.name == "wayland":
                     client.float_x, client.float_y = 0, 0
                     client.enable_fullscreen()
+
+
+@hook.subscribe.client_name_updated
+def name_updated(client: Window):
+    classes = client.get_wm_class()
+    if classes is not None:
+        match classes[0]:
             case "librewolf":
                 if qtile.core.name == "wayland":
                     if "Bitwarden" in client.name and "Erweiterung" in client.name:
@@ -93,6 +98,7 @@ auto_minimize = False
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = {
     "type:pointer": InputConfig(accel_profile="flat", pointer_accel=0),
+    "type:touchpad": InputConfig(tap=True),
     "type:keyboard": InputConfig(kb_layout="de", kb_variant="nodeadkeys"),
 }
 
