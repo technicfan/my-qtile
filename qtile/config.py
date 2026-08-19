@@ -44,7 +44,9 @@ from modules.widgets import screens, widget_defaults  # noqa: F401
 ### HOOKS ###
 @hook.subscribe.startup_once
 def start_once():
-    subprocess.run([os.path.expanduser("~/.config/qtile/scripts/autostart.sh")])
+    subprocess.run(
+        [os.path.expanduser("~/.config/qtile/scripts/autostart.sh")], check=False
+    )
     try:
         razer_apply_effects(["mouse", "keyboard"])
         razer_set_brightness(50)
@@ -63,8 +65,17 @@ def new_client(client: Window):
                 scratchpad._spawn(scratchpad._dropdownconfig["spotify"])
             case "flameshot":
                 if qtile.core.name == "wayland":
-                    client.float_x, client.float_y = 0, 0
+                    client.static()
+                    client.enable_floating()
+                    client.set_position_floating(0, 0)
                     client.enable_fullscreen()
+
+
+@hook.subscribe.client_managed
+def client_managed(client: Window):
+    if client.is_transient_for() is not None:
+        client.center()
+        client.bring_to_front()
 
 
 @hook.subscribe.client_name_updated
@@ -73,12 +84,15 @@ def name_updated(client: Window):
     if classes is not None:
         match classes[0]:
             case "librewolf":
-                if qtile.core.name == "wayland":
-                    if "Bitwarden" in client.name and "Erweiterung" in client.name:
-                        client.enable_floating()
-                        if not hasattr(client, "_bw_positioned"):
-                            client.center()
-                            client._bw_positioned = True
+                if (
+                    qtile.core.name == "wayland"
+                    and "Bitwarden" in client.name
+                    and "Erweiterung" in client.name
+                ):
+                    client.enable_floating()
+                    if not hasattr(client, "_bw_positioned"):
+                        client.center()
+                        client._bw_positioned = True
 
 
 ### OTHER ###

@@ -57,14 +57,15 @@ group_matches = [
     [
         Match(
             wm_class=re.compile(
-                r"(^Minecraft\*? ([0-9]|\.)*$|com\.mojang\.minecraft|mcpelauncher-client|Vintage Story|steam_app_[0-9]+)"
-            )
-        )
+                r"(^Minecraft\*? ([0-9]|\.)*$|com\.mojang\.minecraft|mcpelauncher-client|Vintage Story|steam_app_[0-9]+|minecraft.windows.exe)"
+            ),
+        ),
+        Match(title=re.compile(r"^Minecraft\*? ([0-9]|\.)*$")),
     ],
     [
         Match(
             wm_class=re.compile(
-                r"^(noriskclient-launcher-v3|no-risk-client|PrismLauncher|org.prismlauncher.PrismLauncher|lunarclient|minecraft-launcher|mcpelauncher-ui-qt|io.mrarm.mcpelauncher-ui-qt|steam)$"
+                r"^(bedrockOnLinux|noriskclient-launcher-v3|no-risk-client|PrismLauncher|org.prismlauncher.PrismLauncher|modrinth-app(-wrapped)?|lunarclient|minecraft-launcher|mcpelauncher-ui-qt|io.mrarm.mcpelauncher-ui-qt|steam)$"
             )
         )
     ],

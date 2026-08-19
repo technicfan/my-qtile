@@ -16,6 +16,9 @@ then
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark &
 fi &
 
+# fix environment for xdg-desktop-portal-wlr?
+systemctl --user import-environment WAYLAND_DISPLAY
+
 #starting utility applications at boot time
 nm-applet &
 xfce4-power-manager &
@@ -27,8 +30,8 @@ bitwarden-desktop &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 dunst &
 /usr/lib/kdeconnectd &
-aw-qt --no-gui &
-( sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" ) &
+awatcher --no-tray &
+# ( sleep 4 && aw-sync --sync-dir "$HOME/Nextcloud/technicfan/Nextcloud/Linux/activitywatch" ) &
 # nextcloud &
 # tutanota-desktop -a &
 caffeine &

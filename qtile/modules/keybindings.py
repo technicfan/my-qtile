@@ -215,7 +215,12 @@ keys = [
         ],
     ),
     # Screenshot
-    Key([], "print", lazy.spawn("flameshot screen"), desc="Screenshot active screen"),
+    Key(
+        [],
+        "print",
+        lazy.spawn("flameshot screen -n 0"),
+        desc="Screenshot active screen",
+    ),
     Key(
         [mod, "shift"], "s", lazy.spawn("flameshot full"), desc="Screenshot all screens"
     ),
@@ -316,14 +321,14 @@ for group in group_names:
                 [mod],
                 group,
                 lazy.group[group].toscreen(),
-                desc="Switch to group {}".format(group),
+                desc=f"Switch to group {group}",
             ),
             Key(
                 [mod, "shift"],
                 group,
                 lazy.window.togroup(group),
                 lazy.group[group].toscreen(),
-                desc="Move focused window to group {}".format(group),
+                desc=f"Move focused window to group {group}",
             ),
         ]
     )
