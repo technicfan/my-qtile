@@ -27,6 +27,8 @@ import re
 
 from libqtile.config import DropDown, Group, Match, ScratchPad
 
+from modules.functions import myMusicPlayer
+
 # temporary solution
 myTerm = "kitty"
 
@@ -60,7 +62,7 @@ group_matches = [
                 r"(^Minecraft\*? ([0-9]|\.)*$|com\.mojang\.minecraft|mcpelauncher-client|Vintage Story|steam_app_[0-9]+|minecraft.windows.exe)"
             ),
         ),
-        Match(title=re.compile(r"^Minecraft\*? ([0-9]|\.)*$")),
+        Match(title=re.compile(r"^Minecraft\*? ([0-9]|\.)+")),
     ],
     [
         Match(
@@ -85,7 +87,11 @@ group_matches = [
         Match(title="Alpaca"),
     ],
     [
-        Match(wm_class=re.compile(r"^(VirtualBox\ Machine|virt\-manager|vmware)$")),
+        Match(
+            wm_class=re.compile(
+                r"^(VirtualBox\ Machine|virt\-manager|vmware|Waydroid)$"
+            )
+        ),
         Match(title=re.compile(r"^(VirtualBoxVM)$")),
     ],
 ]
@@ -152,15 +158,15 @@ groups.append(
                 on_focus_lost_hide=False,
             ),
             DropDown(
-                "spotify",
-                "com.spotify.Client",
-                match=Match(wm_class="spotify"),
+                "music",
+                myMusicPlayer.command,
+                match=Match(wm_class=myMusicPlayer.wm_class),
                 width=0.9,
                 height=0.85,
                 x=0.05,
                 y=0.05,
                 opacity=1,
-                on_focus_lost_hide=True,
+                on_focus_lost_hide=False,
             ),
         ],
     ),

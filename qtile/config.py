@@ -29,8 +29,10 @@ import subprocess
 from libqtile import hook, qtile
 from libqtile.backend.base.window import Window
 from libqtile.backend.wayland.inputs import InputConfig
+from libqtile.group import _Group
 from libqtile.scratchpad import ScratchPad
 from modules.functions import (
+    myMusicPlayer,
     razer_apply_effects,
     razer_set_brightness,
     razer_set_dpi,
@@ -55,14 +57,19 @@ def start_once():
         pass
 
 
+@hook.subscribe.shutdown
+def shutdown():
+    subprocess.run(["kill", "-9", "uwsgi"], check=False)
+
+
 @hook.subscribe.client_new
 def new_client(client: Window):
     classes = client.get_wm_class()
     if classes is not None:
         match classes[0]:
-            case "spotify":
+            case myMusicPlayer.wm_class:
                 scratchpad: ScratchPad = qtile.groups_map["scratchpad"]
-                scratchpad._spawn(scratchpad._dropdownconfig["spotify"])
+                scratchpad._spawn(scratchpad._dropdownconfig["music"])
             case "flameshot":
                 if qtile.core.name == "wayland":
                     client.static()
@@ -71,11 +78,52 @@ def new_client(client: Window):
                     client.enable_fullscreen()
 
 
+@hook.subscribe.float_change
+@hook.subscribe.focus_change
+@hook.subscribe.current_screen_change
+def status_change():
+    with open(os.path.expanduser("~/.config/qtile/waybar/status-change"), "r") as f:
+        f.close()
+
+
+@hook.subscribe.screen_change
+@hook.subscribe.client_name_updated
+def client_name_updated(client):
+    status_change()
+
+
 @hook.subscribe.client_managed
 def client_managed(client: Window):
-    if client.is_transient_for() is not None:
-        client.center()
-        client.bring_to_front()
+    if qtile.core.name == "wayland" and isinstance(client, Window):
+        if qtile.current_window is not None and client.group != qtile.current_group:
+            qtile.current_window.focus(cursor_warp)
+        if client.is_transient_for() is not None:
+            client.center()
+            client.bring_to_front()
+        elif client.group is not None and client.group.name == "6":
+            client.float_x = 0
+            client.float_y = 0
+            client.enable_fullscreen()
+        elif client.name == "gsimplecal":
+            client.set_position_floating(1726, 25)
+
+
+@hook.subscribe.float_change
+def float_change():
+    if qtile.core.name == "wayland":
+        gaming_group: _Group = qtile.groups_map["6"]
+        gaming_group.unminimize_all()
+        # if qtile.current_group.name != "6":
+        #     for window in gaming_group.windows:
+        #         if (
+        #             window.float_x == 0
+        #             and window.float_y == 0
+        #             and not window.fullscreen
+        #         ):
+        #             window.enable_fullscreen()
+        #         if window.float_x is None and window.float_y is None:
+        #             window.float_x = 0
+        #             window.float_y = 0
 
 
 @hook.subscribe.client_name_updated
@@ -115,6 +163,14 @@ wl_input_rules = {
     "type:touchpad": InputConfig(tap=True),
     "type:keyboard": InputConfig(kb_layout="de", kb_variant="nodeadkeys"),
 }
+
+idle_timers = [
+    # IdleTimer(
+    #     10,
+    #     action=lambda: qtile.core.hide_cursor(),
+    #     resume=lambda: qtile.core.unhide_cursor(),
+    # ),
+]
 
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.

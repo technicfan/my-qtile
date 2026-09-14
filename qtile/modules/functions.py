@@ -31,6 +31,37 @@ from alsaaudio import Mixer
 from libqtile.lazy import lazy
 
 
+class MusicPlayer:
+    def __init__(
+        self,
+        mpris_name: str,
+        command: str,
+        kill_command: str,
+        wm_class: str,
+        kill_window: bool,
+    ):
+        self.mpris_name = mpris_name
+        self.kill_command = kill_command
+        self.command = command
+        self.wm_class = wm_class
+        self.kill_window = kill_window
+
+
+myMusicPlayer = MusicPlayer(
+    "com.blitzfc.qbz", "com.blitzfc.qbz", "kill qbz", "qbz", True
+)
+
+# myMusicPlayer = MusicPlayer("com.blitzfc.qbz", "qbzd run", "kill qbzd", "", False)
+
+# myMusicPlayer = MusicPlayer(
+#     "qobine",
+#     "foot -a io.github.sofusa.qobine -T qobine qobine-tui",
+#     "kill qobine-tui",
+#     "io.github.sofusa.qobine",
+#     False,
+# )
+
+
 # get distro
 def get_distro(default: str):
     try:
@@ -106,7 +137,7 @@ def get_uptime():
 
 # polychromatic custom effect
 def razer_apply_effects(effects: list):
-    import polychromatic.procpid as procpid
+    from polychromatic import procpid
     from polychromatic.effects import EffectFileManagement
 
     effectman = EffectFileManagement()
@@ -160,6 +191,16 @@ def toggle_tray(qtile):
     qtile.widgets_map["datetime"].toggle()
 
 
+@lazy.function
+def toggle_music(qtile):
+    if myMusicPlayer.kill_window and qtile.current_window is not None:
+        classes = qtile.current_window.get_wm_class()
+        if classes is not None and classes[0] == myMusicPlayer.wm_class:
+            qtile.current_window.kill()
+            return
+    qtile.groups_map["scratchpad"].dropdown_toggle("music")
+
+
 # volume function
 @lazy.function
 def volume_up_down(qtile, way):
@@ -167,9 +208,9 @@ def volume_up_down(qtile, way):
         return
     mixer = Mixer()
     if way == "toggle":
-        mixer.setmute(bool((mixer.getmute()[0] - 1)))
+        mixer.setmute(bool(mixer.getmute()[0] - 1))
     else:
-        step = qtile.widgets_map["volume"].step
+        step = 5  # qtile.widgets_map["volume"].step
         vol = typing.cast(list[int], mixer.getvolume())[0]
         diff = vol % step
         if way == "up":
@@ -185,9 +226,15 @@ def volume_up_down(qtile, way):
             mixer.setmute(False)
         mixer.setvolume(vol)
         # volume osd using dunst
-        subprocess.run(
-            f"notify-send -a qtile-volume\
-            -h string:x-dunst-stack-tag:test -h int:value:{vol}\
-                'Volume: {vol}%'",
-            shell=True,
+        subprocess.Popen(
+            [
+                "notify-send",
+                "-a",
+                "qtile-volume",
+                "-h",
+                "string:x-dunst-stack-tag:test",
+                "-h",
+                f"int:value:{vol}",
+                f"Volume: {vol}%",
+            ]
         )

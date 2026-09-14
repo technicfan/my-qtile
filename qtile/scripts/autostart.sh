@@ -19,6 +19,9 @@ fi &
 # fix environment for xdg-desktop-portal-wlr?
 systemctl --user import-environment WAYLAND_DISPLAY
 
+uwsgi --plugin python ~/.config/qtile/waybar/uwsgi.ini &
+waybar &
+
 #starting utility applications at boot time
 nm-applet &
 xfce4-power-manager &
@@ -37,7 +40,6 @@ awatcher --no-tray &
 caffeine &
 caffeine-indicator &
 clipcatd -r &
-unclutter -idle 3 &
 flameshot &
 
 #change your keyboard if you need it

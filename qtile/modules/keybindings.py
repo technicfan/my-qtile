@@ -30,8 +30,10 @@ from libqtile.lazy import lazy
 from .floating_window_snapping import move_snap_window
 from .functions import (
     make_lazy,
+    myMusicPlayer,
     razer_apply_effects,
     razer_set_brightness,
+    toggle_music,
     volume_up_down,
 )
 from .groups import group_names
@@ -184,8 +186,8 @@ keys = [
     Key(
         [mod],
         "m",
-        lazy.group["scratchpad"].dropdown_toggle("spotify"),
-        desc="Toggle Spotify",
+        toggle_music(),
+        desc="Toggle music player (make sure to enable minimize to tray)",
     ),
     # rgb lighting (key chord SUPER+k followed by "key")
     KeyChord(
@@ -225,7 +227,7 @@ keys = [
         [mod, "shift"], "s", lazy.spawn("flameshot full"), desc="Screenshot all screens"
     ),
     Key([], "XF86Tools", lazy.spawn("flameshot gui"), desc="Snipping tool"),
-    # Spotify (key chord SUPER+s followed by "key")
+    # Music player (key chord SUPER+s followed by "key")
     KeyChord(
         [mod],
         "s",
@@ -233,11 +235,16 @@ keys = [
             Key(
                 [],
                 "s",
-                lazy.group["scratchpad"].dropdown_toggle("spotify"),
+                lazy.group["scratchpad"].dropdown_toggle("music"),
                 lazy.spawn("sleep 0.5 && playerctl play-pause", shell=True),
-                desc="Spotify - auto play",
+                desc="Music player - auto play",
             ),
-            Key([], "q", lazy.spawn("kill spotify"), desc="Kill Spotify"),
+            Key(
+                [],
+                "q",
+                lazy.spawn(myMusicPlayer.kill_command),
+                desc="Kill music player",
+            ),
         ],
     ),
     Key(
@@ -313,6 +320,16 @@ keys = [
     Key([mod], "Tab", lazy.screen.next_group(), desc="Move to next group"),
     Key([mod], "XF86Launch5", lazy.screen.prev_group(), desc="Move to prev group"),
 ]
+
+for tty in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"],
+            f"f{tty}",
+            lazy.core.change_vt(tty),
+            desc=f"switch to tty {tty}",
+        )
+    )
 
 for group in group_names:
     keys.extend(

@@ -1,0 +1,117 @@
+import itertools
+import subprocess
+
+from flask import Flask
+from libqtile.command.base import CommandError, SelectError
+from libqtile.command.client import InteractiveCommandClient
+
+client = InteractiveCommandClient()
+app = Flask(__name__)
+
+
+colors = [
+    "#282828",
+    "#d4be98",
+    "#d3869b",
+]
+
+
+def get_distro(default: str):
+    try:
+        import distro
+
+        return distro.name().lower()
+    except ImportError:
+        try:
+            return subprocess.getoutput(
+                "awk -F '=| ' 'NR==1 {print $2}' \
+                    <<< \"$((distro || cat /etc/os-release | sed 's/\"//g') 2>/dev/null)\""
+            ).lower()
+        except Exception:
+            return default.lower()
+
+
+def get_screen(port):
+    screen = 0
+    try:
+        while True:
+            if client.screen[screen].info()["port"] == port:
+                break
+            else:
+                screen += 1
+    except SelectError:
+        pass
+    return screen
+
+
+@app.route("/groups/<port>", methods=["GET"])
+def groups(port):
+    screen = client.group.info()["screen"]
+    output = ""
+    if port == "true" or port == "false":
+        for group in client.get_groups().values():
+            if group["screen"] is not None:
+                if group["screen"] == screen:
+                    output += f"<p>{group['label']}</p>;"
+                else:
+                    output += f"<s>{group['label']}</s>;"
+            elif port == "true" or len(group["windows"]) > 0:
+                output += f"{group['label']};"
+        return output
+    else:
+        for group in client.get_groups().values():
+            if group["screen"] is not None:
+                if group["screen"] == screen:
+                    output += f'<span background=\\"{colors[1]}\\" color=\\"{colors[0]}\\"> {group["label"]} </span>'
+                else:
+                    output += f'<span background=\\"{colors[2]}\\" color=\\"{colors[0]}\\"> {group["label"]} </span>'
+            elif len(group["windows"]) != 0:
+                output += f'<span background=\\"{colors[0]}\\" color=\\"{colors[2]}\\"> {group["label"]} </span>'
+
+        return "{" + f'"text": "{output}", "class": "qtile-groups"' + "}\n"
+
+
+@app.route("/window/<port>", methods=["GET"])
+def window(port):
+    try:
+        name = client.group[client.get_screens()[get_screen(port)]["group"]].info()[
+            "focus"
+        ]
+        if name is not None:
+            return name.lower() + "\n"
+        raise CommandError
+    except CommandError:
+        return get_distro("Linux") + " - Qtile\n".lower()
+
+
+@app.route("/switch/<group>", methods=["POST"])
+def switch(group):
+    try:
+        client.group[group].toscreen(client.screen.info()["index"])
+    except CommandError:
+        pass
+    return ""
+
+
+@app.route("/cycle/<direction>", methods=["POST"])
+def cycle(direction):
+    group = client.group.info()
+    current = None
+    if group is not None:
+        current = group["name"]
+    i = None
+    if direction == "forwards":
+        i = itertools.cycle(client.get_groups())
+    elif direction == "backwards":
+        i = itertools.cycle(reversed(client.get_groups()))
+    if i is None:
+        return ""
+    while next(i) != current:
+        pass
+    new_group = None
+    while new_group is None or len(client.group[new_group].info()["windows"]) == 0:
+        new_group = next(i)
+    if i == "scratchpad":
+        new_group = next(i)
+    client.group[new_group].toscreen(client.screen.info()["index"])
+    return ""

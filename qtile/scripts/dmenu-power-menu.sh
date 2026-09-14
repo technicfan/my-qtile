@@ -2,7 +2,11 @@
 
 main()
 {
-    locker="i3lock-fancy"
+    locker="i3lock"
+    if [[ -n $WAYLAND_DISPLAY ]]
+    then
+        locker="swaylock"
+    fi
 
     options=(
         "Lock"
@@ -16,7 +20,7 @@ main()
 
     case $choice in
     "Lock")
-        $locker
+        $locker -c 282828
         ;;
     "Logout")
         if [[ "$(echo -e "No\nYes" | $DMENU "${choice}?")" == "Yes" ]]

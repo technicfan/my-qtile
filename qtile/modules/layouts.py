@@ -93,6 +93,7 @@ floating_layout = layout.Floating(
         Match(wm_class="delphi32.exe"),  # Delphi 7 IDE
         Match(title="vector tools"),
         Match(wm_class="bitwarden"),
+        Match(wm_class="Bitwarden"),
         Match(wm_class=re.compile(r"xdg-desktop-portal-.+")),
         Match(func=lambda c: c.is_transient_for() is not None),
     ],

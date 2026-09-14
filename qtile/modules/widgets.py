@@ -35,6 +35,7 @@ from .functions import (
     get_distro,
     get_uptime,
     get_vram_usage,
+    myMusicPlayer,
     toggle_tray,
     volume_up_down,
     window_name,
@@ -97,7 +98,7 @@ def init_widgets():
                     format="{xesam:title} - {xesam:artist}",
                     background=colors[0],
                     foreground=colors[8],
-                    objname="org.mpris.MediaPlayer2.spotify",
+                    objname=f"org.mpris.MediaPlayer2.{myMusicPlayer.mpris_name}",
                     width=375,
                 ),
             ],
@@ -188,6 +189,8 @@ def init_screen(screen: int) -> Screen:
     # replace vram widget with battery if nvidia-smi not found
     # if subprocess.call("command -v nvidia-smi", shell=True):
     #     widgets[9].update_inerval, widgets[9].func = 30, get_battery
+    if qtile.core.name == "wayland":
+        widgets[2].bell_style = None
 
     match screen:
         case 1:
@@ -200,7 +203,7 @@ def init_screen(screen: int) -> Screen:
                     highlight_radius=0,
                     show_menu_icons=False,
                     menu_width=250,
-                    menu_border_width=1,
+                    menu_border_width=0,
                     menu_border=colors[1],
                     menu_background=colors[0],
                     highlight_colour=colors[1],
@@ -220,11 +223,13 @@ def init_screen(screen: int) -> Screen:
             # systray
             del widgets[9:10]
             # del widgets[11:12]
+            widgets[11].mouse_callbacks = {}
 
     return Screen(
-        top=bar.Bar(
-            widgets=widgets, size=26, background=colors[0], margin=[-1, 0, 0, 0]
-        ),
+        top=bar.Gap(size=25),
+        # top=bar.Bar(
+        #     widgets=widgets, size=26, background=colors[0], margin=[-1, 0, 0, 0]
+        # ),
         wallpaper=subprocess.getoutput(
             "~/.config/qtile/scripts/dmenu-wallpaper.sh print"
         ),
@@ -233,11 +238,11 @@ def init_screen(screen: int) -> Screen:
 
 
 # Some settings that are used on almost every widget
-widget_defaults = dict(
-    font="Terminus",
-    fontsize=14,
-    background=colors[0],
-)
+widget_defaults = {
+    "font": "Terminus",
+    "fontsize": 14,
+    "background": colors[0],
+}
 
 ### SCREENS ###
 screens = [init_screen(i) for i in range(1, 3)]
