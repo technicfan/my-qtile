@@ -80,6 +80,7 @@ def new_client(client: Window):
 
 @hook.subscribe.setgroup
 @hook.subscribe.screen_change
+@hook.subscribe.client_managed
 def group_change(event=None):
     open(os.path.expanduser("~/.config/qtile/waybar/group-change"), "r").close()
 
