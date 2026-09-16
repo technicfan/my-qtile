@@ -55,7 +55,7 @@ def groups(port):
                     output += f"<p>{group['label']}</p>;"
                 else:
                     output += f"<s>{group['label']}</s>;"
-            elif port == "true" or len(group["windows"]) > 0:
+            elif group["label"] != "" and (port == "true" or len(group["windows"]) > 0):
                 output += f"{group['label']};"
         return output
     else:
@@ -84,10 +84,12 @@ def window(port):
         return get_distro("Linux") + " - Qtile\n".lower()
 
 
-@app.route("/switch/<group>", methods=["POST"])
-def switch(group):
+@app.route("/switch/<label>", methods=["POST"])
+def switch(label):
     try:
-        client.group[group].toscreen(client.screen.info()["index"])
+        for group in client.get_groups().values():
+            if group["label"] == label:
+                client.group[group["name"]].toscreen(client.screen.info()["index"])
     except CommandError:
         pass
     return ""
