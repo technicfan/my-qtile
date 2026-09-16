@@ -37,6 +37,7 @@ from .functions import (
     volume_up_down,
 )
 from .groups import group_names
+from .widgets import gap
 
 mod = "mod4"
 myBrowser = "librewolf"
@@ -56,7 +57,13 @@ keys = [
     ),
     Key([mod, "shift"], "Return", lazy.spawn(myFM), desc="File Manager"),
     Key([mod], "space", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "h", lazy.hide_show_bar(), desc="Toggle bar"),
+    Key(
+        [mod],
+        "h",
+        lazy.spawn("killall -SIGUSR1 waybar"),
+        make_lazy(gap.toggle),
+        desc="Toggle bar",
+    ),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "l", lazy.spawn("xkill"), desc="Kill GUI apps"),
     Key(

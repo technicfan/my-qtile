@@ -52,6 +52,16 @@ class Mpris2(widget.Mpris2):
         return super().get_track_info(metadata).lower()
 
 
+class Gap(bar.Gap):
+    def toggle(self):
+        if self.fullsize == 0:
+            self.fullsize = self.size
+        else:
+            self.fullsize = 0
+        if self.screen and self.screen.group:
+            self.screen.group.layout_all()
+
+
 def init_widgets():
     widgets_list = [
         widget.GroupBox(
@@ -183,6 +193,9 @@ def init_widgets():
     return widgets_list
 
 
+gap = Gap(size=25)
+
+
 ### SCREEN INITIALISATION ###
 def init_screen(screen: int) -> Screen:
     widgets = init_widgets()
@@ -226,7 +239,7 @@ def init_screen(screen: int) -> Screen:
             widgets[11].mouse_callbacks = {}
 
     return Screen(
-        top=bar.Gap(size=25),
+        top=gap,
         # top=bar.Bar(
         #     widgets=widgets, size=26, background=colors[0], margin=[-1, 0, 0, 0]
         # ),

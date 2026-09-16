@@ -44,31 +44,19 @@ def get_screen(port):
     return screen
 
 
-@app.route("/groups/<port>", methods=["GET"])
-def groups(port):
+@app.route("/groups/<show_all>", methods=["GET"])
+def groups(show_all):
     screen = client.group.info()["screen"]
     output = ""
-    if port == "true" or port == "false":
-        for group in client.get_groups().values():
-            if group["screen"] is not None:
-                if group["screen"] == screen:
-                    output += f"<p>{group['label']}</p>;"
-                else:
-                    output += f"<s>{group['label']}</s>;"
-            elif group["label"] != "" and (port == "true" or len(group["windows"]) > 0):
-                output += f"{group['label']};"
-        return output
-    else:
-        for group in client.get_groups().values():
-            if group["screen"] is not None:
-                if group["screen"] == screen:
-                    output += f'<span background=\\"{colors[1]}\\" color=\\"{colors[0]}\\"> {group["label"]} </span>'
-                else:
-                    output += f'<span background=\\"{colors[2]}\\" color=\\"{colors[0]}\\"> {group["label"]} </span>'
-            elif len(group["windows"]) != 0:
-                output += f'<span background=\\"{colors[0]}\\" color=\\"{colors[2]}\\"> {group["label"]} </span>'
-
-        return "{" + f'"text": "{output}", "class": "qtile-groups"' + "}\n"
+    for group in client.get_groups().values():
+        if group["screen"] is not None:
+            if group["screen"] == screen:
+                output += f"<p>{group['label']}</p>;"
+            else:
+                output += f"<s>{group['label']}</s>;"
+        elif group["label"] != "" and (show_all == "true" or len(group["windows"]) > 0):
+            output += f"{group['label']};"
+    return output
 
 
 @app.route("/window/<port>", methods=["GET"])

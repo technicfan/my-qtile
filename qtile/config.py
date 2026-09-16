@@ -78,18 +78,16 @@ def new_client(client: Window):
                     client.enable_fullscreen()
 
 
-@hook.subscribe.float_change
-@hook.subscribe.focus_change
-@hook.subscribe.current_screen_change
-def status_change():
-    with open(os.path.expanduser("~/.config/qtile/waybar/status-change"), "r") as f:
-        f.close()
-
-
+@hook.subscribe.setgroup
 @hook.subscribe.screen_change
+def group_change(event=None):
+    open(os.path.expanduser("~/.config/qtile/waybar/group-change"), "r").close()
+
+
+@hook.subscribe.focus_change
 @hook.subscribe.client_name_updated
-def client_name_updated(client):
-    status_change()
+def window_change(client=None):
+    open(os.path.expanduser("~/.config/qtile/waybar/window-change"), "r").close()
 
 
 @hook.subscribe.client_managed
