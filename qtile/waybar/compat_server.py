@@ -1,4 +1,3 @@
-import itertools
 import subprocess
 
 from flask import Flask
@@ -80,31 +79,4 @@ def switch(label):
                 client.group[group["name"]].toscreen(client.screen.info()["index"])
     except CommandError:
         pass
-    return ""
-
-
-@app.route("/cycle/<direction>", methods=["POST"])
-def cycle(direction):
-    group = client.group.info()
-    current = None
-    if group is not None:
-        current = group["name"]
-    i = None
-    if direction == "forwards":
-        i = itertools.cycle(client.get_groups())
-    elif direction == "backwards":
-        i = itertools.cycle(reversed(client.get_groups()))
-    if i is None:
-        return ""
-    while next(i) != current:
-        pass
-    new_group = None
-    while (
-        new_group is None
-        or new_group == "scratchpad"
-        or len(client.group[new_group].info()["windows"]) == 0
-    ):
-        new_group = next(i)
-    if len(client.group[new_group].info()["windows"]) > 0:
-        client.group[new_group].toscreen(client.screen.info()["index"])
     return ""
