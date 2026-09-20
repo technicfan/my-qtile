@@ -29,7 +29,6 @@ import subprocess
 from libqtile import hook, qtile
 from libqtile.backend.base.window import Window
 from libqtile.backend.wayland.inputs import InputConfig
-from libqtile.group import _Group
 from libqtile.scratchpad import ScratchPad
 from modules.functions import (
     myMusicPlayer,
@@ -105,24 +104,31 @@ def client_managed(client: Window):
             client.enable_fullscreen()
         elif client.name == "gsimplecal":
             client.set_position_floating(1726, 25)
+        elif client.name == "VLC media player":
+            if client.group is not None:
+                for window in client.group.windows:
+                    if window.name == "FreetuxTV":
+                        client.set_size_floating(1594, 908)
+                        client.set_position_floating(322, 58)
+                        break
 
 
-@hook.subscribe.float_change
-def float_change():
-    if qtile.core.name == "wayland":
-        gaming_group: _Group = qtile.groups_map["6"]
-        gaming_group.unminimize_all()
-        # if qtile.current_group.name != "6":
-        #     for window in gaming_group.windows:
-        #         if (
-        #             window.float_x == 0
-        #             and window.float_y == 0
-        #             and not window.fullscreen
-        #         ):
-        #             window.enable_fullscreen()
-        #         if window.float_x is None and window.float_y is None:
-        #             window.float_x = 0
-        #             window.float_y = 0
+# @hook.subscribe.float_change
+# def float_change():
+#     if qtile.core.name == "wayland":
+#         gaming_group: _Group = qtile.groups_map["6"]
+#         gaming_group.unminimize_all()
+# if qtile.current_group.name != "6":
+#     for window in gaming_group.windows:
+#         if (
+#             window.float_x == 0
+#             and window.float_y == 0
+#             and not window.fullscreen
+#         ):
+#             window.enable_fullscreen()
+#         if window.float_x is None and window.float_y is None:
+#             window.float_x = 0
+#             window.float_y = 0
 
 
 @hook.subscribe.client_name_updated

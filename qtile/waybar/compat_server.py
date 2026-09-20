@@ -99,9 +99,12 @@ def cycle(direction):
     while next(i) != current:
         pass
     new_group = None
-    while new_group is None or len(client.group[new_group].info()["windows"]) == 0:
+    while (
+        new_group is None
+        or new_group == "scratchpad"
+        or len(client.group[new_group].info()["windows"]) == 0
+    ):
         new_group = next(i)
-    if i == "scratchpad":
-        new_group = next(i)
-    client.group[new_group].toscreen(client.screen.info()["index"])
+    if len(client.group[new_group].info()["windows"]) > 0:
+        client.group[new_group].toscreen(client.screen.info()["index"])
     return ""
