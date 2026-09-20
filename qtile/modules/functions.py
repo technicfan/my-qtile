@@ -47,19 +47,19 @@ class MusicPlayer:
         self.kill_window = kill_window
 
 
-myMusicPlayer = MusicPlayer(
-    "com.blitzfc.qbz", "com.blitzfc.qbz", "kill qbz", "qbz", True
-)
+# myMusicPlayer = MusicPlayer(
+#     "com.blitzfc.qbz", "com.blitzfc.qbz", "kill qbz", "qbz", True
+# )
 
 # myMusicPlayer = MusicPlayer("com.blitzfc.qbz", "qbzd run", "kill qbzd", "", False)
 
-# myMusicPlayer = MusicPlayer(
-#     "qobine",
-#     "foot -a io.github.sofusa.qobine -T qobine qobine-tui",
-#     "kill qobine-tui",
-#     "io.github.sofusa.qobine",
-#     False,
-# )
+myMusicPlayer = MusicPlayer(
+    "qobine",
+    "foot -a io.github.sofusa.qobine -T qobine qobine-tui --connect",
+    "kill qobine-tui",
+    "io.github.sofusa.qobine",
+    False,
+)
 
 
 # get distro

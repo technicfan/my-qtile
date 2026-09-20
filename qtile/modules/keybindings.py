@@ -283,7 +283,7 @@ keys = [
     Key(
         [], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous media key"
     ),
-    Key([mod, "shift"], "m", lazy.widget["mpris"].toggle(), desc="Toggle mpris"),
+    # Key([mod, "shift"], "m", lazy.widget["mpris"].toggle(), desc="Toggle mpris"),
     # Volume
     Key([], "XF86AudioRaiseVolume", volume_up_down("up"), desc="Increase volume key"),
     Key([], "XF86AudioLowerVolume", volume_up_down("down"), desc="Decrease volume key"),
@@ -321,6 +321,7 @@ keys = [
     # Window state control
     Key([mod], "t", lazy.window.toggle_floating(), desc="toggle floating"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
+    Key([mod, "shift"], "m", lazy.window.unminimize(), desc="unminimize"),
     # Switch focus of monitors
     Key([mod], "comma", lazy.next_screen(), desc="Move focus to next monitor"),
     # Switch groups
