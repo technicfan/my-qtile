@@ -76,19 +76,19 @@ class IPCServer:
                         conn.send(struct.pack("i", arg))
                         self.conns[conn] = 0
                     case 1:  # group request
-                        msg = self._groups(arg)
+                        msg = self._groups(arg).encode()
                         conn.send(struct.pack("i", 0))
                         conn.send(struct.pack("i", len(msg)))
-                        conn.send(msg.encode())
+                        conn.send(msg)
                     case 2:  # switch request
                         name = conn.recv(arg).decode()
                         self._switch(name)
                     case 3:  # window request
                         port = conn.recv(arg).decode()
-                        msg = self._window(port)
+                        msg = self._window(port).encode()
                         conn.send(struct.pack("i", 0))
                         conn.send(struct.pack("i", len(msg)))
-                        conn.send(msg.encode())
+                        conn.send(msg)
                     case _:
                         pass
             except ConnectionResetError, BrokenPipeError:

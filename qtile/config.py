@@ -59,7 +59,7 @@ def start_once():
 
 
 # @hook.subscribe.startup
-# def start():
+# def start_debug():
 #     global ipc_server
 #     ipc_server = IPCServer(qtile)
 #     ipc_server.start()
