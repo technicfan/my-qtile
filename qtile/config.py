@@ -37,6 +37,7 @@ from modules.functions import (
     razer_set_dpi,
 )
 from modules.groups import groups  # noqa: F401
+from modules.ipc_server import IPCServer
 from modules.keybindings import keys, mouse  # noqa: F401
 from modules.layouts import floating_layout, layouts  # noqa: F401
 from modules.widgets import screens, widget_defaults  # noqa: F401
@@ -45,6 +46,7 @@ from modules.widgets import screens, widget_defaults  # noqa: F401
 ### HOOKS ###
 @hook.subscribe.startup_once
 def start_once():
+    ipc_server.start()
     subprocess.run(
         [os.path.expanduser("~/.config/qtile/scripts/autostart.sh")], check=False
     )
@@ -56,8 +58,23 @@ def start_once():
         pass
 
 
+# @hook.subscribe.startup
+# def start():
+#     global ipc_server
+#     ipc_server = IPCServer(qtile)
+#     ipc_server.start()
+
+
+@hook.subscribe.startup
+def start():
+    ipc_server.notify_all(0)
+    ipc_server.notify_all(1)
+
+
 @hook.subscribe.shutdown
 def shutdown():
+    ipc_server.close()
+    subprocess.run(["kill", "-9", "waybar"], check=False)
     subprocess.run(["kill", "-9", "uwsgi"], check=False)
 
 
@@ -80,14 +97,15 @@ def new_client(client: Window):
 @hook.subscribe.setgroup
 @hook.subscribe.screen_change
 @hook.subscribe.client_managed
+@hook.subscribe.client_killed
 def group_change(event=None):
-    open(os.path.expanduser("~/.config/qtile/waybar/group-change"), "r").close()
+    ipc_server.notify_all(0)
 
 
 @hook.subscribe.focus_change
 @hook.subscribe.client_name_updated
 def window_change(client=None):
-    open(os.path.expanduser("~/.config/qtile/waybar/window-change"), "r").close()
+    ipc_server.notify_all(1)
 
 
 @hook.subscribe.client_managed
@@ -157,6 +175,9 @@ cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
+
+if not "ipc_server" in globals():
+    ipc_server = IPCServer(qtile)
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?

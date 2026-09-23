@@ -19,7 +19,7 @@ fi &
 # fix environment for xdg-desktop-portal-wlr?
 systemctl --user import-environment WAYLAND_DISPLAY
 
-uwsgi --plugin python ~/.config/qtile/waybar/uwsgi.ini &
+# uwsgi --plugin python ~/.config/qtile/waybar/uwsgi.ini &
 waybar &
 
 #starting utility applications at boot time
