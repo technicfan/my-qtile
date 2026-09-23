@@ -73,9 +73,8 @@ def start():
 
 @hook.subscribe.shutdown
 def shutdown():
-    ipc_server.close()
     subprocess.run(["kill", "-9", "waybar"], check=False)
-    subprocess.run(["kill", "-9", "uwsgi"], check=False)
+    ipc_server.close()
 
 
 @hook.subscribe.client_new

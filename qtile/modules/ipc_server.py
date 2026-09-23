@@ -41,18 +41,13 @@ class IPCServer:
             with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
                 s.connect(self.path)
                 s.close()
+            self.main_thread.join()
             for conn in self.conns:
+                conn.setblocking(False)
                 conn.close()
-            self.socket.close()
-
-    def stop(self):
-        if self.main_thread:
-            self.running = False
-            for conn in self.conns:
                 thread = self.threads.get(conn)
                 if thread:
                     thread.join()
-            self.main_thread.join()
 
     def notify_all(self, signal: int):
         for conn, t in self.conns.items():
