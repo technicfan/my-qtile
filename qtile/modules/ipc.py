@@ -3,12 +3,14 @@ import socket
 import struct
 import threading
 
+from libqtile import qtile
+
 from .functions import get_distro
 
 
-class IPCServer:
-    def __init__(self, qtile):
-        self.path = os.path.expanduser("~/.config/qtile/waybar/socket")
+class Server:
+    def __init__(self, path: str):
+        self.path = path
         if os.path.exists(self.path):
             os.unlink(self.path)
         self.qtile = qtile
@@ -22,15 +24,19 @@ class IPCServer:
 
     def _run(self):
         while self.running:
-            conn, _ = self.socket.accept()
-            if self.running:
-                thread = threading.Thread(target=self._handle, args=[conn])
-                self.threads[conn] = thread
-                self.conns[conn] = 1
-                thread.start()
+            try:
+                conn, _ = self.socket.accept()
+                if self.running:
+                    thread = threading.Thread(target=self._handle, args=[conn])
+                    self.threads[conn] = thread
+                    self.conns[conn] = 1
+                    thread.start()
+            except OSError:
+                break
+        self.socket.close()
 
     def start(self):
-        if not self.running:
+        if not self.running and not self.main_thread:
             self.main_thread = threading.Thread(target=self._run)
             self.running = True
             self.main_thread.start()
@@ -38,15 +44,12 @@ class IPCServer:
     def close(self):
         if self.main_thread:
             self.running = False
-            with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
-                s.connect(self.path)
-                s.close()
+            self.socket.shutdown(socket.SHUT_RDWR)
             self.main_thread.join()
             for conn in self.conns:
-                conn.setblocking(False)
-                conn.close()
                 thread = self.threads.get(conn)
                 if thread:
+                    conn.shutdown(socket.SHUT_RDWR)
                     thread.join()
 
     def notify_all(self, signal: int):
@@ -86,10 +89,11 @@ class IPCServer:
                         conn.send(msg)
                     case _:
                         pass
-            except ConnectionResetError, BrokenPipeError:
+            except ConnectionResetError, BrokenPipeError, OSError:
                 break
-        self.threads.pop(conn)
-        self.conns.pop(conn)
+        if self.running:
+            self.threads.pop(conn)
+            self.conns.pop(conn)
         conn.close()
 
     def _groups(self, show_all: int):

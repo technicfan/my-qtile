@@ -30,6 +30,7 @@ from libqtile import hook, qtile
 from libqtile.backend.base.window import Window
 from libqtile.backend.wayland.inputs import InputConfig
 from libqtile.scratchpad import ScratchPad
+from modules import ipc
 from modules.functions import (
     myMusicPlayer,
     razer_apply_effects,
@@ -37,10 +38,12 @@ from modules.functions import (
     razer_set_dpi,
 )
 from modules.groups import groups  # noqa: F401
-from modules.ipc_server import IPCServer
 from modules.keybindings import keys, mouse  # noqa: F401
 from modules.layouts import floating_layout, layouts  # noqa: F401
 from modules.widgets import screens, widget_defaults  # noqa: F401
+
+if not "ipc_server" in globals():
+    ipc_server = ipc.Server(os.path.expanduser("~/.config/qtile/waybar/socket"))
 
 
 ### HOOKS ###
@@ -58,13 +61,6 @@ def start_once():
         pass
 
 
-# @hook.subscribe.startup
-# def start_debug():
-#     global ipc_server
-#     ipc_server = IPCServer(qtile)
-#     ipc_server.start()
-
-
 @hook.subscribe.startup
 def start():
     ipc_server.notify_all(0)
@@ -73,7 +69,6 @@ def start():
 
 @hook.subscribe.shutdown
 def shutdown():
-    subprocess.run(["kill", "-9", "waybar"], check=False)
     ipc_server.close()
 
 
@@ -160,9 +155,7 @@ def name_updated(client: Window):
                     and "Erweiterung" in client.name
                 ):
                     client.enable_floating()
-                    if not hasattr(client, "_bw_positioned"):
-                        client.center()
-                        client._bw_positioned = True
+                    client.center()
 
 
 ### OTHER ###
@@ -174,9 +167,6 @@ cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-
-if not "ipc_server" in globals():
-    ipc_server = IPCServer(qtile)
 
 # If things like steam games want to auto-minimize themselves when losing
 # focus, should we respect this or not?
