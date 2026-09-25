@@ -57,6 +57,8 @@ class Server:
             if t == signal:
                 try:
                     conn.send(struct.pack("i", signal))
+                    if signal == 0:
+                        self._send_groups(conn)
                 except ConnectionResetError, BrokenPipeError:
                     pass
 
@@ -70,14 +72,10 @@ class Server:
                 command = int.from_bytes(command, "little")
                 arg = int.from_bytes(arg, "little")
                 match command:
-                    case 0:  # update request
+                    case 0:  # group update request
                         conn.send(struct.pack("i", arg))
+                        self._send_groups(conn)
                         self.conns[conn] = 0
-                    case 1:  # group request
-                        msg = self._groups(arg).encode()
-                        conn.send(struct.pack("i", 0))
-                        conn.send(struct.pack("i", len(msg)))
-                        conn.send(msg)
                     case 2:  # switch request
                         name = conn.recv(arg).decode()
                         self._switch(name)
@@ -96,17 +94,26 @@ class Server:
             self.conns.pop(conn)
         conn.close()
 
-    def _groups(self, show_all: int):
+    def _send_groups(self, conn: socket.socket):
+        msg = self._groups().encode()
+        conn.send(struct.pack("i", 0))
+        conn.send(struct.pack("i", len(msg)))
+        conn.send(msg)
+
+    def _groups(self):
         screen = self.qtile.current_group.info()["screen"]
         output = ""
         for group in self.qtile.get_groups().values():
             if group["screen"] is not None:
                 if group["screen"] == screen:
-                    output += f"<p>{group['label']}</p>;"
+                    output += f"<a>{group['label']};"
                 else:
-                    output += f"<s>{group['label']}</s>;"
-            elif group["label"] != "" and (show_all == 1 or len(group["windows"]) > 0):
-                output += f"{group['label']};"
+                    output += f"<v>{group['label']};"
+            elif group["label"] != "":
+                if len(group["windows"]) > 0:
+                    output += f"{group['label']};"
+                else:
+                    output += f"<e>{group['label']};"
         return output
 
     def _get_screen(self, port: str):
